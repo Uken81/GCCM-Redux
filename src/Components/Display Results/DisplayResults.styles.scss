@@ -1,0 +1,64 @@
+.display-container {
+  white-space: pre-wrap;
+  background-color: cornsilk;
+
+  h3 {
+    font-size: 6rem;
+    text-align: center;
+    text-shadow: darkgray 3px 2px;
+  }
+
+  h2 {
+    font-size: 4rem;
+    text-align: center;
+    text-shadow: whitesmoke 5px 2px;
+  }
+
+  .results-container {
+    background-color: blanchedalmond;
+    font-size: 1.5rem;
+    margin: 10%;
+    border: 10px solid black;
+    border-radius: 10%;
+    padding: 2% 5% 5% 5%;
+
+    .points {
+      background-color: black;
+      color: whitesmoke;
+      padding: 1%;
+      width: 20%;
+    }
+
+    .sub-category {
+      background-color: whitesmoke;
+      border: 5px solid black;
+      margin: 2%;
+      padding: 2%;
+
+      .enhancement {
+        color: seagreen;
+      }
+
+      .limitation {
+        color: brown;
+      }
+
+      .sub-section {
+        background-color: cadetblue;
+        border: black 1px solid;
+        padding: 2%;
+      }
+    }
+  }
+}
+
+table {
+  border-spacing: 40px;
+  border-collapse: separate;
+  background-color: darkslateblue;
+
+  tr {
+    background-color: cornflowerblue;
+    text-align: center;
+  }
+}

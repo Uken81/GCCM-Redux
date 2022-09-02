@@ -1,0 +1,23 @@
+.searchbar-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 5% 0;
+  color: whitesmoke;
+  font-weight: bolder;
+
+  .toggle-and-search {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10%;
+  }
+
+  .searchBar {
+    // font-weight: bold;
+    font-size: x-large;
+    margin: 0 0 5% 17.5%;
+    // margin-bottom: 5%;
+    // margin-left: 17.5%;
+    // color: black;
+  }
+}
