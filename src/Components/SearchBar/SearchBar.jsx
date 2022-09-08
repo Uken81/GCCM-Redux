@@ -15,60 +15,73 @@ const SearchBar = () => {
   const characterName = useCharacterStore((state) => state.character.characterName);
   const selectedAdvantages = useCharacterStore((state) => state.character.selectedAdvantages);
   const selectedDisadvantages = useCharacterStore((state) => state.character.selectedDisadvantages);
+  const setSelectedAdavantages = useCharacterStore((state) => state.addAdvantages);
+  const setSelectedDisadvantages = useCharacterStore((state) => state.addDisadvantages);
 
   const isChoosingAdvantages = useToggleStore((state) => state.isChoosingAdvantages);
 
   useEffect(() => {
     const createSearchOptions = () => {
-      let adsArr = AdvantagesArray.map((opt) => ({
+      const allAdvatageObjs = AdvantagesArray.map((opt) => ({
         label: opt.title,
         value: opt,
         category: opt.type
       }));
-      let disadsArr = DisadvantagesArray.map((opt) => ({
+      const allDisadvantageObjs = DisadvantagesArray.map((opt) => ({
         label: opt.title,
         value: opt,
         category: opt.type
       }));
-      setAdvantageOptions(adsArr);
-      setDisadvantageOptions(disadsArr);
+      setAdvantageOptions(allAdvatageObjs);
+      setDisadvantageOptions(allDisadvantageObjs);
     };
     createSearchOptions();
   }, []);
 
-  const handleChange = (event) => {
-    setSelectInput(event.value);
-    let adsArr = [];
-    let disadsArr = [];
-    console.log('selected attributes:', event);
-    event.forEach((e) => {
-      e.value.type === 'advantage' ? adsArr.push(e.value) : disadsArr.push(e.value);
-    });
-    // useCharacterStore.setState({ selectedAdvantages: adsArr });
-    useCharacterStore.setState({ selectedAdvantages: adsArr });
-    useCharacterStore.setState({ selectedAdvantages: adsArr });
-    useCharacterStore.setState({ selectedDisadvantages: disadsArr });
+  const updateSearchList = (e) => {
+    console.log('e', e);
+    setSelectInput(e);
   };
 
-  useEffect(() => {
-    const updateSelect = () => {
-      let adsArr = selectedAdvantages.map((adv) => ({
-        label: adv.title,
-        value: adv,
-        category: adv.type
-      }));
+  const updateCharacterStore = (e) => {
+    console.log('list', selectInput, e);
+    e.map((attribute) => {
+      attribute.category === 'advantage'
+        ? setSelectedAdavantages([...selectedAdvantages, attribute.value])
+        : setSelectedDisadvantages([...selectedDisadvantages, attribute.value]);
+    });
+  };
 
-      let disadsArr = selectedDisadvantages.map((disad) => ({
-        label: disad.title,
-        value: disad,
-        category: disad.type
-      }));
+  // const updateSelectedList = () => {
 
-      let combinedArr = [...adsArr, ...disadsArr];
-      setSelectInput(combinedArr);
-    };
-    updateSelect();
-  }, [selectedAdvantages, selectedDisadvantages]);
+  // }
+
+  const handleChange = (e) => {
+    updateSearchList(e);
+    updateCharacterStore(e);
+  };
+
+  // useEffect(() => {
+  //   const updateSelect = () => {
+  //     let adsArr = selectedAdvantages.map((adv) => ({
+  //       label: adv.title,
+  //       value: adv,
+  //       category: adv.type
+  //     }));
+
+  //     let disadsArr = selectedDisadvantages.map((disad) => ({
+  //       label: disad.title,
+  //       value: disad,
+  //       category: disad.type
+  //     }));
+
+  //     // eslint-disable-next-line no-unused-vars
+  //     let combinedArr = [...adsArr, ...disadsArr];
+  //     // setSelectInput(combinedArr);
+  //   };
+  //   updateSelect();
+  //   console.log('Sads', selectedAdvantages);
+  // }, [selectedAdvantages, selectedDisadvantages]);
 
   const formatOptionLabel = ({ label, category }) => (
     <div style={category === 'advantage' ? { color: 'seagreen' } : { color: 'brown' }}>{label}</div>

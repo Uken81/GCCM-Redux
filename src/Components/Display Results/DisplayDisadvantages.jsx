@@ -22,7 +22,7 @@ const DisplayDisadvantages = () => {
             {subCategories &&
               subCategories.map(({ name, text, points }) => {
                 return (
-                  <div className="sub-category" key={`${name}-container`}>
+                  <div className="sub-category" key={name}>
                     <strong>
                       <p>{name}</p>
                     </strong>

@@ -25,7 +25,20 @@ let characterStore = (set) => ({
   resetCharacter: () => {
     set(initialCharacterState);
   },
-  addAdvantages: () => set((state) => ({ character: (state.character = 'yarn') }))
+  addAdvantages: (advantagesList) =>
+    set((state) => ({
+      character: (state.character = {
+        ...state.character,
+        selectedAdvantages: advantagesList
+      })
+    })),
+  addDisadvantages: (disadvantageList) =>
+    set((state) => ({
+      character: (state.character = {
+        ...state.character,
+        selectedDisadvantages: disadvantageList
+      })
+    }))
 });
 characterStore = devtools(characterStore);
 
