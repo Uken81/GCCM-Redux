@@ -1,5 +1,8 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import Select from 'react-select';
+import { SelectOptionObj } from '../../../types';
 import AdvantagesArray from '../../Attribute Objects/Advantages/Advantages';
 import DisadvantagesArray from '../../Attribute Objects/Disadvantages/Disadvantages';
 import { useCharacterStore, useToggleStore } from '../../Global State/store';
@@ -8,9 +11,9 @@ import ToggleAdvantageDisadvantage from '../ToggleAdvantageDisadvantage/ToggleAd
 import './SearchBar.styles.scss';
 
 const SearchBar = () => {
-  const [advantageOptions, setAdvantageOptions] = useState([]);
-  const [disadvantageOptions, setDisadvantageOptions] = useState([]);
-  const [selectInput, setSelectInput] = useState([]);
+  const [advantageOptions, setAdvantageOptions] = useState<SelectOptionObj[]>([]);
+  const [disadvantageOptions, setDisadvantageOptions] = useState<SelectOptionObj[]>([]);
+  const [selectInput, setSelectInput] = useState<SelectOptionObj[]>([]);
 
   const characterName = useCharacterStore((state) => state.character.characterName);
   const selectedAdvantages = useCharacterStore((state) => state.character.selectedAdvantages);
@@ -22,12 +25,12 @@ const SearchBar = () => {
 
   useEffect(() => {
     const createSearchOptions = () => {
-      const allAdvatageObjs = AdvantagesArray.map((opt) => ({
+      const allAdvatageObjs: any = AdvantagesArray.map((opt) => ({
         label: opt.title,
         value: opt,
         category: opt.type
       }));
-      const allDisadvantageObjs = DisadvantagesArray.map((opt) => ({
+      const allDisadvantageObjs: any = DisadvantagesArray.map((opt) => ({
         label: opt.title,
         value: opt,
         category: opt.type
@@ -38,7 +41,7 @@ const SearchBar = () => {
     createSearchOptions();
   }, []);
 
-  const updateSearchList = (e) => {
+  const updateSelectedList = (e) => {
     console.log('e', e);
     setSelectInput(e);
   };
@@ -46,6 +49,7 @@ const SearchBar = () => {
   const updateCharacterStore = (e) => {
     console.log('list', selectInput, e);
     e.map((attribute) => {
+      console.log('att', attribute.value);
       attribute.category === 'advantage'
         ? setSelectedAdavantages([...selectedAdvantages, attribute.value])
         : setSelectedDisadvantages([...selectedDisadvantages, attribute.value]);
@@ -57,7 +61,7 @@ const SearchBar = () => {
   // }
 
   const handleChange = (e) => {
-    updateSearchList(e);
+    updateSelectedList(e);
     updateCharacterStore(e);
   };
 
@@ -87,6 +91,11 @@ const SearchBar = () => {
     <div style={category === 'advantage' ? { color: 'seagreen' } : { color: 'brown' }}>{label}</div>
   );
 
+  const con = () => {
+    console.log('advantageOptions', advantageOptions);
+    // console.log('selectOptions', selectInput);
+  };
+
   return (
     <div className="searchbar-container">
       {characterName === '' ? (
@@ -108,6 +117,7 @@ const SearchBar = () => {
           formatOptionLabel={formatOptionLabel}
         />
       </div>
+      <Button onClick={con}>con</Button>
     </div>
   );
 };
