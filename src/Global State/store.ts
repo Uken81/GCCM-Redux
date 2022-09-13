@@ -48,8 +48,10 @@ export const useCharacterStore = create<CharacterStoreType>(
       })),
     addDisadvantages: (disadvantageList) =>
       set((state) => ({
-        ...state,
-        selectedDisadvantages: disadvantageList
+        character: (state.character = {
+          ...state.character,
+          selectedDisadvantages: disadvantageList
+        })
       }))
   }))
 );
