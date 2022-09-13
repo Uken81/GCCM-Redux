@@ -15,9 +15,10 @@ const SearchBar = () => {
   const [disadvantageOptions, setDisadvantageOptions] = useState<SelectOptionObj[]>([]);
   const [selectInput, setSelectInput] = useState<SelectOptionObj[]>([]);
 
-  const characterName = useCharacterStore((state) => state.character.characterName);
+  const characterName = useCharacterStore((state) => state.character.name);
   const selectedAdvantages = useCharacterStore((state) => state.character.selectedAdvantages);
   const selectedDisadvantages = useCharacterStore((state) => state.character.selectedDisadvantages);
+  //Is it ok to use set when naming an action or should I reserve that for useState?
   const setSelectedAdavantages = useCharacterStore((state) => state.addAdvantages);
   const setSelectedDisadvantages = useCharacterStore((state) => state.addDisadvantages);
 
@@ -41,66 +42,50 @@ const SearchBar = () => {
     createSearchOptions();
   }, []);
 
-  const updateSelectedList = (e) => {
-    console.log('e', e);
+  const updateSelectedList = (e: SelectOptionObj[]) => {
     setSelectInput(e);
   };
 
-  const updateCharacterStore = (e) => {
+  const updateCharacterStore = (e: SelectOptionObj[]) => {
     console.log('list', selectInput, e);
     e.map((attribute) => {
       console.log('att', attribute.value);
+      const selectedAttribute = attribute.value;
       attribute.category === 'advantage'
-        ? setSelectedAdavantages([...selectedAdvantages, attribute.value])
+        ? setSelectedAdavantages([...selectedAdvantages, selectedAttribute])
         : setSelectedDisadvantages([...selectedDisadvantages, attribute.value]);
     });
   };
-
-  // const updateSelectedList = () => {
-
-  // }
 
   const handleChange = (e) => {
     updateSelectedList(e);
     updateCharacterStore(e);
   };
 
-  // useEffect(() => {
-  //   const updateSelect = () => {
-  //     let adsArr = selectedAdvantages.map((adv) => ({
-  //       label: adv.title,
-  //       value: adv,
-  //       category: adv.type
-  //     }));
-
-  //     let disadsArr = selectedDisadvantages.map((disad) => ({
-  //       label: disad.title,
-  //       value: disad,
-  //       category: disad.type
-  //     }));
-
-  //     // eslint-disable-next-line no-unused-vars
-  //     let combinedArr = [...adsArr, ...disadsArr];
-  //     // setSelectInput(combinedArr);
-  //   };
-  //   updateSelect();
-  //   console.log('Sads', selectedAdvantages);
-  // }, [selectedAdvantages, selectedDisadvantages]);
-
   const formatOptionLabel = ({ label, category }) => (
     <div style={category === 'advantage' ? { color: 'seagreen' } : { color: 'brown' }}>{label}</div>
   );
 
   const con = () => {
-    console.log('advantageOptions', advantageOptions);
-    // console.log('selectOptions', selectInput);
+    console.log('selectedAdvantages', selectedAdvantages);
+  };
+
+  const attributeType = () => {
+    // isChoosingAdvantages ? 'ADVANTAGES' : 'DISADVANTAGES'
+    //try to find cleaner way to write this. telmo??
+    if (isChoosingAdvantages) {
+      return 'ADVANTAGES';
+    } else {
+      return 'Disadvantages';
+    }
   };
 
   return (
     <div className="searchbar-container">
       {characterName === '' ? (
-        <h1>Select your Characters {isChoosingAdvantages ? 'ADVANTAGES' : 'DISADVANTAGES'}</h1>
+        <h1>Select your Characters {attributeType()}</h1>
       ) : (
+        // <h1>Select your Characters {isChoosingAdvantages ? 'ADVANTAGES' : 'DISADVANTAGES'}</h1>
         <h1>
           SELECT {characterName.toUpperCase()}&apos;S{' '}
           {isChoosingAdvantages ? 'ADVANTAGES' : 'DISADVANTAGES'}

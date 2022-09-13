@@ -1,6 +1,6 @@
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { AttributeObj, SelectOptionObj } from '../../types';
+import { AttributeObj } from '../../types';
 
 let ToggleStore = (set) => ({
   isChoosingAdvantages: true,
@@ -14,46 +14,37 @@ let ToggleStore = (set) => ({
 
 interface CharacterStoreType {
   character: {
-    characterName: string;
+    name: string;
     selectedAdvantages: AttributeObj[];
     selectedDisadvantages: AttributeObj[];
     currentCharacterId: string;
   };
   resetCharacter: () => void;
-  addAdvantages: (advantagesList: SelectOptionObj[]) => void;
-  addDisadvantages: (disadvantageLis: SelectOptionObj[]) => void;
+  addAdvantages: (advantagesList: AttributeObj[]) => void;
+  addDisadvantages: (disadvantageList: any) => void;
 }
 
 const initialCharacterState = {
-  characterName: '',
-  selectedAdvantages: [],
-  selectedDisadvantages: [],
-  currentCharacterId: ''
+  character: {
+    name: '',
+    selectedAdvantages: [],
+    selectedDisadvantages: [],
+    currentCharacterId: ''
+  }
 };
 
 export const useCharacterStore = create<CharacterStoreType>(
   devtools((set) => ({
-    character: {
-      characterName: '',
-      selectedAdvantages: [],
-      selectedDisadvantages: [],
-      currentCharacterId: ''
-    },
-    initialCharacterState,
+    ...initialCharacterState,
     resetCharacter: () => {
-      set({
-        character: {
-          characterName: '',
-          selectedAdvantages: [],
-          selectedDisadvantages: [],
-          currentCharacterId: ''
-        }
-      });
+      set(initialCharacterState);
     },
     addAdvantages: (advantagesList) =>
       set((state) => ({
-        ...state,
-        selectedAdvantages: advantagesList
+        character: (state.character = {
+          ...state.character,
+          selectedAdvantages: advantagesList
+        })
       })),
     addDisadvantages: (disadvantageList) =>
       set((state) => ({

@@ -3,7 +3,7 @@ import { useCharacterStore } from '../../Global State/store';
 import './DisplayResults.styles.scss';
 
 const DisplayDisadvantages = () => {
-  const characterName = useCharacterStore((state) => state.character.characterName);
+  const characterName = useCharacterStore((state) => state.character.name);
   const selectedDisadvantages = useCharacterStore((state) => state.character.selectedDisadvantages);
 
   const nameText = characterName !== '' ? `${characterName}'s` : '';

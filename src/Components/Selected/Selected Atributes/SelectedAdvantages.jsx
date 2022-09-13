@@ -4,11 +4,10 @@ const SelectedAdvantages = () => {
   const selectedAdvantages = useCharacterStore((state) => state.character.selectedAdvantages);
   return (
     <ul>
-      {selectedAdvantages.map(({ label }) => {
-        console.log('SA', label);
+      {selectedAdvantages.map(({ title }) => {
         return (
-          <li className="selected-advantages" key={label} style={{ color: 'seagreen' }}>
-            {label}
+          <li className="selected-advantages" key={title} style={{ color: 'seagreen' }}>
+            {title}
           </li>
         );
       })}

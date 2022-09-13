@@ -1,27 +1,20 @@
- export interface CharacterObj {
-    characterName: string;
-    selectedAdvantages: AttributeObj[];
-    selectedDisadvantages: AttributeObj[],
-    currentCharacterId: string;
-}
-
 export interface AttributeObj {
     title: string;
     type: string;
     points: string;
     description: JSX.Element;
     subCategories?: SubCategoryObj[];
-    extraText? : any;
+    extraText? : JSX.Element;
 }
 
 interface SubCategoryObj {
-    name: string | JSX.Element;
+    name?: string | JSX.Element;
     text: JSX.Element;
     points?: string;
 }
 
 export interface SelectOptionObj {
-    category: string;
     label: string;
+    category: string;
     value: AttributeObj;
 }

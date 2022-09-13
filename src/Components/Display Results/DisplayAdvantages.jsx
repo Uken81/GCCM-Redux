@@ -3,25 +3,21 @@ import { useCharacterStore } from '../../Global State/store';
 import './DisplayResults.styles.scss';
 
 const DisplayAdvantages = () => {
-  const characterName = useCharacterStore((state) => state.character.characterName);
+  const characterName = useCharacterStore((state) => state.character.name);
   const selectedAdvantages = useCharacterStore((state) => state.character.selectedAdvantages);
 
   const nameText = characterName !== '' ? `${characterName}'s` : '';
   return (
     <div>
       {selectedAdvantages.length > 0 && <h3>{`${nameText} Advantages`}</h3>}
-      {/* {selectedAdvantages.map(({ title, points, description, subCategories, extraText }) => { */}
-      {selectedAdvantages.map((advantage) => {
-        // console.log('tit', title);
-        console.log('selectedAdvantages', selectedAdvantages);
-        console.log('selectedAdvantages', advantage.title);
+      {selectedAdvantages.map(({ title, points, description, subCategories, extraText }) => {
         return (
-          <div className="results-container" key={`${advantage.title}-container`}>
-            <h2>{advantage.title}</h2>
+          <div className="results-container" key={`${title}-container`}>
+            <h2>{title}</h2>
             <p className="points">
-              <strong>{advantage.points}</strong>
+              <strong>{points}</strong>
             </p>
-            {/* {description}
+            {description}
             {subCategories &&
               subCategories.map(({ name, text, points }) => {
                 return (
@@ -36,7 +32,7 @@ const DisplayAdvantages = () => {
                   </div>
                 );
               })}
-            <i>{extraText}</i> */}
+            <i>{extraText}</i>
           </div>
         );
       })}
