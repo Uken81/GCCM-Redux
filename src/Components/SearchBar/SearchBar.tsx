@@ -8,6 +8,7 @@ import { useCharacterStore } from '../../Global State/store';
 import ToggleAdvantageDisadvantage from '../ToggleAdvantageDisadvantage/ToggleAdvantageDisadvantage';
 
 import './SearchBar.styles.scss';
+import { SearchBarTitle } from './SearchBarTitle';
 
 const SearchBar = () => {
   const [advantageOptions, setAdvantageOptions] = useState<SelectOptionObj[]>([]);
@@ -15,7 +16,6 @@ const SearchBar = () => {
   const [selectInput, setSelectInput] = useState<SelectOptionObj[]>([]);
   const [isChoosingAdvantages, setIsChoosingAdvantages] = useState<boolean>(true);
 
-  const characterName = useCharacterStore((state) => state.character.name);
   const selectedAdvantages = useCharacterStore((state) => state.character.selectedAdvantages);
   const selectedDisadvantages = useCharacterStore((state) => state.character.selectedDisadvantages);
   //Is it ok to use set when naming an action or should I reserve that for useState?
@@ -64,25 +64,9 @@ const SearchBar = () => {
     <div style={category === 'advantage' ? { color: 'seagreen' } : { color: 'brown' }}>{label}</div>
   );
 
-  const attributeType = () => {
-    //isChoosingAdvantages ? 'ADVANTAGES' : 'DISADVANTAGES'
-    //try to find cleaner way to write this. telmo??
-    if (isChoosingAdvantages) {
-      return 'ADVANTAGES';
-    } else {
-      return 'Disadvantages';
-    }
-  };
-
   return (
     <div className="searchbar-container">
-      {characterName === '' ? (
-        <h1>Select your Characters {attributeType()}</h1>
-      ) : (
-        <h1>
-          SELECT {characterName.toUpperCase()}&apos;S {attributeType()}
-        </h1>
-      )}
+      <SearchBarTitle isChoosingAdvantages={isChoosingAdvantages} />
       <div className="toggle-and-search">
         <ToggleAdvantageDisadvantage setIsChoosingAdvantages={setIsChoosingAdvantages} />
         <Select

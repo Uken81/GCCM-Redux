@@ -3,10 +3,6 @@ import { devtools } from 'zustand/middleware';
 import { AttributeObj } from '../../types';
 
 let ToggleStore = (set) => ({
-  isChoosingAdvantages: true,
-  toggleAdvantages: () => set({ isChoosingAdvantages: true }),
-  toggleDisadvantages: () => set({ isChoosingAdvantages: false }),
-
   showSuccessAlert: false,
   toggleShow: () => set({ showSuccessfulSaveAlert: true }),
   toggleHide: () => set({ showSuccessfulSaveAlert: false })
@@ -14,7 +10,7 @@ let ToggleStore = (set) => ({
 
 interface CharacterStoreType {
   character: {
-    name: string;
+    name: string | null;
     selectedAdvantages: AttributeObj[];
     selectedDisadvantages: AttributeObj[];
     currentCharacterId: string;
@@ -26,7 +22,7 @@ interface CharacterStoreType {
 
 const initialCharacterState = {
   character: {
-    name: '',
+    name: null,
     selectedAdvantages: [],
     selectedDisadvantages: [],
     currentCharacterId: ''
