@@ -1,11 +1,10 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
 import Select from 'react-select';
 import { SelectOptionObj } from '../../../types';
 import AdvantagesArray from '../../Attribute Objects/Advantages/Advantages';
 import DisadvantagesArray from '../../Attribute Objects/Disadvantages/Disadvantages';
-import { useCharacterStore, useToggleStore } from '../../Global State/store';
+import { useCharacterStore } from '../../Global State/store';
 import ToggleAdvantageDisadvantage from '../ToggleAdvantageDisadvantage/ToggleAdvantageDisadvantage';
 
 import './SearchBar.styles.scss';
@@ -14,6 +13,7 @@ const SearchBar = () => {
   const [advantageOptions, setAdvantageOptions] = useState<SelectOptionObj[]>([]);
   const [disadvantageOptions, setDisadvantageOptions] = useState<SelectOptionObj[]>([]);
   const [selectInput, setSelectInput] = useState<SelectOptionObj[]>([]);
+  const [isChoosingAdvantages, setIsChoosingAdvantages] = useState<boolean>(true);
 
   const characterName = useCharacterStore((state) => state.character.name);
   const selectedAdvantages = useCharacterStore((state) => state.character.selectedAdvantages);
@@ -22,10 +22,9 @@ const SearchBar = () => {
   const setSelectedAdavantages = useCharacterStore((state) => state.addAdvantages);
   const setSelectedDisadvantages = useCharacterStore((state) => state.addDisadvantages);
 
-  const isChoosingAdvantages = useToggleStore((state) => state.isChoosingAdvantages);
-
   useEffect(() => {
     const createSearchOptions = () => {
+      //remove any types below.
       const allAdvatageObjs: any = AdvantagesArray.map((opt) => ({
         label: opt.title,
         value: opt,
@@ -47,17 +46,16 @@ const SearchBar = () => {
   };
 
   const updateCharacterStore = (e: SelectOptionObj[]) => {
-    console.log('list', selectInput, e);
     e.map((attribute) => {
       console.log('att', attribute.value);
       const selectedAttribute = attribute.value;
       attribute.category === 'advantage'
         ? setSelectedAdavantages([...selectedAdvantages, selectedAttribute])
-        : setSelectedDisadvantages([...selectedDisadvantages, attribute.value]);
+        : setSelectedDisadvantages([...selectedDisadvantages, selectedAttribute]);
     });
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: SelectOptionObj[]) => {
     updateSelectedList(e);
     updateCharacterStore(e);
   };
@@ -66,12 +64,8 @@ const SearchBar = () => {
     <div style={category === 'advantage' ? { color: 'seagreen' } : { color: 'brown' }}>{label}</div>
   );
 
-  const con = () => {
-    console.log('selectedAdvantages', selectedAdvantages);
-  };
-
   const attributeType = () => {
-    // isChoosingAdvantages ? 'ADVANTAGES' : 'DISADVANTAGES'
+    //isChoosingAdvantages ? 'ADVANTAGES' : 'DISADVANTAGES'
     //try to find cleaner way to write this. telmo??
     if (isChoosingAdvantages) {
       return 'ADVANTAGES';
@@ -85,14 +79,12 @@ const SearchBar = () => {
       {characterName === '' ? (
         <h1>Select your Characters {attributeType()}</h1>
       ) : (
-        // <h1>Select your Characters {isChoosingAdvantages ? 'ADVANTAGES' : 'DISADVANTAGES'}</h1>
         <h1>
-          SELECT {characterName.toUpperCase()}&apos;S{' '}
-          {isChoosingAdvantages ? 'ADVANTAGES' : 'DISADVANTAGES'}
+          SELECT {characterName.toUpperCase()}&apos;S {attributeType()}
         </h1>
       )}
       <div className="toggle-and-search">
-        <ToggleAdvantageDisadvantage />
+        <ToggleAdvantageDisadvantage setIsChoosingAdvantages={setIsChoosingAdvantages} />
         <Select
           className="searchBar"
           options={isChoosingAdvantages ? advantageOptions : disadvantageOptions}
@@ -102,7 +94,6 @@ const SearchBar = () => {
           formatOptionLabel={formatOptionLabel}
         />
       </div>
-      <Button onClick={con}>con</Button>
     </div>
   );
 };

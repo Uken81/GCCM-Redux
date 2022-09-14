@@ -1,3 +1,4 @@
+import React from 'react';
 import '../page.styles.scss';
 
 import Header from '../../Components/Header/Header.component';
