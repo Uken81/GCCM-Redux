@@ -6,10 +6,16 @@ const DisplayAdvantages = () => {
   const characterName = useCharacterStore((state) => state.character.name);
   const selectedAdvantages = useCharacterStore((state) => state.character.selectedAdvantages);
 
-  const nameText = characterName !== '' ? `${characterName}'s` : '';
+  const nameText = () => {
+    if (characterName) {
+      return `${characterName}'s`;
+    } else {
+      return '';
+    }
+  };
   return (
     <div>
-      {selectedAdvantages.length > 0 && <h3>{`${nameText} Advantages`}</h3>}
+      {selectedAdvantages.length > 0 && <h3>{`${nameText()} Advantages`}</h3>}
       {selectedAdvantages.map(({ title, points, description, subCategories, extraText }) => {
         return (
           <div className="results-container" key={`${title}-container`}>
