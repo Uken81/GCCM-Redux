@@ -13,7 +13,7 @@ import { useCharacterStore } from '../../Global State/store';
 import usePushBackOnRefresh from '../../Components/CustomHooks/PushBackOnRefresh';
 
 const ManageCharactersPage = () => {
-  const characterName = useCharacterStore((state) => state.characterName);
+  const characterName = useCharacterStore((state) => state.character.name);
   const [showAlert, setShowAlert] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 

@@ -13,11 +13,13 @@ interface CharacterStoreType {
     name: string | null;
     selectedAdvantages: AttributeObj[];
     selectedDisadvantages: AttributeObj[];
-    currentCharacterId: string;
+    currentCharacterId: string | null;
   };
   resetCharacter: () => void;
+  addName: (name: string) => void;
   addAdvantages: (advantagesList: AttributeObj[]) => void;
-  addDisadvantages: (disadvantageList: any) => void;
+  addDisadvantages: (disadvantageList: AttributeObj[]) => void;
+  addId: (id: string) => void;
 }
 
 const initialCharacterState = {
@@ -25,7 +27,7 @@ const initialCharacterState = {
     name: null,
     selectedAdvantages: [],
     selectedDisadvantages: [],
-    currentCharacterId: ''
+    currentCharacterId: null
   }
 };
 
@@ -35,6 +37,13 @@ export const useCharacterStore = create<CharacterStoreType>(
     resetCharacter: () => {
       set(initialCharacterState);
     },
+    addName: (name) =>
+      set((state) => ({
+        character: (state.character = {
+          ...state.character,
+          name: name
+        })
+      })),
     addAdvantages: (advantagesList) =>
       set((state) => ({
         character: (state.character = {
@@ -47,6 +56,13 @@ export const useCharacterStore = create<CharacterStoreType>(
         character: (state.character = {
           ...state.character,
           selectedDisadvantages: disadvantageList
+        })
+      })),
+      addId: (id) => 
+      set((state) => ({
+        character: (state.character ={
+          ...state.character,
+          currentCharacterId: id
         })
       }))
   }))

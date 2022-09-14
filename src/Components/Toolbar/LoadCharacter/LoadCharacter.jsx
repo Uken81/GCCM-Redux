@@ -20,6 +20,11 @@ const LoadCharacter = () => {
   const [characterToLoad, setCharacterToLoad] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  const setName = useCharacterStore((state) => state.addName);
+  const setAdvantages = useCharacterStore((state) => state.addAdvantages);
+  const setDisadvantages = useCharacterStore((state) => state.addDisadvantages);
+  const setId = useCharacterStore((state) => state.addId);
+
   useEffect(() => {
     const mapUsersSavedCharactersList = async () => {
       if (user) {
@@ -51,8 +56,8 @@ const LoadCharacter = () => {
     const newRecord = await getRecord();
 
     const characterNameRecord = newRecord.flatMap((item) => item.name);
-    const characterName = characterNameRecord[0];
-    console.log('****Loading ', characterName);
+    const name = characterNameRecord[0];
+    console.log('****Loading ', name);
 
     const advantagesRecord = newRecord.flatMap((item) => item.advantages);
     const characterAdvantages = AdvantagesArray.filter((advantage) =>
@@ -64,11 +69,11 @@ const LoadCharacter = () => {
       disadvantagesRecord.includes(disadvantage.title)
     );
 
-    useCharacterStore.setState({ characterName: characterName });
-    useCharacterStore.setState({ selectedAdvantages: characterAdvantages });
-    useCharacterStore.setState({ selectedDisadvantages: characterDisadvantages });
+    setName(name);
+    setAdvantages(characterAdvantages);
+    setDisadvantages(characterDisadvantages);
 
-    console.log(`****${characterName} successfully loaded`);
+    console.log(`****${name} successfully loaded`);
     console.log('CD: ', characterDisadvantages);
   };
 
@@ -80,7 +85,7 @@ const LoadCharacter = () => {
     });
     console.log('characterId: ', characterId);
 
-    await useCharacterStore.setState({ currentCharacterId: characterId });
+    await setId(characterId);
   };
 
   const navigate = useNavigate();
