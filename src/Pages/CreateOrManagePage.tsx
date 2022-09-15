@@ -19,6 +19,7 @@ const CreateOrManage = () => {
 
   useResetCharacterOnLoad();
   const navigate = useNavigate();
+  
   useEffect(() => {
     let unsubscribeFromAuth: Unsubscribe | null = null;
     unsubscribeFromAuth = onAuthStateChanged(auth, async (userAuth) => {

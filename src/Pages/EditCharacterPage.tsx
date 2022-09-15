@@ -1,3 +1,4 @@
+import React from 'react';
 import Header from '../Components/Header/Header.component';
 import SearchBar from '../Components/SearchBar/SearchBar';
 import EditCharacter from '../Components/Toolbar/EditCharacter/EditCharacter';

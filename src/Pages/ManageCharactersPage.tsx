@@ -1,3 +1,4 @@
+import React from 'react';
 import '../Components/Display Results/DisplayResults.styles.scss';
 import 'Pages/page.styles.scss';
 
@@ -28,7 +29,7 @@ const ManageCharactersPage = () => {
             <span className="toolbar-header">Character Toolbar</span>
             <div className="toolbar-characters">
               <ToEditCharacter />
-              <DeleteCharacter setShowAlert={setShowAlert} isDeleting={isDeleting} />
+              <DeleteCharacter setShowAlert={setShowAlert} />
             </div>
             <div className="toolbar-print-options">
               <CopyToClipboard />
@@ -36,7 +37,7 @@ const ManageCharactersPage = () => {
             </div>
           </div>
           <div className="main-interface">
-            <h1 className="selected-header">{characterName.toUpperCase()}&apos;S CHEATSHEET</h1>
+            <h1 className="selected-header">{characterName!.toUpperCase()}&apos;S CHEATSHEET</h1>
             {showAlert && (
               <DeleteAlert
                 setShowAlert={setShowAlert}

@@ -1,5 +1,5 @@
+import React from 'react';
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 
 import '../../../Pages/SignInAndSignUp/SignInAndSignUpPage.styles.scss';
 
@@ -8,7 +8,12 @@ import { google } from '../../Firebase/firebase.utils';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-const SignIn = ({ setSignInOrUp, setShowLoadingScreen }) => {
+interface Props {
+  setIsSigningIn: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowLoadingScreen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const SignIn = ({ setIsSigningIn, setShowLoadingScreen }: Props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -66,7 +71,7 @@ const SignIn = ({ setSignInOrUp, setShowLoadingScreen }) => {
   };
 
   const redirectToSignup = () => {
-    setSignInOrUp('sign-up');
+    setIsSigningIn(false);
   };
 
   const toResetPasswordPage = () => {
@@ -116,11 +121,6 @@ const SignIn = ({ setSignInOrUp, setShowLoadingScreen }) => {
       </div>
     </div>
   );
-};
-
-SignIn.propTypes = {
-  setSignInOrUp: PropTypes.func,
-  setShowLoadingScreen: PropTypes.func
 };
 
 export default SignIn;
