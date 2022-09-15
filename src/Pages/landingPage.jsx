@@ -1,4 +1,4 @@
-import '../page.styles.scss';
+import 'Pages/page.styles.scss';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 

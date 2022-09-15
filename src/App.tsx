@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { User } from 'firebase/auth';
 import SignInAndSignUp from './Pages/SignInAndSignUp/SignInAndSignUpPage';
 import { useState } from 'react';
+<<<<<<< HEAD
 import { ComponentRefContext, UserContext } from './context';
 import { useMemo } from 'react';
 import ResetPasswordPage from './Pages/ResetPage/ResetPasswordPage';
@@ -12,6 +13,17 @@ import CreateOrManage from 'Pages/CreateOrManagePage';
 import EditCharacterPage from 'Pages/EditCharacterPage/EditCharacterPage';
 import CreateNewCharacterPage from 'Pages/CreateNewCharacterPage';
 import ManageCharactersPage from 'Pages/ManageCharactersPage/ManageCharactersPage';
+=======
+import { ComponentRefContext, ComponentRefContextInterface, UserContext } from './context';
+import { useMemo } from 'react';
+import LandingPage from './Pages/landingPage';
+import GuestPage from './Pages/GuestPage';
+import CreateOrManage from './Pages/CreateOrManagePage';
+import CreateNewCharacterPage from './Pages/CreateNewCharacterPage';
+import ManageCharactersPage from './Pages/ManageCharactersPage';
+import EditCharacterPage from './Pages/EditCharacterPage';
+import ResetPasswordPage from './Pages/ResetPage/ResetPasswordPage';
+>>>>>>> telmo
 
 function App() {
   const [componentRef, setComponentRef] = useState<HTMLDivElement | null>(null);

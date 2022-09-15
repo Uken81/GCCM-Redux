@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 import React from 'react';
 import { useContext } from 'react';
 import { ComponentRefContext } from 'context';
+=======
+import React, { Context } from 'react';
+import { useContext } from 'react';
+import { ComponentRefContext, ComponentRefContextInterface } from 'context';
+>>>>>>> telmo
 import DisplayAdvantages from './DisplayAdvantages';
 import DisplayDisadvantages from './DisplayDisadvantages';
 

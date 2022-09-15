@@ -7,7 +7,11 @@ interface UserContextInterface {
 }
 
 export interface ComponentRefContextInterface {
+<<<<<<< HEAD
   componentRef: HTMLDivElement | null;
+=======
+  componentRef: ComponentRefContextInterface | HTMLDivElement | null;
+>>>>>>> telmo
   setComponentRef: React.Dispatch<React.SetStateAction<HTMLDivElement | null>>;
 }
 
