@@ -1,17 +1,13 @@
 import { User } from 'firebase/auth';
-import { createContext } from 'react';
+import React, { createContext } from 'react';
 
-interface UserContextInterface {
+export interface UserContextInterface {
   user: User | null;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
 }
 
 export interface ComponentRefContextInterface {
-<<<<<<< HEAD
   componentRef: HTMLDivElement | null;
-=======
-  componentRef: ComponentRefContextInterface | HTMLDivElement | null;
->>>>>>> telmo
   setComponentRef: React.Dispatch<React.SetStateAction<HTMLDivElement | null>>;
 }
 

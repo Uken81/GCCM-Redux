@@ -1,17 +1,11 @@
-<<<<<<< HEAD
 import React from 'react';
 import { useContext } from 'react';
-import { ComponentRefContext } from 'context';
-=======
-import React, { Context } from 'react';
-import { useContext } from 'react';
 import { ComponentRefContext, ComponentRefContextInterface } from 'context';
->>>>>>> telmo
 import DisplayAdvantages from './DisplayAdvantages';
 import DisplayDisadvantages from './DisplayDisadvantages';
 
 const ComponentToPrint = () => {
-  const { setComponentRef } = useContext<any>(ComponentRefContext);
+  const { setComponentRef } = useContext(ComponentRefContext) as ComponentRefContextInterface;
 
   return (
     <div className="display-container" ref={setComponentRef}>

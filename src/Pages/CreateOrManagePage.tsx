@@ -9,17 +9,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import { auth, createUserProfileDocument } from '../Components/Firebase/firebase.utils';
 import Header from '../Components/Header/Header.component';
 import LoadCharacter from '../Components/Toolbar/LoadCharacter/LoadCharacter';
-import { UserContext } from '../context';
+import { UserContext, UserContextInterface } from '../context';
 import useResetCharacterOnLoad from '../Components/CustomHooks/ResetCharacter';
 import React from 'react';
+import { Unsubscribe } from 'firebase/firestore';
 
 const CreateOrManage = () => {
-  const { user, setUser } = useContext(UserContext);
+  const {user, setUser} = useContext(UserContext) as UserContextInterface;
 
   useResetCharacterOnLoad();
   const navigate = useNavigate();
   useEffect(() => {
-    let unsubscribeFromAuth = null;
+    let unsubscribeFromAuth: Unsubscribe | null = null;
     unsubscribeFromAuth = onAuthStateChanged(auth, async (userAuth) => {
       await createUserProfileDocument(userAuth);
       if (userAuth) {
@@ -31,7 +32,7 @@ const CreateOrManage = () => {
         navigate('/');
       }
       return () => {
-        unsubscribeFromAuth();
+        unsubscribeFromAuth!();
       };
     });
   }, [user]);
