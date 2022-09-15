@@ -8,7 +8,7 @@ import 'Pages/page.styles.scss';
 
 import Header from '../Components/Header/Header.component';
 import SearchBar from '../Components/SearchBar/SearchBar';
-import CopyToClipboard from '../Components/Toolbar/CopyToClipboard/CopyToClipboard';
+import CopyToClipboard from '../Components/Toolbar/CopyToClipboard';
 import PrintPDF from '../Components/Toolbar/Print PDF/printPDF';
 import ResetCharacter from '../Components/Toolbar/ResetCharacter/ResetCharacter';
 import DisplaySelected from '../Components/Selected/DisplaySelected';

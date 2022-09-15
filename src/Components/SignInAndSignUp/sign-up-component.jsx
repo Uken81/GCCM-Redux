@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import '../../../Pages/SignInAndSignUp/SignInAndSignUpPage.styles.scss';
+import '../../Pages/SignInAndSignUp/SignInAndSignUpPage.styles.scss';
 
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, google } from '../../Firebase/firebase.utils';
+import { auth, google } from '../Firebase/firebase.utils';
 import { Button, Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';

@@ -3,9 +3,6 @@ import { devtools } from 'zustand/middleware';
 import { AttributeObj } from '../../types';
 
 let ToggleStore = (set) => ({
-  // isChoosingAdvantages: true,
-  // toggleAdvantages: () => set({ isChoosingAdvantages: true }),
-  // toggleDisadvantages: () => set({ isChoosingAdvantages: false }),
   toggleKey: 'advantage',
   toggleAdvantages: () => set({ toggleKey: 'advantages' }),
   toggleDisadvantages: () => set({ toggleKey: 'disadvantages' }),

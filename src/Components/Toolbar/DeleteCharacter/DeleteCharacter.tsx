@@ -1,10 +1,14 @@
-import PropTypes from 'prop-types';
+import React from 'react';
 
 import Button from 'react-bootstrap/Button';
 import { useCharacterStore } from '../../../Global State/store';
 
-const DeleteCharacter = ({ setShowAlert }) => {
-  const characterName = useCharacterStore((state) => state.characterName);
+interface Props {
+  setShowAlert: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const DeleteCharacter = ({ setShowAlert }: Props) => {
+  const characterName = useCharacterStore((state) => state.character.name);
 
   const showDeleteAlert = () => {
     setShowAlert(true);
@@ -17,10 +21,6 @@ const DeleteCharacter = ({ setShowAlert }) => {
       </Button>
     </div>
   );
-};
-
-DeleteCharacter.propTypes = {
-  setShowAlert: PropTypes.func
 };
 
 export default DeleteCharacter;

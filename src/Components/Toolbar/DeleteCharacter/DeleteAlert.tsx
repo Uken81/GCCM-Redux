@@ -1,6 +1,6 @@
+import React from 'react';
 import { useContext } from 'react';
-import { UserContext } from '../../../context';
-import PropTypes from 'prop-types';
+import { UserContext, UserContextInterface } from '../../../context';
 
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
@@ -10,15 +10,21 @@ import { deleteDoc } from '@firebase/firestore';
 import { useCharacterStore } from '../../../Global State/store';
 import { useNavigate } from 'react-router';
 
-const DeleteAlert = ({ setShowAlert, isDeleting, setIsDeleting }) => {
-  const { user } = useContext(UserContext);
+interface Props {
+  setShowAlert : React.Dispatch<React.SetStateAction<boolean>>;
+  isDeleting: boolean;
+  setIsDeleting: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-  const characterName = useCharacterStore((state) => state.characterName);
-  const currentCharacterId = useCharacterStore((state) => state.currentCharacterId);
+const DeleteAlert = ({ setShowAlert, isDeleting, setIsDeleting }: Props) => {
+  const { user } = useContext(UserContext) as UserContextInterface;
+
+  const characterName = useCharacterStore((state) => state.character.name);
+  const currentCharacterId = useCharacterStore((state) => state.character.currentCharacterId);
 
   const navigate = useNavigate();
   const deleteCharacter = async () => {
-    const docRef = await GetCharacterReference(user.uid, currentCharacterId);
+    const docRef = await GetCharacterReference(user?.uid, currentCharacterId);
     setIsDeleting(true);
     await deleteDoc(docRef)
       .then(() => {
@@ -54,12 +60,6 @@ const DeleteAlert = ({ setShowAlert, isDeleting, setIsDeleting }) => {
       </Alert>
     </div>
   );
-};
-
-DeleteAlert.propTypes = {
-  setShowAlert: PropTypes.func,
-  isDeleting: PropTypes.bool,
-  setIsDeleting: PropTypes.func
 };
 
 export default DeleteAlert;

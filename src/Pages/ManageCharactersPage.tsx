@@ -3,7 +3,7 @@ import '../Components/Display Results/DisplayResults.styles.scss';
 import 'Pages/page.styles.scss';
 
 import Header from '../Components/Header/Header.component';
-import CopyToClipboard from '../Components/Toolbar/CopyToClipboard/CopyToClipboard';
+import CopyToClipboard from '../Components/Toolbar/CopyToClipboard';
 import DeleteCharacter from '../Components/Toolbar/DeleteCharacter/DeleteCharacter';
 import PrintPDF from '../Components/Toolbar/Print PDF/printPDF';
 import DisplaySelected from '../Components/Selected/DisplaySelected';
