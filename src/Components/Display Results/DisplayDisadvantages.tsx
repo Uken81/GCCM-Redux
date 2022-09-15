@@ -1,10 +1,11 @@
+import React from 'react';
 import { useCharacterStore } from '../../Global State/store';
 
 import './DisplayResults.styles.scss';
 
-const DisplayAdvantages = () => {
+const DisplayDisadvantages = () => {
   const characterName = useCharacterStore((state) => state.character.name);
-  const selectedAdvantages = useCharacterStore((state) => state.character.selectedAdvantages);
+  const selectedDisadvantages = useCharacterStore((state) => state.character.selectedDisadvantages);
 
   const nameText = () => {
     if (characterName) {
@@ -13,10 +14,11 @@ const DisplayAdvantages = () => {
       return '';
     }
   };
+
   return (
     <div>
-      {selectedAdvantages.length > 0 && <h3>{`${nameText()} Advantages`}</h3>}
-      {selectedAdvantages.map(({ title, points, description, subCategories, extraText }) => {
+      {selectedDisadvantages.length > 0 && <h3>{`${nameText()} Disadvantages`}</h3>}
+      {selectedDisadvantages.map(({ title, points, description, subCategories, extraText }) => {
         return (
           <div className="results-container" key={`${title}-container`}>
             <h2>{title}</h2>
@@ -27,7 +29,7 @@ const DisplayAdvantages = () => {
             {subCategories &&
               subCategories.map(({ name, text, points }) => {
                 return (
-                  <div className="sub-category" key={name}>
+                  <div className="sub-category" key={`${name}-subContainer`}>
                     <strong>
                       <p>{name}</p>
                     </strong>
@@ -46,4 +48,4 @@ const DisplayAdvantages = () => {
   );
 };
 
-export default DisplayAdvantages;
+export default DisplayDisadvantages;

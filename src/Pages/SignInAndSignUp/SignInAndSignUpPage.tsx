@@ -1,10 +1,10 @@
+import React from 'react';
 import './SignInAndSignUpPage.styles.scss';
 
 import Header from '../../Components/Header/Header.component';
-import SignIn from '../../Components/SignInAndSignUp/SignIn/sign-in-component.jsx';
-import SignUp from '../../Components/SignInAndSignUp/SignUp/sign-up-component.jsx';
 import { useState } from 'react';
-import React from 'react';
+import SignIn from 'Components/SignInAndSignUp/SignIn/sign-in-component';
+import SignUp from 'Components/SignInAndSignUp/SignUp/sign-up-component';
 
 const SignInAndSignUp = () => {
   const [isSigningIn, setIsSigningin] = useState(true);
@@ -21,10 +21,6 @@ const SignInAndSignUp = () => {
           ) : (
             <SignUp setShowLoadingScreen={setShowLoadingScreen} />
           )}
-          {/* {signInOrUp === 'sign-in' && (
-            <SignIn setSignInOrUp={setSignInOrUp} setShowLoadingScreen={setShowLoadingScreen} />
-          )}
-          {signInOrUp === 'sign-up' && <SignUp setShowLoadingScreen={setShowLoadingScreen} />} */}
         </div>
       </div>
     );

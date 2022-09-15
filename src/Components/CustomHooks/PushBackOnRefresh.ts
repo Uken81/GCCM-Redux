@@ -8,7 +8,6 @@ const usePushBackOnRefresh = () => {
   useEffect(() => {
     if (!currentCharacterId) {
       navigate('/create-or-manage-page');
-      console.log('pushback');
     }
   }, []);
 };
