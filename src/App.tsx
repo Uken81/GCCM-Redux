@@ -1,19 +1,20 @@
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-
+import { User } from 'firebase/auth';
 import SignInAndSignUp from './Pages/SignInAndSignUp/SignInAndSignUpPage';
 import { useState } from 'react';
-import { ComponentRefContext, UserContext } from './context';
+import { ComponentRefContext, ComponentRefContextInterface, UserContext } from './context';
 import { useMemo } from 'react';
-import LandingPage from './Pages/LandingPage/landingPage';
-import GuestPage from './Pages/GuestPage/GuestPage';
-import CreateOrManage from './Pages/CreateOrManagePage/CreateOrManagePage';
-import CreateNewCharacterPage from './Pages/CreateNewCharacterPage/CreateNewCharacterPage';
-import ManageCharactersPage from './Pages/ManageCharactersPage/ManageCharactersPage';
-import EditCharacterPage from './Pages/EditCharacterPage/EditCharacterPage';
+import LandingPage from './Pages/landingPage';
+import GuestPage from './Pages/GuestPage';
+import CreateOrManage from './Pages/CreateOrManagePage';
+import CreateNewCharacterPage from './Pages/CreateNewCharacterPage';
+import ManageCharactersPage from './Pages/ManageCharactersPage';
+import EditCharacterPage from './Pages/EditCharacterPage';
 import ResetPasswordPage from './Pages/ResetPage/ResetPasswordPage';
 
 function App() {
-  const [componentRef, setComponentRef] = useState(null);
+  const [componentRef, setComponentRef] = useState<HTMLDivElement | null>(null);
   const componentRefValue = useMemo(
     () => ({
       componentRef,
@@ -22,7 +23,7 @@ function App() {
     [componentRef, setComponentRef]
   );
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
   const userValue = useMemo(
     () => ({
       user,

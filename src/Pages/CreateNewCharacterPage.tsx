@@ -1,38 +1,41 @@
+import React from 'react';
 import { useRef } from 'react';
 import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 
-import '../../Components/Display Results/DisplayResults.styles.scss';
-import '../page.styles.scss';
+import '../Components/Display Results/DisplayResults.styles.scss';
+import 'Pages/page.styles.scss';
 
-import Header from '../../Components/Header/Header.component';
-import SearchBar from '../../Components/SearchBar/SearchBar';
-import CopyToClipboard from '../../Components/Toolbar/CopyToClipboard/CopyToClipboard';
-import PrintPDF from '../../Components/Toolbar/Print PDF/printPDF';
-import ResetCharacter from '../../Components/Toolbar/ResetCharacter/ResetCharacter';
-import DisplaySelected from '../../Components/Selected/DisplaySelected';
-import ComponentToPrint from '../../Components/Display Results/ComponentToPrint';
+import Header from '../Components/Header/Header.component';
+import SearchBar from '../Components/SearchBar/SearchBar';
+import CopyToClipboard from '../Components/Toolbar/CopyToClipboard/CopyToClipboard';
+import PrintPDF from '../Components/Toolbar/Print PDF/printPDF';
+import ResetCharacter from '../Components/Toolbar/ResetCharacter/ResetCharacter';
+import DisplaySelected from '../Components/Selected/DisplaySelected';
+import ComponentToPrint from '../Components/Display Results/ComponentToPrint';
 
-import { useCharacterStore, useToggleStore } from '../../Global State/store';
-import SuccessfulSaveAlert from '../../Components/Toolbar/SaveCharacter/SuccessfulSaveAlert';
-import SaveCharacter from '../../Components/Toolbar/SaveCharacter/SaveCharacter';
+import { useCharacterStore, useToggleStore } from '../Global State/store';
+import SuccessfulSaveAlert from '../Components/Toolbar/SaveCharacter/SuccessfulSaveAlert';
+import SaveCharacter from '../Components/Toolbar/SaveCharacter/SaveCharacter';
 
 const CreateNewCharacterPage = () => {
   const showSuccessAlert = useToggleStore((state) => state.showSuccessAlert);
 
-  const [formInput, setForminput] = useState('');
+  const [nameFormInput, setNameFormInput] = useState<string>('');
+  const setName = useCharacterStore((state) => state.addName);
 
-  const formRef = useRef();
+  const formRef = useRef<HTMLInputElement>(null);
 
   const handleInput = () => {
-    const value = formRef.current.value;
-    setForminput(value);
+    const value = formRef.current?.value!;
+    console.log('val', value);
+    setNameFormInput(value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    useCharacterStore.setState({ characterName: formInput });
-    setForminput('');
+    setName(nameFormInput);
+    setNameFormInput('');
   };
 
   return (
@@ -56,15 +59,15 @@ const CreateNewCharacterPage = () => {
           </div>
           <div className="main-interface">
             <div className="form">
-              <Form className="new-character-form" onSubmit={handleSubmit}>
+              <Form className="new-name-form" onSubmit={handleSubmit}>
                 <Form.Control
                   type="text"
                   ref={formRef}
-                  value={formInput}
+                  value={nameFormInput}
                   onChange={handleInput}
                   placeholder="Enter New Character Name..."
                   size="lg"
-                  maxLength="20"
+                  maxLength={20}
                 />
               </Form>
             </div>

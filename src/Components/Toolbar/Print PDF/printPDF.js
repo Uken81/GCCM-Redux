@@ -9,6 +9,7 @@ import '../../Display Results/DisplayResults.styles.scss';
 
 const PrintPDF = () => {
   const { componentRef } = useContext(ComponentRefContext);
+
   return (
     <div>
       <div className="button-container">
@@ -18,7 +19,7 @@ const PrintPDF = () => {
               Download PDF
             </Button>
           )}
-          content={() => componentRef.current}
+          content={() => componentRef}
         />
       </div>
     </div>

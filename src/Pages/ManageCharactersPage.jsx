@@ -1,16 +1,16 @@
-import '../../Components/Display Results/DisplayResults.styles.scss';
-import '../page.styles.scss';
+import '../Components/Display Results/DisplayResults.styles.scss';
+import 'Pages/page.styles.scss';
 
-import Header from '../../Components/Header/Header.component';
-import CopyToClipboard from '../../Components/Toolbar/CopyToClipboard/CopyToClipboard';
-import DeleteCharacter from '../../Components/Toolbar/DeleteCharacter/DeleteCharacter';
-import PrintPDF from '../../Components/Toolbar/Print PDF/printPDF';
-import DisplaySelected from '../../Components/Selected/DisplaySelected';
+import Header from '../Components/Header/Header.component';
+import CopyToClipboard from '../Components/Toolbar/CopyToClipboard/CopyToClipboard';
+import DeleteCharacter from '../Components/Toolbar/DeleteCharacter/DeleteCharacter';
+import PrintPDF from '../Components/Toolbar/Print PDF/printPDF';
+import DisplaySelected from '../Components/Selected/DisplaySelected';
 import { useState } from 'react';
-import { ToEditCharacter } from '../../Components/Header/Navigation Links/navigationLinks';
-import DeleteAlert from '../../Components/Toolbar/DeleteCharacter/DeleteAlert';
-import { useCharacterStore } from '../../Global State/store';
-import usePushBackOnRefresh from '../../Components/CustomHooks/PushBackOnRefresh';
+import { ToEditCharacter } from '../Components/Header/Navigation Links/navigationLinks';
+import DeleteAlert from '../Components/Toolbar/DeleteCharacter/DeleteAlert';
+import { useCharacterStore } from '../Global State/store';
+import usePushBackOnRefresh from '../Components/CustomHooks/PushBackOnRefresh';
 
 const ManageCharactersPage = () => {
   const characterName = useCharacterStore((state) => state.character.name);
