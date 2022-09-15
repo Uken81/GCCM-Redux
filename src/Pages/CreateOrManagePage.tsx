@@ -15,11 +15,11 @@ import React from 'react';
 import { Unsubscribe } from 'firebase/firestore';
 
 const CreateOrManage = () => {
-  const {user, setUser} = useContext(UserContext) as UserContextInterface;
+  const { user, setUser } = useContext(UserContext) as UserContextInterface;
 
   useResetCharacterOnLoad();
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     let unsubscribeFromAuth: Unsubscribe | null = null;
     unsubscribeFromAuth = onAuthStateChanged(auth, async (userAuth) => {

@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import './Toggle.styles.scss';
 
 import { Tab, Tabs } from 'react-bootstrap';
+import { useToggleStore } from 'Global State/store';
 
 interface Props {
   setIsChoosingAdvantages: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,6 +12,12 @@ interface Props {
 
 const ToggleAdvantageDisadvantage = ({ setIsChoosingAdvantages }: Props) => {
   const [key, setKey] = useState('advantages');
+  const toggleKey = useToggleStore((state) => state.toggleKey);
+
+  //Used when user clicks on columns in DisplaySelected component.
+  useEffect(() => {
+    toggleKey === 'advantages' ? setKey('advantages') : setKey('disadvantages')
+  }, [toggleKey]);
 
   useEffect(() => {
     key === 'advantages' ? setIsChoosingAdvantages(true) : setIsChoosingAdvantages(false);

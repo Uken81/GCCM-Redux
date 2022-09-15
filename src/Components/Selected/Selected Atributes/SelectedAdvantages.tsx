@@ -1,3 +1,4 @@
+import React from 'react';
 import { useCharacterStore } from '../../../Global State/store';
 
 const SelectedAdvantages = () => {
