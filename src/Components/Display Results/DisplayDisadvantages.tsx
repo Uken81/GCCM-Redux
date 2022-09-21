@@ -5,7 +5,7 @@ import './DisplayResults.styles.scss';
 
 const DisplayDisadvantages = () => {
   const characterName = useCharacterStore((state) => state.character.name);
-  const selectedDisadvantages = useCharacterStore((state) => state.character.selectedDisadvantages);
+  const selectedDisadvantages = useCharacterStore((state) => state.character.disadvantages);
 
   const nameText = () => {
     if (characterName) {

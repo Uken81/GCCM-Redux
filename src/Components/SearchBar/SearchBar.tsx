@@ -14,6 +14,7 @@ const SearchBar = () => {
   const [advantageOptions, setAdvantageOptions] = useState<SelectOptionObj[]>([]);
   const [disadvantageOptions, setDisadvantageOptions] = useState<SelectOptionObj[]>([]);
   const [selectInput, setSelectInput] = useState<SelectOptionObj[]>([]);
+  // const [selectInput, setSelectInput] = useState<SelectOptionObj[]>([]);
   const [isChoosingAdvantages, setIsChoosingAdvantages] = useState<boolean>(true);
 
   const selectedAdvantages = useCharacterStore((state) => state.character.advantages);
@@ -24,15 +25,14 @@ const SearchBar = () => {
 
   useEffect(() => {
     const createSearchOptions = () => {
-      //remove any types below.
-      const allAdvatageObjs: any = AdvantagesArray.map((opt) => ({
+      const allAdvatageObjs: SelectOptionObj[] = AdvantagesArray.map((opt) => ({
         label: opt.title,
-        value: opt,
+        value: opt.title,
         category: opt.type
       }));
-      const allDisadvantageObjs: any = DisadvantagesArray.map((opt) => ({
+      const allDisadvantageObjs: SelectOptionObj[] = DisadvantagesArray.map((opt) => ({
         label: opt.title,
-        value: opt,
+        value: opt.title,
         category: opt.type
       }));
       setAdvantageOptions(allAdvatageObjs);
@@ -47,7 +47,7 @@ const SearchBar = () => {
 
   const updateCharacterStore = (e: SelectOptionObj[]) => {
     e.map((attribute) => {
-      const selectedAttribute = attribute.value.title;
+      const selectedAttribute = attribute.value;
       attribute.category === 'advantage'
         ? setSelectedAdavantages([...selectedAdvantages, selectedAttribute])
         : setSelectedDisadvantages([...selectedDisadvantages, selectedAttribute]);

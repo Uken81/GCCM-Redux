@@ -14,9 +14,9 @@ const ToggleAdvantageDisadvantage = ({ setIsChoosingAdvantages }: Props) => {
   const [key, setKey] = useState('advantages');
   const toggleKey = useToggleStore((state) => state.toggleKey);
 
-  //Used when user clicks on columns in DisplaySelected component.
+  //Below function is called when user clicks on columns in DisplaySelected component.
   useEffect(() => {
-    toggleKey === 'advantages' ? setKey('advantages') : setKey('disadvantages')
+    toggleKey === 'advantages' ? setKey('advantages') : setKey('disadvantages');
   }, [toggleKey]);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const ToggleAdvantageDisadvantage = ({ setIsChoosingAdvantages }: Props) => {
         defaultActiveKey="advantages"
         activeKey={key}
         className="toggle-advantages-disadvantages"
-        onSelect={(key) => setKey(key!)}>
+        onSelect={(key) => setKey(key ?? 'advantages')}>
         <Tab
           style={{ backgroundColor: 'red' }}
           eventKey="choose-from"

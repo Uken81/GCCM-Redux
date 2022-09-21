@@ -11,23 +11,23 @@ export interface CharacterObj {
   id: string;
 }
 
-// export interface AttributeObj {
-//   title: string;
-//   type: string;
-//   points: string;
-//   description?: JSX.Element;
-//   subCategories?: SubCategoryObj[];
-//   extraText?: JSX.Element;
-// }
+export interface SelectOptionObj {
+  label: string;
+  category: string;
+  value: string;
+}
 
-// interface SubCategoryObj {
-//   name?: string | JSX.Element;
-//   text: JSX.Element;
-//   points?: string;
-// }
+export interface AttributeObj {
+  title: string;
+  type: string;
+  points: string;
+  description?: JSX.Element;
+  subCategories?: SubCategoryObj[];
+  extraText?: JSX.Element;
+}
 
-// export interface SelectOptionObj {
-//   label: string;
-//   category: string;
-//   value: AttributeObj;
-// }
+interface SubCategoryObj {
+  name?: string | JSX.Element;
+  text: JSX.Element;
+  points?: string;
+}

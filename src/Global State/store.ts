@@ -2,15 +2,21 @@ import { CharacterObj } from './../../types';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-const ToggleStore = (set) => ({
-  toggleKey: 'advantage',
-  toggleAdvantages: () => set({ toggleKey: 'advantages' }),
-  toggleDisadvantages: () => set({ toggleKey: 'disadvantages' }),
+interface ToggleStoreType {
+  toggleKey: string;
+  toggleAdvantages: (toggleKey: string) => void;
+  toggleDisadvantages: (toggleKey: string) => void;
+}
 
-  showSuccessAlert: false,
-  toggleShow: () => set({ showSuccessfulSaveAlert: true }),
-  toggleHide: () => set({ showSuccessfulSaveAlert: false })
-});
+export const useToggleStore = create<ToggleStoreType>((set) => ({
+  toggleKey: 'advantages',
+  toggleAdvantages: () => set({ toggleKey: 'advantages' }),
+  toggleDisadvantages: () => set({ toggleKey: 'disadvantages' })
+
+  // showSuccessAlert: false,
+  // toggleShow: () => set({ showSuccessfulSaveAlert: true }),
+  // toggleHide: () => set({ showSuccessfulSaveAlert: false })
+}));
 
 interface CharacterStoreType {
   character: CharacterObj;
@@ -67,4 +73,4 @@ export const useCharacterStore = create<CharacterStoreType>(
   }))
 );
 
-export const useToggleStore = create(ToggleStore);
+// export const useToggleStore = create(ToggleStore);
