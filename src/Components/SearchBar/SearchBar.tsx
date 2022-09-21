@@ -2,8 +2,8 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { SelectOptionObj } from '../../../types';
-import AdvantagesArray from '../../Attribute Objects/Advantages/Advantages';
-import DisadvantagesArray from '../../Attribute Objects/Disadvantages/Disadvantages';
+import AdvantagesArray from '../../Attribute Objects/Advantages';
+import DisadvantagesArray from '../../Attribute Objects/Disadvantages';
 import { useCharacterStore } from '../../Global State/store';
 import ToggleAdvantageDisadvantage from '../ToggleAdvantageDisadvantage/ToggleAdvantageDisadvantage';
 
@@ -14,14 +14,13 @@ const SearchBar = () => {
   const [advantageOptions, setAdvantageOptions] = useState<SelectOptionObj[]>([]);
   const [disadvantageOptions, setDisadvantageOptions] = useState<SelectOptionObj[]>([]);
   const [selectInput, setSelectInput] = useState<SelectOptionObj[]>([]);
-  // const [selectInput, setSelectInput] = useState<SelectOptionObj[]>([]);
   const [isChoosingAdvantages, setIsChoosingAdvantages] = useState<boolean>(true);
 
   const selectedAdvantages = useCharacterStore((state) => state.character.advantages);
   const selectedDisadvantages = useCharacterStore((state) => state.character.disadvantages);
   //Is it ok to use set when naming an action or should I reserve that for useState?
-  const setSelectedAdavantages = useCharacterStore((state) => state.addAdvantages);
-  const setSelectedDisadvantages = useCharacterStore((state) => state.addDisadvantages);
+  const setAdavantagesAction = useCharacterStore((state) => state.addAdvantages);
+  const setDisadvantagesAction = useCharacterStore((state) => state.addDisadvantages);
 
   useEffect(() => {
     const createSearchOptions = () => {
@@ -49,8 +48,8 @@ const SearchBar = () => {
     e.map((attribute) => {
       const selectedAttribute = attribute.value;
       attribute.category === 'advantage'
-        ? setSelectedAdavantages([...selectedAdvantages, selectedAttribute])
-        : setSelectedDisadvantages([...selectedDisadvantages, selectedAttribute]);
+        ? setAdavantagesAction([...selectedAdvantages, selectedAttribute])
+        : setDisadvantagesAction([...selectedDisadvantages, selectedAttribute]);
     });
   };
 

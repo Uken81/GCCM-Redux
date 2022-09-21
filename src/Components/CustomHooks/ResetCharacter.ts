@@ -1,7 +1,9 @@
 import { useCharacterStore } from '../../Global State/store';
 
-const useResetCharacterOnLoad = () => {
-  useCharacterStore((state) => state.resetCharacter);
+const useResetCharacter = () => {
+  console.log('reset');
+  const reset = useCharacterStore((state) => state.resetCharacter);
+  reset();
 };
 
-export default useResetCharacterOnLoad;
+export default useResetCharacter;

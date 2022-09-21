@@ -28,6 +28,6 @@ export interface AttributeObj {
 
 interface SubCategoryObj {
   name?: string | JSX.Element;
-  text: JSX.Element;
+  text?: JSX.Element;
   points?: string;
 }

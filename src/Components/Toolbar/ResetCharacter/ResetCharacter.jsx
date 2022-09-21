@@ -1,8 +1,8 @@
 import Button from 'react-bootstrap/Button';
-import useResetCharacterOnLoad from '../../CustomHooks/ResetCharacter';
+import useResetCharacter from '../../CustomHooks/ResetCharacter';
 
 const ResetCharacter = () => {
-  const reset = useResetCharacterOnLoad();
+  const reset = useResetCharacter();
 
   return (
     <div className="button-container">

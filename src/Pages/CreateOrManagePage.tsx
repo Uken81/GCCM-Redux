@@ -10,17 +10,14 @@ import { auth, createUserProfileDocument } from '../Components/Firebase/firebase
 import Header from '../Components/Header/Header.component';
 import LoadCharacter from '../Components/Toolbar/LoadCharacter/LoadCharacter';
 import { UserContext, UserContextInterface } from '../context';
-import useResetCharacterOnLoad from '../Components/CustomHooks/ResetCharacter';
+import useResetCharacter from '../Components/CustomHooks/ResetCharacter';
 import React from 'react';
 import { Unsubscribe } from 'firebase/firestore';
 
 const CreateOrManage = () => {
   const { user, setUser } = useContext(UserContext) as UserContextInterface;
-  // const userValues = useContext(UserContext);
-  // const user = userValues?.user;
-  // const setUser = userValues?.setUser;
 
-  useResetCharacterOnLoad();
+  useResetCharacter();
   const navigate = useNavigate();
 
   useEffect(() => {

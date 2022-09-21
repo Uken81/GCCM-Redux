@@ -27,7 +27,11 @@ interface CharacterStoreType {
   addId: (id: string) => void;
 }
 
-const initialCharacterState = {
+interface InitialCharacterType {
+  character: CharacterObj;
+}
+
+const initialCharacterState: InitialCharacterType = {
   character: {
     name: '',
     advantages: [],
@@ -39,8 +43,20 @@ const initialCharacterState = {
 export const useCharacterStore = create<CharacterStoreType>(
   devtools((set) => ({
     ...initialCharacterState,
+    // resetCharacter: () => {
+    //   set((state) => ({
+    //     character: state.character = initialCharacterState
+    //   }));
+    // },
     resetCharacter: () => {
-      set(initialCharacterState);
+      set((state) => ({
+        character: (state.character = {
+          name: '',
+          advantages: [],
+          disadvantages: [],
+          id: ''
+        })
+      }));
     },
     addName: (name) =>
       set((state) => ({
@@ -72,5 +88,3 @@ export const useCharacterStore = create<CharacterStoreType>(
       }))
   }))
 );
-
-// export const useToggleStore = create(ToggleStore);
