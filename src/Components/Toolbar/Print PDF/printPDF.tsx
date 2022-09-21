@@ -1,14 +1,15 @@
+import React from 'react';
 import { useContext } from 'react';
 import ReactToPrint from 'react-to-print';
 
 import Button from 'react-bootstrap/Button';
 
-import { ComponentRefContext } from '../../../context';
+import { ComponentRefContext, ComponentRefContextInterface } from 'context';
 
 import '../../Display Results/DisplayResults.styles.scss';
 
 const PrintPDF = () => {
-  const { componentRef } = useContext(ComponentRefContext);
+  const { componentRef } = useContext(ComponentRefContext) as ComponentRefContextInterface;
 
   return (
     <div>

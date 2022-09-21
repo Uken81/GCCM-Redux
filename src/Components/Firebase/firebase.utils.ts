@@ -1,13 +1,14 @@
+import { CharacterObj } from './../../../types';
 import { initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics';
 import {
   GoogleAuthProvider,
   getAuth,
   signInWithPopup,
   sendPasswordResetEmail
 } from 'firebase/auth';
-import { getFirestore, collection } from 'firebase/firestore';
+import { getFirestore, collection, QuerySnapshot, DocumentData } from 'firebase/firestore';
 import { doc, setDoc, getDoc, getDocs, addDoc, where, query } from 'firebase/firestore';
+import { NewCharacterStatsObj } from '../../../types';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDkzv0wPbGxh5uzDQyFGGplRKn77u5t9Tg',
@@ -29,12 +30,9 @@ const firebaseConfig = {
 // };
 
 const firebaseApp = initializeApp(firebaseConfig);
-// eslint-disable-next-line no-unused-vars
-const analytics = getAnalytics(firebaseApp);
-
 const db = getFirestore(firebaseApp);
 
-const createUserProfileDocument = async (userAuth) => {
+export const createUserProfileDocument = async (userAuth) => {
   if (!userAuth) return;
   const userRef = doc(db, `users/${userAuth.uid}`);
   const docSnap = await getDoc(userRef);
@@ -63,9 +61,9 @@ const createUserProfileDocument = async (userAuth) => {
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
 
-const auth = getAuth(firebaseApp);
+export const auth = getAuth(firebaseApp);
 
-const google = async () => {
+export const google = async () => {
   await signInWithPopup(auth, provider)
     .then((result) => {
       const user = result.user;
@@ -79,7 +77,7 @@ const google = async () => {
     });
 };
 
-const ResetPassword = (email) => {
+export const ResetPassword = (email) => {
   sendPasswordResetEmail(auth, email)
     .then(() => {
       console.log('reset request sent');
@@ -90,40 +88,62 @@ const ResetPassword = (email) => {
     });
 };
 
-const addNewCharacterForUser = async (userId, newCharacter) => {
-  const userCharactersRef = collection(db, 'users', userId, 'characters');
+const createUsersCharactersRef = (userId: string) => {
+  const usersCharactersRef = collection(db, 'users', userId, 'characters');
+  return usersCharactersRef;
+};
+
+export const addNewCharacterForUser = async (
+  userId: string,
+  newCharacter: NewCharacterStatsObj
+) => {
+  const userCharactersRef = createUsersCharactersRef(userId);
 
   try {
     const newCharacterRef = await addDoc(userCharactersRef, newCharacter);
     return newCharacterRef;
   } catch (error) {
     console.log('**** Something Went wrong: ', error);
+    return error;
   }
 };
 
-const getMatchingCharacterForUser = async (userId, characterName) => {
-  const userCharactersRef = collection(db, 'users', userId, 'characters');
-  const q = query(userCharactersRef, where('name', '==', characterName));
-  try {
-    const matchingCharactersSnapshot = await getDocs(q);
-    const matchingCharacters = [];
-    matchingCharactersSnapshot.forEach((doc) => matchingCharacters.push(doc.data()));
-    return matchingCharacters;
-  } catch (error) {
-    console.log('**** Something Went wrong: ', error);
-  }
+const convertSnapshotToList = async (snapShotObj: QuerySnapshot<DocumentData>) => {
+  const docs = snapShotObj.docs;
+  const characterNamesList: string[] = docs.map((doc) => doc.data().name);
+  return characterNamesList;
 };
 
-const getUsersSavedCharactersList = async (userId) => {
-  const userCharactersRef = collection(db, 'users', userId, 'characters');
-  const charactersList = await getDocs(userCharactersRef);
-  const usersCharactersList = [];
+export const getUsersSavedCharactersList = async (userId: string) => {
+  const usersCharactersRef = createUsersCharactersRef(userId);
+  const savedCharactersDoc = await getDocs(usersCharactersRef);
+  const usersCharactersList = await convertSnapshotToList(savedCharactersDoc);
 
-  charactersList.forEach((doc) => usersCharactersList.push(doc.data().name));
   return usersCharactersList;
 };
 
-const GetCharacterReference = async (userId, currentCharacterId) => {
+const convertSnapshotToObj = async (snapShotObj: QuerySnapshot<DocumentData>) => {
+  const doc = snapShotObj.docs[0];
+  const characterObj = doc.data();
+  return characterObj;
+};
+
+export const getMatchingCharacterForUser = async (userId: string, characterName: string) => {
+  const charactersRef = createUsersCharactersRef(userId);
+  const nameQuery = query(charactersRef, where('name', '==', characterName));
+  try {
+    const matchingCharacterSnapshot = await getDocs(nameQuery);
+    const matchingCharacter = await convertSnapshotToObj(matchingCharacterSnapshot);
+    console.log('mcs', matchingCharacterSnapshot);
+    console.log('mc', matchingCharacter);
+    return matchingCharacter;
+  } catch (error) {
+    console.log('**** Something Went wrong: ', error);
+    return null;
+  }
+};
+
+export const GetCharacterReference = async (userId: string, currentCharacterId: string) => {
   const userCharactersRef = collection(db, 'users', userId, 'characters');
   console.log('userCharacterRef: ', userCharactersRef);
 
@@ -134,7 +154,7 @@ const GetCharacterReference = async (userId, currentCharacterId) => {
   return docRef;
 };
 
-const SaveChangesToCharacter = async (
+export const SaveChangesToCharacter = async (
   characterRef,
   selectedAdvantagesList,
   selectedDisadvantagesList
@@ -149,17 +169,17 @@ const SaveChangesToCharacter = async (
   );
 };
 
-export {
-  signInWithPopup,
-  google,
-  auth,
-  db,
-  firebaseApp,
-  createUserProfileDocument,
-  ResetPassword,
-  addNewCharacterForUser,
-  getMatchingCharacterForUser,
-  getUsersSavedCharactersList,
-  GetCharacterReference,
-  SaveChangesToCharacter
-};
+// export {
+//   signInWithPopup,
+//   google,
+//   auth,
+//   db,
+//   firebaseApp,
+//   createUserProfileDocument,
+//   ResetPassword,
+//   addNewCharacterForUser,
+//   getMatchingCharacterForUser,
+//   getUsersSavedCharactersList,
+//   GetCharacterReference,
+//   SaveChangesToCharacter
+// };

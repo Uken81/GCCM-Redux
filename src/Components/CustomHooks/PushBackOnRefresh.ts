@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { useCharacterStore } from '../../Global State/store';
 
 const usePushBackOnRefresh = () => {
-  const currentCharacterId = useCharacterStore((state) => state.character.currentCharacterId);
+  const currentCharacterId = useCharacterStore((state) => state.character.id);
   const navigate = useNavigate();
   useEffect(() => {
     if (!currentCharacterId) {

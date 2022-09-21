@@ -2,13 +2,13 @@ import React from 'react';
 import { useCharacterStore } from '../../../Global State/store';
 
 const SelectedDisadvantages = () => {
-  const selectedDisadvantages = useCharacterStore((state) => state.character.selectedDisadvantages);
+  const selectedDisadvantages = useCharacterStore((state) => state.character.disadvantages);
   return (
     <ul>
-      {selectedDisadvantages.map(({ title }) => {
+      {selectedDisadvantages.map((name) => {
         return (
-          <li className="selected" key={`${title}-selected`} style={{ color: 'brown' }}>
-            {title}
+          <li className="selected" key={`${name}-selected`} style={{ color: 'brown' }}>
+            {name}
           </li>
         );
       })}

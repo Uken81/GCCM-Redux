@@ -14,7 +14,7 @@ import { useCharacterStore } from '../Global State/store';
 import usePushBackOnRefresh from '../Components/CustomHooks/PushBackOnRefresh';
 
 const ManageCharactersPage = () => {
-  const characterName = useCharacterStore((state) => state.character.name);
+  const characterName = useCharacterStore((state) => state.character.name?.toUpperCase());
   const [showAlert, setShowAlert] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -37,7 +37,7 @@ const ManageCharactersPage = () => {
             </div>
           </div>
           <div className="main-interface">
-            <h1 className="selected-header">{characterName!.toUpperCase()}&apos;S CHEATSHEET</h1>
+            <h1 className="selected-header">{characterName}&apos;S CHEATSHEET</h1>
             {showAlert && (
               <DeleteAlert
                 setShowAlert={setShowAlert}

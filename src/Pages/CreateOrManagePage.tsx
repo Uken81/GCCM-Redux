@@ -16,6 +16,9 @@ import { Unsubscribe } from 'firebase/firestore';
 
 const CreateOrManage = () => {
   const { user, setUser } = useContext(UserContext) as UserContextInterface;
+  // const userValues = useContext(UserContext);
+  // const user = userValues?.user;
+  // const setUser = userValues?.setUser;
 
   useResetCharacterOnLoad();
   const navigate = useNavigate();
@@ -25,7 +28,7 @@ const CreateOrManage = () => {
     unsubscribeFromAuth = onAuthStateChanged(auth, async (userAuth) => {
       await createUserProfileDocument(userAuth);
       if (userAuth) {
-        setUser(userAuth);
+        setUser!(userAuth);
         console.log('****User: ', user);
       } else {
         setUser(userAuth);

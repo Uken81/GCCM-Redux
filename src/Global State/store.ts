@@ -1,6 +1,6 @@
+import { CharacterObj } from './../../types';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { AttributeObj } from '../../types';
 
 let ToggleStore = (set) => ({
   toggleKey: 'advantage',
@@ -13,25 +13,20 @@ let ToggleStore = (set) => ({
 });
 
 interface CharacterStoreType {
-  character: {
-    name: string | null;
-    selectedAdvantages: AttributeObj[];
-    selectedDisadvantages: AttributeObj[];
-    currentCharacterId: string | null;
-  };
+  character: CharacterObj;
   resetCharacter: () => void;
   addName: (name: string) => void;
-  addAdvantages: (advantagesList: AttributeObj[]) => void;
-  addDisadvantages: (disadvantageList: AttributeObj[]) => void;
+  addAdvantages: (advantagesList: string[]) => void;
+  addDisadvantages: (disadvantageList: string[]) => void;
   addId: (id: string) => void;
 }
 
 const initialCharacterState = {
   character: {
     name: null,
-    selectedAdvantages: [],
-    selectedDisadvantages: [],
-    currentCharacterId: null
+    advantages: [],
+    disadvantages: [],
+    id: null
   }
 };
 
@@ -52,21 +47,21 @@ export const useCharacterStore = create<CharacterStoreType>(
       set((state) => ({
         character: (state.character = {
           ...state.character,
-          selectedAdvantages: advantagesList
+          advantages: advantagesList
         })
       })),
     addDisadvantages: (disadvantageList) =>
       set((state) => ({
         character: (state.character = {
           ...state.character,
-          selectedDisadvantages: disadvantageList
+          disadvantages: disadvantageList
         })
       })),
     addId: (id) =>
       set((state) => ({
         character: (state.character = {
           ...state.character,
-          currentCharacterId: id
+          id: id
         })
       }))
   }))

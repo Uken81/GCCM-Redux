@@ -13,7 +13,6 @@ import ManageCharactersPage from './Pages/ManageCharactersPage';
 import EditCharacterPage from './Pages/EditCharacterPage';
 import ResetPasswordPage from './Pages/ResetPage/ResetPasswordPage';
 
-
 function App() {
   const [componentRef, setComponentRef] = useState<HTMLDivElement | null>(null);
   const componentRefValue = useMemo(
@@ -27,14 +26,13 @@ function App() {
   const [user, setUser] = useState<User | null>(null);
   const userValue = useMemo(
     () => ({
-      user: user,
+      user,
       setUser
     }),
     [user, setUser]
   );
 
   return (
-    // <UserContext.Provider value={userValue}>
     <UserContext.Provider value={userValue}>
       <ComponentRefContext.Provider value={componentRefValue}>
         <Routes>

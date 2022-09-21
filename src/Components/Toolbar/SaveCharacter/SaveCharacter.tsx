@@ -1,3 +1,4 @@
+import React from 'react';
 import { setDoc } from '@firebase/firestore';
 import { useContext, useEffect, useState } from 'react';
 
@@ -6,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import { UserContext } from '../../../context';
 import { useCharacterStore, useToggleStore } from '../../../Global State/store';
 import { addNewCharacterForUser, getUsersSavedCharactersList } from '../../Firebase/firebase.utils';
+import { NewCharacterStatsObj } from '../../../../types';
 
 const SaveCharacter = () => {
   const { user } = useContext(UserContext);
@@ -23,6 +25,7 @@ const SaveCharacter = () => {
     currentlyLoggedInUserId = user.uid;
   }
 
+  //remove the useeffect and leave as function? then remove nameIsduplicate state?
   useEffect(() => {
     const checkIfDuplicate = async () => {
       if (user) {
@@ -52,7 +55,7 @@ const SaveCharacter = () => {
       console.log('**** SelectedDisadvantages: ', selectedDisadvantages);
       console.log(`**** ${characterName} has been saved`);
 
-      const newCharacter = {
+      const newCharacter: NewCharacterStatsObj = {
         name: characterName,
         advantages: selectedAdvantages.map(({ title }) => title),
         disadvantages: selectedDisadvantages.map(({ title }) => title)

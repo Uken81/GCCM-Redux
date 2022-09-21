@@ -16,8 +16,8 @@ const SearchBar = () => {
   const [selectInput, setSelectInput] = useState<SelectOptionObj[]>([]);
   const [isChoosingAdvantages, setIsChoosingAdvantages] = useState<boolean>(true);
 
-  const selectedAdvantages = useCharacterStore((state) => state.character.selectedAdvantages);
-  const selectedDisadvantages = useCharacterStore((state) => state.character.selectedDisadvantages);
+  const selectedAdvantages = useCharacterStore((state) => state.character.advantages);
+  const selectedDisadvantages = useCharacterStore((state) => state.character.disadvantages);
   //Is it ok to use set when naming an action or should I reserve that for useState?
   const setSelectedAdavantages = useCharacterStore((state) => state.addAdvantages);
   const setSelectedDisadvantages = useCharacterStore((state) => state.addDisadvantages);
@@ -47,8 +47,7 @@ const SearchBar = () => {
 
   const updateCharacterStore = (e: SelectOptionObj[]) => {
     e.map((attribute) => {
-      console.log('att', attribute.value);
-      const selectedAttribute = attribute.value;
+      const selectedAttribute = attribute.value.title;
       attribute.category === 'advantage'
         ? setSelectedAdavantages([...selectedAdvantages, selectedAttribute])
         : setSelectedDisadvantages([...selectedDisadvantages, selectedAttribute]);
