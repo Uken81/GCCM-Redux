@@ -25,7 +25,7 @@ const CreateOrManage = () => {
     unsubscribeFromAuth = onAuthStateChanged(auth, async (userAuth) => {
       await createUserProfileDocument(userAuth);
       if (userAuth) {
-        setUser!(userAuth);
+        setUser(userAuth);
         console.log('****User: ', user);
       } else {
         setUser(userAuth);

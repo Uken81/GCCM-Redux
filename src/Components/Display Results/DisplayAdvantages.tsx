@@ -2,6 +2,7 @@ import AdvantagesArray from 'Attribute Objects/Advantages';
 import React, { useEffect, useState } from 'react';
 import { AttributeObj } from '../../../types';
 import { useCharacterStore } from '../../Global State/store';
+import { DisplayResult } from './DisplayResults';
 
 import './DisplayResults.styles.scss';
 
@@ -26,32 +27,7 @@ const DisplayAdvantages = () => {
   return (
     <div>
       {selectedAdvantages.length > 0 && <h3>{`${nameText} Advantages`}</h3>}
-      {selectedAdvantages.map(({ title, points, description, subCategories, extraText }) => {
-        return (
-          <div className="results-container" key={`${title}-container`}>
-            <h2>{title}</h2>
-            <p className="points">
-              <strong>{points}</strong>
-            </p>
-            {description}
-            {subCategories &&
-              subCategories.map(({ name, text, points }) => {
-                return (
-                  <div className="sub-category" key={`${name}-subContainer`}>
-                    <strong>
-                      <p>{name}</p>
-                    </strong>
-                    {text}
-                    <p>
-                      <strong>{points}</strong>
-                    </p>
-                  </div>
-                );
-              })}
-            <i>{extraText}</i>
-          </div>
-        );
-      })}
+      <DisplayResult selectedAdvantages={selectedAdvantages} />
     </div>
   );
 };
