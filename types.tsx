@@ -5,29 +5,29 @@ export interface NewCharacterStatsObj {
 }
 
 export interface CharacterObj {
-  name: string | null;
+  name: string;
   advantages: string[];
   disadvantages: string[];
-  id: string | null;
+  id: string;
 }
 
-export interface AttributeObj {
-  title: string;
-  type: string;
-  points: string;
-  description?: JSX.Element;
-  subCategories?: SubCategoryObj[];
-  extraText?: JSX.Element;
-}
+// export interface AttributeObj {
+//   title: string;
+//   type: string;
+//   points: string;
+//   description?: JSX.Element;
+//   subCategories?: SubCategoryObj[];
+//   extraText?: JSX.Element;
+// }
 
-interface SubCategoryObj {
-  name?: string | JSX.Element;
-  text: JSX.Element;
-  points?: string;
-}
+// interface SubCategoryObj {
+//   name?: string | JSX.Element;
+//   text: JSX.Element;
+//   points?: string;
+// }
 
-export interface SelectOptionObj {
-  label: string;
-  category: string;
-  value: AttributeObj;
-}
+// export interface SelectOptionObj {
+//   label: string;
+//   category: string;
+//   value: AttributeObj;
+// }

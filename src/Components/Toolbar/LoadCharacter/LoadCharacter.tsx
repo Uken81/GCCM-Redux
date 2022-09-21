@@ -11,7 +11,6 @@ import { useContext } from 'react';
 import { UserContext, UserContextInterface } from '../../../context';
 import { useCharacterStore } from '../../../Global State/store';
 import { useNavigate } from 'react-router';
-import { CharacterObj } from '../../../../types';
 
 const LoadCharacter = () => {
   const { user } = useContext(UserContext) as UserContextInterface;
@@ -41,28 +40,24 @@ const LoadCharacter = () => {
 
   const getCharacterRecord = async () => {
     const selectedCharacter = characterToLoad;
-    const characterRecord = await getMatchingCharacterForUser(user?.uid!, selectedCharacter);
-    return characterRecord;
+    if (user) {
+      const characterRecord = await getMatchingCharacterForUser(user.uid, selectedCharacter);
+      return characterRecord;
+    } else {
+      return null;
+    }
   };
 
   const repopulateCharacterAttributes = async () => {
     const characterRecord = await getCharacterRecord();
-    console.log('CharacterRecord', characterRecord);
 
-    const characterObj: CharacterObj = {
-      name: characterRecord?.name,
-      advantages: characterRecord?.advantages,
-      disadvantages: characterRecord?.disadvantages,
-      id: characterRecord?.id
-    };
-    console.log('characterObj', characterObj);
+    setName(characterRecord?.name);
+    setAdvantages(characterRecord?.advantages);
+    setDisadvantages(characterRecord?.disadvantages);
+    setId(characterRecord?.id);
 
-    setName(characterObj?.name!);
-    setAdvantages(characterObj.advantages);
-    setDisadvantages(characterObj.disadvantages);
-    setId(characterObj.id!);
-
-    console.log(`****${characterObj.name} successfully loaded`);
+    console.log(`****${characterRecord?.name} successfully loaded`);
+    console.log(characterRecord);
   };
 
   const navigate = useNavigate();

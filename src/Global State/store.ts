@@ -2,7 +2,7 @@ import { CharacterObj } from './../../types';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-let ToggleStore = (set) => ({
+const ToggleStore = (set) => ({
   toggleKey: 'advantage',
   toggleAdvantages: () => set({ toggleKey: 'advantages' }),
   toggleDisadvantages: () => set({ toggleKey: 'disadvantages' }),
@@ -23,10 +23,10 @@ interface CharacterStoreType {
 
 const initialCharacterState = {
   character: {
-    name: null,
+    name: '',
     advantages: [],
     disadvantages: [],
-    id: null
+    id: ''
   }
 };
 

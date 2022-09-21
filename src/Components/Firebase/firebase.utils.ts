@@ -1,4 +1,3 @@
-import { CharacterObj } from './../../../types';
 import { initializeApp } from 'firebase/app';
 import {
   GoogleAuthProvider,
@@ -134,8 +133,6 @@ export const getMatchingCharacterForUser = async (userId: string, characterName:
   try {
     const matchingCharacterSnapshot = await getDocs(nameQuery);
     const matchingCharacter = await convertSnapshotToObj(matchingCharacterSnapshot);
-    console.log('mcs', matchingCharacterSnapshot);
-    console.log('mc', matchingCharacter);
     return matchingCharacter;
   } catch (error) {
     console.log('**** Something Went wrong: ', error);
@@ -168,18 +165,3 @@ export const SaveChangesToCharacter = async (
     { merge: true }
   );
 };
-
-// export {
-//   signInWithPopup,
-//   google,
-//   auth,
-//   db,
-//   firebaseApp,
-//   createUserProfileDocument,
-//   ResetPassword,
-//   addNewCharacterForUser,
-//   getMatchingCharacterForUser,
-//   getUsersSavedCharactersList,
-//   GetCharacterReference,
-//   SaveChangesToCharacter
-// };
