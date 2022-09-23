@@ -4,8 +4,8 @@ import { devtools } from 'zustand/middleware';
 
 interface ToggleStoreType {
   toggleKey: string;
-  toggleAdvantages: (toggleKey: string) => void;
-  toggleDisadvantages: (toggleKey: string) => void;
+  toggleAdvantages: () => void;
+  toggleDisadvantages: () => void;
 }
 
 export const useToggleStore = create<ToggleStoreType>((set) => ({

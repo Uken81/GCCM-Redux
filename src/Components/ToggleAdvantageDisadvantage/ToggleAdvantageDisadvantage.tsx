@@ -13,14 +13,23 @@ interface Props {
 const ToggleAdvantageDisadvantage = ({ setIsChoosingAdvantages }: Props) => {
   const [key, setKey] = useState('advantages');
   const toggleKey = useToggleStore((state) => state.toggleKey);
+  const toggleAdvantages = useToggleStore((state) => state.toggleAdvantages);
+  const toggleDisadvantages = useToggleStore((state) => state.toggleDisadvantages);
 
   //Below function is called when user clicks on columns in DisplaySelected component.
+  //It ensures both states are synced.
   useEffect(() => {
     toggleKey === 'advantages' ? setKey('advantages') : setKey('disadvantages');
   }, [toggleKey]);
 
   useEffect(() => {
-    key === 'advantages' ? setIsChoosingAdvantages(true) : setIsChoosingAdvantages(false);
+    if (key === 'advantages') {
+      setIsChoosingAdvantages(true);
+      toggleAdvantages();
+    } else {
+      setIsChoosingAdvantages(false);
+      toggleDisadvantages();
+    }
   }, [key]);
 
   return (
@@ -29,7 +38,8 @@ const ToggleAdvantageDisadvantage = ({ setIsChoosingAdvantages }: Props) => {
         defaultActiveKey="advantages"
         activeKey={key}
         className="toggle-advantages-disadvantages"
-        onSelect={(key) => setKey(key ?? 'advantages')}>
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        onSelect={(key) => setKey(key!)}>
         <Tab
           style={{ backgroundColor: 'red' }}
           eventKey="choose-from"
