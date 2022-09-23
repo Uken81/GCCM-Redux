@@ -1,8 +1,9 @@
+import { useCharacterStore } from 'Global State/store';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
-import useResetCharacter from '../../CustomHooks/ResetCharacter';
 
 const ResetCharacter = () => {
-  const reset = useResetCharacter();
+  const reset = useCharacterStore((state) => state.resetCharacter);
 
   return (
     <div className="button-container">

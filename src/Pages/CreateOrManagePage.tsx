@@ -10,14 +10,15 @@ import { auth, createUserProfileDocument } from '../Components/Firebase/firebase
 import Header from '../Components/Header/Header.component';
 import LoadCharacter from '../Components/Toolbar/LoadCharacter/LoadCharacter';
 import { UserContext, UserContextInterface } from '../context';
-import useResetCharacter from '../Components/CustomHooks/ResetCharacter';
 import React from 'react';
 import { Unsubscribe } from 'firebase/firestore';
+import { useCharacterStore } from 'Global State/store';
 
 const CreateOrManage = () => {
   const { user, setUser } = useContext(UserContext) as UserContextInterface;
+  const resetCharacter = useCharacterStore((state) => state.resetCharacter);
 
-  useResetCharacter();
+  resetCharacter();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,7 +34,9 @@ const CreateOrManage = () => {
         navigate('/');
       }
       return () => {
-        unsubscribeFromAuth!();
+        if (unsubscribeFromAuth) {
+          unsubscribeFromAuth();
+        }
       };
     });
   }, [user]);
