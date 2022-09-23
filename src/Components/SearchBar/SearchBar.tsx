@@ -13,50 +13,48 @@ import { SearchBarTitle } from './SearchBarTitle';
 const SearchBar = () => {
   const [advantageOptions, setAdvantageOptions] = useState<SelectOptionObj[]>([]);
   const [disadvantageOptions, setDisadvantageOptions] = useState<SelectOptionObj[]>([]);
-  const [selectInput, setSelectInput] = useState<SelectOptionObj[]>([]);
+  const [selectedAttributes, setSelectedAttributes] = useState<SelectOptionObj[]>([]);
   const [isChoosingAdvantages, setIsChoosingAdvantages] = useState<boolean>(true);
 
-  const selectedAdvantages = useCharacterStore((state) => state.character.advantages);
-  const selectedDisadvantages = useCharacterStore((state) => state.character.disadvantages);
-  //Is it ok to use set when naming an action or should I reserve that for useState?
   const setAdavantagesAction = useCharacterStore((state) => state.addAdvantages);
   const setDisadvantagesAction = useCharacterStore((state) => state.addDisadvantages);
 
   useEffect(() => {
     const createSearchOptions = () => {
-      const allAdvatageObjs: SelectOptionObj[] = AdvantagesArray.map((opt) => ({
+      const advantageOptionsObj: SelectOptionObj[] = AdvantagesArray.map((opt) => ({
         label: opt.title,
         value: opt.title,
         category: opt.type
       }));
-      const allDisadvantageObjs: SelectOptionObj[] = DisadvantagesArray.map((opt) => ({
+      const disadvantageOptionsObj: SelectOptionObj[] = DisadvantagesArray.map((opt) => ({
         label: opt.title,
         value: opt.title,
         category: opt.type
       }));
-      setAdvantageOptions(allAdvatageObjs);
-      setDisadvantageOptions(allDisadvantageObjs);
+      setAdvantageOptions(advantageOptionsObj);
+      setDisadvantageOptions(disadvantageOptionsObj);
     };
     createSearchOptions();
   }, []);
 
-  const updateSelectedList = (e: SelectOptionObj[]) => {
-    setSelectInput(e);
+  const updateMultiSelect = async (e: SelectOptionObj[]) => {
+    setSelectedAttributes(e);
   };
 
-  const updateCharacterStore = (e: SelectOptionObj[]) => {
-    e.map((attribute) => {
-      const selectedAttribute = attribute.value;
-      attribute.category === 'advantage'
-        ? setAdavantagesAction([...selectedAdvantages, selectedAttribute])
-        : setDisadvantagesAction([...selectedDisadvantages, selectedAttribute]);
-    });
+  const handleChange = async (e: SelectOptionObj[]) => {
+    await updateMultiSelect(e);
   };
 
-  const handleChange = (e: SelectOptionObj[]) => {
-    updateSelectedList(e);
-    updateCharacterStore(e);
+  const updateAttributeStore = (categoryName: string) => {
+    const filter = selectedAttributes.filter((att) => att.category === categoryName);
+    const result = filter.map((obj) => obj.value);
+    return result;
   };
+
+  useEffect(() => {
+    setAdavantagesAction(updateAttributeStore('advantage'));
+    setDisadvantagesAction(updateAttributeStore('disadvantage'));
+  }, [selectedAttributes]);
 
   const formatOptionLabel = ({ label, category }) => (
     <div style={category === 'advantage' ? { color: 'seagreen' } : { color: 'brown' }}>{label}</div>
@@ -70,7 +68,7 @@ const SearchBar = () => {
         <Select
           className="searchBar"
           options={isChoosingAdvantages ? advantageOptions : disadvantageOptions}
-          value={selectInput}
+          value={selectedAttributes}
           isMulti
           onChange={handleChange}
           formatOptionLabel={formatOptionLabel}

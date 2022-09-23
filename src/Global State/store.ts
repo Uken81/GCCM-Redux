@@ -41,50 +41,39 @@ const initialCharacterState: InitialCharacterType = {
 };
 
 export const useCharacterStore = create<CharacterStoreType>(
-  devtools((set) => ({
-    ...initialCharacterState,
-    // resetCharacter: () => {
-    //   set((state) => ({
-    //     character: state.character = initialCharacterState
-    //   }));
-    // },
-    resetCharacter: () => {
-      set((state) => ({
-        character: (state.character = {
-          name: '',
-          advantages: [],
-          disadvantages: [],
-          id: ''
-        })
-      }));
-    },
-    addName: (name) =>
-      set((state) => ({
-        character: (state.character = {
-          ...state.character,
-          name: name
-        })
-      })),
-    addAdvantages: (advantagesList) =>
-      set((state) => ({
-        character: (state.character = {
-          ...state.character,
-          advantages: advantagesList
-        })
-      })),
-    addDisadvantages: (disadvantageList) =>
-      set((state) => ({
-        character: (state.character = {
-          ...state.character,
-          disadvantages: disadvantageList
-        })
-      })),
-    addId: (id) =>
-      set((state) => ({
-        character: (state.character = {
-          ...state.character,
-          id: id
-        })
-      }))
-  }))
+  devtools(
+    (set) => ({
+      ...initialCharacterState,
+      resetCharacter: () => set(initialCharacterState),
+      addName: (name) =>
+        set((state) => ({
+          character: (state.character = {
+            ...state.character,
+            name: name
+          })
+        })),
+      addAdvantages: (advantagesList) =>
+        set((state) => ({
+          character: (state.character = {
+            ...state.character,
+            advantages: advantagesList
+          })
+        })),
+      addDisadvantages: (disadvantageList) =>
+        set((state) => ({
+          character: (state.character = {
+            ...state.character,
+            disadvantages: disadvantageList
+          })
+        })),
+      addId: (id) =>
+        set((state) => ({
+          character: (state.character = {
+            ...state.character,
+            id: id
+          })
+        }))
+    }),
+    {}
+  )
 );

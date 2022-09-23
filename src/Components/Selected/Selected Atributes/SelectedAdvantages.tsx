@@ -8,7 +8,10 @@ const SelectedAdvantages = () => {
     <ul>
       {selectedAdvantages.map((name) => {
         return (
-          <li className="selected-advantages" key={`${name}-selected`} style={{ color: 'seagreen' }}>
+          <li
+            className="selected-advantages"
+            key={`${name}-selected`}
+            style={{ color: 'seagreen' }}>
             {name}
           </li>
         );
