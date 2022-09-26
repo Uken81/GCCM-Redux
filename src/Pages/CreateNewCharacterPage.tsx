@@ -27,8 +27,7 @@ const CreateNewCharacterPage = () => {
   const formRef = useRef<HTMLInputElement>(null);
 
   const handleInput = () => {
-    const value = formRef.current?.value!;
-    console.log('val', value);
+    const value = formRef.current?.value ?? '';
     setNameFormInput(value);
   };
 

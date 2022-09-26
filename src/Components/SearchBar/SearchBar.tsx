@@ -11,11 +11,11 @@ import './SearchBar.styles.scss';
 import { SearchBarTitle } from './SearchBarTitle';
 
 const SearchBar = () => {
+  const [isChoosingAdvantages, setIsChoosingAdvantages] = useState<boolean>(true);
   const [advantageOptions, setAdvantageOptions] = useState<SelectOptionObj[]>([]);
   const [disadvantageOptions, setDisadvantageOptions] = useState<SelectOptionObj[]>([]);
-  const [selectedAttributes, setSelectedAttributes] = useState<SelectOptionObj[]>([]);
-  const [isChoosingAdvantages, setIsChoosingAdvantages] = useState<boolean>(true);
-
+  const selectedOptions = useCharacterStore((state) => state.selectedOptions);
+  const addSelectedOptionAction = useCharacterStore((state) => state.addSelectedOption);
   const setAdavantagesAction = useCharacterStore((state) => state.addAdvantages);
   const setDisadvantagesAction = useCharacterStore((state) => state.addDisadvantages);
 
@@ -37,16 +37,12 @@ const SearchBar = () => {
     createSearchOptions();
   }, []);
 
-  const updateMultiSelect = async (e: SelectOptionObj[]) => {
-    setSelectedAttributes(e);
-  };
-
   const handleChange = async (e: SelectOptionObj[]) => {
-    await updateMultiSelect(e);
+    addSelectedOptionAction(e);
   };
 
   const updateAttributeStore = (categoryName: string) => {
-    const filter = selectedAttributes.filter((att) => att.category === categoryName);
+    const filter = selectedOptions.filter((att) => att.category === categoryName);
     const result = filter.map((obj) => obj.value);
     return result;
   };
@@ -54,7 +50,7 @@ const SearchBar = () => {
   useEffect(() => {
     setAdavantagesAction(updateAttributeStore('advantage'));
     setDisadvantagesAction(updateAttributeStore('disadvantage'));
-  }, [selectedAttributes]);
+  }, [selectedOptions]);
 
   const formatOptionLabel = ({ label, category }) => (
     <div style={category === 'advantage' ? { color: 'seagreen' } : { color: 'brown' }}>{label}</div>
@@ -68,7 +64,7 @@ const SearchBar = () => {
         <Select
           className="searchBar"
           options={isChoosingAdvantages ? advantageOptions : disadvantageOptions}
-          value={selectedAttributes}
+          value={selectedOptions}
           isMulti
           onChange={handleChange}
           formatOptionLabel={formatOptionLabel}

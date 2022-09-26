@@ -1,4 +1,4 @@
-import { CharacterObj } from './../../types';
+import { CharacterObj, SelectOptionObj } from './../../types';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
@@ -20,6 +20,9 @@ export const useToggleStore = create<ToggleStoreType>((set) => ({
 
 interface CharacterStoreType {
   character: CharacterObj;
+  selectedOptions: SelectOptionObj[];
+  resetSelectedOptions: () => void;
+  addSelectedOption: (selected: SelectOptionObj[]) => void;
   resetCharacter: () => void;
   addName: (name: string) => void;
   addAdvantages: (advantagesList: string[]) => void;
@@ -44,6 +47,12 @@ export const useCharacterStore = create<CharacterStoreType>(
   devtools(
     (set) => ({
       ...initialCharacterState,
+      selectedOptions: [],
+      resetSelectedOptions: () => set(() => ({ selectedOptions: [] })),
+      //Why does below throw TS error??
+      // resetSelectedOptions: () => set((state) => (state.selectedOptions = [])),
+      addSelectedOption: (selectedOptionArr: SelectOptionObj[]) =>
+        set(() => ({ selectedOptions: selectedOptionArr })),
       resetCharacter: () => set(initialCharacterState),
       addName: (name) =>
         set((state) => ({

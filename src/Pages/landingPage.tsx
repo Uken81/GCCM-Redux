@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useCharacterStore } from 'Global State/store';
 
 const LandingPage = () => {
-  const resetCharacter = useCharacterStore((state) => state.resetCharacter);
+  const resetCharacter = useCharacterStore((state) => state.resetSelectedOptions);
   resetCharacter();
 
   return (
