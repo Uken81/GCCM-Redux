@@ -4,7 +4,7 @@ import { AttributeObj } from '../../../types';
 import { useCharacterStore } from '../../Global State/store';
 import { DisplayResult } from './DisplayAttributeCards';
 
-import './DisplayResults.styles.scss';
+import './DisplayAttributeCards.styles.scss';
 
 const DisplayDisadvantages = () => {
   const characterName = useCharacterStore((state) => state.character.name);

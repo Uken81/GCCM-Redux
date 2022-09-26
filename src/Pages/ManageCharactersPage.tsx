@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Components/Display Attribute Cards/DisplayResults.styles.scss';
+import '../Components/Display Attribute Cards/DisplayAttributeCards.styles.scss';
 import 'Pages/page.styles.scss';
 
 import Header from '../Components/Header/Header.component';

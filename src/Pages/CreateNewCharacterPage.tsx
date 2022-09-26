@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 
-import '../Components/Display Attribute Cards/DisplayResults.styles.scss';
+import '../Components/Display Attribute Cards/DisplayAttributeCards.styles.scss';
 import 'Pages/page.styles.scss';
 
 import Header from '../Components/Header/Header.component';
