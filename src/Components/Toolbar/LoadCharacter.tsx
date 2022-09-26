@@ -4,12 +4,12 @@ import DropdownItem from 'react-bootstrap/DropdownItem';
 import {
   getMatchingCharacterForUser,
   getUsersSavedCharactersList
-} from '../../Firebase/firebase.utils';
+} from '../Firebase/firebase.utils';
 import { useEffect, useState } from 'react';
 
 import { useContext } from 'react';
-import { UserContext, UserContextInterface } from '../../../context';
-import { useCharacterStore } from '../../../Global State/store';
+import { UserContext, UserContextInterface } from '../../context';
+import { useCharacterStore } from '../../Global State/store';
 import { useNavigate } from 'react-router';
 
 const LoadCharacter = () => {

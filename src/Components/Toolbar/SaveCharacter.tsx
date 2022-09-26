@@ -4,10 +4,10 @@ import { useContext, useEffect, useState } from 'react';
 
 import Button from 'react-bootstrap/Button';
 
-import { UserContext } from '../../../context';
-import { useCharacterStore, useToggleStore } from '../../../Global State/store';
-import { addNewCharacterForUser, getUsersSavedCharactersList } from '../../Firebase/firebase.utils';
-import { NewCharacterStatsObj } from '../../../../types';
+import { UserContext } from '../../context';
+import { useCharacterStore, useToggleStore } from '../../Global State/store';
+import { addNewCharacterForUser, getUsersSavedCharactersList } from '../Firebase/firebase.utils';
+import { NewCharacterStatsObj } from '../../../types';
 
 const SaveCharacter = () => {
   const { user } = useContext(UserContext);

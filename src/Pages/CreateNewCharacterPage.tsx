@@ -3,20 +3,20 @@ import { useRef } from 'react';
 import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 
-import '../Components/Display Results/DisplayResults.styles.scss';
+import '../Components/Display Attribute Cards/DisplayResults.styles.scss';
 import 'Pages/page.styles.scss';
 
 import Header from '../Components/Header/Header.component';
 import SearchBar from '../Components/SearchBar/SearchBar';
 import CopyToClipboard from '../Components/Toolbar/CopyToClipboard';
-import PrintPDF from '../Components/Toolbar/Print PDF/printPDF';
-import ResetCharacter from '../Components/Toolbar/ResetCharacter/ResetCharacter';
+import PrintPDF from '../Components/Toolbar/printPDF';
+import ResetCharacter from '../Components/Toolbar/ResetCharacter';
 import DisplaySelected from '../Components/Selected/DisplaySelected';
-import ComponentToPrint from '../Components/Display Results/ComponentToPrint';
+import ComponentToPrint from '../Components/Display Attribute Cards/ComponentToPrint';
 
 import { useCharacterStore, useToggleStore } from '../Global State/store';
-import SuccessfulSaveAlert from '../Components/Toolbar/SaveCharacter/SuccessfulSaveAlert';
-import SaveCharacter from '../Components/Toolbar/SaveCharacter/SaveCharacter';
+import SuccessfulSaveAlert from '../Components/Toolbar/SuccessfulSaveAlert';
+import SaveCharacter from '../Components/Toolbar/SaveCharacter';
 
 const CreateNewCharacterPage = () => {
   const showSuccessAlert = useToggleStore((state) => state.showSuccessAlert);

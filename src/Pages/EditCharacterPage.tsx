@@ -1,8 +1,8 @@
 import React from 'react';
 import Header from '../Components/Header/Header.component';
 import SearchBar from '../Components/SearchBar/SearchBar';
-import EditCharacter from '../Components/Toolbar/DeleteCharacter/EditCharacter';
-import ResetChanges from '../Components/Toolbar/ResetChanges/ResetChanges';
+import EditCharacter from '../Components/Toolbar/EditCharacter';
+import ResetChanges from '../Components/Toolbar/ResetChanges';
 import DisplaySelected from '../Components/Selected/DisplaySelected';
 import usePushBackOnRefresh from '../Components/CustomHooks/PushBackOnRefresh';
 

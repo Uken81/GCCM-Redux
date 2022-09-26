@@ -3,9 +3,9 @@ import { useContext } from 'react';
 
 import Button from 'react-bootstrap/Button';
 
-import { UserContext, UserContextInterface } from '../../../context';
-import { GetCharacterReference, SaveChangesToCharacter } from '../../Firebase/firebase.utils';
-import { useCharacterStore } from '../../../Global State/store';
+import { UserContext, UserContextInterface } from '../../context';
+import { GetCharacterReference, SaveChangesToCharacter } from '../Firebase/firebase.utils';
+import { useCharacterStore } from '../../Global State/store';
 import { useNavigate } from 'react-router';
 
 const EditCharacter = () => {

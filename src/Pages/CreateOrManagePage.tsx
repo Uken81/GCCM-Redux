@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth, createUserProfileDocument } from '../Components/Firebase/firebase.utils';
 import Header from '../Components/Header/Header.component';
-import LoadCharacter from '../Components/Toolbar/LoadCharacter/LoadCharacter';
+import LoadCharacter from '../Components/Toolbar/LoadCharacter';
 import { UserContext, UserContextInterface } from '../context';
 import React from 'react';
 import { Unsubscribe } from 'firebase/firestore';

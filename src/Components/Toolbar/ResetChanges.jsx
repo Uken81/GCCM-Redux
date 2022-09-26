@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
-import { useCharacterStore } from '../../../Global State/store';
+import { useCharacterStore } from '../../Global State/store';
 
 const ResetChanges = () => {
   const selectedAdvantages = useCharacterStore((state) => state.selectedAdvantages);

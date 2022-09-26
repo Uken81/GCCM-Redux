@@ -49,39 +49,20 @@ export const useCharacterStore = create<CharacterStoreType>(
       ...initialCharacterState,
       selectedOptions: [],
       resetSelectedOptions: () => set(() => ({ selectedOptions: [] })),
-      //Why does below throw TS error??
-      // resetSelectedOptions: () => set((state) => (state.selectedOptions = [])),
+
       addSelectedOption: (selectedOptionArr: SelectOptionObj[]) =>
         set(() => ({ selectedOptions: selectedOptionArr })),
+
       resetCharacter: () => set(initialCharacterState),
-      addName: (name) =>
-        set((state) => ({
-          character: (state.character = {
-            ...state.character,
-            name: name
-          })
-        })),
+
+      addName: (newName) => set((state) => ({ character: { ...state.character, name: newName } })),
       addAdvantages: (advantagesList) =>
-        set((state) => ({
-          character: (state.character = {
-            ...state.character,
-            advantages: advantagesList
-          })
-        })),
+        set((state) => ({ character: { ...state.character, advantages: advantagesList } })),
+
       addDisadvantages: (disadvantageList) =>
-        set((state) => ({
-          character: (state.character = {
-            ...state.character,
-            disadvantages: disadvantageList
-          })
-        })),
-      addId: (id) =>
-        set((state) => ({
-          character: (state.character = {
-            ...state.character,
-            id: id
-          })
-        }))
+        set((state) => ({ character: { ...state.character, disadvantages: disadvantageList } })),
+
+      addId: (newId) => set((state) => ({ character: { ...state.character, id: newId } }))
     }),
     {}
   )

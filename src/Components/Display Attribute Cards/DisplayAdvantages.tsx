@@ -2,7 +2,7 @@ import AdvantagesArray from 'Attribute Objects/Advantages';
 import React, { useEffect, useState } from 'react';
 import { AttributeObj } from '../../../types';
 import { useCharacterStore } from '../../Global State/store';
-import { DisplayResult } from './DisplayResults';
+import { DisplayResult } from './DisplayAttributeCards';
 
 import './DisplayResults.styles.scss';
 

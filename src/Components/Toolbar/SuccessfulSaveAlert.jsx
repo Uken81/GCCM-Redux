@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
-import { useCharacterStore, useToggleStore } from '../../../Global State/store';
+import { useCharacterStore, useToggleStore } from '../../Global State/store';
 
 const SuccessfulSaveAlert = () => {
   const toggleHide = useToggleStore((state) => state.toggleHide);
