@@ -1,6 +1,6 @@
 import React from 'react';
 import { useContext } from 'react';
-import { UserContext, UserContextInterface } from '../../../context';
+import { UserContext } from '../../../context';
 
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
@@ -11,29 +11,32 @@ import { useCharacterStore } from '../../../Global State/store';
 import { useNavigate } from 'react-router';
 
 interface Props {
-  setShowAlert : React.Dispatch<React.SetStateAction<boolean>>;
+  setShowAlert: React.Dispatch<React.SetStateAction<boolean>>;
   isDeleting: boolean;
   setIsDeleting: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const DeleteAlert = ({ setShowAlert, isDeleting, setIsDeleting }: Props) => {
-  const { user } = useContext(UserContext) as UserContextInterface;
+  const userContext = useContext(UserContext);
+  const user = userContext?.user;
 
   const characterName = useCharacterStore((state) => state.character.name);
-  const currentCharacterId = useCharacterStore((state) => state.character.currentCharacterId);
+  const characterId = useCharacterStore((state) => state.character.id);
 
   const navigate = useNavigate();
   const deleteCharacter = async () => {
-    const docRef = await GetCharacterReference(user?.uid, currentCharacterId);
     setIsDeleting(true);
-    await deleteDoc(docRef)
-      .then(() => {
-        console.log('****Current character has been removed from database');
-        navigate('/create-or-manage-page');
-      })
-      .catch(() => {
-        alert('Unable to delete character from database please try again later');
-      });
+    if (user) {
+      const docRef = await GetCharacterReference(user?.uid, characterId);
+      await deleteDoc(docRef)
+        .then(() => {
+          console.log('****Current character has been removed from database');
+          navigate('/create-or-manage-page');
+        })
+        .catch(() => {
+          alert('Unable to delete character from database please try again later');
+        });
+    }
     setIsDeleting(false);
   };
 
