@@ -72,6 +72,7 @@ const LoadCharacter = () => {
 
         return () => setIsLoading(false);
       }
+      return;
     };
     loadSelectedCharactersStats();
   }, [characterToLoad]);

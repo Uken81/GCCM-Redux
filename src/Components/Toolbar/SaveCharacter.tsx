@@ -22,31 +22,38 @@ const SaveCharacter = () => {
 
   const [isSaving, setIsSaving] = useState(false);
 
-  const checkIfDuplicate = async () => {
-    if (user) {
-      const characterList = await getUsersSavedCharactersList(userId);
-      return characterList.includes(characterName);
-    } else {
-      return;
-    }
-  };
+  const checkCharacterBeforeSave = async () => {
+    const checkIfDuplicate = async () => {
+      if (user) {
+        const characterList = await getUsersSavedCharactersList(userId);
+        return characterList.includes(characterName);
+      } else {
+        return;
+      }
+    };
 
-  const saveCharacterHandler = async () => {
-    setIsSaving(true);
     if (selectedAdvantages.length <= 0 && selectedDisadvantages.length <= 0) {
       console.log('**** Save fail');
       alert('You must select at least one Advantage or Disadvantage');
+      return;
     } else if (await checkIfDuplicate()) {
       console.log('**** Save fail');
       alert(
         'You already have a character with this name. Delete original character or change name'
       );
+      return;
     } else if (characterName === '') {
       console.log('**** Save fail');
       alert('You must select a name for your character in order to save');
+      return;
     } else {
-      console.log(`**** ${characterName} has been saved`);
+      return true;
+    }
+  };
 
+  const saveCharacterHandler = async () => {
+    if (await checkCharacterBeforeSave()) {
+      setIsSaving(true);
       const newCharacter: NewCharacterStatsObj = {
         name: characterName,
         advantages: selectedAdvantages.map((name) => name),
@@ -61,10 +68,11 @@ const SaveCharacter = () => {
       setCharacterIdAction(characterId);
       console.log('**** NewCharacterId: ', characterId);
       await setDoc(newCharacterRef, { id: characterId }, { merge: true });
+      console.log(`**** ${characterName} has been saved`);
 
+      setIsSaving(false);
       toggleShow();
     }
-    setIsSaving(false);
   };
 
   return (

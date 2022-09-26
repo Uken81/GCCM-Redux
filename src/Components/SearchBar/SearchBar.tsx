@@ -10,7 +10,11 @@ import ToggleAdvantageDisadvantage from '../ToggleAdvantageDisadvantage/ToggleAd
 import './SearchBar.styles.scss';
 import { SearchBarTitle } from './SearchBarTitle';
 
-const SearchBar = () => {
+interface Props {
+  combinedAttributeList?: string[];
+}
+
+const SearchBar = ({ combinedAttributeList }: Props) => {
   const [isChoosingAdvantages, setIsChoosingAdvantages] = useState<boolean>(true);
   const [advantageOptions, setAdvantageOptions] = useState<SelectOptionObj[]>([]);
   const [disadvantageOptions, setDisadvantageOptions] = useState<SelectOptionObj[]>([]);
@@ -19,23 +23,32 @@ const SearchBar = () => {
   const setAdavantagesAction = useCharacterStore((state) => state.addAdvantages);
   const setDisadvantagesAction = useCharacterStore((state) => state.addDisadvantages);
 
+  const createSearchOptions = () => {
+    const advantageOptionsObj: SelectOptionObj[] = AdvantagesArray.map((opt) => ({
+      label: opt.title,
+      value: opt.title,
+      category: opt.type
+    }));
+    const disadvantageOptionsObj: SelectOptionObj[] = DisadvantagesArray.map((opt) => ({
+      label: opt.title,
+      value: opt.title,
+      category: opt.type
+    }));
+    setAdvantageOptions(advantageOptionsObj);
+    setDisadvantageOptions(disadvantageOptionsObj);
+  };
+
   useEffect(() => {
-    const createSearchOptions = () => {
-      const advantageOptionsObj: SelectOptionObj[] = AdvantagesArray.map((opt) => ({
-        label: opt.title,
-        value: opt.title,
-        category: opt.type
-      }));
-      const disadvantageOptionsObj: SelectOptionObj[] = DisadvantagesArray.map((opt) => ({
-        label: opt.title,
-        value: opt.title,
-        category: opt.type
-      }));
-      setAdvantageOptions(advantageOptionsObj);
-      setDisadvantageOptions(disadvantageOptionsObj);
-    };
     createSearchOptions();
   }, []);
+
+  const repopulateSelectOnLoad = () => {
+    const adsFilter = advantageOptions.filter((obj) => combinedAttributeList?.includes(obj.label));
+    const disadsFilter = disadvantageOptions.filter((obj) =>
+      combinedAttributeList?.includes(obj.label)
+    );
+    addSelectedOptionAction([...adsFilter, ...disadsFilter]);
+  };
 
   const handleChange = async (e: SelectOptionObj[]) => {
     addSelectedOptionAction(e);
@@ -48,8 +61,12 @@ const SearchBar = () => {
   };
 
   useEffect(() => {
-    setAdavantagesAction(updateAttributeStore('advantage'));
-    setDisadvantagesAction(updateAttributeStore('disadvantage'));
+    if (selectedOptions.length > 0) {
+      setAdavantagesAction(updateAttributeStore('advantage'));
+      setDisadvantagesAction(updateAttributeStore('disadvantage'));
+    } else {
+      repopulateSelectOnLoad();
+    }
   }, [selectedOptions]);
 
   const formatOptionLabel = ({ label, category }) => (

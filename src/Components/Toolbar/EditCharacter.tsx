@@ -3,23 +3,23 @@ import { useContext } from 'react';
 
 import Button from 'react-bootstrap/Button';
 
-import { UserContext, UserContextInterface } from '../../context';
+import { UserContext } from '../../context';
 import { GetCharacterReference, SaveChangesToCharacter } from '../Firebase/firebase.utils';
 import { useCharacterStore } from '../../Global State/store';
 import { useNavigate } from 'react-router';
 
 const EditCharacter = () => {
-  const { user } = useContext(UserContext) as UserContextInterface;
-
-  const currentCharacterId = useCharacterStore((state) => state.character.currentCharacterId);
-  const selectedAdvantages = useCharacterStore((state) => state.character.selectedAdvantages);
-  const selectedDisadvantages = useCharacterStore((state) => state.character.selectedDisadvantages);
+  const userContext = useContext(UserContext);
+  const user = userContext?.user;
+  const userId = user ? user.uid : '';
+  const characterId = useCharacterStore((state) => state.character.id);
+  const selectedAdvantages = useCharacterStore((state) => state.character.advantages);
+  const selectedDisadvantages = useCharacterStore((state) => state.character.disadvantages);
 
   const navigate = useNavigate();
   const handleEdit = async () => {
-    const characterRef = await GetCharacterReference(user?.uid, currentCharacterId);
-    //below line could be made a function or maybe a custom hook
-    if (selectedAdvantages.length !== 0 || selectedDisadvantages.length !== 0) {
+    const characterRef = await GetCharacterReference(userId, characterId);
+    if (selectedAdvantages.length > 0 || selectedDisadvantages.length > 0) {
       await SaveChangesToCharacter(characterRef, selectedAdvantages, selectedDisadvantages);
       console.log(`${characterRef} has been successfully edited.`);
       navigate('/create-or-manage-page');

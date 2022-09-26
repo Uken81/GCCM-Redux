@@ -5,8 +5,13 @@ import EditCharacter from '../Components/Toolbar/EditCharacter';
 import ResetChanges from '../Components/Toolbar/ResetChanges';
 import DisplaySelected from '../Components/Selected/DisplaySelected';
 import usePushBackOnRefresh from '../Components/CustomHooks/PushBackOnRefresh';
+import { useCharacterStore } from 'Global State/store';
 
 const EditCharacterPage = () => {
+  const combinedAttributesList = useCharacterStore((state) => [
+    ...state.character.advantages,
+    ...state.character.disadvantages
+  ]);
   usePushBackOnRefresh();
   return (
     <div className="edit-character-page">
@@ -22,7 +27,7 @@ const EditCharacterPage = () => {
             </div>
           </div>
           <div className="main-interface">
-            <SearchBar />
+            <SearchBar combinedAttributeList={combinedAttributesList} />
             <DisplaySelected />
           </div>
         </div>

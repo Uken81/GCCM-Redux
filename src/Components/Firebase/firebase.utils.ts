@@ -5,7 +5,13 @@ import {
   signInWithPopup,
   sendPasswordResetEmail
 } from 'firebase/auth';
-import { getFirestore, collection, QuerySnapshot, DocumentData } from 'firebase/firestore';
+import {
+  getFirestore,
+  collection,
+  QuerySnapshot,
+  DocumentData,
+  DocumentReference
+} from 'firebase/firestore';
 import { doc, setDoc, getDoc, getDocs, addDoc, where, query } from 'firebase/firestore';
 import { NewCharacterStatsObj } from '../../../types';
 
@@ -142,25 +148,20 @@ export const getMatchingCharacterForUser = async (userId: string, characterName:
 
 export const GetCharacterReference = async (userId: string, currentCharacterId: string) => {
   const userCharactersRef = collection(db, 'users', userId, 'characters');
-  console.log('userCharacterRef: ', userCharactersRef);
-
-  const docRef = doc(userCharactersRef, currentCharacterId);
-
-  console.log('docRef: ', docRef);
-
-  return docRef;
+  const characterDocRef = doc(userCharactersRef, currentCharacterId);
+  return characterDocRef;
 };
 
 export const SaveChangesToCharacter = async (
-  characterRef,
-  selectedAdvantagesList,
-  selectedDisadvantagesList
+  characterRef: DocumentReference<DocumentData>,
+  selectedAdvantagesList: string[],
+  selectedDisadvantagesList: string[]
 ) => {
   setDoc(
     characterRef,
     {
-      advantages: selectedAdvantagesList.map(({ title }) => title),
-      disadvantages: selectedDisadvantagesList.map(({ title }) => title)
+      advantages: selectedAdvantagesList.map((title) => title),
+      disadvantages: selectedDisadvantagesList.map((title) => title)
     },
     { merge: true }
   );
