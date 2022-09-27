@@ -14,14 +14,13 @@ import ResetCharacter from '../Components/Toolbar/ResetCharacter';
 import DisplaySelected from '../Components/Selected/DisplaySelected';
 import ComponentToPrint from '../Components/Display Attribute Cards/ComponentToPrint';
 
-import { useCharacterStore, useToggleStore } from '../Global State/store';
+import { useCharacterStore } from '../Global State/store';
 import SuccessfulSaveAlert from '../Components/Toolbar/SuccessfulSaveAlert';
 import SaveCharacter from '../Components/Toolbar/SaveCharacter';
 
 const CreateNewCharacterPage = () => {
-  const showSuccessAlert = useToggleStore((state) => state.showSuccessAlert);
-
   const [nameFormInput, setNameFormInput] = useState<string>('');
+  const [showSaveAlert, setShowSaveAlert] = useState(false);
   const setName = useCharacterStore((state) => state.addName);
 
   const formRef = useRef<HTMLInputElement>(null);
@@ -42,13 +41,13 @@ const CreateNewCharacterPage = () => {
       <Header />
       <div className="user-interface-window">
         <h1 className="main-title"> G.C.C.M </h1>
-        {showSuccessAlert && <SuccessfulSaveAlert />}
+        {showSaveAlert && <SuccessfulSaveAlert setShowSaveAlert={setShowSaveAlert} />}
         <div className="container">
           <div className="toolbar-container">
             <span className="toolbar-header">Character Tools</span>
             <div className="toolbar-characters">
               <ResetCharacter />
-              <SaveCharacter />
+              <SaveCharacter setShowSaveAlert={setShowSaveAlert} />
             </div>
             <span className="toolbar-header">Output Tools</span>
             <div className="toolbar-print-options">

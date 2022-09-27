@@ -1,18 +1,21 @@
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
-import { useCharacterStore, useToggleStore } from '../../Global State/store';
+import { useCharacterStore } from '../../Global State/store';
 
-const SuccessfulSaveAlert = () => {
-  const toggleHide = useToggleStore((state) => state.toggleHide);
+interface Props {
+  setShowSaveAlert: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-  const characterName = useCharacterStore((state) => state.characterName);
+const SuccessfulSaveAlert = ({ setShowSaveAlert }: Props) => {
+  const characterName = useCharacterStore((state) => state.character.name);
 
   return (
     <div className="successful-save-alert">
       <Alert variant="success">
         <Alert.Heading>{`${characterName} has been succesfully saved.`}</Alert.Heading>
         <div className="d-flex justify-content-end">
-          <Button onClick={toggleHide}>Continue</Button>
+          <Button onClick={() => setShowSaveAlert(false)}>Continue</Button>
         </div>
       </Alert>
     </div>

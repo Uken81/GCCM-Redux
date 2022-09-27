@@ -5,11 +5,15 @@ import { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
 import { UserContext } from '../../context';
-import { useCharacterStore, useToggleStore } from '../../Global State/store';
+import { useCharacterStore } from '../../Global State/store';
 import { addNewCharacterForUser, getUsersSavedCharactersList } from '../Firebase/firebase.utils';
 import { NewCharacterStatsObj } from '../../../types';
 
-const SaveCharacter = () => {
+interface Props {
+  setShowSaveAlert: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const SaveCharacter = ({ setShowSaveAlert }: Props) => {
   const userContext = useContext(UserContext);
   const user = userContext?.user;
   const userId = user ? user.uid : '';
@@ -18,11 +22,9 @@ const SaveCharacter = () => {
   const selectedDisadvantages = useCharacterStore((state) => state.character.disadvantages);
   const setCharacterIdAction = useCharacterStore((state) => state.addId);
 
-  const toggleShow = useToggleStore((state) => state.toggleShow);
-
   const [isSaving, setIsSaving] = useState(false);
 
-  const checkCharacterBeforeSave = async () => {
+  const checkSaveRequirements = async () => {
     const checkIfDuplicate = async () => {
       if (user) {
         const characterList = await getUsersSavedCharactersList(userId);
@@ -52,7 +54,7 @@ const SaveCharacter = () => {
   };
 
   const saveCharacterHandler = async () => {
-    if (await checkCharacterBeforeSave()) {
+    if (await checkSaveRequirements()) {
       setIsSaving(true);
       const newCharacter: NewCharacterStatsObj = {
         name: characterName,
@@ -71,7 +73,7 @@ const SaveCharacter = () => {
       console.log(`**** ${characterName} has been saved`);
 
       setIsSaving(false);
-      toggleShow();
+      setShowSaveAlert(true);
     }
   };
 

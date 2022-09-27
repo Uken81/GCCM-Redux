@@ -12,10 +12,6 @@ export const useToggleStore = create<ToggleStoreType>((set) => ({
   toggleKey: 'advantages',
   toggleAdvantages: () => set({ toggleKey: 'advantages' }),
   toggleDisadvantages: () => set({ toggleKey: 'disadvantages' })
-
-  // showSuccessAlert: false,
-  // toggleShow: () => set({ showSuccessfulSaveAlert: true }),
-  // toggleHide: () => set({ showSuccessfulSaveAlert: false })
 }));
 
 interface CharacterStoreType {
