@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../Components/Header/Header.component';
 import SearchBar from '../Components/SearchBar/SearchBar';
 import EditCharacter from '../Components/Toolbar/EditCharacter';
@@ -8,10 +8,10 @@ import usePushBackOnRefresh from '../Components/CustomHooks/PushBackOnRefresh';
 import { useCharacterStore } from 'Global State/store';
 
 const EditCharacterPage = () => {
-  const combinedAttributesList = useCharacterStore((state) => [
-    ...state.character.advantages,
-    ...state.character.disadvantages
-  ]);
+  const [combinedAttributesList, setCombinedAttributesList] = useState(
+    useCharacterStore((state) => [...state.character.advantages, ...state.character.disadvantages])
+  );
+
   usePushBackOnRefresh();
   return (
     <div className="edit-character-page">
@@ -22,12 +22,12 @@ const EditCharacterPage = () => {
           <div className="toolbar-container">
             <span className="toolbar-header">Character Toolbar</span>
             <div className="toolbar-characters">
-              <ResetChanges />
+              <ResetChanges setCombinedAttributesList={setCombinedAttributesList} />
               <EditCharacter />
             </div>
           </div>
           <div className="main-interface">
-            <SearchBar combinedAttributeList={combinedAttributesList} />
+            <SearchBar combinedAttributesList={combinedAttributesList} />
             <DisplaySelected />
           </div>
         </div>
