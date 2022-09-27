@@ -3,10 +3,10 @@ import Button from 'react-bootstrap/Button';
 import { useCharacterStore } from 'Global State/store';
 
 const ResetCharacter = () => {
-  const reset = () => {
-    const resetSelect = useCharacterStore((state) => state.resetSelectedOptions);
-    const resetCharacter = useCharacterStore((state) => state.resetCharacter);
+  const resetSelect = useCharacterStore((state) => state.resetSelectedOptions);
+  const resetCharacter = useCharacterStore((state) => state.resetCharacter);
 
+  const reset = () => {
     resetSelect();
     resetCharacter();
   };
