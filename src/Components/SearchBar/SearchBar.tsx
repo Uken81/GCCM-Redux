@@ -20,7 +20,6 @@ const SearchBar = ({ combinedAttributesList }: Props) => {
   const addSelectedOptionAction = useCharacterStore((state) => state.addSelectedOption);
   const setAdavantagesAction = useCharacterStore((state) => state.addAdvantages);
   const setDisadvantagesAction = useCharacterStore((state) => state.addDisadvantages);
-  console.log('Sbar render');
 
   const advantageOptions: SelectOptionObj[] = AdvantagesArray.map((opt) => ({
     label: opt.title,
@@ -60,7 +59,6 @@ const SearchBar = ({ combinedAttributesList }: Props) => {
   };
 
   useEffect(() => {
-    console.log('testy');
     repopulateSelect();
   }, [combinedAttributesList]);
 
