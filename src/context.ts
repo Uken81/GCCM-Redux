@@ -11,5 +11,5 @@ export interface ComponentRefContextInterface {
   setComponentRef: React.Dispatch<React.SetStateAction<HTMLDivElement | null>>;
 }
 
-export const ComponentRefContext = createContext<ComponentRefContextInterface | null>(null);
 export const UserContext = createContext<UserContextInterface | null>(null);
+export const ComponentRefContext = createContext<ComponentRefContextInterface | null>(null);

@@ -8,12 +8,13 @@ import {
 import { useEffect, useState } from 'react';
 
 import { useContext } from 'react';
-import { UserContext, UserContextInterface } from '../../context';
+import { UserContext } from '../../context';
 import { useCharacterStore } from '../../Global State/store';
 import { useNavigate } from 'react-router';
 
 const LoadCharacter = () => {
-  const { user } = useContext(UserContext) as UserContextInterface;
+  const userContext = useContext(UserContext);
+  const user = userContext?.user;
 
   const [charactersList, setCharactersList] = useState<string[]>([]);
   const [characterToLoad, setCharacterToLoad] = useState('');

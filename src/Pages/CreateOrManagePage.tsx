@@ -9,13 +9,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { auth, createUserProfileDocument } from '../Components/Firebase/firebase.utils';
 import Header from '../Components/Header/Header.component';
 import LoadCharacter from '../Components/Toolbar/LoadCharacter';
-import { UserContext, UserContextInterface } from '../context';
+import { UserContext } from '../context';
 import React from 'react';
 import { Unsubscribe } from 'firebase/firestore';
 import { useCharacterStore } from 'Global State/store';
 
 const CreateOrManage = () => {
-  const { user, setUser } = useContext(UserContext) as UserContextInterface;
+  const userContext = useContext(UserContext);
+  const user = userContext?.user;
+  const setUser = userContext?.setUser;
   const resetCharacter = useCharacterStore((state) => state.resetCharacter);
 
   resetCharacter();
@@ -26,10 +28,10 @@ const CreateOrManage = () => {
     unsubscribeFromAuth = onAuthStateChanged(auth, async (userAuth) => {
       await createUserProfileDocument(userAuth);
       if (userAuth) {
-        setUser(userAuth);
+        setUser?.(userAuth);
         console.log('****User: ', user);
       } else {
-        setUser(userAuth);
+        setUser?.(userAuth);
         console.log('User has logged out');
         navigate('/');
       }

@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { ReactInstance } from 'react';
 import { useContext } from 'react';
 import ReactToPrint from 'react-to-print';
 
 import Button from 'react-bootstrap/Button';
 
-import { ComponentRefContext, ComponentRefContextInterface } from 'context';
+import { ComponentRefContext } from 'context';
 
 import '../Display Attribute Cards/DisplayAttributeCards.styles.scss';
 
 const PrintPDF = () => {
-  const { componentRef } = useContext(ComponentRefContext) as ComponentRefContextInterface;
+  const componentRef = useContext(ComponentRefContext) as ReactInstance | null;
 
   return (
     <div>

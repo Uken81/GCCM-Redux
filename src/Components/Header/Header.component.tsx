@@ -7,12 +7,13 @@ import './header.styles.scss';
 
 import { useLocation } from 'react-router';
 import { useContext } from 'react';
-import { UserContext, UserContextInterface } from '../../context';
+import { UserContext } from '../../context';
 import { useNavigate } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
 
 const Header = () => {
-  const { user } = useContext(UserContext) as UserContextInterface;
+  const userContext = useContext(UserContext);
+  const user = userContext?.user;
   const location = useLocation();
   const pathname = location.pathname;
   const navigate = useNavigate();
