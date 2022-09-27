@@ -4,7 +4,7 @@ import SearchBar from '../Components/SearchBar/SearchBar';
 import EditCharacter from '../Components/Toolbar/EditCharacter';
 import ResetChanges from '../Components/Toolbar/ResetChanges';
 import DisplaySelected from '../Components/Selected/DisplaySelected';
-import usePushBackOnRefresh from '../Components/CustomHooks/PushBackOnRefresh';
+import { usePushBackOnRefresh } from '../Components/CustomHooks/PushBackOnRefresh';
 import { useCharacterStore } from 'Global State/store';
 
 const EditCharacterPage = () => {

@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { ToEditCharacter } from '../Components/Header/Navigation Links/navigationLinks';
 import DeleteAlert from '../Components/Toolbar/DeleteCharacter/DeleteAlert';
 import { useCharacterStore } from '../Global State/store';
-import usePushBackOnRefresh from '../Components/CustomHooks/PushBackOnRefresh';
+import { usePushBackOnRefresh } from '../Components/CustomHooks/PushBackOnRefresh';
 
 const ManageCharactersPage = () => {
   const characterName = useCharacterStore((state) => state.character.name?.toUpperCase());

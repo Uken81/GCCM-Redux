@@ -12,15 +12,14 @@ import LoadCharacter from '../Components/Toolbar/LoadCharacter';
 import { UserContext } from '../context';
 import React from 'react';
 import { Unsubscribe } from 'firebase/firestore';
-import { useCharacterStore } from 'Global State/store';
+import { useResetCharacter } from 'Components/CustomHooks/ResetCharacterHook';
 
 const CreateOrManage = () => {
   const userContext = useContext(UserContext);
   const user = userContext?.user;
   const setUser = userContext?.setUser;
-  const resetCharacter = useCharacterStore((state) => state.resetCharacter);
 
-  resetCharacter();
+  useResetCharacter();
   const navigate = useNavigate();
 
   useEffect(() => {

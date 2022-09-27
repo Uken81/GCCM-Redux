@@ -1,12 +1,12 @@
-import { useCharacterStore } from 'Global State/store';
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import { useCharacterStore } from 'Global State/store';
 
 const ResetCharacter = () => {
-  const resetSelect = useCharacterStore((state) => state.resetSelectedOptions);
-  const resetCharacter = useCharacterStore((state) => state.resetCharacter);
-
   const reset = () => {
+    const resetSelect = useCharacterStore((state) => state.resetSelectedOptions);
+    const resetCharacter = useCharacterStore((state) => state.resetCharacter);
+
     resetSelect();
     resetCharacter();
   };

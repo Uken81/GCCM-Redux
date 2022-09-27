@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useCharacterStore } from '../../Global State/store';
 
-const usePushBackOnRefresh = () => {
+export const usePushBackOnRefresh = () => {
   const currentCharacterId = useCharacterStore((state) => state.character.id);
   const navigate = useNavigate();
   useEffect(() => {
@@ -11,5 +11,3 @@ const usePushBackOnRefresh = () => {
     }
   }, []);
 };
-
-export default usePushBackOnRefresh;

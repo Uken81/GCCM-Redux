@@ -2,12 +2,10 @@ import React from 'react';
 import 'Pages/page.styles.scss';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
-import { useCharacterStore } from 'Global State/store';
+import { useResetCharacter } from 'Components/CustomHooks/ResetCharacterHook';
 
 const LandingPage = () => {
-  const resetCharacter = useCharacterStore((state) => state.resetSelectedOptions);
-  resetCharacter();
-
+  useResetCharacter();
   return (
     <div className="landingPage">
       <div className="user-interface-window">
