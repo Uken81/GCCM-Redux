@@ -17,23 +17,14 @@ import { doc, setDoc, getDoc, getDocs, addDoc, where, query } from 'firebase/fir
 import { NewCharacterStatsObj } from '../../../types';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDkzv0wPbGxh5uzDQyFGGplRKn77u5t9Tg',
-  authDomain: 'gccm-8038b.firebaseapp.com',
-  projectId: 'gccm-8038b',
-  storageBucket: 'gccm-8038b.appspot.com',
-  messagingSenderId: '4145863428',
-  appId: '1:4145863428:web:1b7c953db8d4aba9fe0e51',
-  measurementId: 'G-725VJ4X4NW'
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSENGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
-// const firebaseConfig = {
-//   apiKey: process.env.REACT_APP_API_KEY,
-//   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-//   projectId: process.env.REACT_APP_PROJECT_ID,
-//   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-//   messagingSenderId: process.env.REACT_APP_MESSENGING_SENDER_ID,
-//   appId: process.env.REACT_APP_APP_ID,
-//   measurementId: process.env.REACT_APP_MEASUREMENT_ID
-// };
 
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);

@@ -3,12 +3,8 @@ import 'Pages/page.styles.scss';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { useResetCharacter } from 'Components/CustomHooks/ResetCharacterHook';
-// import { useCharacterStore } from 'Global State/store';
 
 const LandingPage = () => {
-  // const selectedOptions = useCharacterStore((state) => state.selectedOptions);
-  // if (selectedOptions.length > 0) {
-  // }
   useResetCharacter();
   return (
     <div className="landingPage">
