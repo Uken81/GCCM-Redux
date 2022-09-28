@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 
 import './ResetPage.styles.scss';
@@ -11,22 +12,18 @@ const ResetPasswordPage = () => {
   const [emailSent, setEmailSent] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewEmail(event.target.value);
   };
 
-  const sendPasswordReset = () => {
-    ResetPassword(newEmail);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     if (newEmail === '') {
-      e.preventDefault();
+      event.preventDefault();
       setShowAlert(true);
     } else {
-      e.preventDefault();
+      event.preventDefault();
+      ResetPassword(newEmail);
       setEmailSent(true);
-      sendPasswordReset();
     }
   };
 

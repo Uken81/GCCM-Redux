@@ -3,7 +3,8 @@ import {
   GoogleAuthProvider,
   getAuth,
   signInWithPopup,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
+  User
 } from 'firebase/auth';
 import {
   getFirestore,
@@ -37,7 +38,7 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
 
-export const createUserProfileDocument = async (userAuth) => {
+export const createUserProfileDocument = async (userAuth: User | null) => {
   if (!userAuth) return;
   const userRef = doc(db, `users/${userAuth.uid}`);
   const docSnap = await getDoc(userRef);
@@ -53,9 +54,6 @@ export const createUserProfileDocument = async (userAuth) => {
       });
       console.log('CreateUserProfileDocument/FireBase.Utils');
       console.log('userRef: ', userRef);
-      console.log('docSnap exist: ', docSnap.exists());
-      console.log('docData: ', docSnap.data());
-      console.log('UID: ', userAuth.uid);
     } catch (error) {
       console.log('error creating user', error.message);
     }
@@ -82,7 +80,7 @@ export const google = async () => {
     });
 };
 
-export const ResetPassword = (email) => {
+export const ResetPassword = (email: string) => {
   sendPasswordResetEmail(auth, email)
     .then(() => {
       console.log('reset request sent');
