@@ -12,6 +12,7 @@ import { ToEditCharacter } from '../Components/Header/Navigation Links/navigatio
 import DeleteAlert from '../Components/Toolbar/DeleteCharacter/DeleteAlert';
 import { useCharacterStore } from '../Global State/store';
 import { usePushBackOnRefresh } from '../Components/CustomHooks/PushBackOnRefresh';
+import ComponentToPrint from 'Components/Display Attribute Cards/ComponentToPrint';
 
 const ManageCharactersPage = () => {
   const characterName = useCharacterStore((state) => state.character.name?.toUpperCase());
@@ -47,6 +48,11 @@ const ManageCharactersPage = () => {
             )}
             <DisplaySelected />
           </div>
+        </div>
+      </div>
+      <div className="results-window" id="results">
+        <div style={{ display: 'none' }}>
+          <ComponentToPrint />
         </div>
       </div>
     </div>
