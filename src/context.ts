@@ -1,5 +1,5 @@
 import { User } from 'firebase/auth';
-import React, { createContext } from 'react';
+import React, { createContext, RefObject } from 'react';
 
 export interface UserContextInterface {
   user: User | null;
@@ -7,8 +7,12 @@ export interface UserContextInterface {
 }
 
 export interface ComponentRefContextInterface {
-  componentRef: HTMLDivElement | null;
-  setComponentRef: React.Dispatch<React.SetStateAction<HTMLDivElement | null>>;
+  componentRef: // | React.MutableRefObject<ReactInstance | null | undefined>
+  // | React.MutableRefObject<HTMLDivElement | null | undefined>
+  RefObject<any>;
+  // RefObject<ReactInstance | null>;
+  // RefObject<any>;
+  setComponentRef: any;
 }
 
 export const UserContext = createContext<UserContextInterface | null>(null);

@@ -1,4 +1,4 @@
-import React, { ReactInstance } from 'react';
+import React from 'react';
 import { useContext } from 'react';
 import ReactToPrint from 'react-to-print';
 
@@ -9,7 +9,9 @@ import { ComponentRefContext } from 'context';
 import '../Display Attribute Cards/DisplayAttributeCards.styles.scss';
 
 const PrintPDF = () => {
-  const componentRef = useContext(ComponentRefContext) as ReactInstance | null;
+  const componentRefContext = useContext(ComponentRefContext);
+  const componentRef = componentRefContext?.componentRef;
+  console.log('PDF', componentRef);
 
   return (
     <div>
@@ -20,7 +22,7 @@ const PrintPDF = () => {
               Download PDF
             </Button>
           )}
-          content={() => componentRef}
+          content={() => componentRef?.current}
         />
       </div>
     </div>
