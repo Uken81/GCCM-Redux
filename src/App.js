@@ -11,7 +11,7 @@ import CreateNewCharacterPage from './Pages/CreateNewCharacterPage/CreateNewChar
 import ManageCharactersPage from './Pages/ManageCharactersPage/ManageCharactersPage';
 import EditCharacterPage from './Pages/EditCharacterPage/EditCharacterPage';
 import ResetPasswordPage from './Pages/ResetPage/ResetPasswordPage';
-
+//test
 function App() {
   const [componentRef, setComponentRef] = useState(null);
   const componentRefValue = useMemo(
