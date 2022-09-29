@@ -11,7 +11,6 @@ import '../Display Attribute Cards/DisplayAttributeCards.styles.scss';
 const PrintPDF = () => {
   const componentRefContext = useContext(ComponentRefContext);
   const componentRef = componentRefContext?.componentRef;
-  console.log('PDF', componentRef);
 
   return (
     <div>
