@@ -6,7 +6,6 @@ import '../../Pages/SignInAndSignUp/SignInAndSignUpPage.styles.scss';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, google } from '../Firebase/firebase.utils';
 import { Button, Form } from 'react-bootstrap';
-import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {
@@ -127,10 +126,6 @@ const SignUp = ({ setShowLoadingScreen }: Props) => {
       </Form>
     </div>
   );
-};
-
-SignUp.propTypes = {
-  setShowLoadingScreen: PropTypes.func
 };
 
 export default SignUp;
