@@ -17,7 +17,7 @@ const SignIn = ({ setIsSigningIn, setShowLoadingScreen }: Props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: string; value: React.SetStateAction<string> } }) => {
     if (e.target.name === 'email') {
       setEmail(e.target.value);
     }
@@ -30,7 +30,7 @@ const SignIn = ({ setIsSigningIn, setShowLoadingScreen }: Props) => {
   const auth = getAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     setShowLoadingScreen(true);
 
@@ -49,10 +49,11 @@ const SignIn = ({ setIsSigningIn, setShowLoadingScreen }: Props) => {
         if (errorCode === 'auth/wrong-password') {
           alert('Wrong password entered for this account.');
         }
-        return () => {
-          setShowLoadingScreen(false);
-        };
+        setShowLoadingScreen(false);
       });
+    return () => {
+      setShowLoadingScreen(false);
+    };
   };
 
   const googleSignIn = async () => {
@@ -64,6 +65,7 @@ const SignIn = ({ setIsSigningIn, setShowLoadingScreen }: Props) => {
       })
       .catch(() => {
         alert('Google sign in is not working. Sign in with email and password or try again later.');
+        setShowLoadingScreen(false);
       });
     return () => {
       setShowLoadingScreen(false);
