@@ -11,6 +11,7 @@ import '../Display Attribute Cards/DisplayAttributeCards.styles.scss';
 const PrintPDF = () => {
   const componentRefContext = useContext(ComponentRefContext);
   const componentRef = componentRefContext?.componentRef;
+  const content = componentRef ? componentRef.current : null;
 
   return (
     <div>
@@ -21,7 +22,7 @@ const PrintPDF = () => {
               Download PDF
             </Button>
           )}
-          content={() => componentRef?.current}
+          content={() => content}
         />
       </div>
     </div>
