@@ -8,7 +8,7 @@ export interface UserContextInterface {
 
 export interface ComponentRefContextInterface {
   componentRef: RefObject<HTMLDivElement> | null;
-  setComponentRef: any;
+  setComponentRef: React.Dispatch<React.SetStateAction<RefObject<HTMLDivElement> | null>>;
 }
 
 export const UserContext = createContext<UserContextInterface | null>(null);

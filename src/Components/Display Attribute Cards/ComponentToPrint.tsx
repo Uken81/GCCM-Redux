@@ -6,13 +6,15 @@ import DisplayDisadvantages from './DisplayDisadvantages';
 
 const ComponentToPrint = () => {
   const componentRefContext = useContext(ComponentRefContext);
-  const componentRef = componentRefContext?.componentRef;
+  const componentRef = componentRefContext ? componentRefContext.componentRef : null;
   const setComponentRef = componentRefContext?.setComponentRef;
 
-  const divRef = useRef();
+  const divRef = useRef(null);
 
   useEffect(() => {
-    setComponentRef(divRef);
+    if (divRef !== null) {
+      setComponentRef?.(divRef);
+    }
   }, []);
 
   return (
