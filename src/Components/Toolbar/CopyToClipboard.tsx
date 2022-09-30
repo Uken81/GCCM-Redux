@@ -6,17 +6,20 @@ const CopyToClipboard = () => {
     const sectionToCopy = document.getElementById('results');
     const rangeCount = document.getSelection()?.rangeCount;
     let currentRange: boolean | Range | undefined;
-    
-    console.log("rcount", rangeCount)
-    if (rangeCount! > 0) {
+
+    if (rangeCount && rangeCount > 0) {
       currentRange = document.getSelection()?.getRangeAt(0);
-      window.getSelection()?.removeRange(currentRange!);
+      if (currentRange) {
+        window.getSelection()?.removeRange(currentRange);
+      }
     } else {
       currentRange = false;
     }
 
-    let copyRange = document.createRange();
-    copyRange.selectNode(sectionToCopy!);
+    const copyRange = document.createRange();
+    if (sectionToCopy) {
+      copyRange.selectNode(sectionToCopy);
+    }
     window.getSelection()?.addRange(copyRange);
     document.execCommand('copy');
 
