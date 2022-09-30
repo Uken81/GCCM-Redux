@@ -3,8 +3,8 @@ import './SignInAndSignUpPage.styles.scss';
 
 import Header from '../../Components/Header/Header.component';
 import { useState } from 'react';
-import SignIn from 'Components/SignInAndSignUp/sign-in-component';
-import SignUp from 'Components/SignInAndSignUp/sign-up-component';
+import SignIn from 'Components/SignInAndSignUp/SignInComponent';
+import SignUp from 'Components/SignInAndSignUp/SignUpComponent';
 
 const SignInAndSignUp = () => {
   const [isSigningIn, setIsSigningin] = useState(true);

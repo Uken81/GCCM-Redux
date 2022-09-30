@@ -17,7 +17,6 @@ import ComponentToPrint from 'Components/Display Attribute Cards/ComponentToPrin
 const ManageCharactersPage = () => {
   const characterName = useCharacterStore((state) => state.character.name?.toUpperCase());
   const [showAlert, setShowAlert] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
 
   usePushBackOnRefresh();
   return (
@@ -39,13 +38,7 @@ const ManageCharactersPage = () => {
           </div>
           <div className="main-interface">
             <h1 className="selected-header">{characterName}&apos;S CHEATSHEET</h1>
-            {showAlert && (
-              <DeleteAlert
-                setShowAlert={setShowAlert}
-                isDeleting={isDeleting}
-                setIsDeleting={setIsDeleting}
-              />
-            )}
+            {showAlert && <DeleteAlert setShowAlert={setShowAlert} />}
             <DisplaySelected />
           </div>
         </div>

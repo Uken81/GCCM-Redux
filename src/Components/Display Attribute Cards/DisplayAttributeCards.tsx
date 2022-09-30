@@ -13,7 +13,6 @@ export const DisplayResult = ({ selectedAdvantages, selectedDisadvantages }: Pro
   return (
     <div>
       {attributeObjs?.map(({ title, points, description, subCategories, extraText }) => {
-        console.log('attObj', attributeObjs);
         return (
           <div className="results-container" key={`${title}-container`}>
             <h2>{title}</h2>
@@ -23,7 +22,6 @@ export const DisplayResult = ({ selectedAdvantages, selectedDisadvantages }: Pro
             {description}
             {subCategories &&
               subCategories.map(({ name, text, points }, index) => {
-                console.log('sub', index);
                 return (
                   <div className="sub-category" key={`${index}-subContainer`}>
                     <strong>{name}</strong>

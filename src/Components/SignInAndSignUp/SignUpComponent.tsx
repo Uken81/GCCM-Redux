@@ -1,19 +1,23 @@
-import { useState } from 'react';
+import React from 'react';
+import { SetStateAction, useState } from 'react';
 
 import '../../Pages/SignInAndSignUp/SignInAndSignUpPage.styles.scss';
 
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, google } from '../Firebase/firebase.utils';
 import { Button, Form } from 'react-bootstrap';
-import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
-const SignUp = ({ setShowLoadingScreen }) => {
+interface Props {
+  setShowLoadingScreen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const SignUp = ({ setShowLoadingScreen }: Props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: string; value: SetStateAction<string> } }) => {
     if (e.target.name === 'email') {
       setEmail(e.target.value);
     }
@@ -26,21 +30,27 @@ const SignUp = ({ setShowLoadingScreen }) => {
       setConfirmPassword(e.target.value);
     }
   };
+
+  const resetForm = () => {
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+  };
+
   const navigate = useNavigate();
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
     if (password !== confirmPassword) {
       alert("passwords don't match");
+      resetForm();
       return;
     }
 
     try {
       setShowLoadingScreen(true);
       await createUserWithEmailAndPassword(auth, email, password);
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
+      resetForm();
 
       navigate('/create-or-manage-page');
     } catch (error) {
@@ -59,6 +69,7 @@ const SignUp = ({ setShowLoadingScreen }) => {
         alert('The password is too weak');
       }
       setShowLoadingScreen(false);
+      resetForm();
     }
     return () => {
       setShowLoadingScreen(false);
@@ -115,10 +126,6 @@ const SignUp = ({ setShowLoadingScreen }) => {
       </Form>
     </div>
   );
-};
-
-SignUp.propTypes = {
-  setShowLoadingScreen: PropTypes.func
 };
 
 export default SignUp;

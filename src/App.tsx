@@ -14,7 +14,7 @@ import EditCharacterPage from './Pages/EditCharacterPage';
 import ResetPasswordPage from './Pages/ResetPage/ResetPasswordPage';
 
 function App() {
-  const [componentRef, setComponentRef] = useState<HTMLDivElement | null>(null);
+  const [componentRef, setComponentRef] = useState(null);
   const componentRefValue = useMemo(
     () => ({
       componentRef,

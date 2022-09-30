@@ -9,5 +9,6 @@ export const usePushBackOnRefresh = () => {
     if (!currentCharacterId) {
       navigate('/create-or-manage-page');
     }
+    return;
   }, []);
 };
