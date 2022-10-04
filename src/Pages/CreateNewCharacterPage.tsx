@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRef } from 'react';
 import { useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 
 import '../Components/Display Attribute Cards/DisplayAttributeCards.styles.scss';
 import 'Pages/page.styles.scss';
@@ -9,7 +9,6 @@ import 'Pages/page.styles.scss';
 import Header from '../Components/Header/Header.component';
 import SearchBar from '../Components/SearchBar/SearchBar';
 import CopyToClipboard from '../Components/Toolbar/CopyToClipboard';
-import PrintPDF from '../Components/Toolbar/printPDF';
 import ResetCharacter from '../Components/Toolbar/ResetCharacter';
 import DisplaySelected from '../Components/Selected/DisplaySelected';
 import ComponentToPrint from '../Components/Display Attribute Cards/ComponentToPrint';
@@ -17,12 +16,14 @@ import ComponentToPrint from '../Components/Display Attribute Cards/ComponentToP
 import { useCharacterStore } from '../Global State/store';
 import SuccessfulSaveAlert from '../Components/Toolbar/SuccessfulSaveAlert';
 import SaveCharacter from '../Components/Toolbar/SaveCharacter';
+import ReactToPrint from 'react-to-print';
 
 const CreateNewCharacterPage = () => {
   const [nameFormInput, setNameFormInput] = useState<string>('');
   const [showSaveAlert, setShowSaveAlert] = useState(false);
   const setName = useCharacterStore((state) => state.addName);
 
+  const divRef = useRef(null);
   const formRef = useRef<HTMLInputElement>(null);
 
   const handleInput = () => {
@@ -51,7 +52,14 @@ const CreateNewCharacterPage = () => {
             </div>
             <span className="toolbar-header">Output Tools</span>
             <div className="toolbar-print-options">
-              <PrintPDF />
+              <ReactToPrint
+                trigger={() => (
+                  <Button className="tool-button" size="lg">
+                    Download PDF
+                  </Button>
+                )}
+                content={() => divRef.current}
+              />
               <CopyToClipboard />
             </div>
           </div>
@@ -75,7 +83,7 @@ const CreateNewCharacterPage = () => {
         </div>
       </div>
       <div className="results-window" id="results">
-        <ComponentToPrint />
+        <ComponentToPrint divRef={divRef} />
       </div>
     </div>
   );

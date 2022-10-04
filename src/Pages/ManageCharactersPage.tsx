@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import '../Components/Display Attribute Cards/DisplayAttributeCards.styles.scss';
 import 'Pages/page.styles.scss';
 
 import Header from '../Components/Header/Header.component';
 import CopyToClipboard from '../Components/Toolbar/CopyToClipboard';
 import DeleteCharacter from '../Components/Toolbar/DeleteCharacter/DeleteCharacter';
-import PrintPDF from '../Components/Toolbar/printPDF';
 import DisplaySelected from '../Components/Selected/DisplaySelected';
 import { useState } from 'react';
 import { ToEditCharacter } from '../Components/Header/Navigation Links/navigationLinks';
@@ -13,9 +12,12 @@ import DeleteAlert from '../Components/Toolbar/DeleteCharacter/DeleteAlert';
 import { useCharacterStore } from '../Global State/store';
 import { usePushBackOnRefresh } from '../Components/CustomHooks/PushBackOnRefresh';
 import ComponentToPrint from 'Components/Display Attribute Cards/ComponentToPrint';
+import ReactToPrint from 'react-to-print';
+import { Button } from 'react-bootstrap';
 
 const ManageCharactersPage = () => {
   const characterName = useCharacterStore((state) => state.character.name?.toUpperCase());
+  const divRef = useRef(null);
   const [showAlert, setShowAlert] = useState(false);
 
   usePushBackOnRefresh();
@@ -33,7 +35,14 @@ const ManageCharactersPage = () => {
             </div>
             <div className="toolbar-print-options">
               <CopyToClipboard />
-              <PrintPDF />
+              <ReactToPrint
+                trigger={() => (
+                  <Button className="tool-button" size="lg">
+                    Download PDF
+                  </Button>
+                )}
+                content={() => divRef.current}
+              />
             </div>
           </div>
           <div className="main-interface">
@@ -45,7 +54,7 @@ const ManageCharactersPage = () => {
       </div>
       <div className="results-window" id="results">
         <div style={{ display: 'none' }}>
-          <ComponentToPrint />
+          <ComponentToPrint divRef={divRef} />
         </div>
       </div>
     </div>

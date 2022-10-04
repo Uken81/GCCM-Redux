@@ -1,24 +1,16 @@
-import React, { useEffect, useRef } from 'react';
-import { useContext } from 'react';
-import { ComponentRefContext } from 'context';
+import React, { LegacyRef } from 'react';
+// import { useContext } from 'react';
+// import { ComponentRefContext } from 'context';
 import DisplayAdvantages from './DisplayAdvantages';
 import DisplayDisadvantages from './DisplayDisadvantages';
 
-const ComponentToPrint = () => {
-  const componentRefContext = useContext(ComponentRefContext);
-  const componentRef = componentRefContext ? componentRefContext.componentRef : null;
-  const setComponentRef = componentRefContext?.setComponentRef;
+interface Props {
+  divRef: LegacyRef<HTMLDivElement> | undefined;
+}
 
-  const divRef = useRef(null);
-
-  useEffect(() => {
-    if (divRef !== null) {
-      setComponentRef?.(divRef);
-    }
-  }, []);
-
+const ComponentToPrint = ({ divRef }: Props) => {
   return (
-    <div className="display-container" ref={componentRef}>
+    <div className="display-container" ref={divRef}>
       <DisplayAdvantages />
       <DisplayDisadvantages />
     </div>
