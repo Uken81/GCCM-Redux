@@ -3,15 +3,15 @@ import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
 interface ToggleStoreType {
-  toggleKey: string;
+  isChoosingAdvantages: boolean;
   toggleAdvantages: () => void;
   toggleDisadvantages: () => void;
 }
 
 export const useToggleStore = create<ToggleStoreType>((set) => ({
-  toggleKey: 'advantages',
-  toggleAdvantages: () => set({ toggleKey: 'advantages' }),
-  toggleDisadvantages: () => set({ toggleKey: 'disadvantages' })
+  isChoosingAdvantages: true,
+  toggleAdvantages: () => set({ isChoosingAdvantages: true }),
+  toggleDisadvantages: () => set({ isChoosingAdvantages: false })
 }));
 
 interface CharacterStoreType {
@@ -40,26 +40,23 @@ const initialCharacterState: InitialCharacterType = {
 };
 
 export const useCharacterStore = create<CharacterStoreType>(
-  devtools(
-    (set) => ({
-      ...initialCharacterState,
-      selectedOptions: [],
-      resetSelectedOptions: () => set(() => ({ selectedOptions: [] })),
+  devtools((set) => ({
+    ...initialCharacterState,
+    selectedOptions: [],
+    resetSelectedOptions: () => set(() => ({ selectedOptions: [] })),
 
-      addSelectedOption: (selectedOptionArr: SelectOptionObj[]) =>
-        set(() => ({ selectedOptions: selectedOptionArr })),
+    addSelectedOption: (selectedOptionArr: SelectOptionObj[]) =>
+      set(() => ({ selectedOptions: selectedOptionArr })),
 
-      resetCharacter: () => set(initialCharacterState),
+    resetCharacter: () => set(initialCharacterState),
 
-      addName: (newName) => set((state) => ({ character: { ...state.character, name: newName } })),
-      addAdvantages: (advantagesList) =>
-        set((state) => ({ character: { ...state.character, advantages: advantagesList } })),
+    addName: (newName) => set((state) => ({ character: { ...state.character, name: newName } })),
+    addAdvantages: (advantagesList) =>
+      set((state) => ({ character: { ...state.character, advantages: advantagesList } })),
 
-      addDisadvantages: (disadvantageList) =>
-        set((state) => ({ character: { ...state.character, disadvantages: disadvantageList } })),
+    addDisadvantages: (disadvantageList) =>
+      set((state) => ({ character: { ...state.character, disadvantages: disadvantageList } })),
 
-      addId: (newId) => set((state) => ({ character: { ...state.character, id: newId } }))
-    }),
-    {}
-  )
+    addId: (newId) => set((state) => ({ character: { ...state.character, id: newId } }))
+  }))
 );

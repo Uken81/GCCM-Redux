@@ -1,10 +1,10 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Select from 'react-select';
 import { SelectOptionObj } from '../../../types';
 import AdvantagesArray from '../../Attribute Objects/Advantages';
 import DisadvantagesArray from '../../Attribute Objects/Disadvantages';
-import { useCharacterStore } from '../../Global State/store';
+import { useCharacterStore, useToggleStore } from '../../Global State/store';
 import ToggleAdvantageDisadvantage from '../ToggleAdvantageDisadvantage/ToggleAdvantageDisadvantage';
 
 import './SearchBar.styles.scss';
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const SearchBar = ({ combinedAttributesList }: Props) => {
-  const [isChoosingAdvantages, setIsChoosingAdvantages] = useState<boolean>(true);
+  const isChoosingAdvantages = useToggleStore((state) => state.isChoosingAdvantages);
   const selectedOptions = useCharacterStore((state) => state.selectedOptions);
   const addSelectedOptionAction = useCharacterStore((state) => state.addSelectedOption);
   const setAdavantagesAction = useCharacterStore((state) => state.addAdvantages);
@@ -70,7 +70,7 @@ const SearchBar = ({ combinedAttributesList }: Props) => {
     <div className="searchbar-container">
       <SearchBarTitle isChoosingAdvantages={isChoosingAdvantages} />
       <div className="toggle-and-search">
-        <ToggleAdvantageDisadvantage setIsChoosingAdvantages={setIsChoosingAdvantages} />
+        <ToggleAdvantageDisadvantage isChoosingAdvantages={isChoosingAdvantages} />
         <Select
           className="searchBar"
           options={isChoosingAdvantages ? advantageOptions : disadvantageOptions}
