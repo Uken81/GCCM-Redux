@@ -1,10 +1,11 @@
+import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
 import React from 'react';
 import { useEffect } from 'react';
 import Select from 'react-select';
 import { SelectOptionObj } from '../../../types';
 import AdvantagesArray from '../../Attribute Objects/Advantages';
 import DisadvantagesArray from '../../Attribute Objects/Disadvantages';
-import { useCharacterStore, useToggleStore } from '../../Global State/store';
+import { useCharacterStore } from '../../Global State/store';
 import ToggleAdvantageDisadvantage from '../ToggleAdvantageDisadvantage/ToggleAdvantageDisadvantage';
 
 import './SearchBar.styles.scss';
@@ -15,7 +16,8 @@ interface Props {
 }
 
 const SearchBar = ({ combinedAttributesList }: Props) => {
-  const isChoosingAdvantages = useToggleStore((state) => state.isChoosingAdvantages);
+  const isChoosingAdvantages = useAppSelector((state) => state.toggle.isChoosingAdvantages);
+
   const selectedOptions = useCharacterStore((state) => state.selectedOptions);
   const addSelectedOptionAction = useCharacterStore((state) => state.addSelectedOption);
   const setAdavantagesAction = useCharacterStore((state) => state.addAdvantages);

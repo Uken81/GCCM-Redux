@@ -5,7 +5,7 @@ import SignInAndSignUp from './Pages/SignInAndSignUp/SignInAndSignUpPage';
 import { useState } from 'react';
 import { UserContext } from './context';
 import { useMemo } from 'react';
-import LandingPage from './Pages/LandingPage';
+import LandingPage from 'Pages/landingPage';
 import GuestPage from './Pages/GuestPage';
 import CreateOrManage from './Pages/CreateOrManagePage';
 import CreateNewCharacterPage from './Pages/CreateNewCharacterPage';

@@ -3,22 +3,25 @@ import React, { useLayoutEffect } from 'react';
 import './Toggle.styles.scss';
 
 import { Tab, Tabs } from 'react-bootstrap';
-import { useToggleStore } from 'Global State/store';
+import { useAppDispatch } from 'Components/CustomHooks/reduxHooks';
+import { toggleAdvantages, toggleDisadvantages } from 'features/toggleSlice';
 
 interface Props {
   isChoosingAdvantages: boolean;
 }
 
 const ToggleAdvantageDisadvantage = ({ isChoosingAdvantages }: Props) => {
-  const toggleAdvantages = useToggleStore((state) => state.toggleAdvantages);
-  const toggleDisadvantages = useToggleStore((state) => state.toggleDisadvantages);
+  const dispatch = useAppDispatch();
+  // const chooseAdvantages = dispatch(toggleAdvantages());
+  // const chooseDisadvantages = dispatch(() => toggleDisadvantages());
 
   useLayoutEffect(() => {
-    toggleAdvantages();
+    // chooseAdvantages;
+    dispatch(toggleAdvantages());
   }, []);
 
   const handleTabs = (key: string) => {
-    key === 'advantages' ? toggleAdvantages() : toggleDisadvantages();
+    key === 'advantages' ? dispatch(toggleAdvantages()) : dispatch(toggleDisadvantages());
   };
 
   return (

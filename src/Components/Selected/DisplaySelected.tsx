@@ -3,19 +3,27 @@ import SelectedAdvantages from './Selected Atributes/SelectedAdvantages';
 import SelectedDisadvantages from './Selected Atributes/SelectedDisadvantages';
 
 import './displaySelected.styles.scss';
-import { useToggleStore } from '../../Global State/store';
+import { useAppDispatch } from 'Components/CustomHooks/reduxHooks';
+import { toggleAdvantages, toggleDisadvantages } from 'features/toggleSlice';
 
 const DisplaySelected = () => {
-  const toggleAdvantages = useToggleStore((state) => state.toggleAdvantages);
-  const toggleDisadvantages = useToggleStore((state) => state.toggleDisadvantages);
+  const dispatch = useAppDispatch();
+  // const chooseAdvantages = dispatch(toggleAdvantages());
+  // const chooseDisadvantages = dispatch(toggleDisadvantages());
 
   return (
     <div className="selected-window">
-      <div className="selected-list" id="selected-advantages" onClick={toggleAdvantages}>
+      <div
+        className="selected-list"
+        id="selected-advantages"
+        onClick={() => dispatch(toggleAdvantages())}>
         <h1 style={{ color: 'seagreen' }}>Selected Advantages</h1>
         <SelectedAdvantages />
       </div>
-      <div className="selected-list" id="selected-disadvantages" onClick={toggleDisadvantages}>
+      <div
+        className="selected-list"
+        id="selected-disadvantages"
+        onClick={() => dispatch(toggleDisadvantages())}>
         <h1 style={{ color: 'brown' }}>Selected Disadvantages</h1>
         <SelectedDisadvantages />
       </div>
