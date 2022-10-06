@@ -1,13 +1,16 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { useCharacterStore } from 'Global State/store';
+import { useAppDispatch } from 'Components/CustomHooks/reduxHooks';
+import { resetSelectedOptions } from 'features/selectedOptionsSlice';
 
 const ResetCharacter = () => {
-  const resetSelect = useCharacterStore((state) => state.resetSelectedOptions);
+  const dispatch = useAppDispatch();
+
   const resetCharacter = useCharacterStore((state) => state.resetCharacter);
 
   const reset = () => {
-    resetSelect();
+    dispatch(resetSelectedOptions());
     resetCharacter();
   };
 

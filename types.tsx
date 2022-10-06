@@ -4,13 +4,6 @@ export interface NewCharacterStatsObj {
   disadvantages: string[];
 }
 
-export interface CharacterObj {
-  name: string;
-  advantages: string[];
-  disadvantages: string[];
-  id: string;
-}
-
 export interface SelectOptionObj {
   label: string;
   category: string;

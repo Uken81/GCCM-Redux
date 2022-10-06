@@ -12,11 +12,8 @@ interface Props {
 
 const ToggleAdvantageDisadvantage = ({ isChoosingAdvantages }: Props) => {
   const dispatch = useAppDispatch();
-  // const chooseAdvantages = dispatch(toggleAdvantages());
-  // const chooseDisadvantages = dispatch(() => toggleDisadvantages());
 
   useLayoutEffect(() => {
-    // chooseAdvantages;
     dispatch(toggleAdvantages());
   }, []);
 

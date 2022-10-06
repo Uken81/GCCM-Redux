@@ -1,4 +1,5 @@
-import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from 'Components/CustomHooks/reduxHooks';
+import { addSelectedOption } from 'features/selectedOptionsSlice';
 import React from 'react';
 import { useEffect } from 'react';
 import Select from 'react-select';
@@ -16,10 +17,11 @@ interface Props {
 }
 
 const SearchBar = ({ combinedAttributesList }: Props) => {
-  const isChoosingAdvantages = useAppSelector((state) => state.toggle.isChoosingAdvantages);
+  const dispatch = useAppDispatch();
 
-  const selectedOptions = useCharacterStore((state) => state.selectedOptions);
-  const addSelectedOptionAction = useCharacterStore((state) => state.addSelectedOption);
+  const isChoosingAdvantages = useAppSelector((state) => state.toggle.isChoosingAdvantages);
+  const selectedOptions = useAppSelector((state) => state.options.selectedOptions);
+
   const setAdavantagesAction = useCharacterStore((state) => state.addAdvantages);
   const setDisadvantagesAction = useCharacterStore((state) => state.addDisadvantages);
 
@@ -35,7 +37,7 @@ const SearchBar = ({ combinedAttributesList }: Props) => {
   }));
 
   const handleChange = async (e: SelectOptionObj[]) => {
-    addSelectedOptionAction(e);
+    dispatch(addSelectedOption(e));
   };
 
   const updateAttributeStore = (categoryName: string) => {
@@ -52,12 +54,11 @@ const SearchBar = ({ combinedAttributesList }: Props) => {
   }, [selectedOptions]);
 
   const repopulateSelect = () => {
-    console.log('repop');
     const adsFilter = advantageOptions.filter((obj) => combinedAttributesList?.includes(obj.label));
     const disadsFilter = disadvantageOptions.filter((obj) =>
       combinedAttributesList?.includes(obj.label)
     );
-    addSelectedOptionAction([...adsFilter, ...disadsFilter]);
+    dispatch(addSelectedOption([...adsFilter, ...disadsFilter]));
   };
 
   useEffect(() => {
