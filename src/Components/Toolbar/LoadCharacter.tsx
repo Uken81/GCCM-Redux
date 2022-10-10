@@ -9,21 +9,18 @@ import { useEffect, useState } from 'react';
 
 import { useContext } from 'react';
 import { UserContext } from '../../context';
-import { useCharacterStore } from '../../Global State/store';
 import { useNavigate } from 'react-router';
+import { addAdvantage, addDisadvantage, setId, setName } from 'features/characterSlice';
+import { useAppDispatch } from 'Components/CustomHooks/reduxHooks';
 
 const LoadCharacter = () => {
+  const dispatch = useAppDispatch();
   const userContext = useContext(UserContext);
   const user = userContext?.user;
 
   const [charactersList, setCharactersList] = useState<string[]>([]);
   const [characterToLoad, setCharacterToLoad] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
-  const setName = useCharacterStore((state) => state.addName);
-  const setAdvantages = useCharacterStore((state) => state.addAdvantages);
-  const setDisadvantages = useCharacterStore((state) => state.addDisadvantages);
-  const setId = useCharacterStore((state) => state.addId);
 
   useEffect(() => {
     const createCharactersList = async () => {
@@ -51,11 +48,10 @@ const LoadCharacter = () => {
 
   const repopulateCharacterAttributes = async () => {
     const characterRecord = await getCharacterRecord();
-
-    setName(characterRecord?.name);
-    setAdvantages(characterRecord?.advantages);
-    setDisadvantages(characterRecord?.disadvantages);
-    setId(characterRecord?.id);
+    dispatch(setName(characterRecord?.name));
+    dispatch(addAdvantage(characterRecord?.advantages));
+    dispatch(addDisadvantage(characterRecord?.disadvantages));
+    dispatch(setId(characterRecord?.id));
 
     console.log(`****${characterRecord?.name} successfully loaded`);
     console.log(characterRecord);

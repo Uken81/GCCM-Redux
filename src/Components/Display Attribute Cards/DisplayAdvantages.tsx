@@ -1,14 +1,14 @@
 import AdvantagesArray from 'Attribute Objects/Advantages';
+import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
 import React, { useEffect, useState } from 'react';
 import { AttributeObj } from '../../../types';
-import { useCharacterStore } from '../../Global State/store';
 import { DisplayResult } from './DisplayAttributeCards';
 
 import './DisplayAttributeCards.styles.scss';
 
 const DisplayAdvantages = () => {
-  const characterName = useCharacterStore((state) => state.character.name);
-  const savedAdvantages = useCharacterStore((state) => state.character.advantages);
+  const characterName = useAppSelector((state) => state.character.name);
+  const savedAdvantages = useAppSelector((state) => state.character.advantages);
   const [selectedAdvantages, setSelectedAdvantages] = useState<AttributeObj[]>([]);
   const nameText = characterName !== '' ? `${characterName}'s` : '';
 

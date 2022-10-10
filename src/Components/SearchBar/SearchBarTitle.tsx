@@ -1,12 +1,12 @@
 import React from 'react';
-import { useCharacterStore } from 'Global State/store';
+import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
 
 interface Props {
   isChoosingAdvantages: boolean;
 }
 
 export const SearchBarTitle = ({ isChoosingAdvantages }: Props) => {
-  const characterName = useCharacterStore((state) => state.character.name);
+  const characterName = useAppSelector((state) => state.character.name);
   const attributeType = isChoosingAdvantages ? 'ADVANTAGES' : 'DISADVANTAGES';
 
   const createHeading = () => {
