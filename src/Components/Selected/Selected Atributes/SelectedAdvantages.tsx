@@ -1,8 +1,8 @@
+import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
 import React from 'react';
-import { useCharacterStore } from '../../../Global State/store';
 
 const SelectedAdvantages = () => {
-  const selectedAdvantages = useCharacterStore((state) => state.character.advantages);
+  const selectedAdvantages = useAppSelector((state) => state.character.advantages);
 
   return (
     <ul>

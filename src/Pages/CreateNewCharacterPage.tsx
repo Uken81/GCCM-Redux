@@ -13,15 +13,16 @@ import ResetCharacter from '../Components/Toolbar/ResetCharacter';
 import DisplaySelected from '../Components/Selected/DisplaySelected';
 import ComponentToPrint from '../Components/Display Attribute Cards/ComponentToPrint';
 
-import { useCharacterStore } from '../Global State/store';
 import SuccessfulSaveAlert from '../Components/Toolbar/SuccessfulSaveAlert';
 import SaveCharacter from '../Components/Toolbar/SaveCharacter';
 import ReactToPrint from 'react-to-print';
+import { useAppDispatch } from 'Components/CustomHooks/reduxHooks';
+import { setName } from 'features/characterSlice';
 
 const CreateNewCharacterPage = () => {
+  const dispatch = useAppDispatch();
   const [nameFormInput, setNameFormInput] = useState<string>('');
   const [showSaveAlert, setShowSaveAlert] = useState(false);
-  const setName = useCharacterStore((state) => state.addName);
 
   const divRef = useRef(null);
   const formRef = useRef<HTMLInputElement>(null);
@@ -33,7 +34,7 @@ const CreateNewCharacterPage = () => {
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    setName(nameFormInput);
+    dispatch(setName(nameFormInput));
     setNameFormInput('');
   };
 

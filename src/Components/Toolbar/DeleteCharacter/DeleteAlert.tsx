@@ -7,8 +7,8 @@ import Alert from 'react-bootstrap/Alert';
 
 import { GetCharacterReference } from '../../Firebase/firebase.utils';
 import { deleteDoc } from '@firebase/firestore';
-import { useCharacterStore } from '../../../Global State/store';
 import { useNavigate } from 'react-router';
+import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
 
 interface Props {
   setShowAlert: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,8 +19,8 @@ const DeleteAlert = ({ setShowAlert }: Props) => {
   const user = userContext?.user;
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const characterName = useCharacterStore((state) => state.character.name);
-  const characterId = useCharacterStore((state) => state.character.id);
+  const characterName = useAppSelector((state) => state.character.name);
+  const characterId = useAppSelector((state) => state.character.id);
 
   const navigate = useNavigate();
   const deleteCharacter = async () => {

@@ -1,14 +1,14 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
-import { useCharacterStore } from '../../Global State/store';
+import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
 
 interface Props {
   setShowSaveAlert: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SuccessfulSaveAlert = ({ setShowSaveAlert }: Props) => {
-  const characterName = useCharacterStore((state) => state.character.name);
+  const characterName = useAppSelector((state) => state.character.name);
 
   return (
     <div className="successful-save-alert">

@@ -5,11 +5,11 @@ import EditCharacter from '../Components/Toolbar/EditCharacter';
 import ResetChanges from '../Components/Toolbar/ResetChanges';
 import DisplaySelected from '../Components/Selected/DisplaySelected';
 import { usePushBackOnRefresh } from '../Components/CustomHooks/PushBackOnRefresh';
-import { useCharacterStore } from 'Global State/store';
+import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
 
 const EditCharacterPage = () => {
   const [combinedAttributesList, setCombinedAttributesList] = useState(
-    useCharacterStore((state) => [...state.character.advantages, ...state.character.disadvantages])
+    useAppSelector((state) => [...state.character.advantages, ...state.character.disadvantages])
   );
 
   usePushBackOnRefresh();

@@ -5,22 +5,23 @@ import { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
 import { UserContext } from '../../context';
-import { useCharacterStore } from '../../Global State/store';
 import { addNewCharacterForUser, getUsersSavedCharactersList } from '../Firebase/firebase.utils';
 import { NewCharacterStatsObj } from '../../../types';
+import { setId } from 'features/characterSlice';
+import { useAppDispatch, useAppSelector } from 'Components/CustomHooks/reduxHooks';
 
 interface Props {
   setShowSaveAlert: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SaveCharacter = ({ setShowSaveAlert }: Props) => {
+  const dispatch = useAppDispatch();
   const userContext = useContext(UserContext);
   const user = userContext?.user;
   const userId = user ? user.uid : '';
-  const characterName = useCharacterStore((state) => state.character.name);
-  const selectedAdvantages = useCharacterStore((state) => state.character.advantages);
-  const selectedDisadvantages = useCharacterStore((state) => state.character.disadvantages);
-  const setCharacterIdAction = useCharacterStore((state) => state.addId);
+  const characterName = useAppSelector((state) => state.character.name);
+  const selectedAdvantages = useAppSelector((state) => state.character.advantages);
+  const selectedDisadvantages = useAppSelector((state) => state.character.disadvantages);
 
   const [isSaving, setIsSaving] = useState(false);
 
@@ -46,7 +47,7 @@ const SaveCharacter = ({ setShowSaveAlert }: Props) => {
       return;
     } else if (characterName === '') {
       console.log('**** Save fail');
-      alert('You must select a name for your character in order to save');
+      alert('You must type a name for your character and press enter in order to save');
       return;
     } else {
       return true;
@@ -58,8 +59,8 @@ const SaveCharacter = ({ setShowSaveAlert }: Props) => {
       setIsSaving(true);
       const newCharacter: NewCharacterStatsObj = {
         name: characterName,
-        advantages: selectedAdvantages.map((name) => name),
-        disadvantages: selectedDisadvantages.map((name) => name)
+        advantages: selectedAdvantages.map((name: string) => name),
+        disadvantages: selectedDisadvantages.map((name: string) => name)
       };
 
       console.log('**** New Character for ' + userId + ' is ', newCharacter);
@@ -67,7 +68,7 @@ const SaveCharacter = ({ setShowSaveAlert }: Props) => {
       console.log('**** NewCharacterRef: ', newCharacterRef);
 
       const characterId = newCharacterRef.id;
-      setCharacterIdAction(characterId);
+      dispatch(setId(characterId));
       console.log('**** NewCharacterId: ', characterId);
       await setDoc(newCharacterRef, { id: characterId }, { merge: true });
       console.log(`**** ${characterName} has been saved`);

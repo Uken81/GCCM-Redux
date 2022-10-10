@@ -1,11 +1,11 @@
 import AdvantagesArray from 'Attribute Objects/Advantages';
 import DisadvantagesArray from 'Attribute Objects/Disadvantages';
-import { useCharacterStore } from 'Global State/store';
 import { AttributeObj } from '../../../types';
+import { useAppSelector } from './reduxHooks';
 
 export const useCreateAttributeObjList = (attributeType: string) => {
-  const savedAdvantages = useCharacterStore((state) => state.character.advantages);
-  const savedDisadvantages = useCharacterStore((state) => state.character.disadvantages);
+  const savedAdvantages = useAppSelector((state) => state.character.advantages);
+  const savedDisadvantages = useAppSelector((state) => state.character.disadvantages);
 
   const ObjArray: AttributeObj[] =
     attributeType === 'advantage' ? AdvantagesArray : DisadvantagesArray;

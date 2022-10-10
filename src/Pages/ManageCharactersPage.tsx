@@ -9,14 +9,14 @@ import DisplaySelected from '../Components/Selected/DisplaySelected';
 import { useState } from 'react';
 import { ToEditCharacter } from '../Components/Header/Navigation Links/navigationLinks';
 import DeleteAlert from '../Components/Toolbar/DeleteCharacter/DeleteAlert';
-import { useCharacterStore } from '../Global State/store';
 import { usePushBackOnRefresh } from '../Components/CustomHooks/PushBackOnRefresh';
 import ComponentToPrint from 'Components/Display Attribute Cards/ComponentToPrint';
 import ReactToPrint from 'react-to-print';
 import { Button } from 'react-bootstrap';
+import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
 
 const ManageCharactersPage = () => {
-  const characterName = useCharacterStore((state) => state.character.name?.toUpperCase());
+  const characterName = useAppSelector((state) => state.character.name);
   const divRef = useRef(null);
   const [showAlert, setShowAlert] = useState(false);
 

@@ -1,12 +1,13 @@
-import { useCharacterStore } from 'Global State/store';
 import { useEffect } from 'react';
+import { useAppDispatch } from 'Components/CustomHooks/reduxHooks';
+import { resetSelectedOptions } from 'features/selectedOptionsSlice';
+import { resetCharacter } from 'features/characterSlice';
 
 export const useResetCharacter = () => {
-  const resetSelect = useCharacterStore((state) => state.resetSelectedOptions);
-  const resetCharacter = useCharacterStore((state) => state.resetCharacter);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    resetSelect();
-    resetCharacter();
+    dispatch(resetSelectedOptions());
+    dispatch(resetCharacter());
   }, []);
 };

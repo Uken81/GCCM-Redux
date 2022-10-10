@@ -5,16 +5,16 @@ import Button from 'react-bootstrap/Button';
 
 import { UserContext } from '../../context';
 import { GetCharacterReference, SaveChangesToCharacter } from '../Firebase/firebase.utils';
-import { useCharacterStore } from '../../Global State/store';
 import { useNavigate } from 'react-router';
+import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
 
 const EditCharacter = () => {
   const userContext = useContext(UserContext);
   const user = userContext?.user;
   const userId = user ? user.uid : '';
-  const characterId = useCharacterStore((state) => state.character.id);
-  const selectedAdvantages = useCharacterStore((state) => state.character.advantages);
-  const selectedDisadvantages = useCharacterStore((state) => state.character.disadvantages);
+  const characterId = useAppSelector((state) => state.character.id);
+  const selectedAdvantages = useAppSelector((state) => state.character.advantages);
+  const selectedDisadvantages = useAppSelector((state) => state.character.disadvantages);
 
   const navigate = useNavigate();
   const handleEdit = async () => {
