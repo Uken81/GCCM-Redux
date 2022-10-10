@@ -47,7 +47,7 @@ const SaveCharacter = ({ setShowSaveAlert }: Props) => {
       return;
     } else if (characterName === '') {
       console.log('**** Save fail');
-      alert('You must select a name for your character in order to save');
+      alert('You must type a name for your character and press enter in order to save');
       return;
     } else {
       return true;
