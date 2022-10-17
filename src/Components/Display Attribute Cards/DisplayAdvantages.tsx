@@ -2,7 +2,7 @@ import AdvantagesArray from 'Attribute Objects/Advantages';
 import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
 import React, { useEffect, useState } from 'react';
 import { AttributeObj } from '../../../types';
-import { DisplayResult } from './DisplayAttributeCards';
+import { DisplayAttributeCards } from './DisplayAttributeCards';
 
 import './DisplayAttributeCards.styles.scss';
 
@@ -12,7 +12,7 @@ const DisplayAdvantages = () => {
   const [selectedAdvantages, setSelectedAdvantages] = useState<AttributeObj[]>([]);
   const nameText = characterName !== '' ? `${characterName}'s` : '';
 
-  const createAdvantagesList = () => {
+  const listAdvantagesToDisplay = () => {
     const advantagesFilter = AdvantagesArray.filter((advantageObj) => {
       const filteredArr = savedAdvantages.includes(advantageObj.title);
       return filteredArr;
@@ -21,13 +21,13 @@ const DisplayAdvantages = () => {
   };
 
   useEffect(() => {
-    createAdvantagesList();
+    listAdvantagesToDisplay();
   }, [savedAdvantages]);
 
   return (
     <div>
       {selectedAdvantages.length > 0 && <h3>{`${nameText} Advantages`}</h3>}
-      <DisplayResult selectedAdvantages={selectedAdvantages} />
+      <DisplayAttributeCards selectedAdvantages={selectedAdvantages} />
     </div>
   );
 };

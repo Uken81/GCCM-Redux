@@ -2,7 +2,7 @@ import DisadvantagesArray from 'Attribute Objects/Disadvantages';
 import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
 import React, { useEffect, useState } from 'react';
 import { AttributeObj } from '../../../types';
-import { DisplayResult } from './DisplayAttributeCards';
+import { DisplayAttributeCards } from './DisplayAttributeCards';
 
 import './DisplayAttributeCards.styles.scss';
 
@@ -27,7 +27,7 @@ const DisplayDisadvantages = () => {
   return (
     <div>
       {selectedDisadvantages.length > 0 && <h3>{`${nameText} Disadvantages`}</h3>}
-      <DisplayResult selectedDisadvantages={selectedDisadvantages} />
+      <DisplayAttributeCards selectedDisadvantages={selectedDisadvantages} />
     </div>
   );
 };

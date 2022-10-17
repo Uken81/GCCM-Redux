@@ -7,7 +7,7 @@ interface CharacterState {
   id: string;
 }
 
-const initialState: CharacterState = {
+const initialState: CharacterState | undefined = {
   name: '',
   advantages: [],
   disadvantages: [],

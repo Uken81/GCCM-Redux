@@ -6,7 +6,7 @@ interface Props {
   selectedDisadvantages?: AttributeObj[];
 }
 
-export const DisplayResult = ({ selectedAdvantages, selectedDisadvantages }: Props) => {
+export const DisplayAttributeCards = ({ selectedAdvantages, selectedDisadvantages }: Props) => {
   const attributeObjs =
     selectedAdvantages !== undefined ? selectedAdvantages : selectedDisadvantages;
 
