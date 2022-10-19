@@ -15,7 +15,7 @@ export const BackToSignIn = () => {
 
 export const BackToLandingPage = () => {
   return (
-    <div className="nav-link">
+    <div className="nav-link" data-testid="test">
       <Link to="/">BACK</Link>
     </div>
   );

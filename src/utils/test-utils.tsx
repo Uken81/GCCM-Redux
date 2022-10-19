@@ -7,6 +7,8 @@ import { Provider } from 'react-redux';
 
 // As a basic setup, import your same slice reducers
 import characterReducer from 'features/characterSlice';
+import toggleReducer from 'features/toggleSlice';
+import selectedOptionsReducer from 'features/selectedOptionsSlice';
 import { RootState } from 'store';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -23,8 +25,14 @@ export function renderWithProviders(
   {
     preloadedState = {},
     // Automatically create a store instance if no store was passed in
-    store = configureStore({ reducer: { character: characterReducer }, preloadedState }),
-    // store = configureStore({ reducer: { character: characterReducer }, preloadedState }),
+    store = configureStore({
+      reducer: {
+        character: characterReducer,
+        toggle: toggleReducer,
+        options: selectedOptionsReducer
+      },
+      preloadedState
+    }),
     ...renderOptions
   }: ExtendedRenderOptions = {}
 ) {
