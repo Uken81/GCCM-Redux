@@ -16,8 +16,8 @@ import ComponentToPrint from '../Components/Display Attribute Cards/ComponentToP
 import SuccessfulSaveAlert from '../Components/Toolbar/SuccessfulSaveAlert';
 import SaveCharacter from '../Components/Toolbar/SaveCharacter';
 import ReactToPrint from 'react-to-print';
-import { useAppDispatch } from 'Components/CustomHooks/reduxHooks';
-import { setName } from 'features/characterSlice';
+import { setName } from '../features/characterSlice';
+import { useAppDispatch } from '../Components/CustomHooks/reduxHooks';
 
 const CreateNewCharacterPage = () => {
   const dispatch = useAppDispatch();

@@ -9,8 +9,8 @@ import { Provider } from 'react-redux';
 import characterReducer from 'features/characterSlice';
 import toggleReducer from 'features/toggleSlice';
 import selectedOptionsReducer from 'features/selectedOptionsSlice';
-import { RootState } from 'store';
 import { BrowserRouter } from 'react-router-dom';
+import { RootState } from '../store';
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.

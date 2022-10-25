@@ -4,9 +4,9 @@ import { useState } from 'react';
 import '../../Pages/SignInAndSignUp/SignInAndSignUpPage.styles.scss';
 
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { google } from '../Firebase/firebase.utils';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { google } from 'Components/Firebase/firebase.utils';
 
 interface Props {
   setIsSigningIn: React.Dispatch<React.SetStateAction<boolean>>;

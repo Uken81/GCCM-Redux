@@ -8,8 +8,6 @@ import { toggleAdvantages, toggleDisadvantages } from 'features/toggleSlice';
 
 const DisplaySelected = () => {
   const dispatch = useAppDispatch();
-  // const chooseAdvantages = dispatch(toggleAdvantages());
-  // const chooseDisadvantages = dispatch(toggleDisadvantages());
 
   return (
     <div className="selected-window">

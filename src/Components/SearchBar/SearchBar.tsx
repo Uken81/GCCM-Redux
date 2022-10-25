@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from 'Components/CustomHooks/reduxHooks';
+import ToggleAdvantageDisadvantage from 'Components/ToggleAdvantageDisadvantage/ToggleAdvantageDisadvantage';
 import { addAdvantage, addDisadvantage } from 'features/characterSlice';
 import { addSelectedOption } from 'features/selectedOptionsSlice';
 import React from 'react';
@@ -7,7 +8,6 @@ import Select from 'react-select';
 import { SelectOptionObj } from '../../../types';
 import AdvantagesArray from '../../Attribute Objects/Advantages';
 import DisadvantagesArray from '../../Attribute Objects/Disadvantages';
-import ToggleAdvantageDisadvantage from '../ToggleAdvantageDisadvantage/ToggleAdvantageDisadvantage';
 
 import './SearchBar.styles.scss';
 import { SearchBarTitle } from './SearchBarTitle';
@@ -55,7 +55,11 @@ const SearchBar = ({ combinedAttributesList }: Props) => {
   }, [combinedAttributesList]);
 
   const formatOptionLabel = ({ label, category }) => (
-    <div style={category === 'advantage' ? { color: 'seagreen' } : { color: 'brown' }}>{label}</div>
+    <div
+      style={category === 'advantage' ? { color: 'seagreen' } : { color: 'brown' }}
+      data-testid="items-container">
+      {label}
+    </div>
   );
 
   return (
@@ -65,6 +69,7 @@ const SearchBar = ({ combinedAttributesList }: Props) => {
         <ToggleAdvantageDisadvantage isChoosingAdvantages={isChoosingAdvantages} />
         <Select
           className="searchBar"
+          name="attributes"
           options={isChoosingAdvantages ? advantageOptions : disadvantageOptions}
           value={selectedOptions}
           isMulti
