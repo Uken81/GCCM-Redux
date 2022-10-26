@@ -1,6 +1,6 @@
 import React from 'react';
-import SelectedAdvantages from './Selected Atributes/SelectedAdvantages';
-import SelectedDisadvantages from './Selected Atributes/SelectedDisadvantages';
+import SelectedAdvantages from '../Selected Atributes/SelectedAdvantages';
+import SelectedDisadvantages from '../Selected Atributes/SelectedDisadvantages';
 
 import './displaySelected.styles.scss';
 import { useAppDispatch } from 'Components/CustomHooks/reduxHooks';

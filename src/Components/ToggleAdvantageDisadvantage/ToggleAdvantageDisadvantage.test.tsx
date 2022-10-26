@@ -4,7 +4,9 @@ import { renderWithProviders } from 'utils/test-utils';
 // import ToggleAdvantageDisadvantage from './ToggleAdvantageDisadvantage';
 import userEvent from '@testing-library/user-event';
 import SearchBar from 'Components/SearchBar/SearchBar';
-import DisplaySelected from 'Components/Selected/DisplaySelected';
+import DisplaySelected from 'Components/Selected/Display Selected/DisplaySelected';
+import ToggleAdvantageDisadvantage from './ToggleAdvantageDisadvantage';
+import { debug } from 'console';
 
 beforeEach(() =>
   renderWithProviders(
@@ -17,7 +19,22 @@ beforeEach(() =>
 // beforeEach(() => renderWithProviders(<ToggleAdvantageDisadvantage isChoosingAdvantages={false} />));
 afterEach(() => cleanup());
 
-test('If clicking on tags will select it and deselect the other', async () => {
+// test('if the tabs are correctly colored', () => {
+//   renderWithProviders(<ToggleAdvantageDisadvantage isChoosingAdvantages={false} />);
+//   const advantageTab = screen.getByTestId('test');
+//   // const advantageTab = screen.getByRole('tab', { name: 'Advantages' });
+//   console.log('AT', advantageTab);
+//   debug(advantageTab);
+//   // expect(advantageTab).toHaveTextContent('Choose From');
+//   expect(advantageTab).toHaveStyle('color: seagreen');
+// });
+
+// test('if the display only tab is unselectable and the other two are selectable.', () => {
+//   const readOnlyTab = screen.getAllByRole('tab', { name: 'Choose From' });
+//   expect(readOnlyTab).toHaveAttribute('disabled');
+// });
+
+test('if clicking on tags will select it and deselect the other', async () => {
   await userEvent.click(screen.getByRole('tab', { name: 'Disadvantages' }));
   const selected = screen.getByRole('tab', { selected: true });
   const unselected = screen.getByRole('tab', { selected: false });

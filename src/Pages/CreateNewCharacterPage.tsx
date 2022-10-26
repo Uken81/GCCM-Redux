@@ -10,7 +10,7 @@ import Header from '../Components/Header/Header.component';
 import SearchBar from '../Components/SearchBar/SearchBar';
 import CopyToClipboard from '../Components/Toolbar/CopyToClipboard';
 import ResetCharacter from '../Components/Toolbar/ResetCharacter';
-import DisplaySelected from '../Components/Selected/DisplaySelected';
+import DisplaySelected from '../Components/Selected/Display Selected/DisplaySelected';
 import ComponentToPrint from '../Components/Display Attribute Cards/ComponentToPrint';
 
 import SuccessfulSaveAlert from '../Components/Toolbar/SuccessfulSaveAlert';

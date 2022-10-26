@@ -34,7 +34,7 @@ const ToggleAdvantageDisadvantage = ({ isChoosingAdvantages }: Props) => {
           title="Choose From"
           disabled
         />
-        <Tab eventKey="advantages" title="Advantages" />
+        <Tab eventKey="advantages" title="Advantages" data-testid="test" />
         <Tab eventKey="disadvantages" title="Disadvantages" />
       </Tabs>
     </div>

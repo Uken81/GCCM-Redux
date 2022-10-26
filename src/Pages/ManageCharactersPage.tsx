@@ -5,7 +5,7 @@ import 'Pages/page.styles.scss';
 import Header from '../Components/Header/Header.component';
 import CopyToClipboard from '../Components/Toolbar/CopyToClipboard';
 import DeleteCharacter from '../Components/Toolbar/DeleteCharacter/DeleteCharacter';
-import DisplaySelected from '../Components/Selected/DisplaySelected';
+import DisplaySelected from '../Components/Selected/Display Selected/DisplaySelected';
 import { useState } from 'react';
 import { ToEditCharacter } from '../Components/Header/Navigation Links/navigationLinks';
 import DeleteAlert from '../Components/Toolbar/DeleteCharacter/DeleteAlert';

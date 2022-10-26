@@ -1,6 +1,4 @@
 import React, { LegacyRef } from 'react';
-// import { useContext } from 'react';
-// import { ComponentRefContext } from 'context';
 import DisplayAdvantages from './DisplayAdvantages';
 import DisplayDisadvantages from './DisplayDisadvantages';
 

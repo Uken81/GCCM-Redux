@@ -27,7 +27,7 @@ test('If clicking on Disadvantages tab changes the searchbar title', async () =>
   expect(SearchBarTitle).toHaveTextContent('Select your Characters DISADVANTAGES');
 });
 
-test('If clicking on Disadvantages tab changes the searchbar selections', async () => {
+test('If clicking on Disadvantages tab changes the searchbar options', async () => {
   const disadvantagesTab = screen.getByRole('tab', { name: 'Disadvantages' });
   const searchBar = screen.getByRole('combobox');
 

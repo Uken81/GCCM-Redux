@@ -3,7 +3,7 @@ import Header from '../Components/Header/Header.component';
 import SearchBar from '../Components/SearchBar/SearchBar';
 import EditCharacter from '../Components/Toolbar/EditCharacter';
 import ResetChanges from '../Components/Toolbar/ResetChanges';
-import DisplaySelected from '../Components/Selected/DisplaySelected';
+import DisplaySelected from '../Components/Selected/Display Selected/DisplaySelected';
 import { usePushBackOnRefresh } from '../Components/CustomHooks/PushBackOnRefresh';
 import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
 
