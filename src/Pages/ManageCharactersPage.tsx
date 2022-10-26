@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { ToEditCharacter } from '../Components/Header/Navigation Links/navigationLinks';
 import DeleteAlert from '../Components/Toolbar/DeleteCharacter/DeleteAlert';
 import { usePushBackOnRefresh } from '../Components/CustomHooks/PushBackOnRefresh';
-import ComponentToPrint from 'Components/Display Attribute Cards/ComponentToPrint';
+import ComponentToPrint from 'Components/Display Attribute Cards/ComponentToPrint/ComponentToPrint';
 import ReactToPrint from 'react-to-print';
 import { Button } from 'react-bootstrap';
 import { useAppSelector } from 'Components/CustomHooks/reduxHooks';

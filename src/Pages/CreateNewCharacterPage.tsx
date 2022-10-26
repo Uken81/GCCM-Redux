@@ -11,7 +11,7 @@ import SearchBar from '../Components/SearchBar/SearchBar';
 import CopyToClipboard from '../Components/Toolbar/CopyToClipboard';
 import ResetCharacter from '../Components/Toolbar/ResetCharacter';
 import DisplaySelected from '../Components/Selected/Display Selected/DisplaySelected';
-import ComponentToPrint from '../Components/Display Attribute Cards/ComponentToPrint';
+import ComponentToPrint from '../Components/Display Attribute Cards/ComponentToPrint/ComponentToPrint';
 
 import SuccessfulSaveAlert from '../Components/Toolbar/SuccessfulSaveAlert';
 import SaveCharacter from '../Components/Toolbar/SaveCharacter';

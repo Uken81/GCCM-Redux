@@ -5,7 +5,7 @@ import Header from '../../Components/Header/Header.component';
 import SearchBar from '../../Components/SearchBar/SearchBar';
 import CopyToClipboard from '../../Components/Toolbar/CopyToClipboard';
 import ResetCharacter from '../../Components/Toolbar/ResetCharacter';
-import ComponentToPrint from '../../Components/Display Attribute Cards/ComponentToPrint';
+import ComponentToPrint from '../../Components/Display Attribute Cards/ComponentToPrint/ComponentToPrint';
 import DisplaySelected from '../../Components/Selected/Display Selected/DisplaySelected';
 import ReactToPrint from 'react-to-print';
 import { Button } from 'react-bootstrap';

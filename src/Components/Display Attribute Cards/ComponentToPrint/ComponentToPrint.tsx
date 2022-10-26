@@ -1,6 +1,6 @@
 import React, { LegacyRef } from 'react';
-import DisplayAdvantages from './DisplayAdvantages';
-import DisplayDisadvantages from './DisplayDisadvantages';
+import DisplayAdvantages from '../DisplayAdvantages';
+import DisplayDisadvantages from '../DisplayDisadvantages';
 
 interface Props {
   divRef: LegacyRef<HTMLDivElement> | undefined;
