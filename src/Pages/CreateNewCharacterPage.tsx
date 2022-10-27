@@ -9,7 +9,7 @@ import 'Pages/page.styles.scss';
 import Header from '../Components/Header/Header.component';
 import SearchBar from '../Components/SearchBar/SearchBar';
 import CopyToClipboard from '../Components/Toolbar/CopyToClipboard';
-import ResetCharacter from '../Components/Toolbar/ResetCharacter';
+import ResetCharacter from '../Components/Toolbar/ResetCharacter/ResetCharacter';
 import DisplaySelected from '../Components/Selected/Display Selected/DisplaySelected';
 import ComponentToPrint from '../Components/Display Attribute Cards/ComponentToPrint/ComponentToPrint';
 
