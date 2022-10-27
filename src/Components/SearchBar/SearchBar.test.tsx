@@ -5,10 +5,8 @@ import userEvent from '@testing-library/user-event';
 
 import SearchBar from './SearchBar';
 import selectEvent from 'react-select-event';
-let test;
 beforeEach(() => {
   renderWithProviders(<SearchBar />);
-  test = screen.getByRole('combobox');
 });
 
 afterEach(() => cleanup());
@@ -16,7 +14,6 @@ afterEach(() => cleanup());
 test('If searchBar dropdown menu appears when focused', () => {
   const searchBar = screen.getByRole('combobox');
 
-  expect(test).toBeInTheDocument();
   expect(screen.queryByText('Affliction')).not.toBeInTheDocument();
   selectEvent.openMenu(searchBar);
   expect(screen.getByText('Affliction')).toBeInTheDocument();

@@ -2,9 +2,9 @@ import React from 'react';
 import SearchBar from 'Components/SearchBar/SearchBar';
 import { renderWithProviders } from 'utils/test-utils';
 import ComponentToPrint from './ComponentToPrint';
-import { screen, within } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import selectEvent from 'react-select-event';
-import { debug } from 'console';
+import userEvent from '@testing-library/user-event';
 
 beforeEach(() =>
   renderWithProviders(
@@ -16,11 +16,13 @@ beforeEach(() =>
 );
 
 test('if attribute card appears in correct component', async () => {
-  await selectEvent.select(screen.getByRole('combobox'), ['Absolute Direction']);
+  const searchBar = screen.getByRole('combobox');
+  const disadvantagesTab = screen.getByRole('tab', { name: 'Disadvantages' });
 
-  //   const container = screen.getByText('5 or 10 points');
+  await selectEvent.select(searchBar, ['Absolute Direction']);
+  await userEvent.click(disadvantagesTab);
+  await selectEvent.select(searchBar, ['Amnesia']);
+
   expect(screen.getByText(/^You have an excellent sense of direction/)).toBeInTheDocument();
-  //   const container = screen.getByRole('heading', { level: 3 });
-  //   const test = within(container).getByText('5 or 10 points');
-  //   debug(test);
+  expect(screen.getByText(/^You’ve lost your memory/)).toBeInTheDocument();
 });
