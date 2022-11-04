@@ -2,13 +2,13 @@ import React from 'react';
 import { cleanup, screen } from '@testing-library/react';
 import { renderWithProviders } from 'utils/test-utils';
 import userEvent from '@testing-library/user-event';
-import SearchBar from 'Components/SearchBar/SearchBar';
+import Searchbar from 'Components/Searchbar/Searchbar';
 import DisplaySelected from 'Components/Selected/Display Selected/DisplaySelected';
 
 beforeEach(() =>
   renderWithProviders(
     <div>
-      <SearchBar />
+      <Searchbar />
       <DisplaySelected />
     </div>
   )

@@ -3,21 +3,21 @@ import { useRef } from 'react';
 import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 
-import '../Components/Display Attribute Cards/DisplayAttributeCards.styles.scss';
+import '../../Components/Display Attribute Cards/DisplayAttributeCards.styles.scss';
 import 'Pages/page.styles.scss';
 
-import Header from '../Components/Header/Header.component';
-import SearchBar from '../Components/SearchBar/SearchBar';
-import CopyToClipboard from '../Components/Toolbar/CopyToClipboard';
-import ResetCharacter from '../Components/Toolbar/ResetCharacter/ResetCharacter';
-import DisplaySelected from '../Components/Selected/Display Selected/DisplaySelected';
-import ComponentToPrint from '../Components/Display Attribute Cards/ComponentToPrint/ComponentToPrint';
+import Header from '../../Components/Header/Header.component';
+import Searchbar from '../../Components/Searchbar/Searchbar';
+import CopyToClipboard from '../../Components/Toolbar/CopyToClipboard';
+import ResetCharacter from '../../Components/Toolbar/ResetCharacter/ResetCharacter';
+import DisplaySelected from '../../Components/Selected/Display Selected/DisplaySelected';
+import ComponentToPrint from '../../Components/Display Attribute Cards/ComponentToPrint/ComponentToPrint';
 
-import SuccessfulSaveAlert from '../Components/Toolbar/SuccessfulSaveAlert';
-import SaveCharacter from '../Components/Toolbar/SaveCharacter';
+import SuccessfulSaveAlert from '../../Components/Toolbar/SuccessfulSaveAlert';
+import SaveCharacter from '../../Components/Toolbar/SaveCharacter';
 import ReactToPrint from 'react-to-print';
-import { setName } from '../features/characterSlice';
-import { useAppDispatch } from '../Components/CustomHooks/reduxHooks';
+import { setName } from '../../features/characterSlice';
+import { useAppDispatch } from '../../Components/CustomHooks/reduxHooks';
 
 const CreateNewCharacterPage = () => {
   const dispatch = useAppDispatch();
@@ -69,6 +69,7 @@ const CreateNewCharacterPage = () => {
               <Form className="new-name-form" onSubmit={handleSubmit}>
                 <Form.Control
                   type="text"
+                  name="character-name-form"
                   ref={formRef}
                   value={nameFormInput}
                   onChange={handleInput}
@@ -78,7 +79,7 @@ const CreateNewCharacterPage = () => {
                 />
               </Form>
             </div>
-            <SearchBar />
+            <Searchbar />
             <DisplaySelected />
           </div>
         </div>

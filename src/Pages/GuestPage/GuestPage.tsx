@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import 'Pages/page.styles.scss';
 
 import Header from '../../Components/Header/Header.component';
-import SearchBar from '../../Components/SearchBar/SearchBar';
+import Searchbar from '../../Components/Searchbar/Searchbar';
 import CopyToClipboard from '../../Components/Toolbar/CopyToClipboard';
 import ResetCharacter from '../../Components/Toolbar/ResetCharacter/ResetCharacter';
 import ComponentToPrint from '../../Components/Display Attribute Cards/ComponentToPrint/ComponentToPrint';
@@ -33,7 +33,7 @@ const GuestPage = () => {
             </div>
           </div>
           <div className="main-interface">
-            <SearchBar />
+            <Searchbar />
             <DisplaySelected />
           </div>
         </div>

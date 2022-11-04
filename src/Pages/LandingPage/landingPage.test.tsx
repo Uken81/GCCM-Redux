@@ -12,8 +12,8 @@ describe('navigating to', () => {
   test('guest page and back', async () => {
     const linkToGuest = screen.getByRole('button', { name: 'Continue as Guest' });
     await userEvent.click(linkToGuest);
-    const searchBar = screen.getByText('Select...');
-    expect(searchBar).toBeInTheDocument();
+    const searchbar = screen.getByText('Select...');
+    expect(searchbar).toBeInTheDocument();
     const back = screen.getByRole('link', { name: 'BACK' });
     await userEvent.click(back);
     expect(screen.getByText('Continue as Guest')).toBeInTheDocument();

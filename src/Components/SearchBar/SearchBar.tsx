@@ -9,14 +9,14 @@ import { SelectOptionObj } from '../../../types';
 import AdvantagesArray from '../../Attribute Objects/Advantages';
 import DisadvantagesArray from '../../Attribute Objects/Disadvantages';
 
-import './SearchBar.styles.scss';
-import { SearchBarTitle } from './SearchBarTitle';
+import './Searchbar.styles.scss';
+import { SearchbarTitle } from './SearchbarTitle';
 
 interface Props {
   combinedAttributesList?: string[];
 }
 
-const SearchBar = ({ combinedAttributesList }: Props) => {
+const Searchbar = ({ combinedAttributesList }: Props) => {
   const dispatch = useAppDispatch();
 
   const isChoosingAdvantages = useAppSelector((state) => state.toggle.isChoosingAdvantages);
@@ -64,11 +64,11 @@ const SearchBar = ({ combinedAttributesList }: Props) => {
 
   return (
     <div className="searchbar-container">
-      <SearchBarTitle isChoosingAdvantages={isChoosingAdvantages} />
+      <SearchbarTitle isChoosingAdvantages={isChoosingAdvantages} />
       <div className="toggle-and-search">
         <ToggleAdvantageDisadvantage isChoosingAdvantages={isChoosingAdvantages} />
         <Select
-          className="searchBar"
+          className="searchbar"
           name="attributes"
           options={isChoosingAdvantages ? advantageOptions : disadvantageOptions}
           value={selectedOptions}
@@ -81,4 +81,4 @@ const SearchBar = ({ combinedAttributesList }: Props) => {
   );
 };
 
-export default SearchBar;
+export default Searchbar;

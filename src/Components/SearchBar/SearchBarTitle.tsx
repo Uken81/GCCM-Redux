@@ -5,7 +5,7 @@ interface Props {
   isChoosingAdvantages: boolean;
 }
 
-export const SearchBarTitle = ({ isChoosingAdvantages }: Props) => {
+export const SearchbarTitle = ({ isChoosingAdvantages }: Props) => {
   const characterName = useAppSelector((state) => state.character.name);
   const attributeType = isChoosingAdvantages ? 'ADVANTAGES' : 'DISADVANTAGES';
 

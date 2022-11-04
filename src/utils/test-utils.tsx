@@ -11,6 +11,7 @@ import toggleReducer from 'features/toggleSlice';
 import selectedOptionsReducer from 'features/selectedOptionsSlice';
 import { BrowserRouter } from 'react-router-dom';
 import { RootState } from '../store';
+import userEvent from '@testing-library/user-event';
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.
@@ -20,7 +21,7 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   store?: any;
 }
 
-export function renderWithProviders(
+function renderWithProviders(
   ui: React.ReactElement,
   {
     preloadedState = {},
@@ -46,4 +47,13 @@ export function renderWithProviders(
 
   // Return an object with the store and all of RTL's query functions
   return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
+}
+
+export function setupWithUserEvents(jsx: JSX.Element) {
+  const userAction = userEvent.setup();
+  const utils = renderWithProviders(jsx);
+  return {
+    userAction,
+    ...utils
+  };
 }
