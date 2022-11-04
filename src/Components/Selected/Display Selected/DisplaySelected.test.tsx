@@ -1,22 +1,28 @@
 import React from 'react';
 import Searchbar from 'Components/Searchbar/Searchbar';
-import { renderWithProviders } from 'utils/test-utils';
+import { setupWithUserEvents } from 'utils/test-utils';
 import DisplaySelected from './DisplaySelected';
 import { screen } from '@testing-library/react';
 import selectEvent from 'react-select-event';
 import userEvent from '@testing-library/user-event';
 
-beforeEach(() =>
-  renderWithProviders(
+function setupTest() {
+  const utils = setupWithUserEvents(
     <div>
       <Searchbar />
       <DisplaySelected />
     </div>
-  )
-);
+  );
+  const searchbar = utils.getByRole('combobox');
+
+  return {
+    ...utils,
+    searchbar
+  };
+}
 
 test('if selecting an advantage displays its name in the appropriate selected box', async () => {
-  const searchbar = screen.getByRole('combobox');
+  const { searchbar } = setupTest();
 
   await selectEvent.select(searchbar, ['Catfall']);
   const selectedAdvantage = screen.getByRole('listitem');
@@ -25,8 +31,8 @@ test('if selecting an advantage displays its name in the appropriate selected bo
 });
 
 test('if selecting a disadvantage displays its name in the appropriate selected box', async () => {
+  const { searchbar } = setupTest();
   const disadvantagesTab = screen.getByRole('tab', { name: 'Disadvantages' });
-  const searchbar = screen.getByRole('combobox');
 
   await userEvent.click(disadvantagesTab);
   await selectEvent.select(searchbar, ['Confused']);

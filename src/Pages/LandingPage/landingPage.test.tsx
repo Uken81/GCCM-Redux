@@ -1,28 +1,26 @@
 import React from 'react';
-import { cleanup, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { screen } from '@testing-library/react';
 import { App } from '../../App';
-import { renderWithProviders } from '../../utils/test-utils';
-
-afterEach(() => cleanup());
+import { setupWithUserEvents } from '../../utils/test-utils';
 
 describe('navigating to', () => {
-  beforeEach(() => renderWithProviders(<App />));
-
   test('guest page and back', async () => {
+    const { userAction } = setupWithUserEvents(<App />);
+
     const linkToGuest = screen.getByRole('button', { name: 'Continue as Guest' });
-    await userEvent.click(linkToGuest);
+    await userAction.click(linkToGuest);
     const searchbar = screen.getByText('Select...');
     expect(searchbar).toBeInTheDocument();
     const back = screen.getByRole('link', { name: 'BACK' });
-    await userEvent.click(back);
+    await userAction.click(back);
     expect(screen.getByText('Continue as Guest')).toBeInTheDocument();
   });
 
   test('log in page', async () => {
-    const linkToLogin = screen.getByRole('button', { name: 'Log-in/Sign-up' });
+    const { userAction } = setupWithUserEvents(<App />);
 
-    await userEvent.click(linkToLogin);
+    const linkToLogin = screen.getByRole('button', { name: 'Log-in/Sign-up' });
+    await userAction.click(linkToLogin);
     expect(screen.getByText('SIGN IN')).toBeInTheDocument();
   });
 });
