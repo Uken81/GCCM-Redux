@@ -15,6 +15,7 @@ function setupTest() {
   const click = utils.userAction.click;
 
   return {
+    ...utils,
     disadvantageTab,
     click
   };
