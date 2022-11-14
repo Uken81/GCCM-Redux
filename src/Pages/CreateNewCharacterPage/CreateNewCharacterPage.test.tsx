@@ -1,14 +1,26 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { setupWithUserEvents } from 'utils/test-utils';
 import CreateNewCharacterPage from './CreateNewCharacterPage';
 
-test('if ', async () => {
-  const { userAction } = setupWithUserEvents(<CreateNewCharacterPage />);
-  const SearchbarTitle = screen.getByText(/Select your Characters/);
-  const disadvantagesTab = screen.getByRole('tab', { name: 'Disadvantages' });
+function setupTest() {
+  const utils = setupWithUserEvents(<CreateNewCharacterPage />);
+  const form = utils.getByTestId('form');
+  const nameInput = utils.getByRole('textbox', { name: 'character-name-form' });
+  const typeName = () => utils.userAction.type(nameInput, 'character name');
 
-  expect(SearchbarTitle).toHaveTextContent('Select your Characters ADVANTAGES');
-  await userAction.click(disadvantagesTab);
-  expect(SearchbarTitle).toHaveTextContent('Select your Characters DISADVANTAGES');
+  return {
+    ...utils,
+    form,
+    typeName
+  };
+}
+
+test('if searchbar heading changes when a characters name is submitted', async () => {
+  const { form, typeName } = setupTest();
+  const searchbarHeading = screen.getByText(/Select your Characters/);
+
+  await typeName();
+  fireEvent.submit(form);
+  expect(searchbarHeading).toHaveTextContent("SELECT CHARACTER NAME'S ADVANTAGES");
 });

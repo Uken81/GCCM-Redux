@@ -66,10 +66,11 @@ const CreateNewCharacterPage = () => {
           </div>
           <div className="main-interface">
             <div className="form">
-              <Form className="new-name-form" onSubmit={handleSubmit}>
+              <Form className="new-name-form" onSubmit={handleSubmit} data-testid="form">
                 <Form.Control
                   type="text"
                   name="character-name-form"
+                  aria-label="character-name-form"
                   ref={formRef}
                   value={nameFormInput}
                   onChange={handleInput}
