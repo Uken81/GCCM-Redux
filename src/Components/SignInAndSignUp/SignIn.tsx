@@ -7,15 +7,26 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { google } from 'Components/Firebase/firebase.utils';
+import { GoogleAlert } from './signin.utils.tsx/GoogleAlert';
+import handleSubmit from './signin.utils.tsx/handleSubmit';
+// import { GoogleAlert } from './signin.utils.tsx/GoogleAlert';
 
 interface Props {
   setIsSigningIn: React.Dispatch<React.SetStateAction<boolean>>;
   setShowLoadingScreen: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowEmailAlert: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowPasswordAlert: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SignIn = ({ setIsSigningIn, setShowLoadingScreen }: Props) => {
+const SignIn = ({
+  setIsSigningIn,
+  setShowLoadingScreen,
+  setShowEmailAlert,
+  setShowPasswordAlert
+}: Props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showGoogleAlert, setShowGoogleAlert] = useState(false);
 
   const handleChange = (e: { target: { name: string; value: React.SetStateAction<string> } }) => {
     if (e.target.name === 'email') {
@@ -30,27 +41,27 @@ const SignIn = ({ setIsSigningIn, setShowLoadingScreen }: Props) => {
   const auth = getAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (event: { preventDefault: () => void }) => {
+  const handleSignin = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     setShowLoadingScreen(true);
-
+    // await handleSubmit(auth, email, password)
     await signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        console.log('****signin');
         navigate('/create-or-manage-page');
       })
       .catch((error) => {
         const errorCode = error.code;
-        console.log('error code: ', errorCode);
         if (errorCode === 'auth/user-not-found') {
-          alert('The email you have entered has not been found.');
+          console.log('email', errorCode);
+          setShowEmailAlert(true);
         }
 
         if (errorCode === 'auth/wrong-password') {
-          alert('Wrong password entered for this account.');
+          console.log('password', errorCode);
+          setShowPasswordAlert(true);
         }
-        setShowLoadingScreen(false);
       });
+    setShowLoadingScreen(false);
     return () => {
       setShowLoadingScreen(false);
     };
@@ -64,8 +75,8 @@ const SignIn = ({ setIsSigningIn, setShowLoadingScreen }: Props) => {
         navigate('/create-or-manage-page');
       })
       .catch(() => {
-        alert('Google sign in is not working. Sign in with email and password or try again later.');
         setShowLoadingScreen(false);
+        setShowGoogleAlert(true);
       });
     return () => {
       setShowLoadingScreen(false);
@@ -85,14 +96,17 @@ const SignIn = ({ setIsSigningIn, setShowLoadingScreen }: Props) => {
       <Button variant="primary" onClick={googleSignIn}>
         SIGN IN WITH GOOGLE
       </Button>
+      {showGoogleAlert && <GoogleAlert setShowGoogleAlert={setShowGoogleAlert} />}
       <span>or</span>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSignin}>
+        {/* <Form onSubmit={(e) => handleSubmit(e, auth, email, password)}> */}
         <Form.Group className="sign-in-form" controlId="sign-in-email">
           <Form.Control
             type="email"
             name="email"
+            aria-label="email"
             value={email}
-            placeholder="Enter email"
+            placeholder="Email"
             onChange={handleChange}
           />
         </Form.Group>
@@ -101,6 +115,7 @@ const SignIn = ({ setIsSigningIn, setShowLoadingScreen }: Props) => {
           <Form.Control
             type="password"
             name="password"
+            aria-label="password"
             value={password}
             placeholder="Password"
             onChange={handleChange}
@@ -119,7 +134,7 @@ const SignIn = ({ setIsSigningIn, setShowLoadingScreen }: Props) => {
         <p className="redirect-link" onClick={redirectToSignup}>
           Sign Up
         </p>
-        <p>if you dont have an account yet</p>
+        <p>if you dont already have an account</p>
       </div>
     </div>
   );

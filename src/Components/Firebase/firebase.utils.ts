@@ -74,10 +74,8 @@ export const google = async () => {
       console.log(`${user.email} has signed in with google pop-up.`);
     })
     .catch((error) => {
-      const errorCode = error.code;
       const errorMessage = error.message;
-      console.log(errorCode);
-      alert(errorMessage);
+      console.log(errorMessage);
     });
 };
 
