@@ -10,7 +10,7 @@ import AdvantagesArray from '../../Attribute Objects/Advantages';
 import DisadvantagesArray from '../../Attribute Objects/Disadvantages';
 
 import './Searchbar.styles.scss';
-import { SearchbarTitle } from './SearchbarTitle';
+import { SearchbarTitle } from './SearchBarTitle';
 
 interface Props {
   combinedAttributesList?: string[];

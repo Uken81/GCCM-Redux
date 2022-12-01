@@ -2,7 +2,7 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import { setupWithUserEvents } from 'utils/test-utils';
 import selectEvent from 'react-select-event';
-import Searchbar from './Searchbar';
+import Searchbar from './SearchBar';
 
 const setupTest = () => {
   const utils = setupWithUserEvents(<Searchbar />);

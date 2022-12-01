@@ -1,7 +1,7 @@
 import React from 'react';
 import { setupWithUserEvents } from 'utils/test-utils';
 import SignInAndSignUp from './SignInAndSignUpPage';
-import { act, screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 
 function setupTest() {
   const utils = setupWithUserEvents(<SignInAndSignUp />);
@@ -19,7 +19,7 @@ test('if clicking on the sign in with google button renders the loading page', a
   await click(googleButton);
   expect(screen.getByText('LOADING....')).toBeInTheDocument();
 });
-
+//remove this**for test purpose only
 // test('if clicking on the sign in button renders the loading page', async () => {
 //   const { click } = setupTest();
 
