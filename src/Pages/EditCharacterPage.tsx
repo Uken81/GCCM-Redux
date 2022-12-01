@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Header from '../Components/Header/Header.component';
-import Searchbar from '../Components/Searchbar/SearchBar';
+import Searchbar from '../Components/SearchBar/SearchBar';
 import EditCharacter from '../Components/Toolbar/EditCharacter';
 import ResetChanges from '../Components/Toolbar/ResetChanges';
 import DisplaySelected from '../Components/Selected/Display Selected/DisplaySelected';

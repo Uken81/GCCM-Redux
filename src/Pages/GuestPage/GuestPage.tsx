@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import 'Pages/page.styles.scss';
 
 import Header from '../../Components/Header/Header.component';
-import Searchbar from '../../Components/Searchbar/SearchBar';
+import Searchbar from '../../Components/SearchBar/SearchBar';
 import CopyToClipboard from '../../Components/Toolbar/CopyToClipboard';
 import ResetCharacter from '../../Components/Toolbar/ResetCharacter/ResetCharacter';
 import ComponentToPrint from '../../Components/Display Attribute Cards/ComponentToPrint/ComponentToPrint';
