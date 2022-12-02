@@ -7,7 +7,7 @@ import '../../Components/Display Attribute Cards/DisplayAttributeCards.styles.sc
 import 'Pages/page.styles.scss';
 
 import Header from '../../Components/Header/Header.component';
-import Searchbar from '../../Components/SearchBar/SearchBar';
+import Searchbar from '../../Components/SearchBar/Searchbar';
 import CopyToClipboard from '../../Components/Toolbar/CopyToClipboard';
 import ResetCharacter from '../../Components/Toolbar/ResetCharacter/ResetCharacter';
 import DisplaySelected from '../../Components/Selected/Display Selected/DisplaySelected';

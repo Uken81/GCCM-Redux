@@ -1,5 +1,5 @@
 import React from 'react';
-import Searchbar from 'Components/SearchBar/SearchBar';
+import Searchbar from 'Components/SearchBar/Searchbar';
 import { setupWithUserEvents } from 'utils/test-utils';
 import ComponentToPrint from './ComponentToPrint';
 import { screen } from '@testing-library/react';
