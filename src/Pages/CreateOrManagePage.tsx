@@ -8,11 +8,11 @@ import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth, createUserProfileDocument } from '../Components/Firebase/firebase.utils';
 import Header from '../Components/Header/Header.component';
-import LoadCharacter from '../Components/Toolbar/LoadCharacter';
 import { UserContext } from '../context';
 import React from 'react';
 import { Unsubscribe } from 'firebase/firestore';
 import { useResetCharacter } from 'Components/CustomHooks/ResetCharacterHook';
+import LoadCharacter from 'Components/Toolbar/LoadCharacter/LoadCharacter';
 
 const CreateOrManage = () => {
   const userContext = useContext(UserContext);

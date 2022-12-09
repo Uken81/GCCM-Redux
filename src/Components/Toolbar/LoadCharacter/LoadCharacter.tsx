@@ -4,35 +4,51 @@ import DropdownItem from 'react-bootstrap/DropdownItem';
 import {
   getMatchingCharacterForUser,
   getUsersSavedCharactersList
-} from '../Firebase/firebase.utils';
+} from '../../Firebase/firebase.utils';
 import { useEffect, useState } from 'react';
 
 import { useContext } from 'react';
-import { UserContext } from '../../context';
+import { UserContext } from '../../../context';
 import { useNavigate } from 'react-router';
 import { addAdvantage, addDisadvantage, setId, setName } from 'features/characterSlice';
 import { useAppDispatch } from 'Components/CustomHooks/reduxHooks';
+import { CreateCharactersList } from './CharacterList.utils';
 
 const LoadCharacter = () => {
   const dispatch = useAppDispatch();
   const userContext = useContext(UserContext);
   const user = userContext?.user;
-
-  const [charactersList, setCharactersList] = useState<string[]>([]);
+  const [charactersList, setCharactersList] = useState<string[] | null>([]);
   const [characterToLoad, setCharacterToLoad] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  // useEffect(() => {
+  //   const createCharactersList = async () => {
+  //     if (user) {
+  //       const savedCharacters = await getUsersSavedCharactersList(user.uid);
+  //       return setCharactersList(savedCharacters);
+  //     }
+  //   };
+  //   createCharactersList();
+  // }, [user]);
+
   useEffect(() => {
-    const createCharactersList = async () => {
-      if (user) {
-        const savedCharacters = await getUsersSavedCharactersList(user.uid);
-        setCharactersList(savedCharacters);
-      }
+    const getList = async () => {
+      const tempList = ['test1', 'test2'];
+      // const tempList = await CreateCharactersList(user!);
+      setCharactersList(tempList);
     };
-    createCharactersList();
+
+    if (user) {
+      getList();
+    }
+    console.log('Clist', charactersList);
+    console.log('User', user);
   }, [user]);
 
   const handleClick = (characterName: string) => {
+    console.log('Clist', charactersList);
+
     setCharacterToLoad(characterName);
   };
 
@@ -74,29 +90,33 @@ const LoadCharacter = () => {
     loadSelectedCharactersStats();
   }, [characterToLoad]);
 
+  //Consider making a ternary below for cases of null returned from characters list, remove onclick also.
   return (
     <div>
-      <DropdownButton
-        className="dropdown-button"
-        title={isLoading ? 'LOADING...' : 'LOAD CHARACTER'}
-        variant="outline-primary"
-        size="lg">
-        {charactersList.length > 0 &&
-          charactersList.map((characterName) => (
-            <DropdownItem
-              className="dropdown-link"
-              key={charactersList.indexOf(characterName)}
-              onClick={() => handleClick(characterName)}
-              style={{
-                color: 'white',
-                backgroundColor: 'black',
-                fontSize: '1.5rem',
-                borderBottom: '1px solid white'
-              }}>
-              {characterName}
-            </DropdownItem>
-          ))}
-      </DropdownButton>
+      {charactersList && (
+        <DropdownButton
+          className="dropdown-button"
+          title={isLoading ? 'LOADING...' : 'LOAD CHARACTER'}
+          variant="outline-primary"
+          size="lg"
+          onClick={() => console.log('Clist', charactersList)}>
+          {charactersList.length > 0 &&
+            charactersList.map((characterName) => (
+              <DropdownItem
+                className="dropdown-link"
+                key={charactersList.indexOf(characterName)}
+                onClick={() => handleClick(characterName)}
+                style={{
+                  color: 'white',
+                  backgroundColor: 'black',
+                  fontSize: '1.5rem',
+                  borderBottom: '1px solid white'
+                }}>
+                {characterName}
+              </DropdownItem>
+            ))}
+        </DropdownButton>
+      )}
     </div>
   );
 };

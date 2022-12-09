@@ -65,7 +65,7 @@ test('if password input accepts text', async () => {
   expect(passwordInputNode.getAttribute('value')).toBe('1234');
 });
 
-test.only('if submiting a valid email and password calls the signin function with correct arguments', async () => {
+test('if submiting a valid email and password calls the signin function with correct arguments', async () => {
   const { changeEmailInput, changePasswordInput, clickSubmit } = setupTest();
 
   const auth = getAuth();
@@ -75,21 +75,19 @@ test.only('if submiting a valid email and password calls the signin function wit
   mockedSignin.mockResolvedValue({
     kind: 'identitytoolkit#VerifyPasswordResponse',
     localId: 'r9Pn67nFQ7ZHizKjqt285VMKb5R2',
-    email: 'user@email.com',
+    email: 'brendanhurd@hotmail.com',
     displayName: '',
     idToken:
-      'eyJhbGciOiJSUzI1NiIsImtpZCI6ImE5NmFkY2U5OTk5YmJmNWNkMzBmMjlmNDljZDM3ZjRjNWU2NDI3NDAiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZ2NjbS04MDM4YiIsImF1ZCI6ImdjY20tODAzOGIiLCJhdXRoX3RpbWUiOjE2NjkyNzc4NzYsInVzZXJfaWQiOiJyOVBuNjduRlE3WkhpektqcXQyODVWTUtiNVIyIiwic3ViIjoicjlQbjY3bkZRN1pIaXpLanF0Mjg1Vk1LYjVSMiIsImlhdCI6MTY2OTI3Nzg3NiwiZXhwIjoxNjY5MjgxNDc2LCJlbWFpbCI6ImJyZW5kYW5odXJkQGhvdG1haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImJyZW5kYW5odXJkQGhvdG1haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.LwDgO_y9E67UpV9jsyaXb0EXvgoSzkAoDjRjCTW-Sma9veLR8AKfTfX3F1dofwgW8A5lFEl2cmZFSsRFx4azMiClpSxStXvGsYxY-kca8V-oGn5HYkEu0nhWeZbsGb3mSpTx424n5lgQZS1pLbD8hoflq7bQ6Mq-0Tc6yEVPqJgbnJzge6kvYoDnGEFKUb4nPqBUzDZ78WpBT9cMGna0da_W87e0w1lggaqMshNfjPmKB-YTbpb5okVGfp03QgEuAnYcA5Zs7bEf1Nm6W4PyydVBK1Hg8dlZScx5UzIjXHEEgyRibm40rHfWd1lKBN_rPct55xjJECYir_n1izvu_A',
+      'eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk1MWMwOGM1MTZhZTM1MmI4OWU0ZDJlMGUxNDA5NmY3MzQ5NDJhODciLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZ2NjbS04MDM4YiIsImF1ZCI6ImdjY20tODAzOGIiLCJhdXRoX3RpbWUiOjE2NzAzODE0MDcsInVzZXJfaWQiOiJyOVBuNjduRlE3WkhpektqcXQyODVWTUtiNVIyIiwic3ViIjoicjlQbjY3bkZRN1pIaXpLanF0Mjg1Vk1LYjVSMiIsImlhdCI6MTY3MDM4MTQwNywiZXhwIjoxNjcwMzg1MDA3LCJlbWFpbCI6ImJyZW5kYW5odXJkQGhvdG1haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImJyZW5kYW5odXJkQGhvdG1haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.qUVPh4vZL_f1IJ_5x1o1PCR7Azw0A_KI5iCJY_vlhpM0q7-huVr7UPG-_QtIOEDR_j2Hd37uj49w0_UbBfHqI9OlXMXU-A21jaXMBi-_LnIqU0RSe9Jaf2o9ZahZbN1l7CAxMDaENZCuY4J4RTYcit36O2r024XX9bFuY8SRdTgeAIIGCvO5k-K2MUcUKJBP4OIjiPRaOg-XI0O9dPq73QLDScQcgECugPO-Vz1NRAshwibLOTvWVtPhQHvDFSsGx3Oj9F74hEQQ7f9_obkH7UQ0onxA4vI82tP5sD6vabGY1BeeElXVH0WCGXEXGvcheu5Y0n6uBg9jr-g8K9B4qQ',
     registered: true,
     refreshToken:
-      'AOkPPWQkSOfE-0WAsBf813K0GfIeGKErsQsrnpZXnkSeHUq2ub9vW4vwhPccyFOBvtCJlT80JWw-aRRGz4_xKKYyramChLBC_fhKWodTZ85RbZ-ZlrZyDwnXTyUaq4-tz_MUgWZQIQTbZsXvTQixkyU2GXF_mKzFPhTVvwh0w46-dI-TStGqtgWmDJeeV_yo5gGIhOo6igWaCCYjDaJ1wWv6Lmo3r0foUQ',
+      'AOkPPWSfP8CemxHG6vOUktgJ69eYbwaMrY99dagSlwZb2FMuclocYDQ8Bpzi6GYDGgIS6XvF00Dcyhm9wHy7esN1AHBSEwe-UJoIonaYLwIpjrWiVK7IjslUq7itG74_ygidv-3nHJshc3BBYIcLMo7sbmGtIISGkckJ466mxFXR3yhAwC7IyWsZD-JefCLWlgNTPD14RuV_TEV72eS7aQF0SICEInAWWQ',
     expiresIn: '3600'
   });
 
-  await act(async () => {
-    await changeEmailInput(email);
-    await changePasswordInput(password);
-    await clickSubmit();
-  });
+  await changeEmailInput(email);
+  await changePasswordInput(password);
+  await clickSubmit();
 
   expect(mockedSignin).toHaveBeenCalledTimes(1);
   expect(mockedSignin).toHaveBeenCalledWith(auth, 'user@email.com', 'password1234');
@@ -98,14 +96,13 @@ test.only('if submiting a valid email and password calls the signin function wit
 test('if signing in with the wrong email causes the correct alert to display', async () => {
   const { changeEmailInput, changePasswordInput, clickSubmit } = setupTest();
 
-  const auth = getAuth();
   const email = 'user@emai';
   const password = 'password1234';
 
   mockedSignin.mockRejectedValue({
     error: {
       code: 400,
-      message: 'EMAIL_NOT_FOUND',
+      message: 'auth/user-not-found',
       errors: [
         {
           message: 'EMAIL_NOT_FOUND',
@@ -115,12 +112,23 @@ test('if signing in with the wrong email causes the correct alert to display', a
       ]
     }
   });
+  // mockedSignin.mockRejectedValue({
+  //   error: {
+  //     code: 400,
+  //     message: 'EMAIL_NOT_FOUND',
+  //     errors: [
+  //       {
+  //         message: 'EMAIL_NOT_FOUND',
+  //         domain: 'global',
+  //         reason: 'invalid'
+  //       }
+  //     ]
+  //   }
+  // });
 
-  await act(async () => {
-    await changeEmailInput(email);
-    await changePasswordInput(password);
-    await clickSubmit();
-  });
+  await changeEmailInput(email);
+  await changePasswordInput(password);
+  await clickSubmit();
 
   expect(mockedSignin).toHaveBeenCalled();
   //   expect(screen.getByTestId('email-alert')).toBeInTheDocument();
