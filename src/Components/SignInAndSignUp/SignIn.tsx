@@ -44,7 +44,6 @@ const SignIn = ({
   const handleSignin = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     setShowLoadingScreen(true);
-    // await handleSubmit(auth, email, password)
     await signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         navigate('/create-or-manage-page');

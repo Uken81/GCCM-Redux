@@ -126,10 +126,10 @@ test('if signing in with the wrong email causes the correct alert to display', a
   //   }
   // });
 
-  await changeEmailInput(email);
-  await changePasswordInput(password);
-  await clickSubmit();
-
+  // await changeEmailInput(email);
+  // await changePasswordInput(password);
+  // await clickSubmit();
+  screen.debug();
   expect(mockedSignin).toHaveBeenCalled();
   //   expect(screen.getByTestId('email-alert')).toBeInTheDocument();
   expect(
