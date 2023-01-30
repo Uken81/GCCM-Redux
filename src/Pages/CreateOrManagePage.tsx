@@ -21,26 +21,26 @@ const CreateOrManage = () => {
 
   useResetCharacter();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    let unsubscribeFromAuth: Unsubscribe | null = null;
-    unsubscribeFromAuth = onAuthStateChanged(auth, async (userAuth) => {
-      await createUserProfileDocument(userAuth);
-      if (userAuth) {
-        setUser?.(userAuth);
-        console.log('****User: ', user);
-      } else {
-        setUser?.(userAuth);
-        console.log('User has logged out');
-        navigate('/');
-      }
-      return () => {
-        if (unsubscribeFromAuth) {
-          unsubscribeFromAuth();
-        }
-      };
-    });
-  }, [user]);
+  console.log('COM User', user);
+  // useEffect(() => {
+  //   let unsubscribeFromAuth: Unsubscribe | null = null;
+  //   unsubscribeFromAuth = onAuthStateChanged(auth, async (userAuth) => {
+  //     await createUserProfileDocument(userAuth);
+  //     if (userAuth) {
+  //       setUser?.(userAuth);
+  //       console.log('****User: ', user);
+  //     } else {
+  //       setUser?.(userAuth);
+  //       console.log('User has logged out');
+  //       navigate('/');
+  //     }
+  //     return () => {
+  //       if (unsubscribeFromAuth) {
+  //         unsubscribeFromAuth();
+  //       }
+  //     };
+  //   });
+  // }, [user]);
 
   return (
     <div className="create-or-manage-characters">
