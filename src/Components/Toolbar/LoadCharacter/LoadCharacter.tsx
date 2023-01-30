@@ -12,7 +12,6 @@ import { UserContext } from '../../../context';
 import { useNavigate } from 'react-router';
 import { addAdvantage, addDisadvantage, setId, setName } from 'features/characterSlice';
 import { useAppDispatch } from 'Components/CustomHooks/reduxHooks';
-import { CreateCharactersList } from './CharacterList.utils';
 
 const LoadCharacter = () => {
   const dispatch = useAppDispatch();
@@ -22,33 +21,17 @@ const LoadCharacter = () => {
   const [characterToLoad, setCharacterToLoad] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // useEffect(() => {
-  //   const createCharactersList = async () => {
-  //     if (user) {
-  //       const savedCharacters = await getUsersSavedCharactersList(user.uid);
-  //       return setCharactersList(savedCharacters);
-  //     }
-  //   };
-  //   createCharactersList();
-  // }, [user]);
-
   useEffect(() => {
-    const getList = async () => {
-      const tempList = ['test1', 'test2'];
-      // const tempList = await CreateCharactersList(user!);
-      setCharactersList(tempList);
+    const createCharactersList = async () => {
+      if (user) {
+        const savedCharacters = await getUsersSavedCharactersList(user.uid);
+        return setCharactersList(savedCharacters);
+      }
     };
-
-    if (user) {
-      getList();
-    }
-    console.log('Clist', charactersList);
-    console.log('User', user);
+    createCharactersList();
   }, [user]);
 
   const handleClick = (characterName: string) => {
-    console.log('Clist', charactersList);
-
     setCharacterToLoad(characterName);
   };
 
@@ -98,8 +81,7 @@ const LoadCharacter = () => {
           className="dropdown-button"
           title={isLoading ? 'LOADING...' : 'LOAD CHARACTER'}
           variant="outline-primary"
-          size="lg"
-          onClick={() => console.log('Clist', charactersList)}>
+          size="lg">
           {charactersList.length > 0 &&
             charactersList.map((characterName) => (
               <DropdownItem

@@ -1,7 +1,7 @@
-import React, { PropsWithChildren } from 'react';
+import React, { ReactNode } from 'react';
 import { render } from '@testing-library/react';
 import type { RenderOptions } from '@testing-library/react';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, EnhancedStore } from '@reduxjs/toolkit';
 import type { PreloadedState } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 
@@ -18,13 +18,26 @@ import userEvent from '@testing-library/user-event';
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>;
   //fix any type below
-  store?: any;
+  store?: EnhancedStore;
 }
 
 function renderWithProviders(
   ui: React.ReactElement,
   {
-    preloadedState = {},
+    preloadedState = {
+      toggle: {
+        isChoosingAdvantages: true
+      },
+      options: {
+        selectedOptions: []
+      },
+      character: {
+        name: '',
+        advantages: [],
+        disadvantages: [],
+        id: ''
+      }
+    },
     // Automatically create a store instance if no store was passed in
     store = configureStore({
       reducer: {
@@ -37,7 +50,10 @@ function renderWithProviders(
     ...renderOptions
   }: ExtendedRenderOptions = {}
 ) {
-  function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
+  type Props = {
+    children: ReactNode;
+  };
+  function Wrapper({ children }: Props): JSX.Element {
     return (
       <BrowserRouter>
         <Provider store={store}>{children}</Provider>

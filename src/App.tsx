@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { User } from 'firebase/auth';
 import SignInAndSignUp from './Pages/SignInAndSignUp/SignInAndSignUpPage';
 import { useState } from 'react';
@@ -12,16 +12,6 @@ import CreateNewCharacterPage from './Pages/CreateNewCharacterPage/CreateNewChar
 import ManageCharactersPage from './Pages/ManageCharactersPage';
 import EditCharacterPage from './Pages/EditCharacterPage';
 import ResetPasswordPage from './Pages/ResetPage/ResetPasswordPage';
-
-// const LandingPage = () => <div>You are home</div>;
-// const GuestPage = () => <div>You are on the about page</div>;
-// const NoMatch = () => <div>No match</div>
-
-export const LocationDisplay = () => {
-  const location = useLocation();
-
-  return <div data-testid="location-display">{location.pathname}</div>;
-};
 
 export const App = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -45,7 +35,6 @@ export const App = () => {
         <Route path="/create-new-character-page" element={<CreateNewCharacterPage />} />
         <Route path="/manage-characters-page" element={<ManageCharactersPage />} />
       </Routes>
-      <LocationDisplay />
     </UserContext.Provider>
   );
 };
