@@ -5,11 +5,25 @@
     "node": true
   },
   "extends": [
-    "plugin:@typescript-eslint/recommended",
+    "react-app",
+    "react-app/jest",
     "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "plugin:prettier/recommended"
   ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -17,7 +31,7 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react"],
+  "plugins": ["@typescript-eslint", "import", "testing-library", "jest-dom", "react"],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "no-undef": "off",

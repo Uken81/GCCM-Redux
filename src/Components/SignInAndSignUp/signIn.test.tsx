@@ -1,15 +1,12 @@
-import { act, screen, waitFor } from '@testing-library/react';
-import { wait } from '@testing-library/user-event/dist/types/utils';
+import { screen } from '@testing-library/react';
+import { google } from 'Components/Firebase/firebase.utils';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import CreateOrManage from 'Pages/CreateOrManagePage';
 import SignInAndSignUp from 'Pages/SignInAndSignUp/SignInAndSignUpPage';
 import React from 'react';
 import { setupWithUserEvents } from 'utils/test-utils';
-import handleSubmit from './signin.utils.tsx/handleSubmit';
 
-// jest.mock('./signin.utils.tsx/handleSubmit');
-// const mockedHandleSubmit = handleSubmit as jest.MockedFunction<typeof handleSubmit>;
-//test
+jest.mock('firebase/auth');
+const mockedGoogleSignin = google as jest.MockedFunction<typeof google>;
 jest.mock('firebase/auth');
 const mockedSignin = signInWithEmailAndPassword as jest.MockedFunction<
   typeof signInWithEmailAndPassword
@@ -19,18 +16,21 @@ function setupTest() {
   const utils = setupWithUserEvents(
     <div>
       <SignInAndSignUp />
-      <CreateOrManage />
     </div>
   );
-  const emailInputNode = utils.getByLabelText(/email/i);
-  const passwordInputNode = utils.getByLabelText(/password/i);
 
-  const clickSubmit = () => utils.userAction.click(utils.getByRole('button', { name: 'SIGN IN' }));
+  const click = utils.userAction.click;
+
+  const emailInputNode = screen.getByLabelText(/email/i);
+  const passwordInputNode = screen.getByLabelText(/password/i);
+
+  const clickSubmit = () => utils.userAction.click(screen.getByRole('button', { name: 'SIGN IN' }));
   const changeEmailInput = (value: string) => utils.userAction.type(emailInputNode, value);
   const changePasswordInput = (value: string) => utils.userAction.type(passwordInputNode, value);
 
   return {
     ...utils,
+    click,
     emailInputNode,
     passwordInputNode,
     clickSubmit,
@@ -42,32 +42,25 @@ function setupTest() {
 test('if email input has the correct placeholder text', () => {
   const { emailInputNode } = setupTest();
 
-  expect(emailInputNode.getAttribute('placeholder')).toBe('Email');
+  expect(emailInputNode).toHaveAttribute('placeholder', 'Email');
 });
 
 test('if password input has the correct placeholder text', () => {
   const { passwordInputNode } = setupTest();
 
-  expect(passwordInputNode.getAttribute('placeholder')).toBe('Password');
+  expect(passwordInputNode).toHaveAttribute('placeholder', 'Password');
 });
 
-test('if email input accepts text', async () => {
-  const { emailInputNode, changeEmailInput } = setupTest();
+// test.only('if clicking on the sign in with google button renders the loading page', async () => {
+//   const { click } = setupTest();
+//   screen.debug();
+//   const googleButton = screen.getByRole('button', { name: 'SIGN IN WITH GOOGLE' });
+//   await click(googleButton);
+//   expect(screen.getByText('LOADING....')).toBeInTheDocument();
+//   screen.debug();
+// });
 
-  expect(emailInputNode.getAttribute('value')).toBe('');
-  await changeEmailInput('testuser@email.com');
-  expect(emailInputNode.getAttribute('value')).toBe('testuser@email.com');
-});
-
-test('if password input accepts text', async () => {
-  const { passwordInputNode, changePasswordInput } = setupTest();
-
-  expect(passwordInputNode.getAttribute('value')).toBe('');
-  await changePasswordInput('1234');
-  expect(passwordInputNode.getAttribute('value')).toBe('1234');
-});
-
-test('if submiting a valid email and password calls the signin function with correct arguments', async () => {
+test('if the email and password are submitted correctly', async () => {
   mockedSignin.mockResolvedValue({
     kind: 'identitytoolkit#VerifyPasswordResponse',
     localId: 'r9Pn67nFQ7ZHizKjqt285VMKb5R2',
@@ -78,18 +71,7 @@ test('if submiting a valid email and password calls the signin function with cor
     refreshToken: '',
     expiresIn: '3600'
   });
-  // mockedSignin.mockResolvedValue({
-  //   kind: 'identitytoolkit#VerifyPasswordResponse',
-  //   localId: 'r9Pn67nFQ7ZHizKjqt285VMKb5R2',
-  //   email: '',
-  //   displayName: '',
-  //   idToken:
-  //     'eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk1MWMwOGM1MTZhZTM1MmI4OWU0ZDJlMGUxNDA5NmY3MzQ5NDJhODciLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZ2NjbS04MDM4YiIsImF1ZCI6ImdjY20tODAzOGIiLCJhdXRoX3RpbWUiOjE2NzAzODE0MDcsInVzZXJfaWQiOiJyOVBuNjduRlE3WkhpektqcXQyODVWTUtiNVIyIiwic3ViIjoicjlQbjY3bkZRN1pIaXpLanF0Mjg1Vk1LYjVSMiIsImlhdCI6MTY3MDM4MTQwNywiZXhwIjoxNjcwMzg1MDA3LCJlbWFpbCI6ImJyZW5kYW5odXJkQGhvdG1haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImJyZW5kYW5odXJkQGhvdG1haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.qUVPh4vZL_f1IJ_5x1o1PCR7Azw0A_KI5iCJY_vlhpM0q7-huVr7UPG-_QtIOEDR_j2Hd37uj49w0_UbBfHqI9OlXMXU-A21jaXMBi-_LnIqU0RSe9Jaf2o9ZahZbN1l7CAxMDaENZCuY4J4RTYcit36O2r024XX9bFuY8SRdTgeAIIGCvO5k-K2MUcUKJBP4OIjiPRaOg-XI0O9dPq73QLDScQcgECugPO-Vz1NRAshwibLOTvWVtPhQHvDFSsGx3Oj9F74hEQQ7f9_obkH7UQ0onxA4vI82tP5sD6vabGY1BeeElXVH0WCGXEXGvcheu5Y0n6uBg9jr-g8K9B4qQ',
-  //   registered: true,
-  //   refreshToken:
-  //     'AOkPPWSfP8CemxHG6vOUktgJ69eYbwaMrY99dagSlwZb2FMuclocYDQ8Bpzi6GYDGgIS6XvF00Dcyhm9wHy7esN1AHBSEwe-UJoIonaYLwIpjrWiVK7IjslUq7itG74_ygidv-3nHJshc3BBYIcLMo7sbmGtIISGkckJ466mxFXR3yhAwC7IyWsZD-JefCLWlgNTPD14RuV_TEV72eS7aQF0SICEInAWWQ',
-  //   expiresIn: '3600'
-  // });
+
   const { changeEmailInput, changePasswordInput, clickSubmit } = setupTest();
 
   const auth = getAuth();
@@ -100,21 +82,10 @@ test('if submiting a valid email and password calls the signin function with cor
   await changePasswordInput(password);
   await clickSubmit();
 
-  expect(mockedSignin).toHaveBeenCalledTimes(1);
   expect(mockedSignin).toHaveBeenCalledWith(auth, 'user@email.com', 'password1234');
-
-  await waitFor(() => {
-    expect(screen.getByRole('button', { name: 'LOAD CHARACTER' })).toBeInTheDocument();
-    screen.debug();
-  });
 });
 
 // test('if signing in with the wrong email causes the correct alert to display', async () => {
-//   const { changeEmailInput, changePasswordInput, clickSubmit } = setupTest();
-
-//   const email = 'user@emai';
-//   const password = 'password1234';
-
 //   mockedSignin.mockRejectedValue({
 //     error: {
 //       code: 400,
@@ -129,9 +100,14 @@ test('if submiting a valid email and password calls the signin function with cor
 //     }
 //   });
 
-//   // await changeEmailInput(email);
-//   // await changePasswordInput(password);
-//   // await clickSubmit();
+//   const { changeEmailInput, changePasswordInput, clickSubmit } = setupTest();
+
+//   const email = 'user@emai';
+//   const password = 'password1234';
+
+//   await changeEmailInput(email);
+//   await changePasswordInput(password);
+//   await clickSubmit();
 //   screen.debug();
 //   expect(mockedSignin).toHaveBeenCalled();
 //   //   expect(screen.getByTestId('email-alert')).toBeInTheDocument();

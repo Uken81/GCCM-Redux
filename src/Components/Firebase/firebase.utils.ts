@@ -11,9 +11,15 @@ import {
   collection,
   QuerySnapshot,
   DocumentData,
-  DocumentReference
+  DocumentReference,
+  doc,
+  setDoc,
+  getDoc,
+  getDocs,
+  addDoc,
+  where,
+  query
 } from 'firebase/firestore';
-import { doc, setDoc, getDoc, getDocs, addDoc, where, query } from 'firebase/firestore';
 import { NewCharacterStatsObj } from '../../../types';
 
 // const firebaseConfig = {
@@ -40,6 +46,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
 
 export const createUserProfileDocument = async (userAuth: User | null) => {
+  console.log('********FunctionFired*******');
   if (!userAuth) return;
   const userRef = doc(db, `users/${userAuth.uid}`);
   const docSnap = await getDoc(userRef);

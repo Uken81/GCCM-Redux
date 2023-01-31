@@ -1,17 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import DropdownItem from 'react-bootstrap/DropdownItem';
 import {
   getMatchingCharacterForUser,
   getUsersSavedCharactersList
 } from '../../Firebase/firebase.utils';
-import { useEffect, useState } from 'react';
 
-import { useContext } from 'react';
 import { UserContext } from '../../../context';
 import { useNavigate } from 'react-router';
-import { addAdvantage, addDisadvantage, setId, setName } from 'features/characterSlice';
-import { useAppDispatch } from 'Components/CustomHooks/reduxHooks';
+import { addAdvantage, addDisadvantage, setId, setName } from '../../../features/characterSlice';
+import { useAppDispatch } from '../../../Components/CustomHooks/reduxHooks';
 
 const LoadCharacter = () => {
   const dispatch = useAppDispatch();

@@ -1,18 +1,16 @@
 import { onAuthStateChanged } from '@firebase/auth';
-import { useContext } from 'react';
-import { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 
-import 'Pages/page.styles.scss';
+import '../Pages/page.styles.scss';
 
 import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth, createUserProfileDocument } from '../Components/Firebase/firebase.utils';
 import Header from '../Components/Header/Header.component';
 import { UserContext } from '../context';
-import React from 'react';
 import { Unsubscribe } from 'firebase/firestore';
-import { useResetCharacter } from 'Components/CustomHooks/ResetCharacterHook';
-import LoadCharacter from 'Components/Toolbar/LoadCharacter/LoadCharacter';
+import { useResetCharacter } from '../Components/CustomHooks/ResetCharacterHook';
+import LoadCharacter from '../Components/Toolbar/LoadCharacter/LoadCharacter';
 
 const CreateOrManage = () => {
   const userContext = useContext(UserContext);
@@ -21,26 +19,26 @@ const CreateOrManage = () => {
 
   useResetCharacter();
   const navigate = useNavigate();
-  console.log('COM User', user);
-  // useEffect(() => {
-  //   let unsubscribeFromAuth: Unsubscribe | null = null;
-  //   unsubscribeFromAuth = onAuthStateChanged(auth, async (userAuth) => {
-  //     await createUserProfileDocument(userAuth);
-  //     if (userAuth) {
-  //       setUser?.(userAuth);
-  //       console.log('****User: ', user);
-  //     } else {
-  //       setUser?.(userAuth);
-  //       console.log('User has logged out');
-  //       navigate('/');
-  //     }
-  //     return () => {
-  //       if (unsubscribeFromAuth) {
-  //         unsubscribeFromAuth();
-  //       }
-  //     };
-  //   });
-  // }, [user]);
+  useEffect(() => {
+    console.log('COM User', user);
+    let unsubscribeFromAuth: Unsubscribe | null = null;
+    unsubscribeFromAuth = onAuthStateChanged(auth, async (userAuth) => {
+      await createUserProfileDocument(userAuth);
+      if (userAuth) {
+        setUser?.(userAuth);
+        console.log('****User: ', user);
+      } else {
+        setUser?.(userAuth);
+        console.log('User has logged out');
+        navigate('/');
+      }
+      return () => {
+        if (unsubscribeFromAuth) {
+          unsubscribeFromAuth();
+        }
+      };
+    });
+  }, [user]);
 
   return (
     <div className="create-or-manage-characters">

@@ -1,5 +1,5 @@
-import { screen, waitFor } from '@testing-library/react';
-import { getUsersSavedCharactersList } from 'Components/Firebase/firebase.utils';
+import { screen } from '@testing-library/react';
+import { getUsersSavedCharactersList } from '../../Firebase/firebase.utils';
 import React from 'react';
 import { UserContextProvider } from 'utils/mockContextProvider';
 import { setupWithUserEvents } from 'utils/test-utils';
@@ -19,16 +19,13 @@ function setupTest() {
     </div>
   );
   const clickButton = () =>
-    utils.userAction.click(utils.getByRole('button', { name: 'LOAD CHARACTER' }));
+    utils.userAction.click(screen.getByRole('button', { name: 'LOAD CHARACTER' }));
   return { ...utils, clickButton };
 }
 
 test('if the load character dropdown contains the list of created characters names', async () => {
   mockedRetrieveCharactersList.mockResolvedValue(['character1', 'character2']);
   const { clickButton } = setupTest();
-
   await clickButton();
-  await waitFor(() => {
-    expect(screen.getByRole('button', { name: 'character1' })).toBeInTheDocument();
-  });
+  expect(await screen.findByRole('button', { name: 'character1' })).toBeInTheDocument();
 });

@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import '../../Pages/SignInAndSignUp/SignInAndSignUpPage.styles.scss';
 
@@ -8,7 +7,6 @@ import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { google } from 'Components/Firebase/firebase.utils';
 import { GoogleAlert } from './signin.utils.tsx/GoogleAlert';
-import handleSubmit from './signin.utils.tsx/handleSubmit';
 // import { GoogleAlert } from './signin.utils.tsx/GoogleAlert';
 
 interface Props {
@@ -98,7 +96,6 @@ const SignIn = ({
       {showGoogleAlert && <GoogleAlert setShowGoogleAlert={setShowGoogleAlert} />}
       <span>or</span>
       <Form onSubmit={handleSignin}>
-        {/* <Form onSubmit={(e) => handleSubmit(e, auth, email, password)}> */}
         <Form.Group className="sign-in-form" controlId="sign-in-email">
           <Form.Control
             type="email"
