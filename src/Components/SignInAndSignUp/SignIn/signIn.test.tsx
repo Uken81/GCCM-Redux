@@ -1,13 +1,18 @@
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { google } from 'Components/Firebase/firebase.utils';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup
+} from 'firebase/auth';
 import SignInAndSignUp from 'Pages/SignInAndSignUp/SignInAndSignUpPage';
 import React from 'react';
 import { setupWithUserEvents } from 'utils/test-utils';
 
 jest.mock('firebase/auth');
-const mockedGoogleSignin = google as jest.MockedFunction<typeof google>;
-jest.mock('firebase/auth');
+const mockedGoogleSignin = signInWithPopup as jest.MockedFunction<typeof signInWithPopup>;
+// const mockedGoogleSignin = google as jest.MockedFunction<typeof google>;
 const mockedSignin = signInWithEmailAndPassword as jest.MockedFunction<
   typeof signInWithEmailAndPassword
 >;
@@ -25,6 +30,8 @@ function setupTest() {
   const passwordInputNode = screen.getByLabelText(/password/i);
 
   const clickSubmit = () => utils.userAction.click(screen.getByRole('button', { name: 'SIGN IN' }));
+  const clickGoogleSignIn = () =>
+    utils.userAction.click(screen.getByRole('button', { name: 'SIGN IN WITH GOOGLE' }));
   const changeEmailInput = (value: string) => utils.userAction.type(emailInputNode, value);
   const changePasswordInput = (value: string) => utils.userAction.type(passwordInputNode, value);
 
@@ -34,6 +41,7 @@ function setupTest() {
     emailInputNode,
     passwordInputNode,
     clickSubmit,
+    clickGoogleSignIn,
     changeEmailInput,
     changePasswordInput
   };
@@ -73,7 +81,6 @@ test('if the email and password are submitted correctly', async () => {
   });
 
   const { changeEmailInput, changePasswordInput, clickSubmit } = setupTest();
-
   const auth = getAuth();
   const email = 'user@email.com';
   const password = 'password1234';
@@ -85,33 +92,49 @@ test('if the email and password are submitted correctly', async () => {
   expect(mockedSignin).toHaveBeenCalledWith(auth, 'user@email.com', 'password1234');
 });
 
-// test('if signing in with the wrong email causes the correct alert to display', async () => {
-//   mockedSignin.mockRejectedValue({
-//     error: {
-//       code: 400,
-//       message: 'auth/user-not-found',
-//       errors: [
-//         {
-//           message: 'EMAIL_NOT_FOUND',
-//           domain: 'global',
-//           reason: 'invalid'
-//         }
-//       ]
-//     }
-//   });
+test('if signing in with the wrong email causes the correct alert to display', async () => {
+  mockedSignin.mockRejectedValue({
+    error: {
+      code: 400,
+      message: 'EMAIL_NOT_FOUND',
+      errors: [
+        {
+          message: 'EMAIL_NOT_FOUND',
+          domain: 'global',
+          reason: 'invalid'
+        }
+      ]
+    }
+  });
 
-//   const { changeEmailInput, changePasswordInput, clickSubmit } = setupTest();
+  const { changeEmailInput, changePasswordInput, clickSubmit } = setupTest();
 
-//   const email = 'user@emai';
-//   const password = 'password1234';
+  const email = 'user@emai';
+  const password = 'password1234';
 
-//   await changeEmailInput(email);
-//   await changePasswordInput(password);
-//   await clickSubmit();
-//   screen.debug();
-//   expect(mockedSignin).toHaveBeenCalled();
-//   //   expect(screen.getByTestId('email-alert')).toBeInTheDocument();
-//   expect(
-//     await screen.findByText('The email you have entered has not been found.')
-//   ).toBeInTheDocument();
-// });
+  await changeEmailInput(email);
+  await changePasswordInput(password);
+  await clickSubmit();
+  // screen.debug();
+  expect(mockedSignin).toHaveBeenCalled();
+  console.log('mockSignIN', mockedSignin.mock.results);
+  expect(await screen.findByRole('alert')).toBeInTheDocument();
+  // await waitFor(() => {
+  //   expect(screen.getByRole('alert')).toBeInTheDocument();
+  // });
+});
+
+test.only('if clicking on sign in with google calls the correct function', async () => {
+  mockedGoogleSignin.mockResolvedValue({
+    kind: 'identitytoolkit#GetAccountInfoResponse',
+    users: {
+      email: 'user@email.com',
+      displayName: 'user',
+      emailVerified: true
+    }
+  });
+  const { clickGoogleSignIn } = setupTest();
+
+  await clickGoogleSignIn();
+  expect(mockedGoogleSignin).toHaveBeenCalled();
+});

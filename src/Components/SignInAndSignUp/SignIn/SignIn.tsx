@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 
-import '../../Pages/SignInAndSignUp/SignInAndSignUpPage.styles.scss';
-
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { google } from 'Components/Firebase/firebase.utils';
-import { GoogleAlert } from './signin.utils.tsx/GoogleAlert';
+import { GoogleAlert } from '../signin.utils.tsx/GoogleAlert';
 // import { GoogleAlert } from './signin.utils.tsx/GoogleAlert';
 
 interface Props {
@@ -47,7 +45,9 @@ const SignIn = ({
         navigate('/create-or-manage-page');
       })
       .catch((error) => {
-        const errorCode = error.code;
+        const errorCode = error.message;
+        // setShowEmailAlert(true);
+
         if (errorCode === 'auth/user-not-found') {
           console.log('email', errorCode);
           setShowEmailAlert(true);

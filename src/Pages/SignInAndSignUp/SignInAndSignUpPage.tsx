@@ -1,14 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './SignInAndSignUpPage.styles.scss';
 
 import Header from '../../Components/Header/Header.component';
-import { useState } from 'react';
-import SignIn from '../../Components/SignInAndSignUp/SignIn';
+import SignIn from '../../Components/SignInAndSignUp/SignIn/SignIn';
 import SignUp from '../../Components/SignInAndSignUp/SignUp';
 import { EmailAlert } from 'Components/SignInAndSignUp/signin.utils.tsx/EmailAlert';
 import { PasswordAlert } from 'Components/SignInAndSignUp/signin.utils.tsx/PasswordAlert';
-// import { EmailAlert } from 'Components/SignInAndSignUp/signin.utils.tsx/EmailAlert';
-// import { PasswordAlert } from 'Components/SignInAndSignUp/signin.utils.tsx/PasswordAlert';
 
 const SignInAndSignUp = () => {
   const [isSigningIn, setIsSigningin] = useState(true);
@@ -23,11 +20,7 @@ const SignInAndSignUp = () => {
         <div className="form-container">
           <h1 className="main-title"> G.C.C.M </h1>
 
-          {showEmailAlert && (
-            <div data-testid="email-alert">
-              <EmailAlert setShowEmailAlert={setShowEmailAlert} />
-            </div>
-          )}
+          {showEmailAlert && <EmailAlert setShowEmailAlert={setShowEmailAlert} />}
           {showPasswordAlert && <PasswordAlert setShowPasswordAlert={setShowPasswordAlert} />}
           {isSigningIn ? (
             <SignIn

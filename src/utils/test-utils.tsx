@@ -9,9 +9,11 @@ import { Provider } from 'react-redux';
 import characterReducer from 'features/characterSlice';
 import toggleReducer from 'features/toggleSlice';
 import selectedOptionsReducer from 'features/selectedOptionsSlice';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Router } from 'react-router-dom';
 import { RootState } from '../store';
 import userEvent from '@testing-library/user-event';
+import { createMemoryHistory } from 'history';
+import { UserContextProvider } from './mockContextProvider';
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.
@@ -54,10 +56,15 @@ function renderWithProviders(
     children: ReactNode;
   };
   function Wrapper({ children }: Props): JSX.Element {
+    // const history = createMemoryHistory({ initialEntries: ['/create-or-manage-page'] });
     return (
-      <BrowserRouter>
-        <Provider store={store}>{children}</Provider>
-      </BrowserRouter>
+      <UserContextProvider>
+        <BrowserRouter>
+          {/* <Router location={history.location} navigator={history}> */}
+          <Provider store={store}>{children}</Provider>
+          {/* </Router> */}
+        </BrowserRouter>
+      </UserContextProvider>
     );
   }
 

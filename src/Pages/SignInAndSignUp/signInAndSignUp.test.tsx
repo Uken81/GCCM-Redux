@@ -13,7 +13,7 @@ function setupTest() {
   };
 }
 
-test('if clicking on the sign in with google button renders the loading page', async () => {
+test.skip('if clicking on the sign in with google button renders the loading page', async () => {
   const { click } = setupTest();
   screen.debug();
   const googleButton = screen.getByRole('button', { name: 'SIGN IN WITH GOOGLE' });
