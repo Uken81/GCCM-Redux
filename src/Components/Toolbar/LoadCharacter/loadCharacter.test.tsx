@@ -9,7 +9,7 @@ import { setupWithUserEvents } from 'utils/test-utils';
 import LoadCharacter from './LoadCharacter';
 import { MemoryRouter, Route, Router, Routes } from 'react-router';
 import CreateOrManage from 'Pages/CreateOrManagePage';
-import ManageCharactersPage from 'Pages/ManageCharactersPage';
+import ManageCharactersPage from 'Pages/ManageCharactersPage/ManageCharactersPage';
 import { createMemoryHistory } from 'history';
 import CreateNewCharacterPage from 'Pages/CreateNewCharacterPage/CreateNewCharacterPage';
 

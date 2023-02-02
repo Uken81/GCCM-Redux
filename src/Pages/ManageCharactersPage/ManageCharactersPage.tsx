@@ -1,15 +1,14 @@
-import React, { useRef } from 'react';
-import '../Components/Display Attribute Cards/DisplayAttributeCards.styles.scss';
+import React, { useRef, useState } from 'react';
+import '../../Components/Display Attribute Cards/DisplayAttributeCards.styles.scss';
 import 'Pages/page.styles.scss';
 
-import Header from '../Components/Header/Header.component';
-import CopyToClipboard from '../Components/Toolbar/CopyToClipboard';
-import DeleteCharacter from '../Components/Toolbar/DeleteCharacter/DeleteCharacter';
-import DisplaySelected from '../Components/Selected/Display Selected/DisplaySelected';
-import { useState } from 'react';
-import { ToEditCharacter } from '../Components/Header/Navigation Links/navigationLinks';
-import DeleteAlert from '../Components/Toolbar/DeleteCharacter/DeleteAlert';
-import { usePushBackOnRefresh } from '../Components/CustomHooks/PushBackOnRefresh';
+import Header from '../../Components/Header/Header.component';
+import CopyToClipboard from '../../Components/Toolbar/CopyToClipboard';
+import DeleteCharacter from '../../Components/Toolbar/DeleteCharacter/DeleteCharacter';
+import DisplaySelected from '../../Components/Selected/Display Selected/DisplaySelected';
+import { ToEditCharacter } from '../../Components/Header/Navigation Links/navigationLinks';
+import DeleteAlert from '../../Components/Toolbar/DeleteCharacter/DeleteAlert';
+import { usePushBackOnRefresh } from '../../Components/CustomHooks/PushBackOnRefresh';
 import ComponentToPrint from 'Components/Display Attribute Cards/ComponentToPrint/ComponentToPrint';
 import ReactToPrint from 'react-to-print';
 import { Button } from 'react-bootstrap';
@@ -19,7 +18,7 @@ const ManageCharactersPage = () => {
   const characterName = useAppSelector((state) => state.character.name);
   const divRef = useRef(null);
   const [showAlert, setShowAlert] = useState(false);
-
+  console.log('****test Name', characterName);
   usePushBackOnRefresh();
   return (
     <div className="manage-character-page">
@@ -46,7 +45,7 @@ const ManageCharactersPage = () => {
             </div>
           </div>
           <div className="main-interface">
-            <h1 className="selected-header">{characterName}&apos;S CHEATSHEET</h1>
+            <h1 className="selected-header">{characterName}&apos;s CHEATSHEET</h1>
             {showAlert && <DeleteAlert setShowAlert={setShowAlert} />}
             <DisplaySelected />
           </div>

@@ -23,7 +23,7 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   store?: EnhancedStore;
 }
 
-function renderWithProviders(
+export function renderWithProviders(
   ui: React.ReactElement,
   {
     preloadedState = {
@@ -34,10 +34,10 @@ function renderWithProviders(
         selectedOptions: []
       },
       character: {
-        name: '',
+        name: 'Test Character',
         advantages: [],
         disadvantages: [],
-        id: ''
+        id: 'test12345'
       }
     },
     // Automatically create a store instance if no store was passed in

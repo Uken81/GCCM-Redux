@@ -9,7 +9,7 @@ import LandingPage from 'Pages/LandingPage/LandingPage';
 import GuestPage from './Pages/GuestPage/GuestPage';
 import CreateOrManage from './Pages/CreateOrManagePage';
 import CreateNewCharacterPage from './Pages/CreateNewCharacterPage/CreateNewCharacterPage';
-import ManageCharactersPage from './Pages/ManageCharactersPage';
+import ManageCharactersPage from './Pages/ManageCharactersPage/ManageCharactersPage';
 import EditCharacterPage from './Pages/EditCharacterPage';
 import ResetPasswordPage from './Pages/ResetPage/ResetPasswordPage';
 
