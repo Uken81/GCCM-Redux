@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import characterReducer from 'features/characterSlice';
 import toggleReducer from 'features/toggleSlice';
 import selectedOptionsReducer from 'features/selectedOptionsSlice';
-import { BrowserRouter, Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { RootState } from '../store';
 import userEvent from '@testing-library/user-event';
 import { UserContextProvider } from './mockContextProvider';
