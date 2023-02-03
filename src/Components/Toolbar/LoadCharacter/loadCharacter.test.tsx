@@ -22,7 +22,7 @@ const mockLoadCharacter = getMatchingCharacterForUser as jest.MockedFunction<
 >;
 
 function setupTest() {
-  // const history = createMemoryHistory({ initialEntries: ['/create-or-manage-page'] });
+  const history = createMemoryHistory({ initialEntries: ['/create-or-manage-page'] });
   // const utils = setupWithUserEvents(
   //   <Router location={history.location} navigator={history}>
   //     <Routes>
@@ -43,7 +43,7 @@ function setupTest() {
   return { ...utils, clickLoadCharacterButton, clickName, clickNewCharacterButton, history };
 }
 
-test.only('if the load character dropdown contains the list of created characters names', async () => {
+test('if the load character dropdown contains the list of created characters names', async () => {
   mockedRetrieveCharactersList.mockResolvedValue(['character1', 'character2']);
   const { clickLoadCharacterButton } = setupTest();
   await clickLoadCharacterButton();

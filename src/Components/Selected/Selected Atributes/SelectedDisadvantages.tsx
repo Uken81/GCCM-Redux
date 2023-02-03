@@ -10,7 +10,8 @@ const SelectedDisadvantages = () => {
           <li
             className="selected-disadvantages"
             key={`${name}-selected`}
-            style={{ color: 'brown' }}>
+            style={{ color: 'brown' }}
+            title={name}>
             {name}
           </li>
         );

@@ -1,18 +1,12 @@
-import { screen, waitFor } from '@testing-library/react';
-import { google } from 'Components/Firebase/firebase.utils';
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-  signInWithPopup
-} from 'firebase/auth';
+import { screen } from '@testing-library/react';
+import { getAuth, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import SignInAndSignUp from 'Pages/SignInAndSignUp/SignInAndSignUpPage';
 import React from 'react';
+import { initialUserValue } from 'utils/mockContextProvider';
 import { setupWithUserEvents } from 'utils/test-utils';
 
 jest.mock('firebase/auth');
 const mockedGoogleSignin = signInWithPopup as jest.MockedFunction<typeof signInWithPopup>;
-// const mockedGoogleSignin = google as jest.MockedFunction<typeof google>;
 const mockedSignin = signInWithEmailAndPassword as jest.MockedFunction<
   typeof signInWithEmailAndPassword
 >;
@@ -59,25 +53,11 @@ test('if password input has the correct placeholder text', () => {
   expect(passwordInputNode).toHaveAttribute('placeholder', 'Password');
 });
 
-// test.only('if clicking on the sign in with google button renders the loading page', async () => {
-//   const { click } = setupTest();
-//   screen.debug();
-//   const googleButton = screen.getByRole('button', { name: 'SIGN IN WITH GOOGLE' });
-//   await click(googleButton);
-//   expect(screen.getByText('LOADING....')).toBeInTheDocument();
-//   screen.debug();
-// });
-
 test('if the email and password are submitted correctly', async () => {
   mockedSignin.mockResolvedValue({
-    kind: 'identitytoolkit#VerifyPasswordResponse',
-    localId: 'r9Pn67nFQ7ZHizKjqt285VMKb5R2',
-    email: '',
-    displayName: '',
-    idToken: '',
-    registered: true,
-    refreshToken: '',
-    expiresIn: '3600'
+    user: initialUserValue,
+    providerId: '',
+    operationType: 'signIn'
   });
 
   const { changeEmailInput, changePasswordInput, clickSubmit } = setupTest();
@@ -95,15 +75,7 @@ test('if the email and password are submitted correctly', async () => {
 test('if signing in with the wrong email causes the correct alert to display', async () => {
   mockedSignin.mockRejectedValue({
     error: {
-      code: 400,
-      message: 'EMAIL_NOT_FOUND',
-      errors: [
-        {
-          message: 'EMAIL_NOT_FOUND',
-          domain: 'global',
-          reason: 'invalid'
-        }
-      ]
+      message: 'Firebase: Error (auth/user-not-found).'
     }
   });
 
@@ -115,23 +87,14 @@ test('if signing in with the wrong email causes the correct alert to display', a
   await changeEmailInput(email);
   await changePasswordInput(password);
   await clickSubmit();
-  // screen.debug();
-  expect(mockedSignin).toHaveBeenCalled();
-  console.log('mockSignIN', mockedSignin.mock.results);
   expect(await screen.findByRole('alert')).toBeInTheDocument();
-  // await waitFor(() => {
-  //   expect(screen.getByRole('alert')).toBeInTheDocument();
-  // });
 });
 
-test.only('if clicking on sign in with google calls the correct function', async () => {
+test('if clicking on sign in with google calls the correct function', async () => {
   mockedGoogleSignin.mockResolvedValue({
-    kind: 'identitytoolkit#GetAccountInfoResponse',
-    users: {
-      email: 'user@email.com',
-      displayName: 'user',
-      emailVerified: true
-    }
+    user: initialUserValue,
+    providerId: '',
+    operationType: 'signIn'
   });
   const { clickGoogleSignIn } = setupTest();
 

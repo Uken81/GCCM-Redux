@@ -18,7 +18,6 @@ const ManageCharactersPage = () => {
   const characterName = useAppSelector((state) => state.character.name);
   const divRef = useRef(null);
   const [showAlert, setShowAlert] = useState(false);
-  console.log('****test Name', characterName);
   usePushBackOnRefresh();
   return (
     <div className="manage-character-page">
@@ -45,7 +44,7 @@ const ManageCharactersPage = () => {
             </div>
           </div>
           <div className="main-interface">
-            <h1 className="selected-header">{characterName}&apos;s CHEATSHEET</h1>
+            <h1 className="selected-header">{characterName}&apos;s Cheatsheet</h1>
             {showAlert && <DeleteAlert setShowAlert={setShowAlert} />}
             <DisplaySelected />
           </div>

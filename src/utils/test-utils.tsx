@@ -12,7 +12,6 @@ import selectedOptionsReducer from 'features/selectedOptionsSlice';
 import { BrowserRouter, Router } from 'react-router-dom';
 import { RootState } from '../store';
 import userEvent from '@testing-library/user-event';
-import { createMemoryHistory } from 'history';
 import { UserContextProvider } from './mockContextProvider';
 
 // This type interface extends the default options for render from RTL, as well
@@ -34,10 +33,10 @@ export function renderWithProviders(
         selectedOptions: []
       },
       character: {
-        name: 'Test Character',
+        name: '',
         advantages: [],
         disadvantages: [],
-        id: 'test12345'
+        id: ''
       }
     },
     // Automatically create a store instance if no store was passed in
@@ -72,9 +71,9 @@ export function renderWithProviders(
   return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
 }
 
-export function setupWithUserEvents(jsx: JSX.Element) {
+export function setupWithUserEvents(jsx: JSX.Element, renderOptions?: ExtendedRenderOptions) {
   const userAction = userEvent.setup();
-  const utils = renderWithProviders(jsx);
+  const utils = renderWithProviders(jsx, renderOptions);
   return {
     userAction,
     ...utils

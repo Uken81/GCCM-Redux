@@ -5,7 +5,6 @@ import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { google } from 'Components/Firebase/firebase.utils';
 import { GoogleAlert } from '../signin.utils.tsx/GoogleAlert';
-// import { GoogleAlert } from './signin.utils.tsx/GoogleAlert';
 
 interface Props {
   setIsSigningIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -45,10 +44,10 @@ const SignIn = ({
         navigate('/create-or-manage-page');
       })
       .catch((error) => {
-        const errorCode = error.message;
-        // setShowEmailAlert(true);
+        const errorCode = error.error.message;
+        console.log('error', errorCode);
 
-        if (errorCode === 'auth/user-not-found') {
+        if (errorCode === 'Firebase: Error (auth/user-not-found).') {
           console.log('email', errorCode);
           setShowEmailAlert(true);
         }

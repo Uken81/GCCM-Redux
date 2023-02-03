@@ -1,9 +1,8 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useMemo, useState } from 'react';
 import { UserContext } from 'context';
 import { IdTokenResult, User } from 'firebase/auth';
-import { useMemo, useState } from 'react';
 
-const initialUserValue: User = {
+export const initialUserValue: User = {
   emailVerified: false,
   isAnonymous: false,
   metadata: {
