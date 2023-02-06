@@ -1,11 +1,14 @@
-import React from 'react';
-import { setDoc } from '@firebase/firestore';
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { DocumentData, DocumentReference } from '@firebase/firestore';
 
 import Button from 'react-bootstrap/Button';
 
 import { UserContext } from '../../context';
-import { addNewCharacterForUser, getUsersSavedCharactersList } from '../Firebase/firebase.utils';
+import {
+  addNewCharacterForUser,
+  createCharacterDocument,
+  getUsersSavedCharactersList
+} from '../Firebase/firebase.utils';
 import { NewCharacterStatsObj } from '../../../types';
 import { setId } from 'features/characterSlice';
 import { useAppDispatch, useAppSelector } from 'Components/CustomHooks/reduxHooks';
@@ -26,16 +29,21 @@ const SaveCharacter = ({ setShowSaveAlert }: Props) => {
   const [isSaving, setIsSaving] = useState(false);
 
   const checkSaveRequirements = async () => {
+    console.log('checking requirements');
     const checkIfDuplicate = async () => {
       if (user) {
+        console.log('checking user');
         const characterList = await getUsersSavedCharactersList(userId);
         return characterList.includes(characterName);
       } else {
+        console.log('duplcate fail');
         return;
       }
     };
 
     if (selectedAdvantages.length <= 0 && selectedDisadvantages.length <= 0) {
+      console.log('checking attribute lengths');
+
       console.log('**** Save fail');
       alert('You must select at least one Advantage or Disadvantage');
       return;
@@ -46,6 +54,8 @@ const SaveCharacter = ({ setShowSaveAlert }: Props) => {
       );
       return;
     } else if (characterName === '') {
+      console.log('checking name length');
+
       console.log('**** Save fail');
       alert('You must type a name for your character and press enter in order to save');
       return;
@@ -55,7 +65,11 @@ const SaveCharacter = ({ setShowSaveAlert }: Props) => {
   };
 
   const saveCharacterHandler = async () => {
+    console.log('saveCharacterHandler start');
+    console.log('character name', characterName);
     if (await checkSaveRequirements()) {
+      console.log('startting save');
+
       setIsSaving(true);
       const newCharacter: NewCharacterStatsObj = {
         name: characterName,
@@ -64,17 +78,25 @@ const SaveCharacter = ({ setShowSaveAlert }: Props) => {
       };
 
       console.log('**** New Character for ' + userId + ' is ', newCharacter);
-      const newCharacterRef = await addNewCharacterForUser(userId, newCharacter);
+      const newCharacterRef: DocumentReference<DocumentData> = await addNewCharacterForUser(
+        userId,
+        newCharacter
+      );
       console.log('**** NewCharacterRef: ', newCharacterRef);
 
       const characterId = newCharacterRef.id;
       dispatch(setId(characterId));
       console.log('**** NewCharacterId: ', characterId);
-      await setDoc(newCharacterRef, { id: characterId }, { merge: true });
-      console.log(`**** ${characterName} has been saved`);
-
-      setIsSaving(false);
-      setShowSaveAlert(true);
+      await createCharacterDocument(newCharacterRef, characterId);
+      try {
+        console.log(`**** ${characterName} has been saved`);
+        setIsSaving(false);
+        setShowSaveAlert(true);
+      } catch (error) {
+        //Add alert for unsuccessful save??
+        console.log('**** Something Went wrong: ', error);
+        setIsSaving(false);
+      }
     }
   };
 

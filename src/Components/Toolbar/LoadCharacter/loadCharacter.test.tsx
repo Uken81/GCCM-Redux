@@ -68,14 +68,9 @@ test('if clicking on character link navigates to correct page', async () => {
   await clickLoadCharacterButton();
   expect(await screen.findByRole('button', { name: 'character1' })).toBeInTheDocument();
 
-  // screen.debug();
-
   await clickName();
   console.log('location2', location);
   expect(history.location.pathname).toBe('/manage-characters-page');
-  // expect(await screen.findByRole('button', { name: 'Edit Character' })).toBeInTheDocument();
-
-  // screen.debug();
 });
 
 test('if the user clicks the create new character button, check if you are redirected to the correct URL', async () => {

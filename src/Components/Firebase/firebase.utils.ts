@@ -109,11 +109,19 @@ export const addNewCharacterForUser = async (
 
   try {
     const newCharacterRef = await addDoc(userCharactersRef, newCharacter);
+    console.log('charref', newCharacterRef);
     return newCharacterRef;
   } catch (error) {
     console.log('**** Something Went wrong: ', error);
     return error;
   }
+};
+
+export const createCharacterDocument = async (
+  newCharacterRef: DocumentReference<DocumentData>,
+  characterId: string
+) => {
+  await setDoc(newCharacterRef, { id: characterId }, { merge: true });
 };
 
 const convertSnapshotToList = async (snapShotObj: QuerySnapshot<DocumentData>) => {
