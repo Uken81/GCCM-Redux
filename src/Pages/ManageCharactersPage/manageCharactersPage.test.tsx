@@ -1,10 +1,10 @@
-import { screen } from '@testing-library/react';
 import React from 'react';
-import { setupWithUserEvents } from 'utils/test-utils';
+import { screen } from '@testing-library/react';
+import { renderWithProviders } from '../../utils/testSetup';
 import ManageCharactersPage from './ManageCharactersPage';
 
 function setUpTest() {
-  const utils = setupWithUserEvents(<ManageCharactersPage />, {
+  renderWithProviders(<ManageCharactersPage />, {
     preloadedState: {
       character: {
         name: 'Test Character',
@@ -20,11 +20,11 @@ function setUpTest() {
       }
     }
   });
-  return { ...utils };
 }
 
-test('Check if the page is loading with the correct values from the character', async () => {
+test('Check if the page is loading with the correct values from the characters stored data', async () => {
   setUpTest();
+
   expect(screen.getByRole('heading', { name: "Test Character's Cheatsheet" })).toBeInTheDocument();
   expect(screen.getByRole('listitem', { name: 'contacts' })).toBeInTheDocument();
   expect(screen.getByRole('listitem', { name: 'loner' })).toBeInTheDocument();

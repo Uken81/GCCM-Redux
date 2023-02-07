@@ -1,16 +1,16 @@
 import { onAuthStateChanged } from '@firebase/auth';
 import React, { useContext, useEffect } from 'react';
 
-import '../Pages/page.styles.scss';
+import '../../Pages/page.styles.scss';
 
 import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from 'react-router-dom';
-import { auth, createUserProfileDocument } from '../Components/Firebase/firebase.utils';
-import Header from '../Components/Header/Header.component';
-import { UserContext } from '../context';
+import { auth, createUserProfileDocument } from '../../Components/Firebase/firebase.utils';
+import Header from '../../Components/Header/Header.component';
+import { UserContext } from '../../context';
 import { Unsubscribe } from 'firebase/firestore';
-import { useResetCharacter } from '../Components/CustomHooks/ResetCharacterHook';
-import LoadCharacter from '../Components/Toolbar/LoadCharacter/LoadCharacter';
+import { useResetCharacter } from '../../Components/CustomHooks/ResetCharacterHook';
+import LoadCharacter from '../../Components/Toolbar/LoadCharacter/LoadCharacter';
 
 const CreateOrManage = () => {
   const userContext = useContext(UserContext);

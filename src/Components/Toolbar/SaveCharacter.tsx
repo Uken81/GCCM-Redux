@@ -29,34 +29,24 @@ const SaveCharacter = ({ setShowSaveAlert }: Props) => {
   const [isSaving, setIsSaving] = useState(false);
 
   const checkSaveRequirements = async () => {
-    console.log('checking requirements');
     const checkIfDuplicate = async () => {
       if (user) {
-        console.log('checking user');
         const characterList = await getUsersSavedCharactersList(userId);
         return characterList.includes(characterName);
       } else {
-        console.log('duplcate fail');
         return;
       }
     };
 
     if (selectedAdvantages.length <= 0 && selectedDisadvantages.length <= 0) {
-      console.log('checking attribute lengths');
-
-      console.log('**** Save fail');
       alert('You must select at least one Advantage or Disadvantage');
       return;
     } else if (await checkIfDuplicate()) {
-      console.log('**** Save fail');
       alert(
         'You already have a character with this name. Delete original character or change name'
       );
       return;
     } else if (characterName === '') {
-      console.log('checking name length');
-
-      console.log('**** Save fail');
       alert('You must type a name for your character and press enter in order to save');
       return;
     } else {
@@ -65,11 +55,7 @@ const SaveCharacter = ({ setShowSaveAlert }: Props) => {
   };
 
   const saveCharacterHandler = async () => {
-    console.log('saveCharacterHandler start');
-    console.log('character name', characterName);
     if (await checkSaveRequirements()) {
-      console.log('startting save');
-
       setIsSaving(true);
       const newCharacter: NewCharacterStatsObj = {
         name: characterName,
@@ -82,11 +68,9 @@ const SaveCharacter = ({ setShowSaveAlert }: Props) => {
         userId,
         newCharacter
       );
-      console.log('**** NewCharacterRef: ', newCharacterRef);
 
       const characterId = newCharacterRef.id;
       dispatch(setId(characterId));
-      console.log('**** NewCharacterId: ', characterId);
       await createCharacterDocument(newCharacterRef, characterId);
       try {
         console.log(`**** ${characterName} has been saved`);

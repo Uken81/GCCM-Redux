@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { render } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import type { RenderOptions } from '@testing-library/react';
 import { configureStore, EnhancedStore } from '@reduxjs/toolkit';
 import type { PreloadedState } from '@reduxjs/toolkit';
@@ -9,17 +10,18 @@ import { Provider } from 'react-redux';
 import characterReducer from 'features/characterSlice';
 import toggleReducer from 'features/toggleSlice';
 import selectedOptionsReducer from 'features/selectedOptionsSlice';
-import { BrowserRouter } from 'react-router-dom';
 import { RootState } from '../store';
 import userEvent from '@testing-library/user-event';
 import { UserContextProvider } from './mockContextProvider';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router';
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>;
-  //fix any type below
   store?: EnhancedStore;
+  initialEntry?: string;
 }
 
 export function renderWithProviders(
@@ -48,6 +50,7 @@ export function renderWithProviders(
       },
       preloadedState
     }),
+    initialEntry = '/',
     ...renderOptions
   }: ExtendedRenderOptions = {}
 ) {
@@ -55,27 +58,30 @@ export function renderWithProviders(
     children: ReactNode;
   };
   function Wrapper({ children }: Props): JSX.Element {
-    // const history = createMemoryHistory({ initialEntries: ['/create-or-manage-page'] });
     return (
       <UserContextProvider>
-        <BrowserRouter>
-          {/* <Router location={history.location} navigator={history}> */}
+        <Router location={history.location} navigator={history}>
           <Provider store={store}>{children}</Provider>
-          {/* </Router> */}
-        </BrowserRouter>
+        </Router>
       </UserContextProvider>
     );
   }
+  const history = createMemoryHistory({ initialEntries: [initialEntry] });
 
   // Return an object with the store and all of RTL's query functions
-  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
-}
-
-export function setupWithUserEvents(jsx: JSX.Element, renderOptions?: ExtendedRenderOptions) {
-  const userAction = userEvent.setup();
-  const utils = renderWithProviders(jsx, renderOptions);
   return {
-    userAction,
-    ...utils
+    store,
+    user: userEvent.setup(),
+    history,
+    ...render(ui, { wrapper: Wrapper, ...renderOptions })
   };
 }
+
+// export function setupWithUserEvents(jsx: JSX.Element, renderOptions?: ExtendedRenderOptions) {
+//   const userAction = userEvent.setup();
+//   const utils = renderWithProviders(jsx, renderOptions);
+//   return {
+//     userAction,
+//     ...utils
+//   };
+// }

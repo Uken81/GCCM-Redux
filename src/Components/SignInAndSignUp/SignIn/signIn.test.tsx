@@ -3,7 +3,7 @@ import { getAuth, signInWithEmailAndPassword, signInWithPopup } from 'firebase/a
 import SignInAndSignUp from 'Pages/SignInAndSignUp/SignInAndSignUpPage';
 import React from 'react';
 import { initialUserValue } from 'utils/mockContextProvider';
-import { setupWithUserEvents } from 'utils/test-utils';
+import { setupWithUserEvents } from 'utils/testSetup';
 
 jest.mock('firebase/auth');
 const mockedGoogleSignin = signInWithPopup as jest.MockedFunction<typeof signInWithPopup>;

@@ -1,30 +1,25 @@
 import React from 'react';
-import { setupWithUserEvents } from 'utils/test-utils';
 import SignInAndSignUp from './SignInAndSignUpPage';
 import { screen } from '@testing-library/react';
+import { renderWithProviders } from 'utils/testSetup';
 
 function setupTest() {
-  const utils = setupWithUserEvents(<SignInAndSignUp />);
-  const click = utils.userAction.click;
-
+  const utils = renderWithProviders(<SignInAndSignUp />);
   return {
-    ...utils,
-    click
+    ...utils
   };
 }
 
 test('if clicking on the sign in with google button renders the loading page', async () => {
-  const { click } = setupTest();
-  const googleButton = screen.getByRole('button', { name: 'SIGN IN WITH GOOGLE' });
-  await click(googleButton);
-  expect(screen.getByText('LOADING....')).toBeInTheDocument();
-});
-// test('if clicking on the sign in button renders the loading page', async () => {
-//   const { click } = setupTest();
+  const { user } = setupTest();
 
-//   const signinButton = screen.getByRole('button', { name: 'SIGN IN' });
-//   await act(async () => {
-//     await click(signinButton);
-//   });
-//   await waitFor(() => expect(screen.getByText('LOADING....')));
-// });
+  await user.click(screen.getByRole('button', { name: 'SIGN IN WITH GOOGLE' }));
+  expect(await screen.findByText('LOADING....')).toBeInTheDocument();
+});
+
+test('if clicking on the sign in button renders the loading page', async () => {
+  const { user } = setupTest();
+
+  await user.click(screen.getByRole('button', { name: 'SIGN IN' }));
+  expect(await screen.findByText('LOADING....')).toBeInTheDocument();
+});

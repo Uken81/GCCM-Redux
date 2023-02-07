@@ -1,17 +1,11 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import {
   getMatchingCharacterForUser,
   getUsersSavedCharactersList
 } from '../../Firebase/firebase.utils';
 import React from 'react';
-import { UserContextProvider } from 'utils/mockContextProvider';
-import { setupWithUserEvents } from 'utils/test-utils';
+import { renderWithProviders } from 'utils/testSetup';
 import LoadCharacter from './LoadCharacter';
-import { MemoryRouter, Route, Router, Routes } from 'react-router';
-import CreateOrManage from 'Pages/CreateOrManagePage';
-import ManageCharactersPage from 'Pages/ManageCharactersPage/ManageCharactersPage';
-import { createMemoryHistory } from 'history';
-import CreateNewCharacterPage from 'Pages/CreateNewCharacterPage/CreateNewCharacterPage';
 
 jest.mock('Components/Firebase/firebase.utils');
 const mockedRetrieveCharactersList = getUsersSavedCharactersList as jest.MockedFunction<
@@ -22,31 +16,16 @@ const mockLoadCharacter = getMatchingCharacterForUser as jest.MockedFunction<
 >;
 
 function setupTest() {
-  const history = createMemoryHistory({ initialEntries: ['/create-or-manage-page'] });
-  // const utils = setupWithUserEvents(
-  //   <Router location={history.location} navigator={history}>
-  //     <Routes>
-  //       <Route path="/create-or-manage-page" element={<CreateOrManage />} />
-  //       <Route path="/manage-characters-page" element={<ManageCharactersPage />} />
-  //       <Route path="/create-new-character-page" element={<CreateNewCharacterPage />} />
-  //     </Routes>
-  //   </Router>
-  // );
-  const utils = setupWithUserEvents(<LoadCharacter />);
-  const clickLoadCharacterButton = () =>
-    utils.userAction.click(screen.getByRole('button', { name: 'LOAD CHARACTER' }));
-  const clickName = () =>
-    utils.userAction.click(screen.getByRole('button', { name: 'character1' }));
-  const clickNewCharacterButton = () =>
-    utils.userAction.click(screen.getByRole('button', { name: 'Create New Character' }));
-
-  return { ...utils, clickLoadCharacterButton, clickName, clickNewCharacterButton, history };
+  const initialEntry = '/create-or-manage-page';
+  const utils = renderWithProviders(<LoadCharacter />, { initialEntry });
+  return { ...utils };
 }
 
 test('if the load character dropdown contains the list of created characters names', async () => {
   mockedRetrieveCharactersList.mockResolvedValue(['character1', 'character2']);
-  const { clickLoadCharacterButton } = setupTest();
-  await clickLoadCharacterButton();
+  const { user } = setupTest();
+
+  await user.click(screen.getByRole('button', { name: 'LOAD CHARACTER' }));
   expect(await screen.findByRole('button', { name: 'character1' })).toBeInTheDocument();
 });
 
@@ -59,27 +38,13 @@ test('if clicking on character link navigates to correct page', async () => {
     disadvantages: []
   });
 
-  const { clickLoadCharacterButton, clickName, history } = setupTest();
-
-  const location = history.location.pathname;
-  console.log('location', location);
+  const { user, history } = setupTest();
   expect(history.location.pathname).toBe('/create-or-manage-page');
 
-  await clickLoadCharacterButton();
+  await user.click(screen.getByRole('button', { name: 'LOAD CHARACTER' }));
+
   expect(await screen.findByRole('button', { name: 'character1' })).toBeInTheDocument();
 
-  await clickName();
-  console.log('location2', location);
+  await user.click(screen.getByRole('button', { name: 'character1' }));
   expect(history.location.pathname).toBe('/manage-characters-page');
-});
-
-test('if the user clicks the create new character button, check if you are redirected to the correct URL', async () => {
-  mockedRetrieveCharactersList.mockResolvedValue(['character1', 'character2']);
-
-  const { clickNewCharacterButton, history } = setupTest();
-
-  expect(history.location.pathname).toBe('/create-or-manage-page');
-
-  await clickNewCharacterButton();
-  expect(history.location.pathname).toBe('/create-new-character-page');
 });

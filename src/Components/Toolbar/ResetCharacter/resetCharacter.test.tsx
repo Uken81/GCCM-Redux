@@ -1,5 +1,5 @@
 import React from 'react';
-import { setupWithUserEvents } from 'utils/test-utils';
+import { setupWithUserEvents } from 'utils/testSetup';
 import GuestPage from 'Pages/GuestPage/GuestPage';
 import { screen } from '@testing-library/react';
 import selectEvent from 'react-select-event';

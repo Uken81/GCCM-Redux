@@ -2,7 +2,7 @@
 module.exports = {
   preset: "ts-jest",
   testEnvironment: "node",
-  setupFilesAfterEnv: ["<rootDir>/jest.config.ts"],
+  setupFilesAfterEnv: ["<rootDir>/src/utils/test-utils.tsx"],
   verbose: true,
   automock: true,
   transform: {

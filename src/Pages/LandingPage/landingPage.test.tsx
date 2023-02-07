@@ -1,26 +1,29 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
-import { App } from '../../App';
-import { setupWithUserEvents } from '../../utils/test-utils';
+import { renderWithProviders } from '../../utils/testSetup';
+import LandingPage from './LandingPage';
+
+function setupTest() {
+  const utils = renderWithProviders(<LandingPage />);
+  return { ...utils };
+}
 
 describe('navigating to', () => {
-  test('guest page and back', async () => {
-    const { userAction } = setupWithUserEvents(<App />);
+  test('guest page', async () => {
+    const { user, history } = setupTest();
 
-    const linkToGuest = screen.getByRole('button', { name: 'Continue as Guest' });
-    await userAction.click(linkToGuest);
-    const searchbar = screen.getByText('Select...');
-    expect(searchbar).toBeInTheDocument();
-    const back = screen.getByRole('link', { name: 'BACK' });
-    await userAction.click(back);
-    expect(screen.getByText('Continue as Guest')).toBeInTheDocument();
+    expect(history.location.pathname).toBe('/');
+
+    await user.click(screen.getByRole('button', { name: 'Continue as Guest' }));
+    expect(history.location.pathname).toBe('/guest-page');
   });
 
   test('log in page', async () => {
-    const { userAction } = setupWithUserEvents(<App />);
+    const { user, history } = setupTest();
 
-    const linkToLogin = screen.getByRole('button', { name: 'Log-in/Sign-up' });
-    await userAction.click(linkToLogin);
-    expect(screen.getByText('SIGN IN')).toBeInTheDocument();
+    expect(history.location.pathname).toBe('/');
+
+    await user.click(screen.getByRole('button', { name: 'Log in/Sign up' }));
+    expect(history.location.pathname).toBe('/sign-in-and-sign-up');
   });
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import Searchbar from 'Components/SearchBar/Searchbar';
-import { setupWithUserEvents } from 'utils/test-utils';
+import { setupWithUserEvents } from 'utils/testSetup';
 import ComponentToPrint from './ComponentToPrint';
 import { screen } from '@testing-library/react';
 import selectEvent from 'react-select-event';
