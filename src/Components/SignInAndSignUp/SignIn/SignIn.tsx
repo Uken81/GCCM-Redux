@@ -45,7 +45,6 @@ const SignIn = ({
       })
       .catch((error) => {
         const errorCode = error.error.message;
-        console.log('error', errorCode);
 
         if (errorCode === 'Firebase: Error (auth/user-not-found).') {
           console.log('email', errorCode);

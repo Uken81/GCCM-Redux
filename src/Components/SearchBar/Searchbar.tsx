@@ -2,8 +2,7 @@ import { useAppDispatch, useAppSelector } from 'Components/CustomHooks/reduxHook
 import ToggleAdvantageDisadvantage from 'Components/ToggleAdvantageDisadvantage/ToggleAdvantageDisadvantage';
 import { addAdvantage, addDisadvantage } from 'features/characterSlice';
 import { addSelectedOption } from 'features/selectedOptionsSlice';
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Select from 'react-select';
 import { SelectOptionObj } from '../../../types';
 import AdvantagesArray from '../../Attribute Objects/Advantages';
@@ -57,7 +56,8 @@ const Searchbar = ({ combinedAttributesList }: Props) => {
   const formatOptionLabel = ({ label, category }) => (
     <div
       style={category === 'advantage' ? { color: 'seagreen' } : { color: 'brown' }}
-      data-testid="items-container">
+      data-testid="items-container"
+      title={label}>
       {label}
     </div>
   );

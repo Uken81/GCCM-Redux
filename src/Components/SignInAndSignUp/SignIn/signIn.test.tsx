@@ -3,7 +3,7 @@ import { getAuth, signInWithEmailAndPassword, signInWithPopup } from 'firebase/a
 import SignInAndSignUp from 'Pages/SignInAndSignUp/SignInAndSignUpPage';
 import React from 'react';
 import { initialUserValue } from 'utils/mockContextProvider';
-import { setupWithUserEvents } from 'utils/testSetup';
+import { renderWithProviders } from 'utils/testSetup';
 
 jest.mock('firebase/auth');
 const mockedGoogleSignin = signInWithPopup as jest.MockedFunction<typeof signInWithPopup>;
@@ -12,62 +12,43 @@ const mockedSignin = signInWithEmailAndPassword as jest.MockedFunction<
 >;
 
 function setupTest() {
-  const utils = setupWithUserEvents(
+  const utils = renderWithProviders(
     <div>
       <SignInAndSignUp />
     </div>
   );
-
-  const click = utils.userAction.click;
-
-  const emailInputNode = screen.getByLabelText(/email/i);
-  const passwordInputNode = screen.getByLabelText(/password/i);
-
-  const clickSubmit = () => utils.userAction.click(screen.getByRole('button', { name: 'SIGN IN' }));
-  const clickGoogleSignIn = () =>
-    utils.userAction.click(screen.getByRole('button', { name: 'SIGN IN WITH GOOGLE' }));
-  const changeEmailInput = (value: string) => utils.userAction.type(emailInputNode, value);
-  const changePasswordInput = (value: string) => utils.userAction.type(passwordInputNode, value);
-
   return {
-    ...utils,
-    click,
-    emailInputNode,
-    passwordInputNode,
-    clickSubmit,
-    clickGoogleSignIn,
-    changeEmailInput,
-    changePasswordInput
+    ...utils
   };
 }
 
 test('if email input has the correct placeholder text', () => {
-  const { emailInputNode } = setupTest();
+  setupTest();
 
-  expect(emailInputNode).toHaveAttribute('placeholder', 'Email');
+  expect(screen.getByLabelText('email')).toHaveAttribute('placeholder', 'Email');
 });
 
 test('if password input has the correct placeholder text', () => {
-  const { passwordInputNode } = setupTest();
+  setupTest();
 
-  expect(passwordInputNode).toHaveAttribute('placeholder', 'Password');
+  expect(screen.getByLabelText('password')).toHaveAttribute('placeholder', 'Password');
 });
 
-test('if the email and password are submitted correctly', async () => {
+test('if the email and password are submitted to the sign in with email and password function correctly', async () => {
   mockedSignin.mockResolvedValue({
     user: initialUserValue,
     providerId: '',
     operationType: 'signIn'
   });
 
-  const { changeEmailInput, changePasswordInput, clickSubmit } = setupTest();
+  const { user } = setupTest();
   const auth = getAuth();
   const email = 'user@email.com';
   const password = 'password1234';
 
-  await changeEmailInput(email);
-  await changePasswordInput(password);
-  await clickSubmit();
+  await user.type(screen.getByLabelText('email'), email);
+  await user.type(screen.getByLabelText('password'), password);
+  await user.click(screen.getByRole('button', { name: 'SIGN IN' }));
 
   expect(mockedSignin).toHaveBeenCalledWith(auth, 'user@email.com', 'password1234');
 });
@@ -79,14 +60,15 @@ test('if signing in with the wrong email causes the correct alert to display', a
     }
   });
 
-  const { changeEmailInput, changePasswordInput, clickSubmit } = setupTest();
+  const { user } = setupTest();
 
   const email = 'user@emai';
   const password = 'password1234';
 
-  await changeEmailInput(email);
-  await changePasswordInput(password);
-  await clickSubmit();
+  await user.type(screen.getByLabelText('email'), email);
+  await user.type(screen.getByLabelText('password'), password);
+  await user.click(screen.getByRole('button', { name: 'SIGN IN' }));
+
   expect(await screen.findByRole('alert')).toBeInTheDocument();
 });
 
@@ -96,8 +78,9 @@ test('if clicking on sign in with google calls the correct function', async () =
     providerId: '',
     operationType: 'signIn'
   });
-  const { clickGoogleSignIn } = setupTest();
 
-  await clickGoogleSignIn();
+  const { user } = setupTest();
+
+  await user.click(screen.getByRole('button', { name: 'SIGN IN WITH GOOGLE' }));
   expect(mockedGoogleSignin).toHaveBeenCalled();
 });

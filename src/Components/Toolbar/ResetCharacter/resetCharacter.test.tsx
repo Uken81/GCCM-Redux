@@ -1,16 +1,33 @@
 import React from 'react';
-import { setupWithUserEvents } from 'utils/testSetup';
 import GuestPage from 'Pages/GuestPage/GuestPage';
 import { screen } from '@testing-library/react';
-import selectEvent from 'react-select-event';
+import { renderWithProviders } from 'utils/testSetup';
+
+function setupTest() {
+  const utils = renderWithProviders(<GuestPage />, {
+    preloadedState: {
+      toggle: {
+        isChoosingAdvantages: true
+      },
+      options: {
+        selectedOptions: []
+      },
+      character: {
+        name: 'test character',
+        advantages: ['Clinging'],
+        disadvantages: ['Greed'],
+        id: ''
+      }
+    }
+  });
+  return { ...utils };
+}
 
 test('if clicking on the reset character button clears all references to selected attribute', async () => {
-  const { userAction } = setupWithUserEvents(<GuestPage />);
-  const searchbar = screen.getByRole('combobox');
+  const { user } = setupTest();
 
-  await selectEvent.select(searchbar, ['Clinging']);
-  const resetCharacterButton = screen.getByRole('button', { name: 'Reset Character' });
-  await userAction.click(resetCharacterButton);
-  const selectedItems = screen.queryAllByText('Clinging');
-  expect(selectedItems.length).toBe(0);
+  await user.click(screen.getByRole('button', { name: 'Reset Character' }));
+  expect(screen.queryByText('test character')).not.toBeInTheDocument();
+  expect(screen.queryByText('Clinging')).not.toBeInTheDocument();
+  expect(screen.queryByText('Greed')).not.toBeInTheDocument();
 });
