@@ -1,4 +1,4 @@
-import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
+import { useAppSelector } from 'features/reduxHooks';
 import React from 'react';
 
 import Button from 'react-bootstrap/Button';

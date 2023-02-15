@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from 'Components/CustomHooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from 'features/reduxHooks';
 import ToggleAdvantageDisadvantage from 'Components/ToggleAdvantageDisadvantage/ToggleAdvantageDisadvantage';
 import { addAdvantage, addDisadvantage } from 'features/characterSlice';
 import { addSelectedOption } from 'features/selectedOptionsSlice';

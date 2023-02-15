@@ -1,12 +1,11 @@
-import React from 'react';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 
 import Button from 'react-bootstrap/Button';
 
 import { UserContext } from '../../context';
 import { GetCharacterReference, SaveChangesToCharacter } from '../Firebase/firebase.utils';
 import { useNavigate } from 'react-router';
-import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
+import { useAppSelector } from 'features/reduxHooks';
 
 const EditCharacter = () => {
   const userContext = useContext(UserContext);

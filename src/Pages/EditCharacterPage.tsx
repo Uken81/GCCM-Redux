@@ -5,7 +5,7 @@ import EditCharacter from '../Components/Toolbar/EditCharacter';
 import ResetChanges from '../Components/Toolbar/ResetChanges';
 import DisplaySelected from '../Components/Selected/Display Selected/DisplaySelected';
 import { usePushBackOnRefresh } from '../Components/CustomHooks/PushBackOnRefresh';
-import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
+import { useAppSelector } from 'features/reduxHooks';
 
 const EditCharacterPage = () => {
   const [combinedAttributesList, setCombinedAttributesList] = useState(

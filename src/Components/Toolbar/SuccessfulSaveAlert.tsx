@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
-import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
+import { useAppSelector } from 'features/reduxHooks';
 
 interface Props {
   setShowSaveAlert: React.Dispatch<React.SetStateAction<boolean>>;

@@ -3,7 +3,7 @@ import SelectedAdvantages from '../Selected Atributes/SelectedAdvantages';
 import SelectedDisadvantages from '../Selected Atributes/SelectedDisadvantages';
 
 import './displaySelected.styles.scss';
-import { useAppDispatch } from 'Components/CustomHooks/reduxHooks';
+import { useAppDispatch } from 'features/reduxHooks';
 import { toggleAdvantages, toggleDisadvantages } from 'features/toggleSlice';
 
 const DisplaySelected = () => {

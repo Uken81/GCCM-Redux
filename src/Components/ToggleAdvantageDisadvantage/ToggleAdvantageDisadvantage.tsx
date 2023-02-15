@@ -3,7 +3,7 @@ import React, { useLayoutEffect } from 'react';
 import './Toggle.styles.scss';
 
 import { Tab, Tabs } from 'react-bootstrap';
-import { useAppDispatch } from 'Components/CustomHooks/reduxHooks';
+import { useAppDispatch } from 'features/reduxHooks';
 import { toggleAdvantages, toggleDisadvantages } from 'features/toggleSlice';
 
 interface Props {

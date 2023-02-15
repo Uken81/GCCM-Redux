@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
+import { useAppSelector } from 'features/reduxHooks';
 
 interface Props {
   isChoosingAdvantages: boolean;

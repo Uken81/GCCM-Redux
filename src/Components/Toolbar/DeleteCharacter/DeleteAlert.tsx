@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { UserContext } from '../../../context';
 
 import Button from 'react-bootstrap/Button';
@@ -8,7 +7,7 @@ import Alert from 'react-bootstrap/Alert';
 import { GetCharacterReference } from '../../Firebase/firebase.utils';
 import { deleteDoc } from '@firebase/firestore';
 import { useNavigate } from 'react-router';
-import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
+import { useAppSelector } from 'features/reduxHooks';
 
 interface Props {
   setShowAlert: React.Dispatch<React.SetStateAction<boolean>>;

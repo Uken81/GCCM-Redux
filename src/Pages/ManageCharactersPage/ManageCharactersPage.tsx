@@ -12,7 +12,7 @@ import { usePushBackOnRefresh } from '../../Components/CustomHooks/PushBackOnRef
 import ComponentToPrint from 'Components/Display Attribute Cards/ComponentToPrint/ComponentToPrint';
 import ReactToPrint from 'react-to-print';
 import { Button } from 'react-bootstrap';
-import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
+import { useAppSelector } from 'features/reduxHooks';
 
 const ManageCharactersPage = () => {
   const characterName = useAppSelector((state) => state.character.name);

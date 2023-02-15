@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import { useAppDispatch } from 'Components/CustomHooks/reduxHooks';
+import { useAppDispatch } from 'features/reduxHooks';
 import { resetSelectedOptions } from 'features/selectedOptionsSlice';
 import { resetCharacter } from 'features/characterSlice';
 

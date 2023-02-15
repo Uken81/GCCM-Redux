@@ -1,6 +1,4 @@
-import React from 'react';
-import { useRef } from 'react';
-import { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 
 import '../../Components/Display Attribute Cards/DisplayAttributeCards.styles.scss';
@@ -17,7 +15,7 @@ import SuccessfulSaveAlert from '../../Components/Toolbar/SuccessfulSaveAlert';
 import SaveCharacter from '../../Components/Toolbar/SaveCharacter';
 import ReactToPrint from 'react-to-print';
 import { setName } from '../../features/characterSlice';
-import { useAppDispatch } from '../../Components/CustomHooks/reduxHooks';
+import { useAppDispatch } from '../../features/reduxHooks';
 
 const CreateNewCharacterPage = () => {
   const dispatch = useAppDispatch();

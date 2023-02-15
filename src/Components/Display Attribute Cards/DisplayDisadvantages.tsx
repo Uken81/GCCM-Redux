@@ -1,5 +1,5 @@
 import DisadvantagesArray from 'Attribute Objects/Disadvantages';
-import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
+import { useAppSelector } from 'features/reduxHooks';
 import React, { useEffect, useState } from 'react';
 import { AttributeObj } from '../../../types';
 import { DisplayAttributeCards } from './DisplayAttributeCards';

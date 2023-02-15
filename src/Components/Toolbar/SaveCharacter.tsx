@@ -11,7 +11,7 @@ import {
 } from '../Firebase/firebase.utils';
 import { NewCharacterStatsObj } from '../../../types';
 import { setId } from 'features/characterSlice';
-import { useAppDispatch, useAppSelector } from 'Components/CustomHooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from 'features/reduxHooks';
 
 interface Props {
   setShowSaveAlert: React.Dispatch<React.SetStateAction<boolean>>;

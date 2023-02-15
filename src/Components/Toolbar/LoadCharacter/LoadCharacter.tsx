@@ -9,7 +9,7 @@ import {
 import { UserContext } from '../../../context';
 import { useNavigate } from 'react-router';
 import { addAdvantage, addDisadvantage, setId, setName } from '../../../features/characterSlice';
-import { useAppDispatch } from '../../../Components/CustomHooks/reduxHooks';
+import { useAppDispatch } from '../../../features/reduxHooks';
 
 const LoadCharacter = () => {
   const dispatch = useAppDispatch();

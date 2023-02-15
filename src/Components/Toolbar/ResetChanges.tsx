@@ -1,6 +1,5 @@
-import { useAppSelector } from 'Components/CustomHooks/reduxHooks';
-import React from 'react';
-import { useState } from 'react';
+import { useAppSelector } from 'features/reduxHooks';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
 interface Props {
