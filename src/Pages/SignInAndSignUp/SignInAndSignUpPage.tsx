@@ -13,6 +13,15 @@ const SignInAndSignUp = () => {
   const [showEmailAlert, setShowEmailAlert] = useState(false);
   const [showPasswordAlert, setShowPasswordAlert] = useState(false);
 
+  const redirectLink = (
+    <div className="redirect-sign-up">
+      <p className="redirect-link" onClick={() => setIsSigningin(false)}>
+        Sign Up
+      </p>
+      <p>if you dont already have an account</p>
+    </div>
+  );
+
   if (!showLoadingScreen) {
     return (
       <div className="sign-in-and-sign-up">
@@ -23,12 +32,15 @@ const SignInAndSignUp = () => {
           {showEmailAlert && <EmailAlert setShowEmailAlert={setShowEmailAlert} />}
           {showPasswordAlert && <PasswordAlert setShowPasswordAlert={setShowPasswordAlert} />}
           {isSigningIn ? (
-            <SignIn
-              setIsSigningIn={setIsSigningin}
-              setShowLoadingScreen={setShowLoadingScreen}
-              setShowEmailAlert={setShowEmailAlert}
-              setShowPasswordAlert={setShowPasswordAlert}
-            />
+            <>
+              <SignIn
+                setIsSigningIn={setIsSigningin}
+                setShowLoadingScreen={setShowLoadingScreen}
+                setShowEmailAlert={setShowEmailAlert}
+                setShowPasswordAlert={setShowPasswordAlert}
+              />
+              {redirectLink}
+            </>
           ) : (
             <SignUp setShowLoadingScreen={setShowLoadingScreen} />
           )}

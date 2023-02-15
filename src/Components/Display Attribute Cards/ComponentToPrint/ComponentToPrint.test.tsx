@@ -7,10 +7,10 @@ import { renderWithProviders } from 'utils/testSetup';
 
 function setupTest() {
   const utils = renderWithProviders(
-    <div>
+    <>
       <Searchbar />
       <ComponentToPrint divRef={undefined} />
-    </div>
+    </>
   );
   return { ...utils };
 }

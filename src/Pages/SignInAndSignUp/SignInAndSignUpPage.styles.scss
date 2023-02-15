@@ -15,7 +15,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 8% 5%;
+      padding: 8% 5% 2% 5%;
       color: white;
 
       button {
@@ -101,25 +101,23 @@
         }
       }
 
-      .redirect-sign-up {
-        display: flex;
+    }
+    .redirect-sign-up {
+      display: flex;
+      color: white;
 
-        .redirect-link {
-          color: royalblue;
+      .redirect-link {
+        color: royalblue;
+        margin-right: 0.5em;
+        
+        &:hover {
+          cursor: pointer;
           text-decoration: underline;
-          margin-right: 0.5em;
-
-          &:hover {
-            cursor: pointer;
-            // color: #212529;
-            color: red;
-            // text-shadow: .1px .75px royalblue;
-          }
         }
+      }
 
-        p {
-          font-size: 0.75em;
-        }
+      p {
+        font-size: 0.75em;
       }
     }
   }

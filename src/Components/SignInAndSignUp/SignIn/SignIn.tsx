@@ -44,19 +44,19 @@ const SignIn = ({
         navigate('/create-or-manage-page');
       })
       .catch((error) => {
-        const errorCode = error.error.message;
+        const errorCode = error.message;
 
         if (errorCode === 'Firebase: Error (auth/user-not-found).') {
           console.log('email', errorCode);
           setShowEmailAlert(true);
         }
 
-        if (errorCode === 'auth/wrong-password') {
+        if (errorCode === 'Firebase: Error (auth/wrong-password).') {
           console.log('password', errorCode);
           setShowPasswordAlert(true);
         }
+        setShowLoadingScreen(false);
       });
-    setShowLoadingScreen(false);
     return () => {
       setShowLoadingScreen(false);
     };
@@ -78,9 +78,9 @@ const SignIn = ({
     };
   };
 
-  const redirectToSignup = () => {
-    setIsSigningIn(false);
-  };
+  // const redirectToSignup = () => {
+  //   setIsSigningIn(false);
+  // };
 
   const toResetPasswordPage = () => {
     navigate('/reset-password-page');
@@ -124,12 +124,12 @@ const SignIn = ({
           SIGN IN
         </Button>
       </Form>
-      <div className="redirect-sign-up">
+      {/* <div className="redirect-sign-up">
         <p className="redirect-link" onClick={redirectToSignup}>
           Sign Up
         </p>
         <p>if you dont already have an account</p>
-      </div>
+      </div> */}
     </div>
   );
 };

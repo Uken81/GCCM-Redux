@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import type { RenderOptions } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { configureStore, EnhancedStore } from '@reduxjs/toolkit';
 import type { PreloadedState } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
@@ -11,7 +12,6 @@ import characterReducer from 'features/characterSlice';
 import toggleReducer from 'features/toggleSlice';
 import selectedOptionsReducer from 'features/selectedOptionsSlice';
 import { RootState } from '../store';
-import userEvent from '@testing-library/user-event';
 import { UserContextProvider } from './mockContextProvider';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router';
@@ -76,12 +76,3 @@ export function renderWithProviders(
     ...render(ui, { wrapper: Wrapper, ...renderOptions })
   };
 }
-
-// export function setupWithUserEvents(jsx: JSX.Element, renderOptions?: ExtendedRenderOptions) {
-//   const userAction = userEvent.setup();
-//   const utils = renderWithProviders(jsx, renderOptions);
-//   return {
-//     userAction,
-//     ...utils
-//   };
-// }

@@ -81,6 +81,9 @@ const SaveCharacter = ({ setShowSaveAlert }: Props) => {
         console.log('**** Something Went wrong: ', error);
         setIsSaving(false);
       }
+    } else {
+      //should I keep this else??
+      return;
     }
   };
 

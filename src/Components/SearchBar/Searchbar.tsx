@@ -1,8 +1,8 @@
+import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'Components/CustomHooks/reduxHooks';
 import ToggleAdvantageDisadvantage from 'Components/ToggleAdvantageDisadvantage/ToggleAdvantageDisadvantage';
 import { addAdvantage, addDisadvantage } from 'features/characterSlice';
 import { addSelectedOption } from 'features/selectedOptionsSlice';
-import React, { useEffect } from 'react';
 import Select from 'react-select';
 import { SelectOptionObj } from '../../../types';
 import AdvantagesArray from '../../Attribute Objects/Advantages';
