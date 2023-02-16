@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default-member */
 import React from 'react';
 import { screen } from '@testing-library/react';
 import { renderWithProviders } from 'utils/testSetup';
@@ -15,6 +16,7 @@ test('If clicking on the Disadvantages tab changes the searchbar title', async (
   const { user } = setupTest();
 
   expect(screen.getByRole('heading')).toHaveTextContent('Select your Characters ADVANTAGES');
+
   await user.click(screen.getByRole('tab', { name: 'Disadvantages' }));
   expect(screen.getByRole('heading')).toHaveTextContent('Select your Characters DISADVANTAGES');
 });
@@ -34,8 +36,9 @@ test('If Searchbar results are empty until an option is selected', async () => {
   setupTest();
 
   expect(screen.queryByDisplayValue('Affliction')).not.toBeInTheDocument();
+
   await selectEvent.select(screen.getByRole('combobox'), ['Affliction']);
-  expect(await screen.findByDisplayValue('Affliction')).toBeInTheDocument();
+  expect(screen.getByDisplayValue('Affliction')).toBeInTheDocument();
 });
 
 test('If Muliselect works and items are in selected order', async () => {

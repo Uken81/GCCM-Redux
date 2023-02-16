@@ -6,10 +6,10 @@ import DisplaySelected from 'Components/Selected/Display Selected/DisplaySelecte
 
 function setupTest() {
   const utils = renderWithProviders(
-    <div>
+    <>
       <Searchbar />
       <DisplaySelected />
-    </div>
+    </>
   );
   return {
     ...utils
@@ -28,7 +28,7 @@ test('if clicking on a tab will select it and deselect the other', async () => {
   expect(screen.getByRole('tab', { selected: false })).toHaveTextContent('Disadvantages');
 });
 
-test('if clicking on selected lists element changes the selected tab', async () => {
+test('if clicking on the selected lists elements changes the selected tab', async () => {
   const { user } = setupTest();
 
   await user.click(screen.getByRole('heading', { name: 'Selected Disadvantages' }));

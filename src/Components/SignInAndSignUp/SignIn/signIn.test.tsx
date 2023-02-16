@@ -22,19 +22,21 @@ function setupTest() {
   };
 }
 
-test('if email input has the correct placeholder text', () => {
-  setupTest();
+describe('if input has the correct placeholder text', () => {
+  test('email', () => {
+    setupTest();
 
-  expect(screen.getByLabelText('email')).toHaveAttribute('placeholder', 'Email');
+    expect(screen.getByLabelText('email')).toHaveAttribute('placeholder', 'Email');
+  });
+
+  test('password', () => {
+    setupTest();
+
+    expect(screen.getByLabelText('password')).toHaveAttribute('placeholder', 'Password');
+  });
 });
 
-test('if password input has the correct placeholder text', () => {
-  setupTest();
-
-  expect(screen.getByLabelText('password')).toHaveAttribute('placeholder', 'Password');
-});
-
-test('if the email and password are submitted to the sign in with email and password function correctly', async () => {
+test('if the email and password are correctly submitted to the sign in with email and password function', async () => {
   mockedSignin.mockResolvedValue({
     user: initialUserValue,
     providerId: '',
@@ -46,7 +48,9 @@ test('if the email and password are submitted to the sign in with email and pass
   const email = 'user@email.com';
   const password = 'password1234';
 
+  await user.clear(screen.getByLabelText('email'));
   await user.type(screen.getByLabelText('email'), email);
+  await user.clear(screen.getByLabelText('password'));
   await user.type(screen.getByLabelText('password'), password);
   await user.click(screen.getByRole('button', { name: 'SIGN IN' }));
 

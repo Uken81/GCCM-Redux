@@ -11,16 +11,18 @@ import ResetCharacter from '../../Components/Toolbar/ResetCharacter/ResetCharact
 import DisplaySelected from '../../Components/Selected/Display Selected/DisplaySelected';
 import ComponentToPrint from '../../Components/Display Attribute Cards/ComponentToPrint/ComponentToPrint';
 
-import SuccessfulSaveAlert from '../../Components/Toolbar/SuccessfulSaveAlert';
-import SaveCharacter from '../../Components/Toolbar/SaveCharacter';
+import SaveCharacter from '../../Components/Toolbar/SaveCharacter/SaveCharacter';
 import ReactToPrint from 'react-to-print';
 import { setName } from '../../features/characterSlice';
 import { useAppDispatch } from '../../features/reduxHooks';
+// import SuccessfulSaveAlert from 'Components/Toolbar/SaveCharacter/SaveAlerts/SuccessfulSaveAlert';
+import { DisplayAlert } from 'Components/Toolbar/SaveCharacter/SaveAlerts/displayAlert';
 
 const CreateNewCharacterPage = () => {
   const dispatch = useAppDispatch();
   const [nameFormInput, setNameFormInput] = useState<string>('');
-  const [showSaveAlert, setShowSaveAlert] = useState(false);
+  const [showAlert, setShowAlert] = useState<string | null>(null);
+  // const [showSaveAlert, setShowSaveAlert] = useState(false);
 
   const divRef = useRef(null);
   const formRef = useRef<HTMLInputElement>(null);
@@ -41,13 +43,17 @@ const CreateNewCharacterPage = () => {
       <Header />
       <div className="user-interface-window">
         <h1 className="main-title"> G.C.C.M </h1>
-        {showSaveAlert && <SuccessfulSaveAlert setShowSaveAlert={setShowSaveAlert} />}
+
+        {showAlert && <DisplayAlert alertType={showAlert} />}
+        <Button onClick={() => console.log(showAlert)} />
+        {/* {showSaveAlert && <SuccessfulSaveAlert />} */}
+        {/* {showSaveAlert && <SuccessfulSaveAlert setShowSaveAlert={setShowSaveAlert} />} */}
         <div className="container">
           <div className="toolbar-container">
             <span className="toolbar-header">Character Tools</span>
             <div className="toolbar-characters">
               <ResetCharacter />
-              <SaveCharacter setShowSaveAlert={setShowSaveAlert} />
+              <SaveCharacter setShowAlert={setShowAlert} />
             </div>
             <span className="toolbar-header">Output Tools</span>
             <div className="toolbar-print-options">

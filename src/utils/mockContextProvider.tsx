@@ -28,7 +28,7 @@ export const initialUserValue: User = {
     throw new Error('Function not implemented.');
   },
   displayName: null,
-  email: 'testUser@gmail.com',
+  email: 'testUser@email.com',
   phoneNumber: null,
   photoURL: null,
   providerId: 'firebase',

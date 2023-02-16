@@ -109,7 +109,6 @@ export const addNewCharacterForUser = async (
 
   try {
     const newCharacterRef = await addDoc(userCharactersRef, newCharacter);
-    console.log('charref', newCharacterRef);
     return newCharacterRef;
   } catch (error) {
     console.log('**** Something Went wrong: ', error);
@@ -121,7 +120,12 @@ export const createCharacterDocument = async (
   newCharacterRef: DocumentReference<DocumentData>,
   characterId: string
 ) => {
-  await setDoc(newCharacterRef, { id: characterId }, { merge: true });
+  // await setDoc(newCharacterRef, { id: characterId }, { merge: true });
+  try {
+    await setDoc(newCharacterRef, { id: characterId }, { merge: true });
+  } catch (error) {
+    throw new Error(`Failed to create character document: ${error.message}`);
+  }
 };
 
 const convertSnapshotToList = async (snapShotObj: QuerySnapshot<DocumentData>) => {

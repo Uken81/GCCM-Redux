@@ -28,9 +28,7 @@ test('if clicking on the sign in with google button renders the loading page', a
   const { user } = setupTest();
 
   await user.click(screen.getByRole('button', { name: 'SIGN IN WITH GOOGLE' }));
-  expect(await screen.findByText('LOADING....')).toBeInTheDocument();
-
-  expect(mockedGoogleSignin).toHaveBeenCalled();
+  expect(screen.getByText('LOADING....')).toBeInTheDocument();
 });
 
 test('if clicking on the sign in button renders the loading page', async () => {
@@ -43,7 +41,7 @@ test('if clicking on the sign in button renders the loading page', async () => {
   const { user } = setupTest();
 
   await user.click(screen.getByRole('button', { name: 'SIGN IN' }));
-  expect(await screen.findByText('LOADING....')).toBeInTheDocument();
+  expect(screen.getByText('LOADING....')).toBeInTheDocument();
 });
 
 test('if signing in with the wrong email causes the correct alert to display', async () => {

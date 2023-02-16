@@ -3,21 +3,21 @@ import { DocumentData, DocumentReference } from '@firebase/firestore';
 
 import Button from 'react-bootstrap/Button';
 
-import { UserContext } from '../../context';
+import { UserContext } from '../../../context';
 import {
   addNewCharacterForUser,
   createCharacterDocument,
   getUsersSavedCharactersList
-} from '../Firebase/firebase.utils';
-import { NewCharacterStatsObj } from '../../../types';
+} from '../../Firebase/firebase.utils';
+import { NewCharacterStatsObj } from '../../../../types';
 import { setId } from 'features/characterSlice';
 import { useAppDispatch, useAppSelector } from 'features/reduxHooks';
 
 interface Props {
-  setShowSaveAlert: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowAlert: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-const SaveCharacter = ({ setShowSaveAlert }: Props) => {
+const SaveCharacter = ({ setShowAlert }: Props) => {
   const dispatch = useAppDispatch();
   const userContext = useContext(UserContext);
   const user = userContext?.user;
@@ -25,7 +25,6 @@ const SaveCharacter = ({ setShowSaveAlert }: Props) => {
   const characterName = useAppSelector((state) => state.character.name);
   const selectedAdvantages = useAppSelector((state) => state.character.advantages);
   const selectedDisadvantages = useAppSelector((state) => state.character.disadvantages);
-
   const [isSaving, setIsSaving] = useState(false);
 
   const checkSaveRequirements = async () => {
@@ -39,15 +38,13 @@ const SaveCharacter = ({ setShowSaveAlert }: Props) => {
     };
 
     if (selectedAdvantages.length <= 0 && selectedDisadvantages.length <= 0) {
-      alert('You must select at least one Advantage or Disadvantage');
+      setShowAlert('no-attributes');
       return;
     } else if (await checkIfDuplicate()) {
-      alert(
-        'You already have a character with this name. Delete original character or change name'
-      );
+      setShowAlert('duplicate');
       return;
     } else if (characterName === '') {
-      alert('You must type a name for your character and press enter in order to save');
+      setShowAlert('no-name');
       return;
     } else {
       return true;
@@ -72,18 +69,16 @@ const SaveCharacter = ({ setShowSaveAlert }: Props) => {
       const characterId = newCharacterRef.id;
       dispatch(setId(characterId));
       await createCharacterDocument(newCharacterRef, characterId);
+      console.log('****CCD ran');
       try {
         console.log(`**** ${characterName} has been saved`);
         setIsSaving(false);
-        setShowSaveAlert(true);
+        setShowAlert('success');
       } catch (error) {
-        //Add alert for unsuccessful save??
+        setShowAlert('save-error');
         console.log('**** Something Went wrong: ', error);
         setIsSaving(false);
       }
-    } else {
-      //should I keep this else??
-      return;
     }
   };
 

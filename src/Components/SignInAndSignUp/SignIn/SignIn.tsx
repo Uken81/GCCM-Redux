@@ -78,10 +78,6 @@ const SignIn = ({
     };
   };
 
-  // const redirectToSignup = () => {
-  //   setIsSigningIn(false);
-  // };
-
   const toResetPasswordPage = () => {
     navigate('/reset-password-page');
   };
@@ -124,12 +120,6 @@ const SignIn = ({
           SIGN IN
         </Button>
       </Form>
-      {/* <div className="redirect-sign-up">
-        <p className="redirect-link" onClick={redirectToSignup}>
-          Sign Up
-        </p>
-        <p>if you dont already have an account</p>
-      </div> */}
     </div>
   );
 };
