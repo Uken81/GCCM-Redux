@@ -8,7 +8,12 @@ import {
 
 import { UserContext } from '../../../context';
 import { useNavigate } from 'react-router';
-import { addAdvantage, addDisadvantage, setId, setName } from '../../../features/characterSlice';
+import {
+  storeAdvantageList,
+  storeDisadvantageList,
+  setId,
+  setName
+} from '../../../features/characterSlice';
 import { useAppDispatch } from '../../../features/reduxHooks';
 
 const LoadCharacter = () => {
@@ -46,8 +51,8 @@ const LoadCharacter = () => {
   const repopulateCharacterAttributes = async () => {
     const characterRecord = await getCharacterRecord();
     dispatch(setName(characterRecord?.name));
-    dispatch(addAdvantage(characterRecord?.advantages));
-    dispatch(addDisadvantage(characterRecord?.disadvantages));
+    dispatch(storeAdvantageList(characterRecord?.advantages));
+    dispatch(storeDisadvantageList(characterRecord?.disadvantages));
     dispatch(setId(characterRecord?.id));
 
     console.log(`****${characterRecord?.name} successfully loaded`);

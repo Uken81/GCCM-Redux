@@ -19,7 +19,6 @@ export const DisplayAlert: React.FC<{ alertType: string }> = ({ alertType }) => 
       );
     } else return;
   };
-  console.log('aTeam', alertType);
   //check below
   const alert = alertType;
   let saveAlert: JSX.Element | undefined;

@@ -22,11 +22,11 @@ export const characterSlice = createSlice({
     setName: (state, action) => {
       state.name = action.payload;
     },
-    addAdvantage: (state, action) => {
-      state.advantages.push(action.payload);
+    storeAdvantageList: (state, action) => {
+      state.advantages = action.payload;
     },
-    addDisadvantage: (state, action) => {
-      state.disadvantages.push(action.payload);
+    storeDisadvantageList: (state, action) => {
+      state.disadvantages = action.payload;
     },
     setId: (state, action) => {
       state.id = action.payload;
@@ -34,7 +34,7 @@ export const characterSlice = createSlice({
   }
 });
 
-export const { resetCharacter, setName, addAdvantage, addDisadvantage, setId } =
+export const { resetCharacter, setName, storeAdvantageList, storeDisadvantageList, setId } =
   characterSlice.actions;
 
 export const selectCharacter = (state: RootState) => state.options;

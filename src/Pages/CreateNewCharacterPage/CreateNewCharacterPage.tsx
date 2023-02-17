@@ -15,14 +15,12 @@ import SaveCharacter from '../../Components/Toolbar/SaveCharacter/SaveCharacter'
 import ReactToPrint from 'react-to-print';
 import { setName } from '../../features/characterSlice';
 import { useAppDispatch } from '../../features/reduxHooks';
-// import SuccessfulSaveAlert from 'Components/Toolbar/SaveCharacter/SaveAlerts/SuccessfulSaveAlert';
 import { DisplayAlert } from 'Components/Toolbar/SaveCharacter/SaveAlerts/displayAlert';
 
 const CreateNewCharacterPage = () => {
   const dispatch = useAppDispatch();
   const [nameFormInput, setNameFormInput] = useState<string>('');
   const [showAlert, setShowAlert] = useState<string | null>(null);
-  // const [showSaveAlert, setShowSaveAlert] = useState(false);
 
   const divRef = useRef(null);
   const formRef = useRef<HTMLInputElement>(null);
@@ -43,11 +41,8 @@ const CreateNewCharacterPage = () => {
       <Header />
       <div className="user-interface-window">
         <h1 className="main-title"> G.C.C.M </h1>
-
         {showAlert && <DisplayAlert alertType={showAlert} />}
         <Button onClick={() => console.log(showAlert)} />
-        {/* {showSaveAlert && <SuccessfulSaveAlert />} */}
-        {/* {showSaveAlert && <SuccessfulSaveAlert setShowSaveAlert={setShowSaveAlert} />} */}
         <div className="container">
           <div className="toolbar-container">
             <span className="toolbar-header">Character Tools</span>

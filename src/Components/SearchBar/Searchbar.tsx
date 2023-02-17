@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'features/reduxHooks';
 import ToggleAdvantageDisadvantage from 'Components/ToggleAdvantageDisadvantage/ToggleAdvantageDisadvantage';
-import { addAdvantage, addDisadvantage } from 'features/characterSlice';
+import { storeAdvantageList, storeDisadvantageList } from 'features/characterSlice';
 import { addSelectedOption } from 'features/selectedOptionsSlice';
 import Select from 'react-select';
 import { SelectOptionObj } from '../../../types';
@@ -35,10 +35,15 @@ const Searchbar = ({ combinedAttributesList }: Props) => {
   const handleChange = async (e: SelectOptionObj[]) => {
     dispatch(addSelectedOption(e));
 
-    const lastSelected = e.slice(-1)[0];
-    lastSelected.category === 'advantage'
-      ? dispatch(addAdvantage(lastSelected.value))
-      : dispatch(addDisadvantage(lastSelected.value));
+    const selectedAdvantages = e
+      .filter((adv) => adv.category === 'advantage')
+      .map((adv) => adv.label);
+    dispatch(storeAdvantageList(selectedAdvantages));
+
+    const selectedDisadvantages = e
+      .filter((dis) => dis.category === 'disadvantage')
+      .map((dis) => dis.label);
+    dispatch(storeDisadvantageList(selectedDisadvantages));
   };
 
   const repopulateSelect = () => {
@@ -75,6 +80,7 @@ const Searchbar = ({ combinedAttributesList }: Props) => {
           isMulti
           onChange={handleChange}
           formatOptionLabel={formatOptionLabel}
+          //remove
         />
       </div>
     </div>
