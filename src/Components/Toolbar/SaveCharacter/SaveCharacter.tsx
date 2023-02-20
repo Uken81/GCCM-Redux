@@ -7,7 +7,7 @@ import { UserContext } from '../../../context';
 import {
   addNewCharacterForUser,
   createCharacterDocument,
-  getUsersSavedCharactersList
+  getUsersSavedCharacterList
 } from '../../Firebase/firebase.utils';
 import { NewCharacterStatsObj } from '../../../../types';
 import { setId } from 'features/characterSlice';
@@ -30,7 +30,7 @@ const SaveCharacter = ({ setShowAlert }: Props) => {
   const checkSaveRequirements = async () => {
     const checkIfDuplicate = async () => {
       if (user) {
-        const characterList = await getUsersSavedCharactersList(userId);
+        const characterList = await getUsersSavedCharacterList(userId);
         return characterList.includes(characterName);
       } else {
         return;

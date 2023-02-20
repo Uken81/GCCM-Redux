@@ -1,7 +1,6 @@
 import DisadvantagesArray from 'Attribute Objects/Disadvantages';
 import { useAppSelector } from 'features/reduxHooks';
-import React, { useEffect, useState } from 'react';
-import { AttributeObj } from '../../../types';
+import React from 'react';
 import { DisplayAttributeCards } from './DisplayAttributeCards';
 
 import './DisplayAttributeCards.styles.scss';
@@ -9,20 +8,11 @@ import './DisplayAttributeCards.styles.scss';
 const DisplayDisadvantages = () => {
   const characterName = useAppSelector((state) => state.character.name);
   const savedDisadvantages = useAppSelector((state) => state.character.disadvantages);
-  const [selectedDisadvantages, setSelectedDisadvantages] = useState<AttributeObj[]>([]);
   const nameText = characterName !== '' ? `${characterName}'s` : '';
 
-  const createDisadvantagesList = () => {
-    const advantagesFilter = DisadvantagesArray.filter((advantageObj) => {
-      const filteredArr = savedDisadvantages.includes(advantageObj.title);
-      return filteredArr;
-    });
-    setSelectedDisadvantages(advantagesFilter);
-  };
-
-  useEffect(() => {
-    createDisadvantagesList();
-  }, [savedDisadvantages]);
+  const selectedDisadvantages = DisadvantagesArray.filter((advantageObj) =>
+    savedDisadvantages.includes(advantageObj.title)
+  );
 
   return (
     <div>

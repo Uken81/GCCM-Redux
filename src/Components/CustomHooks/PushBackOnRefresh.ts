@@ -10,5 +10,5 @@ export const usePushBackOnRefresh = () => {
       navigate('/create-or-manage-page');
     }
     return;
-  }, []);
+  }, [currentCharacterId, navigate]);
 };

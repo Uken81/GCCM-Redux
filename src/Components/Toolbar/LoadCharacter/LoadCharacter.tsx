@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import DropdownItem from 'react-bootstrap/DropdownItem';
 import {
@@ -24,13 +24,15 @@ const LoadCharacter = () => {
   const [characterList, setCharacterList] = useState<string[] | null>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const repopulateCharacterList = async () => {
-    if (user) {
-      const savedCharacters = await getUsersSavedCharacterList(user.uid);
-      return setCharacterList(savedCharacters);
-    }
-  };
-  repopulateCharacterList();
+  useEffect(() => {
+    const createCharacterList = async () => {
+      if (user) {
+        const savedCharacters = await getUsersSavedCharacterList(user.uid);
+        return setCharacterList(savedCharacters);
+      }
+    };
+    createCharacterList();
+  }, [user]);
 
   const getCharacterRecord = async (characterName: string) => {
     const selectedCharacter = characterName;

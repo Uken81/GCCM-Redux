@@ -135,7 +135,7 @@ const convertSnapshotToList = async (snapShotObj: QuerySnapshot<DocumentData>) =
   return characterNamesList;
 };
 
-export const getUsersSavedCharactersList = async (userId: string) => {
+export const getUsersSavedCharacterList = async (userId: string) => {
   const usersCharactersRef = createUsersCharactersRef(userId);
   const savedCharactersDoc = await getDocs(usersCharactersRef);
   const usersCharactersList = await convertSnapshotToList(savedCharactersDoc);

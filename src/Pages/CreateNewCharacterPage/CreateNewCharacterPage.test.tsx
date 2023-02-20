@@ -6,7 +6,7 @@ import selectEvent from 'react-select-event';
 import {
   addNewCharacterForUser,
   createCharacterDocument,
-  getUsersSavedCharactersList
+  getUsersSavedCharacterList
 } from 'Components/Firebase/firebase.utils';
 import { DocumentReference, FirestoreDataConverter } from 'firebase/firestore';
 import { renderWithProviders } from 'utils/testSetup';
@@ -15,14 +15,14 @@ jest.mock('Components/Firebase/firebase.utils');
 const mockAddNewCharacter = addNewCharacterForUser as jest.MockedFunction<
   typeof addNewCharacterForUser
 >;
-const mockGetUsersCharactersList = getUsersSavedCharactersList as jest.MockedFunction<
-  typeof getUsersSavedCharactersList
+const mockGetUsersCharactersList = getUsersSavedCharacterList as jest.MockedFunction<
+  typeof getUsersSavedCharacterList
 >;
 const mockCreateCharacterDoc = createCharacterDocument as jest.MockedFunction<
   typeof createCharacterDocument
 >;
-const mockRetrieveCharacterList = getUsersSavedCharactersList as jest.MockedFunction<
-  typeof getUsersSavedCharactersList
+const mockRetrieveCharacterList = getUsersSavedCharacterList as jest.MockedFunction<
+  typeof getUsersSavedCharacterList
 >;
 
 const mockCharacterDocument = {

@@ -2,11 +2,11 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import { renderWithProviders } from 'utils/testSetup';
 import CreateOrManage from './CreateOrManagePage';
-import { getUsersSavedCharactersList } from 'Components/Firebase/firebase.utils';
+import { getUsersSavedCharacterList } from 'Components/Firebase/firebase.utils';
 
 jest.mock('Components/Firebase/firebase.utils');
-const mockedRetrieveCharactersList = getUsersSavedCharactersList as jest.MockedFunction<
-  typeof getUsersSavedCharactersList
+const mockedRetrieveCharactersList = getUsersSavedCharacterList as jest.MockedFunction<
+  typeof getUsersSavedCharacterList
 >;
 
 function setupTest() {
