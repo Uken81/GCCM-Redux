@@ -21,7 +21,6 @@ const LoadCharacter = () => {
   const userContext = useContext(UserContext);
   const user = userContext?.user;
   const [charactersList, setCharactersList] = useState<string[] | null>([]);
-  const [characterToLoad, setCharacterToLoad] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -34,12 +33,17 @@ const LoadCharacter = () => {
     createCharactersList();
   }, [user]);
 
-  const handleClick = (characterName: string) => {
-    setCharacterToLoad(characterName);
+  const handleClick = async (characterName: string) => {
+    setIsLoading(true);
+    // await getCharacterRecord(characterName);
+    await repopulateCharacterAttributes(characterName);
+
+    navigate('/manage-characters-page');
   };
 
-  const getCharacterRecord = async () => {
-    const selectedCharacter = characterToLoad;
+  const getCharacterRecord = async (characterName) => {
+    const selectedCharacter = characterName;
+    // const selectedCharacter = characterToLoad;
     if (user) {
       const characterRecord = await getMatchingCharacterForUser(user.uid, selectedCharacter);
       return characterRecord;
@@ -48,33 +52,32 @@ const LoadCharacter = () => {
     }
   };
 
-  const repopulateCharacterAttributes = async () => {
-    const characterRecord = await getCharacterRecord();
+  const repopulateCharacterAttributes = async (characterName) => {
+    const characterRecord = await getCharacterRecord(characterName);
     dispatch(setName(characterRecord?.name));
     dispatch(storeAdvantageList(characterRecord?.advantages));
     dispatch(storeDisadvantageList(characterRecord?.disadvantages));
     dispatch(setId(characterRecord?.id));
 
     console.log(`****${characterRecord?.name} successfully loaded`);
-    console.log(characterRecord);
   };
 
   const navigate = useNavigate();
-  useEffect(() => {
-    const loadSelectedCharactersStats = async () => {
-      if (characterToLoad !== '') {
-        setIsLoading(true);
-        await getCharacterRecord();
-        await repopulateCharacterAttributes();
+  // useEffect(() => {
+  //   const loadSelectedCharactersStats = async () => {
+  //     if (characterToLoad !== '') {
+  //       setIsLoading(true);
+  //       await getCharacterRecord();
+  //       await repopulateCharacterAttributes();
 
-        navigate('/manage-characters-page');
+  //       navigate('/manage-characters-page');
 
-        return () => setIsLoading(false);
-      }
-      return;
-    };
-    loadSelectedCharactersStats();
-  }, [characterToLoad]);
+  //       return () => setIsLoading(false);
+  //     }
+  //     return;
+  //   };
+  //   loadSelectedCharactersStats();
+  // }, [characterToLoad]);
 
   //Consider making a ternary below for cases of null returned from characters list, remove onclick also.
   return (
@@ -90,6 +93,7 @@ const LoadCharacter = () => {
               <DropdownItem
                 className="dropdown-link"
                 key={charactersList.indexOf(characterName)}
+                // onClick={handleClick}
                 onClick={() => handleClick(characterName)}
                 style={{
                   color: 'white',
