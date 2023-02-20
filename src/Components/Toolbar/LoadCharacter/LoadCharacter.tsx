@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import DropdownItem from 'react-bootstrap/DropdownItem';
 import {
   getMatchingCharacterForUser,
-  getUsersSavedCharactersList
+  getUsersSavedCharacterList
 } from '../../Firebase/firebase.utils';
 
 import { UserContext } from '../../../context';
@@ -18,32 +18,22 @@ import { useAppDispatch } from '../../../features/reduxHooks';
 
 const LoadCharacter = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const userContext = useContext(UserContext);
   const user = userContext?.user;
-  const [charactersList, setCharactersList] = useState<string[] | null>([]);
+  const [characterList, setCharacterList] = useState<string[] | null>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const createCharactersList = async () => {
-      if (user) {
-        const savedCharacters = await getUsersSavedCharactersList(user.uid);
-        return setCharactersList(savedCharacters);
-      }
-    };
-    createCharactersList();
-  }, [user]);
-
-  const handleClick = async (characterName: string) => {
-    setIsLoading(true);
-    // await getCharacterRecord(characterName);
-    await repopulateCharacterAttributes(characterName);
-
-    navigate('/manage-characters-page');
+  const repopulateCharacterList = async () => {
+    if (user) {
+      const savedCharacters = await getUsersSavedCharacterList(user.uid);
+      return setCharacterList(savedCharacters);
+    }
   };
+  repopulateCharacterList();
 
-  const getCharacterRecord = async (characterName) => {
+  const getCharacterRecord = async (characterName: string) => {
     const selectedCharacter = characterName;
-    // const selectedCharacter = characterToLoad;
     if (user) {
       const characterRecord = await getMatchingCharacterForUser(user.uid, selectedCharacter);
       return characterRecord;
@@ -52,7 +42,7 @@ const LoadCharacter = () => {
     }
   };
 
-  const repopulateCharacterAttributes = async (characterName) => {
+  const repopulateCharacterAttributes = async (characterName: string) => {
     const characterRecord = await getCharacterRecord(characterName);
     dispatch(setName(characterRecord?.name));
     dispatch(storeAdvantageList(characterRecord?.advantages));
@@ -62,38 +52,25 @@ const LoadCharacter = () => {
     console.log(`****${characterRecord?.name} successfully loaded`);
   };
 
-  const navigate = useNavigate();
-  // useEffect(() => {
-  //   const loadSelectedCharactersStats = async () => {
-  //     if (characterToLoad !== '') {
-  //       setIsLoading(true);
-  //       await getCharacterRecord();
-  //       await repopulateCharacterAttributes();
+  const handleClick = async (characterName: string) => {
+    setIsLoading(true);
+    await repopulateCharacterAttributes(characterName);
+    navigate('/manage-characters-page');
+  };
 
-  //       navigate('/manage-characters-page');
-
-  //       return () => setIsLoading(false);
-  //     }
-  //     return;
-  //   };
-  //   loadSelectedCharactersStats();
-  // }, [characterToLoad]);
-
-  //Consider making a ternary below for cases of null returned from characters list, remove onclick also.
   return (
     <div>
-      {charactersList && (
+      {characterList && (
         <DropdownButton
           className="dropdown-button"
           title={isLoading ? 'LOADING...' : 'LOAD CHARACTER'}
           variant="outline-primary"
           size="lg">
-          {charactersList.length > 0 &&
-            charactersList.map((characterName) => (
+          {characterList.length > 0 &&
+            characterList.map((characterName) => (
               <DropdownItem
                 className="dropdown-link"
-                key={charactersList.indexOf(characterName)}
-                // onClick={handleClick}
+                key={characterList.indexOf(characterName)}
                 onClick={() => handleClick(characterName)}
                 style={{
                   color: 'white',
