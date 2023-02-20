@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from 'store';
 interface CharacterState {
   name: string;
   advantages: string[];
@@ -36,7 +35,5 @@ export const characterSlice = createSlice({
 
 export const { resetCharacter, setName, storeAdvantageList, storeDisadvantageList, setId } =
   characterSlice.actions;
-
-export const selectCharacter = (state: RootState) => state.options;
 
 export default characterSlice.reducer;

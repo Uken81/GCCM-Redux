@@ -14,9 +14,6 @@ function setUpTest() {
       },
       toggle: {
         isChoosingAdvantages: true
-      },
-      options: {
-        selectedOptions: []
       }
     }
   });

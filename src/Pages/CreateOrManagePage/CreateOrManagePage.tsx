@@ -9,15 +9,16 @@ import { auth, createUserProfileDocument } from '../../Components/Firebase/fireb
 import Header from '../../Components/Header/Header.component';
 import { UserContext } from '../../context';
 import { Unsubscribe } from 'firebase/firestore';
-import { useResetCharacter } from '../../Components/CustomHooks/ResetCharacterHook';
 import LoadCharacter from '../../Components/Toolbar/LoadCharacter/LoadCharacter';
+import { useAppDispatch } from 'features/reduxHooks';
+import { resetCharacter } from 'features/characterSlice';
 
 const CreateOrManage = () => {
+  const dispatch = useAppDispatch();
   const userContext = useContext(UserContext);
   const user = userContext?.user;
   const setUser = userContext?.setUser;
 
-  useResetCharacter();
   const navigate = useNavigate();
   useEffect(() => {
     let unsubscribeFromAuth: Unsubscribe | null = null;
@@ -27,6 +28,7 @@ const CreateOrManage = () => {
         setUser?.(userAuth);
       } else {
         setUser?.(userAuth);
+        dispatch(resetCharacter());
         console.log('User has logged out');
         navigate('/');
       }

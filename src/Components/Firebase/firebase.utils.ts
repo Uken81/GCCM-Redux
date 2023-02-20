@@ -120,11 +120,12 @@ export const createCharacterDocument = async (
   newCharacterRef: DocumentReference<DocumentData>,
   characterId: string
 ) => {
-  // await setDoc(newCharacterRef, { id: characterId }, { merge: true });
   try {
     await setDoc(newCharacterRef, { id: characterId }, { merge: true });
+    return;
   } catch (error) {
-    throw new Error(`Failed to create character document: ${error.message}`);
+    return Promise.reject(new Error('Failed to add new character'));
+    // throw new Error('Failed to add new character');
   }
 };
 

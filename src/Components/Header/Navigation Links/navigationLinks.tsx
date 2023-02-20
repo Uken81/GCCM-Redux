@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
 import './navigationLinks.styles.scss';
+import { useAppDispatch } from 'features/reduxHooks';
+import { resetCharacter } from 'features/characterSlice';
 
 export const BackToSignIn = () => {
   return (
@@ -14,17 +16,25 @@ export const BackToSignIn = () => {
 };
 
 export const BackToLandingPage = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <div className="nav-link" data-testid="test">
-      <Link to="/">BACK</Link>
+      <Link to="/" onClick={() => dispatch(resetCharacter())}>
+        BACK
+      </Link>
     </div>
   );
 };
 
 export const BackToCreateManage = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <div className="nav-link">
-      <Link to="/create-or-manage-page">BACK</Link>
+      <Link to="/create-or-manage-page" onClick={() => dispatch(resetCharacter())}>
+        BACK
+      </Link>
     </div>
   );
 };

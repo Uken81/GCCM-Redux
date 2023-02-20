@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from '../Firebase/firebase.utils';
 import { BackToCreateManage, BackToLandingPage } from './Navigation Links/navigationLinks';
@@ -6,7 +6,6 @@ import { BackToCreateManage, BackToLandingPage } from './Navigation Links/naviga
 import './header.styles.scss';
 
 import { useLocation } from 'react-router';
-import { useContext } from 'react';
 import { UserContext } from '../../context';
 import { useNavigate } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';

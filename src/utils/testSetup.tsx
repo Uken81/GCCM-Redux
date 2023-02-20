@@ -10,7 +10,6 @@ import { Provider } from 'react-redux';
 // As a basic setup, import your same slice reducers
 import characterReducer from 'features/characterSlice';
 import toggleReducer from 'features/toggleSlice';
-import selectedOptionsReducer from 'features/selectedOptionsSlice';
 import { RootState } from '../store';
 import { UserContextProvider } from './mockContextProvider';
 import { createMemoryHistory } from 'history';
@@ -31,9 +30,6 @@ export function renderWithProviders(
       toggle: {
         isChoosingAdvantages: true
       },
-      options: {
-        selectedOptions: []
-      },
       character: {
         name: '',
         advantages: [],
@@ -45,8 +41,7 @@ export function renderWithProviders(
     store = configureStore({
       reducer: {
         character: characterReducer,
-        toggle: toggleReducer,
-        options: selectedOptionsReducer
+        toggle: toggleReducer
       },
       preloadedState
     }),

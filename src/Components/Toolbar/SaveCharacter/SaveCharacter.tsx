@@ -37,14 +37,14 @@ const SaveCharacter = ({ setShowAlert }: Props) => {
       }
     };
 
-    if (selectedAdvantages.length <= 0 && selectedDisadvantages.length <= 0) {
-      setShowAlert('no-attributes');
-      return;
-    } else if (await checkIfDuplicate()) {
+    if (await checkIfDuplicate()) {
       setShowAlert('duplicate');
       return;
     } else if (characterName === '') {
       setShowAlert('no-name');
+      return;
+    } else if (selectedAdvantages.length <= 0 && selectedDisadvantages.length <= 0) {
+      setShowAlert('no-attributes');
       return;
     } else {
       return true;

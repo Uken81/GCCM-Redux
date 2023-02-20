@@ -1,17 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from '../Components/Header/Header.component';
 import Searchbar from '../Components/SearchBar/Searchbar';
 import EditCharacter from '../Components/Toolbar/EditCharacter';
 import ResetChanges from '../Components/Toolbar/ResetChanges';
 import DisplaySelected from '../Components/Selected/Display Selected/DisplaySelected';
 import { usePushBackOnRefresh } from '../Components/CustomHooks/PushBackOnRefresh';
-import { useAppSelector } from 'features/reduxHooks';
 
 const EditCharacterPage = () => {
-  const [combinedAttributesList, setCombinedAttributesList] = useState(
-    useAppSelector((state) => [...state.character.advantages, ...state.character.disadvantages])
-  );
-
   usePushBackOnRefresh();
   return (
     <div className="edit-character-page">
@@ -22,12 +17,12 @@ const EditCharacterPage = () => {
           <div className="toolbar-container">
             <span className="toolbar-header">Character Toolbar</span>
             <div className="toolbar-characters">
-              <ResetChanges setCombinedAttributesList={setCombinedAttributesList} />
+              <ResetChanges />
               <EditCharacter />
             </div>
           </div>
           <div className="main-interface">
-            <Searchbar combinedAttributesList={combinedAttributesList} />
+            <Searchbar />
             <DisplaySelected />
           </div>
         </div>

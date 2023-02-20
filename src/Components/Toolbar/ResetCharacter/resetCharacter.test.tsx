@@ -9,9 +9,6 @@ function setupTest() {
       toggle: {
         isChoosingAdvantages: true
       },
-      options: {
-        selectedOptions: []
-      },
       character: {
         name: 'test character',
         advantages: ['Clinging'],

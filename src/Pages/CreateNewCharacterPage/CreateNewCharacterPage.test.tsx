@@ -47,9 +47,6 @@ const preloadedState = {
     },
     toggle: {
       isChoosingAdvantages: true
-    },
-    options: {
-      selectedOptions: []
     }
   }
 };
@@ -118,7 +115,6 @@ test('if clicking on the reset character button resets all the values on the pag
 
 test('if clicking on the save character button calls the createCharacterDocument function with correct arguments', async () => {
   mockGetUsersCharactersList.mockResolvedValue(['not duplicate']);
-
   mockAddNewCharacter.mockResolvedValue(mockCharacterDocument);
   const { user } = renderWithProviders(<CreateNewCharacterPage />, preloadedState);
 
@@ -130,7 +126,6 @@ test('if clicking on the save character button calls the createCharacterDocument
 test('if successful save alert is displayed only after the character is saved', async () => {
   mockGetUsersCharactersList.mockResolvedValue(['not duplicate']);
   mockAddNewCharacter.mockResolvedValue(mockCharacterDocument);
-
   const { user } = renderWithProviders(<CreateNewCharacterPage />, preloadedState);
 
   expect(screen.queryByRole('alert')).not.toBeInTheDocument();
@@ -150,23 +145,9 @@ describe('if the correct alerts are displayed when a save character requirement 
     await user.click(screen.getByRole('button', { name: 'Save Character' }));
   });
 
-  test('no attributes selected', async () => {
-    const { user } = setUpTest();
-
-    await user.click(screen.getByRole('button', { name: 'Save Character' }));
-    expect(screen.getByRole('alert')).toHaveTextContent(
-      'You must select at least one Advantage or Disadvantage'
-    );
-  });
-
   test('no character name entered', async () => {
     mockRetrieveCharacterList.mockResolvedValue(['Test Character']);
-
     const { user } = setUpTest();
-
-    //This ensures the incorrect alert isnt fired first
-    const searchbar = screen.getByRole('combobox');
-    await selectEvent.select(searchbar, ['Absolute Direction']);
 
     await user.click(screen.getByRole('button', { name: 'Save Character' }));
     expect(screen.getByRole('alert')).toHaveTextContent(
@@ -174,10 +155,24 @@ describe('if the correct alerts are displayed when a save character requirement 
     );
   });
 
-  test.skip('failed to save', async () => {
+  test('no attributes selected', async () => {
+    mockRetrieveCharacterList.mockResolvedValue(['Test Character']);
+    const { user } = setUpTest();
+
+    const nameTextInput = screen.getByRole('textbox', { name: 'character-name-form' });
+    await user.clear(nameTextInput);
+    await user.type(nameTextInput, 'test name');
+    await user.keyboard('{Enter}');
+
+    await user.click(screen.getByRole('button', { name: 'Save Character' }));
+    expect(screen.getByRole('alert')).toHaveTextContent(
+      'You must select at least one Advantage or Disadvantage'
+    );
+  });
+
+  test('failed to save', async () => {
     mockRetrieveCharacterList.mockResolvedValue(['not-duplicate']);
-    mockAddNewCharacter.mockResolvedValue(mockCharacterDocument);
-    // mockCreateCharacterDoc.mockRejectedValue(mockCharacterDocument);
+    mockAddNewCharacter.mockRejectedValue(new Error('Failed to add new character'));
 
     const { user } = renderWithProviders(<CreateNewCharacterPage />, preloadedState);
 

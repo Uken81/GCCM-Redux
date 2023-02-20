@@ -42,7 +42,6 @@ const CreateNewCharacterPage = () => {
       <div className="user-interface-window">
         <h1 className="main-title"> G.C.C.M </h1>
         {showAlert && <DisplayAlert alertType={showAlert} />}
-        <Button onClick={() => console.log(showAlert)} />
         <div className="container">
           <div className="toolbar-container">
             <span className="toolbar-header">Character Tools</span>

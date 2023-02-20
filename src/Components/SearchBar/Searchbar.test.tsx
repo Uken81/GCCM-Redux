@@ -41,7 +41,7 @@ test('If Searchbar results are empty until an option is selected', async () => {
   expect(screen.getByDisplayValue('Affliction')).toBeInTheDocument();
 });
 
-test('If Muliselect works and items are in selected order', async () => {
+test('If Muliselect works and items are in alphabetical order', async () => {
   setupTest();
 
   expect(screen.queryAllByTestId('items-container').length).toBe(0);
@@ -49,5 +49,5 @@ test('If Muliselect works and items are in selected order', async () => {
   await selectEvent.select(screen.getByRole('combobox'), ['Affliction', 'Acute Senses', 'Catfall']);
   const selectedOptions = screen.queryAllByTestId('items-container');
   expect(selectedOptions.length).toBe(3);
-  expect(selectedOptions[1]).toHaveTextContent('Acute Senses');
+  expect(selectedOptions[1]).toHaveTextContent('Affliction');
 });

@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useAppDispatch, useAppSelector } from 'features/reduxHooks';
 import ToggleAdvantageDisadvantage from 'Components/ToggleAdvantageDisadvantage/ToggleAdvantageDisadvantage';
 import { storeAdvantageList, storeDisadvantageList } from 'features/characterSlice';
-import { addSelectedOption } from 'features/selectedOptionsSlice';
 import Select from 'react-select';
 import { SelectOptionObj } from '../../../types';
 import AdvantagesArray from '../../Attribute Objects/Advantages';
@@ -11,15 +10,12 @@ import DisadvantagesArray from '../../Attribute Objects/Disadvantages';
 import './Searchbar.styles.scss';
 import { SearchbarTitle } from './SearchbarTitle';
 
-interface Props {
-  combinedAttributesList?: string[];
-}
-
-const Searchbar = ({ combinedAttributesList }: Props) => {
+const Searchbar = () => {
   const dispatch = useAppDispatch();
+  const selectedAdvantages = useAppSelector((state) => state.character.advantages);
+  const selectedDisadvantages = useAppSelector((state) => state.character.disadvantages);
 
   const isChoosingAdvantages = useAppSelector((state) => state.toggle.isChoosingAdvantages);
-  const selectedOptions = useAppSelector((state) => state.options.selectedOptions);
 
   const advantageOptions: SelectOptionObj[] = AdvantagesArray.map((opt) => ({
     label: opt.title,
@@ -32,8 +28,9 @@ const Searchbar = ({ combinedAttributesList }: Props) => {
     category: opt.type
   }));
 
+  let selectedOptions: SelectOptionObj[] = [];
   const handleChange = async (e: SelectOptionObj[]) => {
-    dispatch(addSelectedOption(e));
+    selectedOptions = e;
 
     const selectedAdvantages = e
       .filter((adv) => adv.category === 'advantage')
@@ -46,17 +43,14 @@ const Searchbar = ({ combinedAttributesList }: Props) => {
     dispatch(storeDisadvantageList(selectedDisadvantages));
   };
 
-  const repopulateSelect = () => {
-    const adsFilter = advantageOptions.filter((obj) => combinedAttributesList?.includes(obj.label));
+  const repopulateSearchbar = () => {
+    const adsFilter = advantageOptions.filter((obj) => selectedAdvantages.includes(obj.label));
     const disadsFilter = disadvantageOptions.filter((obj) =>
-      combinedAttributesList?.includes(obj.label)
+      selectedDisadvantages.includes(obj.label)
     );
-    dispatch(addSelectedOption([...adsFilter, ...disadsFilter]));
+    selectedOptions = [...adsFilter, ...disadsFilter];
   };
-
-  useEffect(() => {
-    repopulateSelect();
-  }, [combinedAttributesList]);
+  repopulateSearchbar();
 
   const formatOptionLabel = ({ label, category }) => (
     <div
@@ -80,7 +74,6 @@ const Searchbar = ({ combinedAttributesList }: Props) => {
           isMulti
           onChange={handleChange}
           formatOptionLabel={formatOptionLabel}
-          //remove
         />
       </div>
     </div>

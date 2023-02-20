@@ -1,12 +1,10 @@
-import { useAppSelector } from 'features/reduxHooks';
+import { storeAdvantageList, storeDisadvantageList } from 'features/characterSlice';
+import { useAppDispatch, useAppSelector } from 'features/reduxHooks';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
-interface Props {
-  setCombinedAttributesList: React.Dispatch<React.SetStateAction<string[]>>;
-}
-
-const ResetChanges = ({ setCombinedAttributesList }: Props) => {
+const ResetChanges = () => {
+  const dispatch = useAppDispatch();
   const selectedAdvantages = useAppSelector((state) => state.character.advantages);
   const selectedDisadvantages = useAppSelector((state) => state.character.disadvantages);
 
@@ -14,7 +12,8 @@ const ResetChanges = ({ setCombinedAttributesList }: Props) => {
   const [initialDisadvantages] = useState([...selectedDisadvantages]);
 
   const handleClick = async () => {
-    setCombinedAttributesList([...initialAdvantages, ...initialDisadvantages]);
+    dispatch(storeAdvantageList(initialAdvantages));
+    dispatch(storeDisadvantageList(initialDisadvantages));
   };
 
   return (
