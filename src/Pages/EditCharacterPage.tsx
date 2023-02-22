@@ -4,10 +4,16 @@ import Searchbar from '../Components/SearchBar/Searchbar';
 import EditCharacter from '../Components/Toolbar/EditCharacter';
 import ResetChanges from '../Components/Toolbar/ResetChanges';
 import DisplaySelected from '../Components/Selected/Display Selected/DisplaySelected';
-import { usePushBackOnRefresh } from '../Components/CustomHooks/PushBackOnRefresh';
+import { useAppSelector } from 'features/reduxHooks';
+import { Navigate } from 'react-router';
 
 const EditCharacterPage = () => {
-  usePushBackOnRefresh();
+  const character = useAppSelector((state) => state.character);
+
+  if (!character.id) {
+    return <Navigate to="/create-or-manage-page" />;
+  }
+
   return (
     <div className="edit-character-page">
       <Header />
