@@ -20,7 +20,7 @@ import { DisplayAlert } from 'Components/Toolbar/SaveCharacter/SaveAlerts/displa
 const CreateNewCharacterPage = () => {
   const dispatch = useAppDispatch();
   const [nameFormInput, setNameFormInput] = useState<string>('');
-  const [showAlert, setShowAlert] = useState<string | null>(null);
+  const [alertType, setAlertType] = useState('');
 
   const divRef = useRef(null);
   const formRef = useRef<HTMLInputElement>(null);
@@ -41,13 +41,13 @@ const CreateNewCharacterPage = () => {
       <Header />
       <div className="user-interface-window">
         <h1 className="main-title"> G.C.C.M </h1>
-        {showAlert && <DisplayAlert alertType={showAlert} />}
+        <DisplayAlert alertType={alertType} setAlertType={setAlertType} />
         <div className="container">
           <div className="toolbar-container">
             <span className="toolbar-header">Character Tools</span>
             <div className="toolbar-characters">
               <ResetCharacter />
-              <SaveCharacter setShowAlert={setShowAlert} />
+              <SaveCharacter setAlertType={setAlertType} />
             </div>
             <span className="toolbar-header">Output Tools</span>
             <div className="toolbar-print-options">
