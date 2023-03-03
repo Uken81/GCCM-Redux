@@ -4,7 +4,7 @@ import { screen } from '@testing-library/react';
 import CreateNewCharacterPage from './CreateNewCharacterPage';
 import selectEvent from 'react-select-event';
 import {
-  addNewCharacterForUser,
+  addNewCharacter,
   createCharacterDocument,
   getUsersSavedCharacterList
 } from 'Components/Firebase/firebase.utils';
@@ -12,9 +12,7 @@ import { DocumentReference, FirestoreDataConverter } from 'firebase/firestore';
 import { renderWithProviders } from 'utils/testSetup';
 
 jest.mock('Components/Firebase/firebase.utils');
-const mockAddNewCharacter = addNewCharacterForUser as jest.MockedFunction<
-  typeof addNewCharacterForUser
->;
+const mockAddNewCharacter = addNewCharacter as jest.MockedFunction<typeof addNewCharacter>;
 const mockGetUsersCharactersList = getUsersSavedCharacterList as jest.MockedFunction<
   typeof getUsersSavedCharacterList
 >;
@@ -170,9 +168,10 @@ describe('if the correct alerts are displayed when a save character requirement 
     );
   });
 
-  test.skip('failed to save', async () => {
+  test('failed to save', async () => {
     mockRetrieveCharacterList.mockResolvedValue(['not-duplicate']);
-    mockAddNewCharacter.mockRejectedValue(new Error('Failed to add new character'));
+    mockAddNewCharacter.mockResolvedValue(mockCharacterDocument);
+    mockCreateCharacterDoc.mockRejectedValue(new Error('Failed to add new character'));
 
     const { user } = renderWithProviders(<CreateNewCharacterPage />, preloadedState);
 

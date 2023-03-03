@@ -101,10 +101,7 @@ const createUsersCharactersRef = (userId: string) => {
   return usersCharactersRef;
 };
 
-export const addNewCharacterForUser = async (
-  userId: string,
-  newCharacter: NewCharacterStatsObj
-) => {
+export const addNewCharacter = async (userId: string, newCharacter: NewCharacterStatsObj) => {
   const userCharactersRef = createUsersCharactersRef(userId);
 
   try {
@@ -124,8 +121,8 @@ export const createCharacterDocument = async (
     await setDoc(newCharacterRef, { id: characterId }, { merge: true });
     return;
   } catch (error) {
-    return Promise.reject(new Error('Failed to add new character'));
-    // throw new Error('Failed to add new character');
+    // return Promise.reject(new Error('Failed to add new character'));
+    throw new Error('Failed to add new character');
   }
 };
 

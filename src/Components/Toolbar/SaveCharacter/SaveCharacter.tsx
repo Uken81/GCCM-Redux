@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 
 import { UserContext } from '../../../context';
 import {
-  addNewCharacterForUser,
+  addNewCharacter,
   createCharacterDocument,
   getUsersSavedCharacterList
 } from '../../Firebase/firebase.utils';
@@ -67,7 +67,7 @@ const SaveCharacter = ({ setAlertType }: Props) => {
       };
 
       console.log('**** New Character for ' + userId + ' is ', newCharacter);
-      const newCharacterRef: DocumentReference<DocumentData> = await addNewCharacterForUser(
+      const newCharacterRef: DocumentReference<DocumentData> = await addNewCharacter(
         userId,
         newCharacter
       );
@@ -75,13 +75,13 @@ const SaveCharacter = ({ setAlertType }: Props) => {
       const characterId = newCharacterRef.id;
       dispatch(setId(characterId));
 
-      await createCharacterDocument(newCharacterRef, characterId);
       try {
+        await createCharacterDocument(newCharacterRef, characterId);
         console.log(`**** ${characterName} has been saved`);
         setIsSaving(false);
       } catch (error) {
-        console.log('**** Something Went wrong: ', error);
-        //add setShowAlertType saveError here? Try to put in above conditional if possible.
+        console.log('**** Saving Error: ', error);
+        setAlertType('saveError');
         setIsSaving(false);
       }
     }
