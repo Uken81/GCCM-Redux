@@ -1,21 +1,23 @@
-Thanks for looking at my test project.
-Please Note that this is my first React project and it is still just a test. CSS is a placeholder and only three Advantages and Disadvantages have been added, the final amount will be closer to fifty of each.
-I hope to learn from this project the fundamentals of React and in particular how to organise components well.
-***************************************************************************************************************
+<b>Gurps Character Cheatsheet Maker</b>
+<br/>
 
-Gurps Character Cheatsheet Maker
+Create and manage digital cheatsheets for your Gurps characters with ease using this webapp. Designed for players of the popular tabletop RPG Gurps, the Gurps Character Cheatsheet Maker allows you to access clear descriptions of the advantages and disadvantages chosen for your character, making it easier to stay organized and informed during gameplay.
+With this webapp, you can save your cheatsheets to a database and easily access, modify, and delete them. The inbuilt PDF maker also lets you create digital copies of your cheatsheets to share with other players and the Game Master, providing a quick and detailed reference during gameplay.
 
-I have made this app to allow the players of a RPG I run to easily access clear descriptions of the Advantages and Disadvantages they have chosen for their character.
+Installing
 
-My main aims are:
-That it is very quick and easy for the players to create it(as any GM knows, players are a lazy bunch).
+```console
+$ cd gccm
+$ npm install
+```
 
-Users can download a PDF of their choices that is nicely formatted and easy to read.
+Running
 
-After downloading it is easy for Users to access it on all their devices.
+```console
+run app
+$ cd gccm
+$ nom start
 
-As the layout of how the advantages and disadvantages can vary a lot in the book I also tried to make presenting it as customisable for the programer writing the objects as possible.
-
-
-
-
+run tests
+$npm test
+```
