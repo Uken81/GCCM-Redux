@@ -14,9 +14,8 @@ import ComponentToPrint from '../../Components/Display Attribute Cards/Component
 import SaveCharacter from '../../Components/Toolbar/SaveCharacter/SaveCharacter';
 import ReactToPrint from 'react-to-print';
 import { setName } from '../../features/characterSlice';
-import { useAppDispatch, useAppSelector } from '../../features/reduxHooks';
+import { useAppDispatch } from '../../features/reduxHooks';
 import { DisplayAlert } from 'Components/Toolbar/SaveCharacter/SaveAlerts/displayAlert';
-import { Navigate } from 'react-router';
 
 const CreateNewCharacterPage = () => {
   const dispatch = useAppDispatch();
@@ -24,11 +23,6 @@ const CreateNewCharacterPage = () => {
   const [alertType, setAlertType] = useState('');
   const divRef = useRef(null);
   const formRef = useRef<HTMLInputElement>(null);
-  const character = useAppSelector((state) => state.character);
-
-  if (!character.id) {
-    return <Navigate to="/create-or-manage-page" />;
-  }
 
   const handleInput = () => {
     const value = formRef.current?.value ?? '';
