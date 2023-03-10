@@ -15,7 +15,7 @@ function setupTest() {
   return { ...utils };
 }
 
-test.only('if the user clicks the create new character button, check if you are redirected to the correct URL', async () => {
+test('if the user clicks the create new character button, check if you are redirected to the correct URL', async () => {
   mockedRetrieveCharactersList.mockResolvedValue([]);
 
   const { user, history } = setupTest();

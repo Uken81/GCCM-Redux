@@ -1,24 +1,15 @@
 import React, { useContext, useState } from 'react';
-import { DocumentData, DocumentReference } from '@firebase/firestore';
-
 import Button from 'react-bootstrap/Button';
-
 import { UserContext } from '../../../context';
-import {
-  addNewCharacter,
-  createCharacterDocument,
-  getUsersSavedCharacterList
-} from '../../Firebase/firebase.utils';
+import { addNewCharacter, getUsersSavedCharacterList } from '../../Firebase/firebase.utils';
 import { NewCharacterStatsObj } from '../../../../types';
-import { setId } from 'features/characterSlice';
-import { useAppDispatch, useAppSelector } from 'features/reduxHooks';
+import { useAppSelector } from 'features/reduxHooks';
 
 interface Props {
   setAlertType: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const SaveCharacter = ({ setAlertType }: Props) => {
-  const dispatch = useAppDispatch();
   const userContext = useContext(UserContext);
   const user = userContext?.user;
   const userId = user ? user.uid : '';
@@ -30,8 +21,8 @@ const SaveCharacter = ({ setAlertType }: Props) => {
   const checkSaveRequirements = async () => {
     const checkIfDuplicate = async (userId: string, characterName: string) => {
       const characterList = await getUsersSavedCharacterList(userId);
-      const nameInDatabase = characterList.includes(characterName);
-      return nameInDatabase;
+      const existsInDatabase = characterList.includes(characterName);
+      return existsInDatabase;
     };
 
     const isDuplicate = await checkIfDuplicate(userId, characterName);
@@ -58,7 +49,6 @@ const SaveCharacter = ({ setAlertType }: Props) => {
     const saveStatus = await checkSaveRequirements();
 
     if (saveStatus) {
-      console.log('****saving');
       setIsSaving(true);
       const newCharacter: NewCharacterStatsObj = {
         name: characterName,
@@ -67,16 +57,8 @@ const SaveCharacter = ({ setAlertType }: Props) => {
       };
 
       console.log('**** New Character for ' + userId + ' is ', newCharacter);
-      const newCharacterRef: DocumentReference<DocumentData> = await addNewCharacter(
-        userId,
-        newCharacter
-      );
-
-      const characterId = newCharacterRef.id;
-      dispatch(setId(characterId));
-
       try {
-        await createCharacterDocument(newCharacterRef, characterId);
+        await addNewCharacter(userId, newCharacter);
         console.log(`**** ${characterName} has been saved`);
         setIsSaving(false);
       } catch (error) {

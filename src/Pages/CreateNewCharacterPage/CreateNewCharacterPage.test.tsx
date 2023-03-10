@@ -3,37 +3,16 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import CreateNewCharacterPage from './CreateNewCharacterPage';
 import selectEvent from 'react-select-event';
-import {
-  addNewCharacter,
-  createCharacterDocument,
-  getUsersSavedCharacterList
-} from 'Components/Firebase/firebase.utils';
-import { DocumentReference, FirestoreDataConverter } from 'firebase/firestore';
+import { addNewCharacter, getUsersSavedCharacterList } from 'Components/Firebase/firebase.utils';
 import { renderWithProviders } from 'utils/testSetup';
+import { NewCharacterStatsObj } from '../../../types';
 
 jest.mock('Components/Firebase/firebase.utils');
 const mockAddNewCharacter = addNewCharacter as jest.MockedFunction<typeof addNewCharacter>;
-const mockGetUsersCharactersList = getUsersSavedCharacterList as jest.MockedFunction<
-  typeof getUsersSavedCharacterList
->;
-const mockCreateCharacterDoc = createCharacterDocument as jest.MockedFunction<
-  typeof createCharacterDocument
->;
+
 const mockRetrieveCharacterList = getUsersSavedCharacterList as jest.MockedFunction<
   typeof getUsersSavedCharacterList
 >;
-
-const mockCharacterDocument = {
-  type: 'document',
-  converter: null,
-  firestore: '',
-  id: 'testid',
-  path: '',
-  parent: undefined,
-  withConverter: function <U>(converter: FirestoreDataConverter<U>): DocumentReference<U> {
-    throw new Error('Function not implemented.');
-  }
-};
 
 const preloadedState = {
   preloadedState: {
@@ -112,18 +91,33 @@ test('if clicking on the reset character button resets all the values on the pag
 });
 
 test('if clicking on the save character button calls the createCharacterDocument function with correct arguments', async () => {
-  mockGetUsersCharactersList.mockResolvedValue(['not duplicate']);
-  mockAddNewCharacter.mockResolvedValue(mockCharacterDocument);
+  const expectedUserId = '1234567890';
+  const expectedNewCharacter = {
+    name: 'Test Character',
+    advantages: ['contacts'],
+    disadvantages: ['loner']
+  };
+  mockRetrieveCharacterList.mockResolvedValue(['not duplicate']);
+  mockAddNewCharacter.mockImplementation(
+    async (userId: string, newCharacter: NewCharacterStatsObj) => {
+      return Promise.resolve();
+    }
+  );
+
   const { user } = renderWithProviders(<CreateNewCharacterPage />, preloadedState);
 
   const saveCharacterButton = screen.getByRole('button', { name: 'Save Character' });
   await user.click(saveCharacterButton);
-  expect(mockCreateCharacterDoc).toHaveBeenCalledWith(mockCharacterDocument, 'testid');
+  expect(addNewCharacter).toHaveBeenCalledWith(expectedUserId, expectedNewCharacter);
 });
 
-test('if successful save alert is displayed only after the character is saved', async () => {
-  mockGetUsersCharactersList.mockResolvedValue(['not duplicate']);
-  mockAddNewCharacter.mockResolvedValue(mockCharacterDocument);
+test('if successful, save alert is displayed only after the character is saved', async () => {
+  mockRetrieveCharacterList.mockResolvedValue(['not duplicate']);
+  mockAddNewCharacter.mockImplementation(
+    async (userId: string, newCharacter: NewCharacterStatsObj) => {
+      return Promise.resolve();
+    }
+  );
   const { user } = renderWithProviders(<CreateNewCharacterPage />, preloadedState);
 
   expect(screen.queryByRole('alert')).not.toBeInTheDocument();
@@ -170,8 +164,11 @@ describe('if the correct alerts are displayed when a save character requirement 
 
   test('failed to save', async () => {
     mockRetrieveCharacterList.mockResolvedValue(['not-duplicate']);
-    mockAddNewCharacter.mockResolvedValue(mockCharacterDocument);
-    mockCreateCharacterDoc.mockRejectedValue(new Error('Failed to add new character'));
+    mockAddNewCharacter.mockImplementation(
+      async (userId: string, newCharacter: NewCharacterStatsObj) => {
+        return Promise.reject();
+      }
+    );
 
     const { user } = renderWithProviders(<CreateNewCharacterPage />, preloadedState);
 

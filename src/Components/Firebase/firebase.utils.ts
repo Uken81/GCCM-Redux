@@ -96,33 +96,14 @@ export const ResetPassword = (email: string) => {
     });
 };
 
-const createUsersCharactersRef = (userId: string) => {
-  const usersCharactersRef = collection(db, 'users', userId, 'characters');
-  return usersCharactersRef;
-};
-
 export const addNewCharacter = async (userId: string, newCharacter: NewCharacterStatsObj) => {
-  const userCharactersRef = createUsersCharactersRef(userId);
-
+  const userCharactersRef = collection(db, 'users', userId, 'characters');
   try {
     const newCharacterRef = await addDoc(userCharactersRef, newCharacter);
-    return newCharacterRef;
-  } catch (error) {
-    console.log('**** Something Went wrong: ', error);
-    return error;
-  }
-};
-
-export const createCharacterDocument = async (
-  newCharacterRef: DocumentReference<DocumentData>,
-  characterId: string
-) => {
-  try {
+    const characterId = newCharacterRef.id;
     await setDoc(newCharacterRef, { id: characterId }, { merge: true });
-    return;
   } catch (error) {
-    // return Promise.reject(new Error('Failed to add new character'));
-    throw new Error('Failed to add new character');
+    return;
   }
 };
 
@@ -133,7 +114,7 @@ const convertSnapshotToList = async (snapShotObj: QuerySnapshot<DocumentData>) =
 };
 
 export const getUsersSavedCharacterList = async (userId: string) => {
-  const usersCharactersRef = createUsersCharactersRef(userId);
+  const usersCharactersRef = collection(db, 'users', userId, 'characters');
   const savedCharactersDoc = await getDocs(usersCharactersRef);
   const usersCharactersList = await convertSnapshotToList(savedCharactersDoc);
 
@@ -147,7 +128,7 @@ const convertSnapshotToObj = async (snapShotObj: QuerySnapshot<DocumentData>) =>
 };
 
 export const getMatchingCharacterForUser = async (userId: string, characterName: string) => {
-  const charactersRef = createUsersCharactersRef(userId);
+  const charactersRef = collection(db, 'users', userId, 'characters');
   const nameQuery = query(charactersRef, where('name', '==', characterName));
   try {
     const matchingCharacterSnapshot = await getDocs(nameQuery);

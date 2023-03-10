@@ -11,8 +11,8 @@ import { useNavigate } from 'react-router';
 import {
   storeAdvantageList,
   storeDisadvantageList,
-  setId,
-  setName
+  setName,
+  setId
 } from '../../../features/characterSlice';
 import { useAppDispatch } from '../../../features/reduxHooks';
 
@@ -28,6 +28,7 @@ const LoadCharacter = () => {
     const createCharacterList = async () => {
       if (user) {
         const savedCharacters = await getUsersSavedCharacterList(user.uid);
+        console.log('savedChar', savedCharacters);
         return setCharacterList(savedCharacters);
       }
     };
@@ -36,8 +37,10 @@ const LoadCharacter = () => {
 
   const getCharacterRecord = async (characterName: string) => {
     const selectedCharacter = characterName;
+    console.log('selectedChar', selectedCharacter);
     if (user) {
       const characterRecord = await getMatchingCharacterForUser(user.uid, selectedCharacter);
+      console.log('charRec', characterRecord);
       return characterRecord;
     } else {
       return null;

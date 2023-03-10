@@ -5,9 +5,11 @@ import Button from 'react-bootstrap/Button';
 import { UserContext } from '../../context';
 import { GetCharacterReference, SaveChangesToCharacter } from '../Firebase/firebase.utils';
 import { useNavigate } from 'react-router';
-import { useAppSelector } from 'features/reduxHooks';
+import { useAppDispatch, useAppSelector } from 'features/reduxHooks';
+import { resetCharacter } from 'features/characterSlice';
 
 const EditCharacter = () => {
+  const dispatch = useAppDispatch();
   const userContext = useContext(UserContext);
   const user = userContext?.user;
   const userId = user ? user.uid : '';
@@ -20,11 +22,11 @@ const EditCharacter = () => {
     const characterRef = await GetCharacterReference(userId, characterId);
     if (selectedAdvantages.length > 0 || selectedDisadvantages.length > 0) {
       await SaveChangesToCharacter(characterRef, selectedAdvantages, selectedDisadvantages);
+      dispatch(resetCharacter());
       console.log(`${characterRef} has been successfully edited.`);
       navigate('/create-or-manage-page');
     } else {
       console.log('**** Edit fail');
-      alert('You must select at least one Advantage or Disadvantage');
     }
   };
 
