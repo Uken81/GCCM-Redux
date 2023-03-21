@@ -67,8 +67,8 @@ const LoadCharacter = () => {
     <div>
       {characterList && (
         <DropdownButton
-          className="dropdown-button"
-          title={isLoading ? 'LOADING...' : 'LOAD CHARACTER'}
+          className="button"
+          title={isLoading ? 'LOADING...' : 'Load Character'}
           variant="outline-primary"
           size="lg">
           {characterList.length > 0 &&
@@ -81,7 +81,8 @@ const LoadCharacter = () => {
                   color: 'white',
                   backgroundColor: 'black',
                   fontSize: '1.5rem',
-                  borderBottom: '1px solid white'
+                  borderBottom: '1px solid white',
+                  minWidth: '11rem'
                 }}>
                 {characterName}
               </DropdownItem>

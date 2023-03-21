@@ -4,11 +4,6 @@
   margin: 0;
 }
 
-.navigation-page {
-  background-color: black;
-  height: 100vh;
-}
-
 .main-title {
   font-size: 12rem;
   // /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;  */
@@ -36,18 +31,6 @@ input {
   flex-direction: column;
   background-color: black;
   align-items: center;
-
-  .landinging-page-buttons {
-    flex-direction: row;
-    margin-top: 15%;
-
-    .links {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      margin: 20% 20%;
-    }
-  }
 
   .container {
     display: flex;

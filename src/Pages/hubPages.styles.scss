@@ -1,0 +1,36 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  align-items: center;
+  height: 100vh;
+
+  .header {
+    margin-left: auto;
+    margin-right: 2%;
+  }
+
+  .title-container {
+    margin-top: 5%;
+  }
+
+  .main-title {
+    font-size: 12rem;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: normal;
+    letter-spacing: 2rem;
+    color: #212529;
+    text-shadow: 2px 2px royalblue;
+  }
+
+  .links-container {
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+    margin-top: 15%;
+
+    .button {
+      min-width: 12rem;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import { onAuthStateChanged } from '@firebase/auth';
 import React, { useContext, useEffect } from 'react';
 
-import '../../Pages/page.styles.scss';
+import 'Pages/hubPages.styles.scss';
 
 import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from 'react-router-dom';
@@ -41,20 +41,18 @@ const CreateOrManage = () => {
   }, [user]);
 
   return (
-    <div className="navigation-page">
+    <div className="main-container">
       <Header />
-      <div className="user-interface-window">
-        <div className="launching-page-options">
-          <h1 className="main-title"> G.C.C.M </h1>
-          <div className="links">
-            <Link to="/create-new-character-page">
-              <Button size="lg" variant="outline-primary">
-                Create New Character
-              </Button>
-            </Link>
-            <LoadCharacter />
-          </div>
-        </div>
+      <div className="title-container">
+        <h1 className="main-title"> G.C.C.M </h1>
+      </div>
+      <div className="links-container">
+        <Link to="/create-new-character-page">
+          <Button className="button" size="lg" variant="outline-primary">
+            New Character
+          </Button>
+        </Link>
+        <LoadCharacter />
       </div>
     </div>
   );

@@ -35,7 +35,7 @@ const Header = () => {
       {['/create-new-character-page', '/manage-characters-page', '/edit-character-page'].includes(
         pathname
       ) && <BackToCreateManage />}
-      {user && <button id="sign-out" onClick={signout}></button>}
+      {user && <button className="sign-out" onClick={signout}></button>}
     </div>
   );
 };

@@ -2,17 +2,25 @@
   display: flex;
   justify-content: flex-end;
   background-color: black;
- 
-  #sign-out {
+  padding-top: 1%;
+
+  .nav-link {
+    margin-right: 2%;
+  }
+
+  a {
+    color: white;
+  }
+
+  .sign-out {
     height: 30px;
     width: 30px;
-    background-image: url("../../Assets/Images/logoutIcon.png");
+    margin-right: 2%;
+    background-image: url('../../Assets/Images/logoutIcon.png');
     background-size: 100%;
     background-repeat: no-repeat;
     background-color: black;
     border: none;
-    margin-top: 0.75%;
-    margin-right: 1%;
     text-decoration: none;
-  } 
+  }
 }

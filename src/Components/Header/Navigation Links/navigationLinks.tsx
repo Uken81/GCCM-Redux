@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
 
-import './navigationLinks.styles.scss';
 import { useAppDispatch } from 'features/reduxHooks';
 import { resetCharacter } from 'features/characterSlice';
 
