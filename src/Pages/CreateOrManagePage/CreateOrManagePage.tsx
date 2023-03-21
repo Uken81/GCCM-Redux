@@ -41,7 +41,7 @@ const CreateOrManage = () => {
   }, [user]);
 
   return (
-    <div className="create-or-manage-characters">
+    <div className="navigation-page">
       <Header />
       <div className="user-interface-window">
         <div className="launching-page-options">
