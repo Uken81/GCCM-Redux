@@ -7,7 +7,7 @@ const LandingPage = () => {
   return (
     <div className="navigation-page">
       <div className="user-interface-window">
-        <div className="launching-page-options">
+        <div className="landinging-page-buttons">
           <h1 className="main-title"> G.C.C.M </h1>
           <div className="links">
             <Link to="/sign-in-and-sign-up">

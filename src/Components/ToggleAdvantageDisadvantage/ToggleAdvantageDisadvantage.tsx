@@ -28,12 +28,12 @@ const ToggleAdvantageDisadvantage = ({ isChoosingAdvantages }: Props) => {
         activeKey={isChoosingAdvantages ? 'advantages' : 'disadvantages'}
         className="toggle-advantages-disadvantages"
         onSelect={handleTabs}>
-        <Tab
+        {/* <Tab
           style={{ backgroundColor: 'red' }}
           className="tab-disabled"
           title="Choose From"
           disabled
-        />
+        /> */}
         <Tab eventKey="advantages" title="Advantages" />
         <Tab eventKey="disadvantages" title="Disadvantages" />
       </Tabs>

@@ -15,14 +15,20 @@ const DisplaySelected = () => {
         className="selected-list"
         id="selected-advantages"
         onClick={() => dispatch(toggleAdvantages())}>
-        <h1 style={{ color: 'seagreen' }}>Selected Advantages</h1>
+        <h2
+          style={{
+            color: 'seagreen',
+            borderBottom: '2px solid seagreen'
+          }}>
+          Selected Advantages
+        </h2>
         <SelectedAdvantages />
       </div>
       <div
         className="selected-list"
         id="selected-disadvantages"
         onClick={() => dispatch(toggleDisadvantages())}>
-        <h1 style={{ color: 'brown' }}>Selected Disadvantages</h1>
+        <h2 style={{ color: 'brown' }}>Selected Disadvantages</h2>
         <SelectedDisadvantages />
       </div>
     </div>

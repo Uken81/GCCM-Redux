@@ -12,12 +12,12 @@ export const SearchbarTitle = ({ isChoosingAdvantages }: Props) => {
   const createHeading = () => {
     if (characterName) {
       return (
-        <h1>
+        <h2>
           SELECT {characterName.toUpperCase()}&apos;S {attributeType}
-        </h1>
+        </h2>
       );
     } else {
-      return <h1>Select your Characters {attributeType}</h1>;
+      return <h2>Select your Characters {attributeType}</h2>;
     }
   };
 
