@@ -3,23 +3,14 @@ import React from 'react';
 
 import Button from 'react-bootstrap/Button';
 
-interface Props {
-  setShowAlert: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const DeleteCharacter = ({ setShowAlert }: Props) => {
+const DeleteCharacter: React.FC<{ handleClick: () => void }> = ({ handleClick }) => {
   const characterName = useAppSelector((state) => state.character.name);
 
-  const showDeleteAlert = () => {
-    setShowAlert(true);
-  };
-
   return (
-    <div className="button-container">
-      <Button className="tool-button" onClick={showDeleteAlert}>
-        {`Delete ${characterName}`}
-      </Button>
-    </div>
+    <Button
+      onClick={handleClick}
+      size="lg"
+      variant="outline-primary">{`Delete ${characterName}`}</Button>
   );
 };
 

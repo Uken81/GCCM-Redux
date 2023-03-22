@@ -42,42 +42,42 @@ input {
       cursor: pointer;
     }
 
-    .toolbar-container {
-      display: flex;
-      flex-direction: column;
-      margin-left: 1.5%;
-      width: 10%;
-      float: left;
-      font-weight: bolder;
-      text-align: center;
+    // .toolbar-container {
+    //   display: flex;
+    //   flex-direction: column;
+    //   margin-left: 1.5%;
+    //   width: 10%;
+    //   float: left;
+    //   font-weight: bolder;
+    //   text-align: center;
 
-      .toolbar-header {
-        font-size: 1.75rem;
-        font-weight: 400;
-        color: white;
-        margin-bottom: 5%;
-        font-weight: bolder;
-      }
+    //   .toolbar-header {
+    //     font-size: 1.75rem;
+    //     font-weight: 400;
+    //     color: white;
+    //     margin-bottom: 5%;
+    //     font-weight: bolder;
+    //   }
 
-      .toolbar-characters,
-      .toolbar-print-options {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 25%;
-        border: white solid 3px;
-        border-radius: 25%;
-        padding: 15% 10%;
+    //   .toolbar-characters,
+    //   .toolbar-print-options {
+    //     display: flex;
+    //     flex-direction: column;
+    //     align-items: center;
+    //     margin-bottom: 25%;
+    //     border: white solid 3px;
+    //     border-radius: 25%;
+    //     padding: 15% 10%;
 
-        .tool-button {
-          background-color: white;
-          color: black;
-          font-weight: bolder;
-          margin: 10% 0;
-          font-size: 1.25rem;
-        }
-      }
-    }
+    //     .tool-button {
+    //       background-color: white;
+    //       color: black;
+    //       font-weight: bolder;
+    //       margin: 10% 0;
+    //       font-size: 1.25rem;
+    //     }
+    //   }
+    // }
 
     .main-interface {
       display: flex;

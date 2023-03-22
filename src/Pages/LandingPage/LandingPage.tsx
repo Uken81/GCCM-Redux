@@ -18,7 +18,7 @@ const LandingPage = () => {
         <Link to="/guest-page">
           <Button className="button" size="lg" variant="outline-primary">
             Continue as Guest
-          </Button>{' '}
+          </Button>
         </Link>
       </div>
     </div>

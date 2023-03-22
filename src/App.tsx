@@ -6,9 +6,9 @@ import { UserContext } from './context';
 import LandingPage from './Pages/LandingPage/LandingPage';
 import GuestPage from './Pages/GuestPage/GuestPage';
 import CreateOrManage from './Pages/CreateOrManagePage/CreateOrManagePage';
-import CreateNewCharacterPage from './Pages/CreateNewCharacterPage/CreateNewCharacterPage';
+import CreateNewCharacterPage from './Pages/CreateNewCharacterPage/NewCharacterPage';
 import ManageCharactersPage from './Pages/ManageCharactersPage/ManageCharactersPage';
-import EditCharacterPage from './Pages/EditCharacterPage';
+import EditCharacterPage from './Pages/EditCharacterPage/EditCharacterPage';
 import ResetPasswordPage from './Pages/ResetPage/ResetPasswordPage';
 
 export const App = () => {

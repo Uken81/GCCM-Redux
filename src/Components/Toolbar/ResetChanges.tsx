@@ -17,11 +17,9 @@ const ResetChanges = () => {
   };
 
   return (
-    <div>
-      <Button className="tool-button" onClick={handleClick} size="lg">
-        Reset Changes
-      </Button>
-    </div>
+    <Button size="lg" variant="outline-primary" onClick={handleClick}>
+      Reset Changes
+    </Button>
   );
 };
 

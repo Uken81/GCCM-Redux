@@ -7,11 +7,9 @@ const ResetCharacter = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="button-container">
-      <Button className="tool-button" size="lg" onClick={() => dispatch(resetCharacter())}>
-        Reset Character
-      </Button>
-    </div>
+    <Button size="lg" variant="outline-primary" onClick={() => dispatch(resetCharacter())}>
+      Reset Character
+    </Button>
   );
 };
 

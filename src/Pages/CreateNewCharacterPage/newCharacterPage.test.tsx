@@ -1,7 +1,7 @@
 /* eslint-disable import/no-named-as-default-member */
 import React from 'react';
 import { screen } from '@testing-library/react';
-import CreateNewCharacterPage from './CreateNewCharacterPage';
+import CreateNewCharacterPage from './NewCharacterPage';
 import selectEvent from 'react-select-event';
 import { addNewCharacter, getUsersSavedCharacterList } from 'Components/Firebase/firebase.utils';
 import { renderWithProviders } from 'utils/testSetup';

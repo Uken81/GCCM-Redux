@@ -31,11 +31,9 @@ const EditCharacter = () => {
   };
 
   return (
-    <div className="button-container">
-      <Button className="tool-button" onClick={handleEdit}>
-        Save Changes
-      </Button>
-    </div>
+    <Button size="lg" variant="outline-primary" onClick={handleEdit}>
+      Save Changes
+    </Button>
   );
 };
 

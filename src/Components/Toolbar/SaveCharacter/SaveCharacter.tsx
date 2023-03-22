@@ -6,7 +6,7 @@ import { NewCharacterStatsObj } from '../../../../types';
 import { useAppSelector } from 'features/reduxHooks';
 
 interface Props {
-  setAlertType: React.Dispatch<React.SetStateAction<string>>;
+  setAlertType: (value: string) => void;
 }
 
 const SaveCharacter = ({ setAlertType }: Props) => {
@@ -70,11 +70,9 @@ const SaveCharacter = ({ setAlertType }: Props) => {
   };
 
   return (
-    <div className="button-container">
-      <Button className="tool-button" size="lg" onClick={saveCharacterHandler}>
-        {isSaving ? 'Saving...' : 'Save Character'}
-      </Button>
-    </div>
+    <Button size="lg" variant="outline-primary" onClick={saveCharacterHandler}>
+      {isSaving ? 'Saving...' : 'Save Character'}
+    </Button>
   );
 };
 
