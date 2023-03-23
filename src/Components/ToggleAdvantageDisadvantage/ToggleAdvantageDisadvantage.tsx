@@ -6,11 +6,9 @@ import { Tab, Tabs } from 'react-bootstrap';
 import { useAppDispatch } from 'features/reduxHooks';
 import { toggleAdvantages, toggleDisadvantages } from 'features/toggleSlice';
 
-interface Props {
-  isChoosingAdvantages: boolean;
-}
-
-const ToggleAdvantageDisadvantage = ({ isChoosingAdvantages }: Props) => {
+const ToggleAdvantageDisadvantage: React.FC<{ isChoosingAdvantages: boolean }> = ({
+  isChoosingAdvantages
+}) => {
   const dispatch = useAppDispatch();
 
   useLayoutEffect(() => {
@@ -26,14 +24,7 @@ const ToggleAdvantageDisadvantage = ({ isChoosingAdvantages }: Props) => {
       <Tabs
         defaultActiveKey="advantages"
         activeKey={isChoosingAdvantages ? 'advantages' : 'disadvantages'}
-        className="toggle-advantages-disadvantages"
         onSelect={handleTabs}>
-        {/* <Tab
-          style={{ backgroundColor: 'red' }}
-          className="tab-disabled"
-          title="Choose From"
-          disabled
-        /> */}
         <Tab eventKey="advantages" title="Advantages" />
         <Tab eventKey="disadvantages" title="Disadvantages" />
       </Tabs>

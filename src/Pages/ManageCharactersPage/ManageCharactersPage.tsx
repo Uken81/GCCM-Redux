@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import '../../Components/Display Attribute Cards/DisplayAttributeCards.styles.scss';
-import 'Pages/page.styles.scss';
+import 'Pages/characterPage.styles.scss';
 
 import Header from '../../Components/Header/Header.component';
 import DisplaySelected from '../../Components/Selected/Display Selected/DisplaySelected';
@@ -20,20 +20,18 @@ const ManageCharactersPage = () => {
   }
 
   return (
-    <div className="manage-character-page">
+    <div className="main-container">
       <Header />
-      <div className="user-interface-window">
-        <h1 className="main-title"> G.C.C.M </h1>
-        <div className="container">
-          <ManageCharactersToolbar setShowAlert={setShowAlert} divRef={divRef} />
-          <div className="main-interface">
-            <h1 className="selected-header">{character.name}&apos;s Cheatsheet</h1>
-            {showAlert && <DeleteAlert setShowAlert={setShowAlert} />}
-            <DisplaySelected />
-          </div>
+      <h1 className="main-title">G.C.C.M</h1>
+      <div className="inner-container">
+        <ManageCharactersToolbar setShowAlert={setShowAlert} divRef={divRef} />
+        <div className="attribute-selections">
+          <h1 className="manage-title">{character.name}&apos;s Attributes</h1>
+          {showAlert && <DeleteAlert setShowAlert={setShowAlert} />}
+          <DisplaySelected />
         </div>
       </div>
-      <div className="results-window" id="results">
+      <div className="results-window">
         <div style={{ display: 'none' }}>
           <ComponentToPrint divRef={divRef} />
         </div>

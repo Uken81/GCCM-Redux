@@ -1,25 +1,17 @@
 import React from 'react';
 import { useAppSelector } from 'features/reduxHooks';
 
-interface Props {
-  isChoosingAdvantages: boolean;
-}
-
-export const SearchbarTitle = ({ isChoosingAdvantages }: Props) => {
+export const SearchbarTitle: React.FC<{ isChoosingAdvantages }> = ({ isChoosingAdvantages }) => {
   const characterName = useAppSelector((state) => state.character.name);
-  const attributeType = isChoosingAdvantages ? 'ADVANTAGES' : 'DISADVANTAGES';
+  const attributeType = isChoosingAdvantages ? 'Advantages' : 'Disadvantages';
 
-  const createHeading = () => {
-    if (characterName) {
-      return (
-        <h2>
-          SELECT {characterName.toUpperCase()}&apos;S {attributeType}
-        </h2>
-      );
-    } else {
-      return <h2>Select your Characters {attributeType}</h2>;
-    }
-  };
+  const title = characterName ? (
+    <h2 className="title">
+      Select {characterName}&apos;s {attributeType}
+    </h2>
+  ) : (
+    <h2 className="title">Select your Characters {attributeType}</h2>
+  );
 
-  return <div>{createHeading()}</div>;
+  return title;
 };

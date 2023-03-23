@@ -14,16 +14,14 @@ const EditCharacterPage = () => {
   }
 
   return (
-    <div className="edit-character-page">
+    <div className="main-container">
       <Header />
-      <div className="user-interface-window">
-        <h1 className="main-title"> G.C.C.M </h1>
-        <div className="container">
-          <EditCharacterToolbar />
-          <div className="main-interface">
-            <Searchbar />
-            <DisplaySelected />
-          </div>
+      <h1 className="main-title"> G.C.C.M </h1>
+      <div className="inner-container">
+        <EditCharacterToolbar />
+        <div className="attribute-selections">
+          <Searchbar />
+          <DisplaySelected />
         </div>
       </div>
     </div>

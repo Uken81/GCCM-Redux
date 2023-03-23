@@ -64,18 +64,16 @@ const Searchbar = () => {
   return (
     <div className="searchbar-container">
       <SearchbarTitle isChoosingAdvantages={isChoosingAdvantages} />
-      <div className="toggle-and-search">
-        <ToggleAdvantageDisadvantage isChoosingAdvantages={isChoosingAdvantages} />
-        <Select
-          className="searchbar"
-          name="attributes"
-          options={isChoosingAdvantages ? advantageOptions : disadvantageOptions}
-          value={selectedOptions}
-          isMulti
-          onChange={handleChange}
-          formatOptionLabel={formatOptionLabel}
-        />
-      </div>
+      <ToggleAdvantageDisadvantage isChoosingAdvantages={isChoosingAdvantages} />
+      <Select
+        className="searchbar"
+        name="attributes"
+        options={isChoosingAdvantages ? advantageOptions : disadvantageOptions}
+        value={selectedOptions}
+        isMulti
+        onChange={handleChange}
+        formatOptionLabel={formatOptionLabel}
+      />
     </div>
   );
 };

@@ -7,11 +7,7 @@ const SelectedDisadvantages = () => {
     <ul>
       {selectedDisadvantages.map((name) => {
         return (
-          <li
-            className="selected-disadvantages"
-            key={`${name}-selected`}
-            style={{ color: 'brown' }}
-            title={name}>
+          <li className="list-items" key={`${name}-selected`} title={name}>
             {name}
           </li>
         );

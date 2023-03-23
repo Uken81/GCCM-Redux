@@ -10,25 +10,19 @@ const DisplaySelected = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="selected-window">
+    <div className="selected-container">
       <div
         className="selected-list"
         id="selected-advantages"
         onClick={() => dispatch(toggleAdvantages())}>
-        <h2
-          style={{
-            color: 'seagreen',
-            borderBottom: '2px solid seagreen'
-          }}>
-          Selected Advantages
-        </h2>
+        <h2>Selected Advantages</h2>
         <SelectedAdvantages />
       </div>
       <div
         className="selected-list"
         id="selected-disadvantages"
         onClick={() => dispatch(toggleDisadvantages())}>
-        <h2 style={{ color: 'brown' }}>Selected Disadvantages</h2>
+        <h2>Selected Disadvantages</h2>
         <SelectedDisadvantages />
       </div>
     </div>

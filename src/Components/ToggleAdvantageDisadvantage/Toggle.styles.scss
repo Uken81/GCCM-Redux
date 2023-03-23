@@ -1,7 +1,6 @@
 .toggle-container {
   display: flex;
   flex-direction: row;
-  // justify-content: left;
   margin-top: 5%;
   font-size: 1.25rem;
 
@@ -13,15 +12,11 @@
     font-weight: bolder;
   }
 
-  .nav-tabs .nav-link.disabled {
-    color: white;
-  }
-
-  li:nth-child(2) button {
+  li:nth-child(1) button {
     color: seagreen;
   }
 
-  li:nth-child(3) button {
+  li:nth-child(2) button {
     color: brown;
   }
 }

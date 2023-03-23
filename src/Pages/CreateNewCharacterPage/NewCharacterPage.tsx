@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Form } from 'react-bootstrap';
 
 import '../../Components/Display Attribute Cards/DisplayAttributeCards.styles.scss';
-import 'Pages/page.styles.scss';
+import 'Pages/characterPage.styles.scss';
 
 import Header from '../../Components/Header/Header.component';
 import Searchbar from '../../Components/SearchBar/Searchbar';
@@ -33,35 +33,31 @@ const CreateNewCharacterPage = () => {
   };
 
   return (
-    <div className="App">
+    <div className="main-container">
       <Header />
-      <div className="user-interface-window">
-        <h1 className="main-title"> G.C.C.M </h1>
-        <DisplayAlert alertType={alertType} setAlertType={setAlertType} />
-        <div className="container">
-          <NewCharacterToolbar setAlertType={setAlertType} divRef={divRef} />
-          <div className="main-interface">
-            <div className="form">
-              <Form className="new-name-form" onSubmit={handleSubmit} data-testid="form">
-                <Form.Control
-                  type="text"
-                  name="character-name-form"
-                  aria-label="character-name-form"
-                  ref={formRef}
-                  value={nameFormInput}
-                  onChange={handleInput}
-                  placeholder="Enter New Character Name..."
-                  size="lg"
-                  maxLength={20}
-                />
-              </Form>
-            </div>
-            <Searchbar />
-            <DisplaySelected />
-          </div>
+      <h1 className="main-title">G.C.C.M</h1>
+      <div className="inner-container">
+        <NewCharacterToolbar setAlertType={setAlertType} divRef={divRef} />
+        <div className="attribute-selections">
+          <DisplayAlert alertType={alertType} setAlertType={setAlertType} />
+          <Form className="name-form" onSubmit={handleSubmit} data-testid="form">
+            <Form.Control
+              type="text"
+              name="character-name-form"
+              aria-label="character-name-form"
+              ref={formRef}
+              value={nameFormInput}
+              onChange={handleInput}
+              placeholder="Enter New Character Name..."
+              size="lg"
+              maxLength={20}
+            />
+          </Form>
+          <Searchbar />
+          <DisplaySelected />
         </div>
       </div>
-      <div className="results-window" id="results">
+      <div className="results-window">
         <ComponentToPrint divRef={divRef} />
       </div>
     </div>
