@@ -6,15 +6,16 @@ const SelectedAdvantages = () => {
   const selectedAdvantages = useAppSelector((state) => state.character.advantages);
 
   return (
-    // <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
     <ul>
-      {selectedAdvantages.map((name) => {
-        return (
-          <li className="list-items" key={`${name}-selected`} title={name}>
-            {name}
-          </li>
-        );
-      })}
+      {selectedAdvantages.map((name) => (
+        <li
+          className="list-items"
+          key={`${name}-selected`}
+          title={name}
+          style={{ color: 'seagreen' }}>
+          {name}
+        </li>
+      ))}
     </ul>
   );
 };

@@ -37,7 +37,7 @@ test('if searchbar heading changes when a characters name is submitted', async (
   const { user } = setUpTest();
 
   expect(
-    screen.getByRole('heading', { name: 'Select your Characters ADVANTAGES' })
+    screen.getByRole('heading', { name: 'Select your Characters Advantages' })
   ).toBeInTheDocument();
 
   const nameTextInput = screen.getByRole('textbox', { name: 'character-name-form' });
@@ -45,7 +45,7 @@ test('if searchbar heading changes when a characters name is submitted', async (
   await user.type(nameTextInput, 'test name');
   await user.keyboard('{Enter}');
   expect(
-    screen.getByRole('heading', { name: "SELECT TEST NAME'S ADVANTAGES" })
+    screen.getByRole('heading', { name: "Select test name's Advantages" })
   ).toBeInTheDocument();
 });
 
@@ -53,19 +53,19 @@ test('if clicking on the disadvantages tab changes the search bar heading text a
   const { user } = setUpTest();
 
   expect(
-    screen.getByRole('heading', { name: 'Select your Characters ADVANTAGES' })
+    screen.getByRole('heading', { name: 'Select your Characters Advantages' })
   ).toBeInTheDocument();
 
   const disadvantageTab = screen.getByRole('tab', { name: 'Disadvantages' });
   await user.click(disadvantageTab);
   expect(
-    screen.getByRole('heading', { name: 'Select your Characters DISADVANTAGES' })
+    screen.getByRole('heading', { name: 'Select your Characters Disadvantages' })
   ).toBeInTheDocument();
 
   const advantageTab = screen.getByRole('tab', { name: 'Advantages' });
   await user.click(advantageTab);
   expect(
-    screen.getByRole('heading', { name: 'Select your Characters ADVANTAGES' })
+    screen.getByRole('heading', { name: 'Select your Characters Advantages' })
   ).toBeInTheDocument();
 });
 
@@ -86,7 +86,7 @@ test('if clicking on the reset character button resets all the values on the pag
   await user.click(screen.getByRole('button', { name: 'Reset Character' }));
   expect(screen.queryAllByText('Absolute Direction').length).toBe(0);
   expect(
-    screen.getByRole('heading', { name: 'Select your Characters ADVANTAGES' })
+    screen.getByRole('heading', { name: 'Select your Characters Advantages' })
   ).toBeInTheDocument();
 });
 

@@ -15,10 +15,10 @@ const setupTest = () => {
 test('If clicking on the Disadvantages tab changes the searchbar title', async () => {
   const { user } = setupTest();
 
-  expect(screen.getByRole('heading')).toHaveTextContent('Select your Characters ADVANTAGES');
+  expect(screen.getByRole('heading')).toHaveTextContent('Select your Characters Advantages');
 
   await user.click(screen.getByRole('tab', { name: 'Disadvantages' }));
-  expect(screen.getByRole('heading')).toHaveTextContent('Select your Characters DISADVANTAGES');
+  expect(screen.getByRole('heading')).toHaveTextContent('Select your Characters Disadvantages');
 });
 
 test('If clicking on Disadvantages tab changes the searchbar options', async () => {

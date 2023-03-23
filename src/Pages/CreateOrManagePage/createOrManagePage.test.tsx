@@ -22,6 +22,6 @@ test('if the user clicks the create new character button, check if you are redir
 
   expect(history.location.pathname).toBe('/create-or-manage-page');
 
-  await user.click(screen.getByRole('button', { name: 'Create New Character' }));
+  await user.click(screen.getByRole('button', { name: 'New Character' }));
   expect(history.location.pathname).toBe('/create-new-character-page');
 });

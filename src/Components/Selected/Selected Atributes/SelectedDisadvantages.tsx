@@ -5,13 +5,11 @@ const SelectedDisadvantages = () => {
   const selectedDisadvantages = useAppSelector((state) => state.character.disadvantages);
   return (
     <ul>
-      {selectedDisadvantages.map((name) => {
-        return (
-          <li className="list-items" key={`${name}-selected`} title={name}>
-            {name}
-          </li>
-        );
-      })}
+      {selectedDisadvantages.map((name) => (
+        <li className="list-items" key={`${name}-selected`} title={name} style={{ color: 'brown' }}>
+          {name}
+        </li>
+      ))}
     </ul>
   );
 };
