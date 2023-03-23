@@ -26,15 +26,13 @@ const SignInAndSignUp = () => {
     return (
       <div className="sign-in-and-sign-up">
         <Header />
+        <h1 className="main-title"> G.C.C.M </h1>
         <div className="form-container">
-          <h1 className="main-title"> G.C.C.M </h1>
-
           {showEmailAlert && <EmailAlert setShowEmailAlert={setShowEmailAlert} />}
           {showPasswordAlert && <PasswordAlert setShowPasswordAlert={setShowPasswordAlert} />}
           {isSigningIn ? (
             <>
               <SignIn
-                setIsSigningIn={setIsSigningin}
                 setShowLoadingScreen={setShowLoadingScreen}
                 setShowEmailAlert={setShowEmailAlert}
                 setShowPasswordAlert={setShowPasswordAlert}

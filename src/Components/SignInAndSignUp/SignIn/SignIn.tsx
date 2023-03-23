@@ -7,18 +7,12 @@ import { google } from 'Components/Firebase/firebase.utils';
 import { GoogleAlert } from '../signin.utils.tsx/GoogleAlert';
 
 interface Props {
-  setIsSigningIn: React.Dispatch<React.SetStateAction<boolean>>;
   setShowLoadingScreen: React.Dispatch<React.SetStateAction<boolean>>;
   setShowEmailAlert: React.Dispatch<React.SetStateAction<boolean>>;
   setShowPasswordAlert: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SignIn = ({
-  setIsSigningIn,
-  setShowLoadingScreen,
-  setShowEmailAlert,
-  setShowPasswordAlert
-}: Props) => {
+const SignIn = ({ setShowLoadingScreen, setShowEmailAlert, setShowPasswordAlert }: Props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showGoogleAlert, setShowGoogleAlert] = useState(false);
@@ -36,7 +30,7 @@ const SignIn = ({
   const auth = getAuth();
   const navigate = useNavigate();
 
-  const handleSignin = async (event: { preventDefault: () => void }) => {
+  const emailSignin = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     setShowLoadingScreen(true);
     await signInWithEmailAndPassword(auth, email, password)
@@ -89,8 +83,8 @@ const SignIn = ({
       </Button>
       {showGoogleAlert && <GoogleAlert setShowGoogleAlert={setShowGoogleAlert} />}
       <span>or</span>
-      <Form onSubmit={handleSignin}>
-        <Form.Group className="sign-in-form" controlId="sign-in-email">
+      <Form onSubmit={emailSignin}>
+        <Form.Group className="form-input" controlId="sign-in-email">
           <Form.Control
             type="email"
             name="email"
@@ -101,7 +95,7 @@ const SignIn = ({
           />
         </Form.Group>
 
-        <Form.Group className="sign-in-form" controlId="sign-in-password">
+        <Form.Group className="form-input" controlId="sign-in-password">
           <Form.Control
             type="password"
             name="password"

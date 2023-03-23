@@ -1,5 +1,4 @@
-import React from 'react';
-import { SetStateAction, useState } from 'react';
+import React, { SetStateAction, useState } from 'react';
 
 import '../../Pages/SignInAndSignUp/SignInAndSignUpPage.styles.scss';
 
@@ -88,7 +87,7 @@ const SignUp = ({ setShowLoadingScreen }: Props) => {
       </Button>
       <span>or</span>
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="sign-up-form" controlId="sign-up-email">
+        <Form.Group className="form-input" controlId="sign-up-email">
           <Form.Control
             type="email"
             name="email"
@@ -98,7 +97,7 @@ const SignUp = ({ setShowLoadingScreen }: Props) => {
           />
         </Form.Group>
 
-        <Form.Group className="sign-up-form" controlId="sign-up-password">
+        <Form.Group className="form-input" controlId="sign-up-password">
           <Form.Control
             type="password"
             name="password"
@@ -109,7 +108,7 @@ const SignUp = ({ setShowLoadingScreen }: Props) => {
           />
         </Form.Group>
 
-        <Form.Group className="sign-up-form" controlId="confirm-password">
+        <Form.Group className="form-input" controlId="confirm-password">
           <Form.Control
             type="password"
             name="confirm-password"
