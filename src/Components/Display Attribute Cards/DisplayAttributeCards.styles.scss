@@ -1,19 +1,18 @@
 .display-container {
   white-space: pre-wrap;
   background-color: cornsilk;
-  padding: 5% 0;
-
-  h3 {
-    font-size: 6rem;
-    text-align: center;
-    text-shadow: darkgray 3px 2px;
-  }
 
   h2 {
     font-size: 4rem;
     text-align: center;
     text-shadow: whitesmoke 5px 2px;
     padding-bottom: 2%;
+  }
+
+  h3 {
+    font-size: 6rem;
+    text-align: center;
+    text-shadow: darkgray 3px 2px;
   }
 
   .results-container {

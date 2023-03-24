@@ -1,4 +1,4 @@
-.main-container {
+.hub-container {
   display: flex;
   flex-direction: column;
   background-color: black;
@@ -15,6 +15,7 @@
   }
 
   .main-title {
+    text-align: center;
     font-size: 12rem;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-weight: normal;
@@ -31,6 +32,7 @@
 
     .button {
       min-width: 12rem;
+      white-space: nowrap;
     }
   }
 }
