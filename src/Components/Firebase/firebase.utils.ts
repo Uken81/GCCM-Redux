@@ -149,13 +149,15 @@ export const GetCharacterReference = async (userId: string, currentCharacterId: 
 export const SaveChangesToCharacter = async (
   characterRef: DocumentReference<DocumentData>,
   selectedAdvantagesList: string[],
-  selectedDisadvantagesList: string[]
+  selectedDisadvantagesList: string[],
+  name: string
 ) => {
   setDoc(
     characterRef,
     {
       advantages: selectedAdvantagesList.map((title) => title),
-      disadvantages: selectedDisadvantagesList.map((title) => title)
+      disadvantages: selectedDisadvantagesList.map((title) => title),
+      name: name
     },
     { merge: true }
   );
