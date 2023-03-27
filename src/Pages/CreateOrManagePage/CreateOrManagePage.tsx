@@ -19,6 +19,8 @@ const CreateOrManage = () => {
   const user = userContext?.user;
   const setUser = userContext?.setUser;
 
+  dispatch(resetCharacter());
+
   const navigate = useNavigate();
   useEffect(() => {
     let unsubscribeFromAuth: Unsubscribe | null = null;

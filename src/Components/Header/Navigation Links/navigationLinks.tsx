@@ -1,10 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import Button from 'react-bootstrap/Button';
-
-import { useAppDispatch } from 'features/reduxHooks';
-import { resetCharacter } from 'features/characterSlice';
 
 export const BackToSignIn = () => (
   <div className="nav-link">
@@ -12,29 +8,17 @@ export const BackToSignIn = () => (
   </div>
 );
 
-export const BackToLandingPage = () => {
-  const dispatch = useAppDispatch();
+export const BackToLandingPage = () => (
+  <div className="nav-link" data-testid="test">
+    <Link to="/">BACK</Link>
+  </div>
+);
 
-  return (
-    <div className="nav-link" data-testid="test">
-      <Link to="/" onClick={() => dispatch(resetCharacter())}>
-        BACK
-      </Link>
-    </div>
-  );
-};
-
-export const BackToCreateManage = () => {
-  const dispatch = useAppDispatch();
-
-  return (
-    <div className="nav-link">
-      <Link to="/create-or-manage-page" onClick={() => dispatch(resetCharacter())}>
-        BACK
-      </Link>
-    </div>
-  );
-};
+export const BackToCreateManage = () => (
+  <div className="nav-link">
+    <Link to="/create-or-manage-page">BACK</Link>
+  </div>
+);
 
 export const ToEditCharacter = () => (
   <Link style={{ width: '100%' }} to="/edit-character-page">

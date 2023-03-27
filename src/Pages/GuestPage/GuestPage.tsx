@@ -6,9 +6,14 @@ import Searchbar from '../../Components/SearchBar/Searchbar';
 import ComponentToPrint from '../../Components/Display Attribute Cards/ComponentToPrint/ComponentToPrint';
 import DisplaySelected from '../../Components/Selected/Display Selected/DisplaySelected';
 import { GuestPageToolbar } from './GuestPageToolbar';
+import { useAppDispatch } from 'features/reduxHooks';
+import { resetCharacter } from 'features/characterSlice';
 
 const GuestPage = () => {
   const divRef = useRef(null);
+  const dispatch = useAppDispatch();
+
+  dispatch(resetCharacter());
   return (
     <div className="main-container">
       <Header />
