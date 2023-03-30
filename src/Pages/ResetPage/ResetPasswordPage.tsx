@@ -1,6 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
-
+import React, { useState } from 'react';
 import './ResetPage.styles.scss';
 
 import { Alert, Button, Form } from 'react-bootstrap';
