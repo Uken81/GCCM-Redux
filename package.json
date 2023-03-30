@@ -60,7 +60,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.1.2",
     "@types/node": "^18.14.0",
-    "@types/react": "^18.0.18",
+    "@types/react": "^17.0.33",
     "@types/react-dom": "^18.0.6",
     "@types/styled-components": "^5.1.26",
     "babel-jest": "^29.1.2",
