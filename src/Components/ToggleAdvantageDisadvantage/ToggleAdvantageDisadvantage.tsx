@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useLayoutEffect } from 'react';
 
 import './Toggle.styles.scss';

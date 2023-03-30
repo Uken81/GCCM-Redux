@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { onAuthStateChanged } from '@firebase/auth';
 import React, { useContext, useEffect } from 'react';
 
