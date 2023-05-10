@@ -16,7 +16,7 @@ Running
 ```console
 run app
 $ cd gccm
-$ nom start
+$ npm start
 
 run tests
 $ npm test
