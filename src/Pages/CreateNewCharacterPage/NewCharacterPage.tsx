@@ -11,8 +11,8 @@ import ComponentToPrint from '../../Components/Display Attribute Cards/Component
 
 import { setName } from '../../features/characterSlice';
 import { useAppDispatch } from '../../features/reduxHooks';
-import { DisplayAlert } from 'Components/Toolbar/SaveCharacter/SaveAlerts/displayAlert';
 import { NewCharacterToolbar } from './NewCharacterToolbar';
+import { SaveAlert } from 'Components/Toolbar/SaveCharacter/SaveAlerts';
 
 const CreateNewCharacterPage = () => {
   const dispatch = useAppDispatch();
@@ -39,7 +39,7 @@ const CreateNewCharacterPage = () => {
       <div className="inner-container">
         <NewCharacterToolbar setAlertType={setAlertType} divRef={divRef} />
         <div className="attribute-selections">
-          <DisplayAlert alertType={alertType} setAlertType={setAlertType} />
+          <SaveAlert alertType={alertType} setAlertType={setAlertType} />
           <Form className="name-form" onSubmit={handleSubmit} data-testid="form">
             <Form.Control
               type="text"

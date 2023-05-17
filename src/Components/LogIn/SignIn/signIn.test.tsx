@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import { getAuth, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
-import SignInAndSignUp from 'Pages/SignInAndSignUp/SignInAndSignUpPage';
+import SignInAndSignUp from 'Pages/LogInPage/LogInPage';
 import { initialUserValue } from 'utils/mockContextProvider';
 import { renderWithProviders } from 'utils/testSetup';
 

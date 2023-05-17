@@ -1,33 +1,20 @@
 import React, { useState } from 'react';
 
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { google } from 'Components/Firebase/firebase.utils';
-import { GoogleAlert } from '../signin.utils.tsx/GoogleAlert';
+import { auth, google } from 'Components/Firebase/firebase.utils';
+import { AlertTypes } from './LogInAlert';
 
 interface Props {
   setShowLoadingScreen: React.Dispatch<React.SetStateAction<boolean>>;
-  setShowEmailAlert: React.Dispatch<React.SetStateAction<boolean>>;
-  setShowPasswordAlert: React.Dispatch<React.SetStateAction<boolean>>;
+  setAlertType: React.Dispatch<React.SetStateAction<AlertTypes>>;
 }
 
-const SignIn = ({ setShowLoadingScreen, setShowEmailAlert, setShowPasswordAlert }: Props) => {
+const SignIn = ({ setShowLoadingScreen, setAlertType }: Props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showGoogleAlert, setShowGoogleAlert] = useState(false);
 
-  const handleChange = (e: { target: { name: string; value: React.SetStateAction<string> } }) => {
-    if (e.target.name === 'email') {
-      setEmail(e.target.value);
-    }
-
-    if (e.target.name === 'password') {
-      setPassword(e.target.value);
-    }
-  };
-
-  const auth = getAuth();
   const navigate = useNavigate();
 
   const emailSignin = async (event: { preventDefault: () => void }) => {
@@ -42,12 +29,12 @@ const SignIn = ({ setShowLoadingScreen, setShowEmailAlert, setShowPasswordAlert 
 
         if (errorCode === 'Firebase: Error (auth/user-not-found).') {
           console.log('email', errorCode);
-          setShowEmailAlert(true);
+          setAlertType('unknownEmail');
         }
 
         if (errorCode === 'Firebase: Error (auth/wrong-password).') {
           console.log('password', errorCode);
-          setShowPasswordAlert(true);
+          setAlertType('wrongPassword');
         }
         setShowLoadingScreen(false);
       });
@@ -65,7 +52,7 @@ const SignIn = ({ setShowLoadingScreen, setShowEmailAlert, setShowPasswordAlert 
       })
       .catch(() => {
         setShowLoadingScreen(false);
-        setShowGoogleAlert(true);
+        setAlertType('google');
       });
     return () => {
       setShowLoadingScreen(false);
@@ -81,7 +68,6 @@ const SignIn = ({ setShowLoadingScreen, setShowEmailAlert, setShowPasswordAlert 
       <Button variant="primary" onClick={googleSignIn}>
         SIGN IN WITH GOOGLE
       </Button>
-      {showGoogleAlert && <GoogleAlert setShowGoogleAlert={setShowGoogleAlert} />}
       <span>or</span>
       <Form onSubmit={emailSignin}>
         <Form.Group className="form-input" controlId="sign-in-email">
@@ -91,7 +77,7 @@ const SignIn = ({ setShowLoadingScreen, setShowEmailAlert, setShowPasswordAlert 
             aria-label="email"
             value={email}
             placeholder="Email"
-            onChange={handleChange}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
 
@@ -102,7 +88,7 @@ const SignIn = ({ setShowLoadingScreen, setShowEmailAlert, setShowPasswordAlert 
             aria-label="password"
             value={password}
             placeholder="Password"
-            onChange={handleChange}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
 

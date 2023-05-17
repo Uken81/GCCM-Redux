@@ -26,12 +26,14 @@ const SaveCharacter = ({ setAlertType }: Props) => {
     };
 
     const isDuplicate = await checkIfDuplicate(userId, characterName);
+    const emptyName = characterName === '';
+    const emptyAttributes = selectedAdvantages.length <= 0 && selectedDisadvantages.length <= 0;
     const alertName = async () => {
       if (isDuplicate) {
         return 'duplicate';
-      } else if (characterName === '') {
+      } else if (emptyName) {
         return 'nameError';
-      } else if (selectedAdvantages.length <= 0 && selectedDisadvantages.length <= 0) {
+      } else if (emptyAttributes) {
         return 'attributesError';
       } else {
         return 'success';

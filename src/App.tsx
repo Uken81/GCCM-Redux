@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { User } from 'firebase/auth';
-import SignInAndSignUp from './Pages/SignInAndSignUp/SignInAndSignUpPage';
+import SignInAndSignUp from './Pages/LogInPage/LogInPage';
 import { UserContext } from './context';
 import LandingPage from './Pages/LandingPage/LandingPage';
 import GuestPage from './Pages/GuestPage/GuestPage';
@@ -9,7 +9,7 @@ import CreateOrManage from './Pages/CreateOrManagePage/CreateOrManagePage';
 import CreateNewCharacterPage from './Pages/CreateNewCharacterPage/NewCharacterPage';
 import ManageCharactersPage from './Pages/ManageCharactersPage/ManageCharactersPage';
 import EditCharacterPage from './Pages/EditCharacterPage/EditCharacterPage';
-import ResetPasswordPage from './Pages/ResetPage/ResetPasswordPage';
+import ResetPasswordPage from './Pages/ResetPasswordPage/ResetPasswordPage';
 
 export const App = () => {
   const [user, setUser] = useState<User | null>(null);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './ResetPage.styles.scss';
+import './ResetPasswordPage.styles.scss';
 
 import { Alert, Button, Form } from 'react-bootstrap';
 import { ResetPassword } from '../../Components/Firebase/firebase.utils';

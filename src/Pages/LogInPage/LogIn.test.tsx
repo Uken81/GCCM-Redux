@@ -1,5 +1,5 @@
 import React from 'react';
-import SignInAndSignUp from './SignInAndSignUpPage';
+import SignInAndSignUp from './LogInPage';
 import { screen } from '@testing-library/react';
 import { renderWithProviders } from 'utils/testSetup';
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';

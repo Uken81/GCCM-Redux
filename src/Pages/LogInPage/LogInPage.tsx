@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
-import './SignInAndSignUpPage.styles.scss';
-
+import './LogIn.styles.scss';
 import Header from '../../Components/Header/Header.component';
-import SignIn from '../../Components/SignInAndSignUp/SignIn/SignIn';
-import SignUp from '../../Components/SignInAndSignUp/SignUp';
-import { EmailAlert } from 'Components/SignInAndSignUp/signin.utils.tsx/EmailAlert';
-import { PasswordAlert } from 'Components/SignInAndSignUp/signin.utils.tsx/PasswordAlert';
+import SignIn from 'Components/LogIn/SignIn/SignIn';
+import SignUp from 'Components/LogIn/SignUp';
+import { AlertTypes, LogInAlert } from 'Components/LogIn/SignIn/LogInAlert';
 
-const SignInAndSignUp = () => {
+const LogInPage = () => {
   const [isSigningIn, setIsSigningin] = useState(true);
   const [showLoadingScreen, setShowLoadingScreen] = useState(false);
-  const [showEmailAlert, setShowEmailAlert] = useState(false);
-  const [showPasswordAlert, setShowPasswordAlert] = useState(false);
+  const [alertType, setAlertType] = useState<AlertTypes>('');
 
   const redirectLink = (
     <div className="redirect-sign-up">
@@ -28,19 +25,14 @@ const SignInAndSignUp = () => {
         <Header />
         <h1 className="main-title"> G.C.C.M </h1>
         <div className="form-container">
-          {showEmailAlert && <EmailAlert setShowEmailAlert={setShowEmailAlert} />}
-          {showPasswordAlert && <PasswordAlert setShowPasswordAlert={setShowPasswordAlert} />}
+          <LogInAlert alertType={alertType} setAlertType={setAlertType} />
           {isSigningIn ? (
             <>
-              <SignIn
-                setShowLoadingScreen={setShowLoadingScreen}
-                setShowEmailAlert={setShowEmailAlert}
-                setShowPasswordAlert={setShowPasswordAlert}
-              />
+              <SignIn setShowLoadingScreen={setShowLoadingScreen} setAlertType={setAlertType} />
               {redirectLink}
             </>
           ) : (
-            <SignUp setShowLoadingScreen={setShowLoadingScreen} />
+            <SignUp setShowLoadingScreen={setShowLoadingScreen} setAlertType={setAlertType} />
           )}
         </div>
       </div>
@@ -68,4 +60,4 @@ const SignInAndSignUp = () => {
   }
 };
 
-export default SignInAndSignUp;
+export default LogInPage;

@@ -1,34 +1,22 @@
-import React, { SetStateAction, useState } from 'react';
+import React, { useState } from 'react';
 
-import '../../Pages/SignInAndSignUp/SignInAndSignUpPage.styles.scss';
+import '../../Pages/LogInPage/LogIn.styles.scss';
 
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, google } from '../Firebase/firebase.utils';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { AlertTypes } from './SignIn/LogInAlert';
 
 interface Props {
   setShowLoadingScreen: React.Dispatch<React.SetStateAction<boolean>>;
+  setAlertType: React.Dispatch<React.SetStateAction<AlertTypes>>;
 }
 
-const SignUp = ({ setShowLoadingScreen }: Props) => {
+const SignUp = ({ setShowLoadingScreen, setAlertType }: Props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
-  const handleChange = (e: { target: { name: string; value: SetStateAction<string> } }) => {
-    if (e.target.name === 'email') {
-      setEmail(e.target.value);
-    }
-
-    if (e.target.name === 'password') {
-      setPassword(e.target.value);
-    }
-
-    if (e.target.name === 'confirm-password') {
-      setConfirmPassword(e.target.value);
-    }
-  };
 
   const resetForm = () => {
     setEmail('');
@@ -40,8 +28,9 @@ const SignUp = ({ setShowLoadingScreen }: Props) => {
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
-    if (password !== confirmPassword) {
-      alert("passwords don't match");
+    const isConfirmed = password === confirmPassword;
+    if (!isConfirmed) {
+      setAlertType('invalidPasswordConfirm');
       resetForm();
       return;
     }
@@ -53,19 +42,19 @@ const SignUp = ({ setShowLoadingScreen }: Props) => {
 
       navigate('/create-or-manage-page');
     } catch (error) {
-      console.error('error code: ', error.code);
       const errorCode = error.code;
+      console.error('error code: ', errorCode);
 
       if (errorCode === 'auth/email-already-in-use') {
-        alert('An account using this email already exists');
+        setAlertType('duplicateEmail');
       }
 
       if (errorCode === 'auth/invalid-email') {
-        alert('The provided Email is invalid');
+        setAlertType('invalidEmail');
       }
 
       if (errorCode === 'auth/weak-password') {
-        alert('The password is too weak');
+        setAlertType('weakPassword');
       }
       setShowLoadingScreen(false);
       resetForm();
@@ -93,7 +82,7 @@ const SignUp = ({ setShowLoadingScreen }: Props) => {
             name="email"
             value={email}
             placeholder="Enter email"
-            onChange={handleChange}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
 
@@ -103,8 +92,7 @@ const SignUp = ({ setShowLoadingScreen }: Props) => {
             name="password"
             value={password}
             placeholder="Password"
-            onChange={handleChange}
-            onSubmit={handleSubmit}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
 
@@ -114,8 +102,7 @@ const SignUp = ({ setShowLoadingScreen }: Props) => {
             name="confirm-password"
             value={confirmPassword}
             placeholder="Confirm Password"
-            onChange={handleChange}
-            onSubmit={handleSubmit}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </Form.Group>
 

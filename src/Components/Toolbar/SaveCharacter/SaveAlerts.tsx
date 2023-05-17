@@ -2,7 +2,7 @@ import React from 'react';
 import { useAppSelector } from 'features/reduxHooks';
 import { Alert as BaseAlert } from 'react-bootstrap';
 
-export const DisplayAlert: React.FC<{
+export const SaveAlert: React.FC<{
   alertType: string;
   setAlertType: React.Dispatch<React.SetStateAction<string>>;
 }> = ({ alertType, setAlertType }) => {
