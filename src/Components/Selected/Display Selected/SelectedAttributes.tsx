@@ -1,5 +1,4 @@
 import React from 'react';
-import '../Display Selected/displaySelected.styles.scss';
 import { useAppSelector } from 'features/reduxHooks';
 import { Card, ListGroup } from 'react-bootstrap';
 
