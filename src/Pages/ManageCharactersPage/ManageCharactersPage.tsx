@@ -25,14 +25,14 @@ const ManageCharactersPage = () => {
       <h1 className="main-title">G.C.C.M</h1>
       <div className="inner-container">
         <ManageCharactersToolbar setShowAlert={setShowAlert} divRef={divRef} />
-        <div className="attribute-selections">
+        <div className="attribute-selection" style={{ marginRight: '15%' }}>
           <h1 className="manage-title">{character.name}&apos;s Attributes</h1>
           {showAlert && <DeleteAlert setShowAlert={setShowAlert} />}
           <DisplaySelected />
         </div>
       </div>
       <div className="results-window">
-        <div style={{ display: 'none' }}>
+        <div>
           <ComponentToPrint divRef={divRef} />
         </div>
       </div>

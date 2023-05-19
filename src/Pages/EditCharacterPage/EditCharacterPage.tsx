@@ -19,10 +19,10 @@ const EditCharacterPage = () => {
       <h1 className="main-title"> G.C.C.M </h1>
       <div className="inner-container">
         <EditCharacterToolbar />
-        <div className="attribute-selections">
+        <div className="attribute-selection">
           <Searchbar />
-          <DisplaySelected />
         </div>
+        <DisplaySelected />
       </div>
     </div>
   );

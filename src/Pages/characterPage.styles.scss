@@ -3,12 +3,13 @@
   text-decoration: none;
   margin: 0;
 }
-
+body {
+  background-color: black;
+}
 .main-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: black;
 
   .main-title {
     text-align: center;
@@ -24,40 +25,40 @@
     display: flex;
     flex-direction: row;
     justify-content: left;
-    background-color: black;
     width: 100%;
 
-    .attribute-selections {
+    .attribute-selection {
       display: flex;
       flex-direction: column;
       align-items: center;
       width: 80%;
-      margin-right: 15%;
 
       .name-form {
-        margin-top: 2%;
+        margin-top: 7%;
         width: 40%;
       }
 
-      h1 {
+      .manage-title {
         font-size: 3rem;
         text-align: center;
         font-weight: bolder;
-      }
-
-      button:hover {
-        cursor: pointer;
-      }
-
-      .form {
-        margin-top: 3%;
-        max-width: 50%;
-      }
-
-      .manage-title {
-        margin: 1% 0 7% 0;
         color: white;
       }
     }
+    .selected-container {
+      display: flex;
+      flex-direction: column;
+      margin-right: 2%;
+      margin-bottom: 5%;
+      cursor: pointer;
+
+      .selected-list {
+        margin-top: 15%;
+      }
+    }
+  }
+
+  .results-window {
+    display: none;
   }
 }

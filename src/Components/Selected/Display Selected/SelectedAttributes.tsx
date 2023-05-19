@@ -16,8 +16,10 @@ export const SelectedAttributes: React.FC<{ attributeType: AttributeType }> = ({
   const textColor = attributeType === 'advantages' ? 'seagreen' : 'brown';
 
   const Selected: React.FC<{ attributeType: AttributeType }> = () => (
-    <Card border="light" style={{ textAlign: 'center', backgroundColor: 'black', width: '14rem' }}>
-      <Card.Title style={{ fontSize: '2rem', fontWeight: 'bold' }}>{title}</Card.Title>
+    <Card border="light" style={{ textAlign: 'center', backgroundColor: 'black', width: '16rem' }}>
+      <Card.Title style={{ fontSize: '2rem', fontWeight: 'bold', color: textColor }}>
+        {title}
+      </Card.Title>
       <ListGroup style={{ backgroundColor: '#343a40' }} variant="flush">
         {attributes.map((attribute) => (
           <ListGroup.Item

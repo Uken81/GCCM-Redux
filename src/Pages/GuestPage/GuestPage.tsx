@@ -20,10 +20,10 @@ const GuestPage = () => {
       <h1 className="main-title">G.C.C.M</h1>
       <div className="inner-container">
         <GuestPageToolbar divRef={divRef} />
-        <div className="attribute-selections">
+        <div className="attribute-selection">
           <Searchbar />
-          <DisplaySelected />
         </div>
+        <DisplaySelected />
       </div>
       <div className="results-window">
         <ComponentToPrint divRef={divRef} />

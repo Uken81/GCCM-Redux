@@ -38,7 +38,7 @@ const CreateNewCharacterPage = () => {
       <h1 className="main-title">G.C.C.M</h1>
       <div className="inner-container">
         <NewCharacterToolbar setAlertType={setAlertType} divRef={divRef} />
-        <div className="attribute-selections">
+        <div className="attribute-selection">
           <SaveAlert alertType={alertType} setAlertType={setAlertType} />
           <Form className="name-form" onSubmit={handleSubmit} data-testid="form">
             <Form.Control
@@ -50,12 +50,12 @@ const CreateNewCharacterPage = () => {
               onChange={handleInput}
               placeholder="Enter New Character Name..."
               size="lg"
-              maxLength={20}
+              maxLength={40}
             />
           </Form>
           <Searchbar />
-          <DisplaySelected />
         </div>
+        <DisplaySelected />
       </div>
       <div className="results-window">
         <ComponentToPrint divRef={divRef} />

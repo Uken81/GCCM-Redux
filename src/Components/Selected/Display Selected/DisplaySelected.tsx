@@ -10,16 +10,10 @@ const DisplaySelected = () => {
 
   return (
     <div className="selected-container">
-      <div
-        className="selected-list"
-        id="selected-advantages"
-        onClick={() => dispatch(toggleAdvantages())}>
+      <div className="selected-list" onClick={() => dispatch(toggleAdvantages())}>
         <SelectedAttributes attributeType="advantages" />
       </div>
-      <div
-        className="selected-list"
-        id="selected-disadvantages"
-        onClick={() => dispatch(toggleDisadvantages())}>
+      <div className="selected-list" onClick={() => dispatch(toggleDisadvantages())}>
         <SelectedAttributes attributeType="disadvantages" />
       </div>
     </div>
